@@ -28,7 +28,7 @@ uint8** routine_FrameDifference(uint8 **in1, uint8 **in2,  long nrl, long nrh, l
 void SigmaDelta_step0(uint8** I, uint8 **M, uint8 **V, long nrl, long nrh, long ncl, long nch)
 {
 	  
-
+ blabla
 
 
 }
