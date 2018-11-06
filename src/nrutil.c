@@ -960,7 +960,7 @@ uint8** LoadPGM_ui8matrix(char *filename, long *nrl, long *nrh, long *ncl, long 
   /* ouverture du fichier */
   file = fopen(filename,"rb");
   if (file==NULL)
-    nrerror("ouverture du fichier impossible\n");
+    nrerror("ouverture du fichier impossible dans load \n");
     //nrerror("ouverture du fichier %s impossible\n", filename);
 
   /* lecture de l'entete du fichier pgm */
@@ -1005,8 +1005,8 @@ void MLoadPGM_ui8matrix(char *filename, int nrl, int nrh, int ncl, int nch, uint
     /* ouverture du fichier */
     file = fopen(filename,"rb");
     if (file==NULL)
-        nrerror("ouverture du fichier impossible\n");
-    //nrerror("ouverture du fichier %s impossible\n", filename);
+        nrerror("ouverture du fichier impossible dans load\n");
+    //nrerror("ouverture du fichier %s impossible dans\n", filename);
     
     /* lecture de l'entete du fichier pgm */
     readitem(file, buffer);
@@ -1045,7 +1045,7 @@ void SavePGM_ui8matrix(uint8 **m, long nrl, long nrh, long ncl, long nch, char *
 
   /* enregistrement de l'image au format rpgm */
 
-  sprintf(buffer,"P5\n%d %d\n255\n",ncol, nrow);
+  sprintf(buffer,"P5\n%ld %ld\n255\n",ncol, nrow);
   fwrite(buffer,strlen(buffer),1,file);
   for(i=nrl; i<=nrh; i++)
     WritePGMrow(m[i], ncol, file);
@@ -1091,8 +1091,8 @@ rgb8** LoadPPM_rgb8matrix(char *filename, long *nrl, long *nrh, long *ncl, long 
   /* ouverture du fichier */
   file = fopen(filename,"rb");
   if (file==NULL)
-    nrerror("ouverture du fichier impossible\n");
-    //nrerror("ouverture du fichier %s impossible\n", filename);
+    nrerror("ouverture du fichier impossible dans load\n");
+    //nrerror("ouverture du fichier %s impossible dans load\n", filename);
 
   /* lecture de l'entete du fichier pgm */
   readitem(file, buffer);
@@ -1139,7 +1139,7 @@ void SavePPM_rgb8matrix(rgb8 **m, long nrl, long nrh, long ncl, long nch, char *
 
   /* enregistrement de l'image au format rpgm */
 
-  sprintf(buffer,"P6\n%d %d\n255\n",ncol, nrow);
+  sprintf(buffer,"P6\n%ld %ld\n255\n",ncol, nrow);
   fwrite(buffer,strlen(buffer),1,file);
   for(i=nrl; i<=nrh; i++)
     WritePNMrow((uint8*)m[i], ncol, file);
