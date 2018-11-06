@@ -26,4 +26,22 @@ uint8** routine_FrameDifference(uint8 **in1, uint8 **in2,  long nrl, long nrh, l
 //YO 
 
 
+<<<<<<< HEAD
 //TEST
+||||||| merged common ancestors
+void SigmaDelta_step0(uint8** I, uint8 **M, uint8 **V, long nrl, long nrh, long ncl, long nch)
+{
+	  
+
+
+
+}
+=======
+void SigmaDelta_step0(uint8** I, uint8 **M, uint8 **V, long nrl, long nrh, long ncl, long nch)
+{
+	  
+ blabla
+
+
+}
+>>>>>>> 46ab7f49d3ba9d04fae7932f02c6d1bf3c7319a1
