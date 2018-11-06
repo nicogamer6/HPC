@@ -6,6 +6,12 @@
 #include "nrdef.h"
 #include "mouvement.h"
 
+
+//////////////////////////////
+//     FRAME DIFFERENCE	    //
+//////////////////////////////
+
+
 uint8** routine_FrameDifference(uint8 **in1, uint8 **in2,  long nrl, long nrh, long ncl, long nch, int seuil){
     uint8 ** res=ui8matrix(nrl,nrh,ncl,nch);
     
@@ -24,6 +30,12 @@ uint8** routine_FrameDifference(uint8 **in1, uint8 **in2,  long nrl, long nrh, l
 }
 
 
+///////////////////////////////////////
+//	   SIGMA DELTA STEP0	     //
+///////////////////////////////////////
+
+
+
 uint8** SigmaDelta_step0(uint8** V, uint8 ** M	, uint8** I, long nrl, long nrh, long ncl, long nch)
 {
 	int i,j;
@@ -38,6 +50,12 @@ uint8** SigmaDelta_step0(uint8** V, uint8 ** M	, uint8** I, long nrl, long nrh, 
 	}
 	return M;
 }
+
+
+///////////////////////////////////////
+//	   SIGMA DELTA STEP1	     //
+///////////////////////////////////////
+
 
 uint8** SigmaDelta_1step(uint8** V, uint8 **M, uint8 **I, uint8 **Et, uint8** Ot, long nrl, long nrh, long ncl, long nch)
 {
@@ -91,6 +109,12 @@ uint8** SigmaDelta_1step(uint8** V, uint8 **M, uint8 **I, uint8 **Et, uint8** Ot
 		}
 	}
 }	 
+
+
+
+///////////////////////////////////////
+//	   MIN ET MAX		     //
+///////////////////////////////////////
 
 
 int min(int a, int b)	{
