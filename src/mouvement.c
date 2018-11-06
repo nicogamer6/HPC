@@ -23,18 +23,7 @@ uint8** routine_FrameDifference(uint8 **in1, uint8 **in2,  long nrl, long nrh, l
 
 }
 
-
-
-
-//TEST 
-
-
-
 //YO 
 
 
-
-
-
-
-//H
+//TEST
