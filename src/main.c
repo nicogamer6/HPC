@@ -5,7 +5,7 @@
 #include "mouvement.h"
 #include "test_mouvement.h"
 
-#define nb 2
+#define NB 2
 
 
 int main()
@@ -34,7 +34,7 @@ int main()
 	}*/
 
   
-    //test_routineFD();
+    test_routineFD();
     test_routineSD();
    
 

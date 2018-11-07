@@ -7,6 +7,7 @@
 #include "string.h"
 
 #define NBIMAGES 299
+#define SEUILFD 20
 
 
 

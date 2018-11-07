@@ -8,6 +8,7 @@
 
 //Defini dans le .h
 //#define NBIMAGES 299
+//#define SEUILFD 20
 
 //Permet de remplir le dossier /testFD et de voir les nouvelles images avec algo FD sur l'ensemble du dossier /hall
 void test_routineFD(void)
@@ -26,7 +27,7 @@ void test_routineFD(void)
 	        //printf("%s",nameload1);
 	        m1= LoadPGM_ui8matrix(nameload1,&nrl,&nrh,&ncl,&nch);
             m2= LoadPGM_ui8matrix(nameload2,&nrl,&nrh,&ncl,&nch);
-            m=routine_FrameDifference(m1,m2,nrl,nrh,ncl,nch,20);
+            m=routine_FrameDifference(m1,m2,nrl,nrh,ncl,nch,SEUILFD);
             sprintf(namesave,"testFD/FD%03d.pgm",i);
             SavePGM_ui8matrix(m,nrl,nrh,ncl,nch,namesave);
 	}   
