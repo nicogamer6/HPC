@@ -7,7 +7,7 @@
 
 #define VMIN 1
 #define VMAX 254
-#define N 2
+#define N 6
 
 uint8** routine_FrameDifference(uint8 **in, uint8 **out,  long nrl, long nrh, long ncl, long nch, int seuil);
 uint8** routine_SigmaDelta_step0(uint8 **V, uint8 **M, uint8 **I, long nrl, long nrh, long ncl, long nch);
