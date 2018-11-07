@@ -33,8 +33,10 @@ int main()
 		strcpy(res,"test/");
 	}*/
 
-    
-    test_routineFD();
+  
+    //test_routineFD();
+    test_routineSD();
+   
 
 
     return 0;

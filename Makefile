@@ -13,8 +13,8 @@ EXE_PATH = exe
 INC_PATH = include
 
 # -- OS ----------
-OS = MACH_OSX
-#OS = LINUX
+#OS = MACH_OSX
+OS = LINUX
 
 # -- Config ----------
 # if CONFIG = CLI  (Command Line Interface, no Apple Framework)

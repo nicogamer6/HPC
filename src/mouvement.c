@@ -35,8 +35,7 @@ uint8** routine_FrameDifference(uint8 **in1, uint8 **in2,  long nrl, long nrh, l
 ///////////////////////////////////////
 
 
-
-uint8** SigmaDelta_step0(uint8** V, uint8 ** M	, uint8** I, long nrl, long nrh, long ncl, long nch)
+uint8** routine_SigmaDelta_step0(uint8 **V, uint8 **M, uint8 **I, long nrl, long nrh, long ncl, long nch)
 {
 	int i,j;
 	for(i = nrl; i<=nrh;i++)
@@ -57,7 +56,7 @@ uint8** SigmaDelta_step0(uint8** V, uint8 ** M	, uint8** I, long nrl, long nrh, 
 ///////////////////////////////////////
 
 
-uint8** SigmaDelta_1step(uint8** V, uint8 **M, uint8 **I, uint8 **Et, uint8** Ot, long nrl, long nrh, long ncl, long nch)
+uint8** routine_SigmaDelta_1step(uint8 **V, uint8 **Vtm1, uint8 **M, uint8 **Mtm1, uint8 **I, uint8 **Et, uint8 **Ot, long nrl, long nrh, long ncl, long nch)
 {
     int i,j;
     
@@ -66,11 +65,11 @@ uint8** SigmaDelta_1step(uint8** V, uint8 **M, uint8 **I, uint8 **Et, uint8** Ot
 	{
 		for(j=ncl;j<=nch;j++)
 		{
-			if(M[i][j] < I[i][j])
-			    M[i][j] = M[i][j]+1;
-			else if(M[i][j] > I[i][j])
-			    M[i][j] = M[i][j]-1;
-			else M[i][j] = M[i][j];
+			if(Mtm1[i][j] < I[i][j])
+			    M[i][j] = Mtm1[i][j]+1;
+			else if(Mtm1[i][j] > I[i][j])
+			    M[i][j] = Mtm1[i][j]-1;
+			else M[i][j] = Mtm1[i][j];
 		}
 	}
 	
@@ -88,11 +87,11 @@ uint8** SigmaDelta_1step(uint8** V, uint8 **M, uint8 **I, uint8 **Et, uint8** Ot
 	{
 		for(j=ncl;j<=nch;j++)
 		{
-			if(V[i][j] < N * Ot[i][j])
-			    V[i][j] = V[i][j]+1;
-			else if(V[i][j] > N * Ot[i][j])
-			    V[i][j] = V[i][j]-1;
-			else V[i][j] = V[i][j];
+			if(Vtm1[i][j] < N * Ot[i][j])
+			    V[i][j] = Vtm1[i][j]+1;
+			else if(Vtm1[i][j] > N * Ot[i][j])
+			    V[i][j] = Vtm1[i][j]-1;
+			else V[i][j] = Vtm1[i][j];
 			//Clamp to [VMIN,VMAX]
 			V[i][j]=max(min(V[i][j],VMAX),VMIN);
 		}
@@ -105,17 +104,16 @@ uint8** SigmaDelta_1step(uint8** V, uint8 **M, uint8 **I, uint8 **Et, uint8** Ot
 		{
 			if(Ot[i][j] < V[i][j])
 			    Et[i][j] = 0;
-			else Et[i][j] = 1; //ou 255
+			else Et[i][j] = 255; //ou 1
 		}
 	}
+	return Et;
 }	 
-
 
 
 ///////////////////////////////////////
 //	   MIN ET MAX		     //
 ///////////////////////////////////////
-
 
 int min(int a, int b)	{
 	if(a < b)
