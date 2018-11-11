@@ -45,10 +45,10 @@ int main()
     test_routineFDmorpho3xOuvFerm(SEUILFD);
     test_routineFDmorpho3xFermOuv(SEUILFD);
     
-    //test_routineSDmorpho3xOuv();
-    //test_routineSDmorpho3xFerm();
-    //test_routineSDmorpho3xOuvFerm();
-    //test_routineSDmorpho3xFermOuv();
+    test_routineSDmorpho3xOuv();
+    test_routineSDmorpho3xFerm();
+    test_routineSDmorpho3xOuvFerm();
+    test_routineSDmorpho3xFermOuv();
     
 
 

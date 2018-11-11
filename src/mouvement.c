@@ -33,9 +33,9 @@ void routine_FrameDifference(uint8 **in1, uint8 **in2, uint8 **res,  long nrl, l
 }
 
 
-///////////////////////////////////////
+///////////////////////////////////
 //	   SIGMA DELTA STEP0	     //
-///////////////////////////////////////
+///////////////////////////////////
 
 
 void routine_SigmaDelta_step0(uint8 **V, uint8 **M, uint8 **I, long nrl, long nrh, long ncl, long nch)
@@ -54,9 +54,9 @@ void routine_SigmaDelta_step0(uint8 **V, uint8 **M, uint8 **I, long nrl, long nr
 }
 
 
-///////////////////////////////////////
+///////////////////////////////////
 //	   SIGMA DELTA STEP1	     //
-///////////////////////////////////////
+///////////////////////////////////
 
 
 void routine_SigmaDelta_1step(uint8 **V, uint8 **Vtm1, uint8 **M, uint8 **Mtm1, uint8 **I, uint8 **Et, long nrl, long nrh, long ncl, long nch)
@@ -115,9 +115,9 @@ void routine_SigmaDelta_1step(uint8 **V, uint8 **Vtm1, uint8 **M, uint8 **Mtm1, 
 }	 
 
 
-///////////////////////////////////////
+///////////////////////////////
 //	   MIN ET MAX		     //
-///////////////////////////////////////
+///////////////////////////////
 
 int min(int a, int b)	{
 	if(a < b)
