@@ -1,1 +1,5 @@
-HPC
+SIMD PROJECT
+
+HPC by BUTEAU Nicolas, TIYE Hans, EISE5
+October 2018 
+

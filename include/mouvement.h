@@ -5,13 +5,13 @@
 #include "nrdef.h"
 
 
-#define VMIN 1
-#define VMAX 254
-#define N 6
+//#define VMIN 1
+//#define VMAX 254
+//#define N 4
 
-uint8** routine_FrameDifference(uint8 **in, uint8 **out,  long nrl, long nrh, long ncl, long nch, int seuil);
-uint8** routine_SigmaDelta_step0(uint8 **V, uint8 **M, uint8 **I, long nrl, long nrh, long ncl, long nch);
-uint8** routine_SigmaDelta_1step(uint8 **V, uint8 **Vtm1, uint8 **M, uint8 **Mtm1, uint8 **I, uint8 **Et, uint8 **Ot, long nrl, long nrh, long ncl, long nch);
+void routine_FrameDifference(uint8 **in1, uint8 **in2, uint8 **res, long nrl, long nrh, long ncl, long nch, int seuil);
+void routine_SigmaDelta_step0(uint8 **V, uint8 **M, uint8 **I, long nrl, long nrh, long ncl, long nch);
+void routine_SigmaDelta_1step(uint8 **V, uint8 **Vtm1, uint8 **M, uint8 **Mtm1, uint8 **I, uint8 **Et, long nrl, long nrh, long ncl, long nch);
 
 int min(int a, int b);
 int max(int a, int b);

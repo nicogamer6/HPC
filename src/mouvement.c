@@ -6,14 +6,17 @@
 #include "nrdef.h"
 #include "mouvement.h"
 
+#define VMIN 1
+#define VMAX 254
+#define N 4
 
 //////////////////////////////
 //     FRAME DIFFERENCE	    //
 //////////////////////////////
 
 
-uint8** routine_FrameDifference(uint8 **in1, uint8 **in2,  long nrl, long nrh, long ncl, long nch, int seuil){
-    uint8 ** res=ui8matrix(nrl,nrh,ncl,nch);
+void routine_FrameDifference(uint8 **in1, uint8 **in2, uint8 **res,  long nrl, long nrh, long ncl, long nch, int seuil){
+    //uint8 ** res=ui8matrix(nrl,nrh,ncl,nch);
     
     int i,j;
     
@@ -25,7 +28,7 @@ uint8** routine_FrameDifference(uint8 **in1, uint8 **in2,  long nrl, long nrh, l
         }
     }
     
-    return res;
+    //return res;
 
 }
 
@@ -35,7 +38,7 @@ uint8** routine_FrameDifference(uint8 **in1, uint8 **in2,  long nrl, long nrh, l
 ///////////////////////////////////////
 
 
-uint8** routine_SigmaDelta_step0(uint8 **V, uint8 **M, uint8 **I, long nrl, long nrh, long ncl, long nch)
+void routine_SigmaDelta_step0(uint8 **V, uint8 **M, uint8 **I, long nrl, long nrh, long ncl, long nch)
 {
 	int i,j;
 	for(i = nrl; i<=nrh;i++)
@@ -47,7 +50,7 @@ uint8** routine_SigmaDelta_step0(uint8 **V, uint8 **M, uint8 **I, long nrl, long
 		}
 	
 	}
-	return M;
+	//return M;
 }
 
 
@@ -56,9 +59,10 @@ uint8** routine_SigmaDelta_step0(uint8 **V, uint8 **M, uint8 **I, long nrl, long
 ///////////////////////////////////////
 
 
-uint8** routine_SigmaDelta_1step(uint8 **V, uint8 **Vtm1, uint8 **M, uint8 **Mtm1, uint8 **I, uint8 **Et, uint8 **Ot, long nrl, long nrh, long ncl, long nch)
+void routine_SigmaDelta_1step(uint8 **V, uint8 **Vtm1, uint8 **M, uint8 **Mtm1, uint8 **I, uint8 **Et, long nrl, long nrh, long ncl, long nch)
 {
     int i,j;
+    uint8 **Ot=ui8matrix(nrl,nrh,ncl,nch);
     
     //Step 1 Estimation
     for(i = nrl; i<=nrh;i++)
@@ -107,7 +111,7 @@ uint8** routine_SigmaDelta_1step(uint8 **V, uint8 **Vtm1, uint8 **M, uint8 **Mtm
 			else Et[i][j] = 255; //ou 1
 		}
 	}
-	return Et;
+	//return Et;
 }	 
 
 
