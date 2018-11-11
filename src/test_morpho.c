@@ -32,7 +32,7 @@ void test_routineFDmorpho3xOuv(int seuil){
             It=LoadPGM_ui8matrix(nameload2,&nrl,&nrh,&ncl,&nch);
             
             routine_FrameDifference(Itm1,It,Et,nrl,nrh,ncl,nch,seuil);
-            sprintf(namesave,"testFDmorphoO/FDmorpho3xOUV%03d.pgm",i);
+            sprintf(namesave,"testFDmorphoO/hall000%03d.pgm",i);
             ouverture3(Et,Etout,nrl,nrh,ncl,nch);
             SavePGM_ui8matrix(Etout,nrl,nrh,ncl,nch,namesave);
             copy_ui8matrix_ui8matrix(It, nrl, nrh, ncl, nch, Itm1);
@@ -62,7 +62,7 @@ void test_routineFDmorpho3xFerm(int seuil){
             It=LoadPGM_ui8matrix(nameload2,&nrl,&nrh,&ncl,&nch);
             
             routine_FrameDifference(Itm1,It,Et,nrl,nrh,ncl,nch,seuil);
-            sprintf(namesave,"testFDmorphoF/FDmorpho3xFERM%03d.pgm",i);
+            sprintf(namesave,"testFDmorphoF/hall000%03d.pgm",i);
             fermeture3(Et,Etout,nrl,nrh,ncl,nch);
             SavePGM_ui8matrix(Etout,nrl,nrh,ncl,nch,namesave);
             copy_ui8matrix_ui8matrix(It, nrl, nrh, ncl, nch, Itm1);
@@ -91,7 +91,7 @@ void test_routineFDmorpho3xOuvFerm(int seuil){
             It=LoadPGM_ui8matrix(nameload2,&nrl,&nrh,&ncl,&nch);
             
             routine_FrameDifference(Itm1,It,Et,nrl,nrh,ncl,nch,seuil);
-            sprintf(namesave,"testFDmorphoOF/FDmorpho3xOUVFERM%03d.pgm",i);
+            sprintf(namesave,"testFDmorphoOF/hall000%03d.pgm",i);
             ouverture3(Et,Etout,nrl,nrh,ncl,nch);
             fermeture3(Etout,Et,nrl,nrh,ncl,nch);
             SavePGM_ui8matrix(Et,nrl,nrh,ncl,nch,namesave);
@@ -121,7 +121,7 @@ void test_routineFDmorpho3xFermOuv(int seuil){
             It=LoadPGM_ui8matrix(nameload2,&nrl,&nrh,&ncl,&nch);
             
             routine_FrameDifference(Itm1,It,Et,nrl,nrh,ncl,nch,seuil);
-            sprintf(namesave,"testFDmorphoFO/FDmorpho3xFERMOUV%03d.pgm",i);
+            sprintf(namesave,"testFDmorphoFO/hall000%03d.pgm",i);
             fermeture3(Et,Etout,nrl,nrh,ncl,nch);
             ouverture3(Etout,Et,nrl,nrh,ncl,nch);
             SavePGM_ui8matrix(Et,nrl,nrh,ncl,nch,namesave);
@@ -168,7 +168,7 @@ void test_routineSDmorpho3xOuv(){
 	        I= LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
 	        routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
 	        ouverture3(Et,Etout,nrl,nrh,ncl,nch);
-            sprintf(namesave,"testSDmorphoO/SDmorpho3xOUV%03d.pgm",i);
+            sprintf(namesave,"testSDmorphoO/hall000%03d.pgm",i);
             SavePGM_ui8matrix(Etout,nrl,nrh,ncl,nch,namesave);
             //On doit copier M dan Mtm1, V dans Vtm1 et I dans Itm1
             copy_ui8matrix_ui8matrix(M, nrl, nrh, ncl, nch, Mtm1);
@@ -214,7 +214,7 @@ void test_routineSDmorpho3xFerm(){
 	        I= LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
 	        routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
 	        fermeture3(Et,Etout,nrl,nrh,ncl,nch);
-            sprintf(namesave,"testSDmorphoF/SDmorpho3xFERM%03d.pgm",i);
+            sprintf(namesave,"testSDmorphoF/hall000%03d.pgm",i);
             SavePGM_ui8matrix(Etout,nrl,nrh,ncl,nch,namesave);
             //On doit copier M dan Mtm1, V dans Vtm1 et I dans Itm1
             copy_ui8matrix_ui8matrix(M, nrl, nrh, ncl, nch, Mtm1);
@@ -261,7 +261,7 @@ void test_routineSDmorpho3xOuvFerm(){
 	        routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
 	        ouverture3(Et,Etout,nrl,nrh,ncl,nch);
 	        fermeture3(Etout,Et,nrl,nrh,ncl,nch);
-            sprintf(namesave,"testSDmorphoOF/SDmorpho3xOUVFERM%03d.pgm",i);
+            sprintf(namesave,"testSDmorphoOF/hall000%03d.pgm",i);
             SavePGM_ui8matrix(Et,nrl,nrh,ncl,nch,namesave);
             //On doit copier M dan Mtm1, V dans Vtm1 et I dans Itm1
             copy_ui8matrix_ui8matrix(M, nrl, nrh, ncl, nch, Mtm1);
@@ -308,7 +308,7 @@ void test_routineSDmorpho3xFermOuv(){
 	        routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
 	        fermeture3(Et,Etout,nrl,nrh,ncl,nch);
 	        ouverture3(Etout,Et,nrl,nrh,ncl,nch);
-            sprintf(namesave,"testSDmorphoFO/SDmorpho3xFERMOUV%03d.pgm",i);
+            sprintf(namesave,"testSDmorphoFO/hall000%03d.pgm",i);
             SavePGM_ui8matrix(Et,nrl,nrh,ncl,nch,namesave);
             //On doit copier M dan Mtm1, V dans Vtm1 et I dans Itm1
             copy_ui8matrix_ui8matrix(M, nrl, nrh, ncl, nch, Mtm1);

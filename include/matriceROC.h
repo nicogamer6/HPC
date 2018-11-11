@@ -4,7 +4,7 @@
 #include "nrutil.h"
 #include "nrdef.h"
 
-void matriceROC(uint8 **Et, uint8 ** Itverite, long nrl, long nrh, long ncl, long nch);
+void matriceROC(char dossier[]);
 
     
 #endif // __MATRICEROC_H__

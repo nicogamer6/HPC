@@ -25,7 +25,7 @@ void test_routineFD(int seuil){
 	        sprintf(nameload2,"hall/hall000%03d.pgm",i);
             It=LoadPGM_ui8matrix(nameload2,&nrl,&nrh,&ncl,&nch);
             routine_FrameDifference(Itm1,It,m,nrl,nrh,ncl,nch,seuil);
-            sprintf(namesave,"testFD/FD%03d.pgm",i);
+            sprintf(namesave,"testFD/hall000%03d.pgm",i);
             SavePGM_ui8matrix(m,nrl,nrh,ncl,nch,namesave);
             copy_ui8matrix_ui8matrix(It, nrl, nrh, ncl, nch, Itm1);
 	}   
@@ -62,7 +62,7 @@ void test_routineSD(void){
 	        I= LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
 	        routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
 	        
-            sprintf(namesave,"testSD/SD%03d.pgm",i);
+            sprintf(namesave,"testSD/hall000%03d.pgm",i);
             SavePGM_ui8matrix(Et,nrl,nrh,ncl,nch,namesave);
             //On doit copier M dan Mtm1, V dans Vtm1 et I dans Itm1
             copy_ui8matrix_ui8matrix(M, nrl, nrh, ncl, nch, Mtm1);

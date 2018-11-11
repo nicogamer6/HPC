@@ -5,6 +5,7 @@
 #include "mouvement.h"
 #include "test_mouvement.h"
 #include "test_morpho.h"
+#include "matriceROC.h"
 
 #define NB 2
 #define SEUILFD 20
@@ -49,6 +50,18 @@ int main()
     test_routineSDmorpho3xFerm();
     test_routineSDmorpho3xOuvFerm();
     test_routineSDmorpho3xFermOuv();
+    
+    //matriceROC(testFD);
+    //matriceROC(testFDmorphoO);
+    //matriceROC(testFDmorphoF);
+    //matriceROC(testFDmorphoOF);
+    //matriceROC(testFDmorphoFO);
+    
+    //matriceROC(testSD);
+    //matriceROC(testSDmorphoO);
+    //matriceROC(testSDmorphoF);
+    //matriceROC(testSDmorphoOF);
+    //matriceROC(testSDmorphoFO);
     
 
 
