@@ -26,7 +26,7 @@ AR = ar -rc
 
 # -- Flags ----------
 C_DEBUG_FLAGS = -O0
-C_CC_FLAGS = -std=c99 -DNOALIAS -DALIGNED
+C_CC_FLAGS = -std=c99 -DNOALIAS -DALIGNED -msse3
 C_OPTIMISATION_FLAGS = -O3 -fstrict-aliasing
 
 #C_ARCH_FLAGS = -xSSE4.2

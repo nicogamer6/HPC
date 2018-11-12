@@ -20,7 +20,7 @@ void test_Etapemorpho(void){
     
     m= LoadPGM_ui8matrix("smile.pgm",&nrl,&nrh,&ncl,&nch);
     uint8 **bord=ui8matrix(nrl-2,nrh+2,ncl-2,nch+2);
-    uint8 **m2=ui8matrix(nrl-2,nrh+2,ncl-2,nch+2);
+    uint8 **m2=ui8matrix(nrl,nrh,ncl,nch);
     for(i=nrl;i<=nrh;i++){
         for(j=ncl;j<=nch;j++){
             bord[i][j]=m[i][j];
