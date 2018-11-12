@@ -34,7 +34,7 @@ void test_routineFDmorpho3xOuv(int seuil){
             routine_FrameDifference(Itm1,It,Et,nrl,nrh,ncl,nch,seuil);
             sprintf(namesave,"testFDmorphoO/hall000%03d.pgm",i);
             ouverture3(Et,Etout,nrl,nrh,ncl,nch);
-            ouverture5(Etout,Et,nrl,nrh,ncl,nch);
+            //ouverture5(Etout,Et,nrl,nrh,ncl,nch);
             SavePGM_ui8matrix(Et,nrl,nrh,ncl,nch,namesave);
             copy_ui8matrix_ui8matrix(It, nrl, nrh, ncl, nch, Itm1);
 	}   
@@ -65,7 +65,7 @@ void test_routineFDmorpho3xFerm(int seuil){
             routine_FrameDifference(Itm1,It,Et,nrl,nrh,ncl,nch,seuil);
             sprintf(namesave,"testFDmorphoF/hall000%03d.pgm",i);
             fermeture3(Et,Etout,nrl,nrh,ncl,nch);
-            fermeture5(Etout,Et,nrl,nrh,ncl,nch);
+            //fermeture5(Etout,Et,nrl,nrh,ncl,nch);
             SavePGM_ui8matrix(Et,nrl,nrh,ncl,nch,namesave);
             copy_ui8matrix_ui8matrix(It, nrl, nrh, ncl, nch, Itm1);
 	}   
@@ -96,8 +96,8 @@ void test_routineFDmorpho3xOuvFerm(int seuil){
             sprintf(namesave,"testFDmorphoOF/hall000%03d.pgm",i);
             ouverture3(Et,Etout,nrl,nrh,ncl,nch);
             fermeture3(Etout,Et,nrl,nrh,ncl,nch);
-            ouverture5(Et,Etout,nrl,nrh,ncl,nch);
-            fermeture5(Etout,Et,nrl,nrh,ncl,nch);
+            //ouverture5(Et,Etout,nrl,nrh,ncl,nch);
+            //fermeture5(Etout,Et,nrl,nrh,ncl,nch);
             SavePGM_ui8matrix(Et,nrl,nrh,ncl,nch,namesave);
             copy_ui8matrix_ui8matrix(It, nrl, nrh, ncl, nch, Itm1);
 	}   
@@ -128,8 +128,8 @@ void test_routineFDmorpho3xFermOuv(int seuil){
             sprintf(namesave,"testFDmorphoFO/hall000%03d.pgm",i);
             fermeture3(Et,Etout,nrl,nrh,ncl,nch);
             ouverture3(Etout,Et,nrl,nrh,ncl,nch);
-            fermeture5(Et,Etout,nrl,nrh,ncl,nch);
-            ouverture5(Etout,Et,nrl,nrh,ncl,nch);
+            //fermeture5(Et,Etout,nrl,nrh,ncl,nch);
+            //ouverture5(Etout,Et,nrl,nrh,ncl,nch);
             SavePGM_ui8matrix(Et,nrl,nrh,ncl,nch,namesave);
             copy_ui8matrix_ui8matrix(It, nrl, nrh, ncl, nch, Itm1);
 	}   

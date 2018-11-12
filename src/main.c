@@ -10,7 +10,7 @@
 #include "morpho.h"
 
 #define NB 2
-#define SEUILFD 20
+#define SEUILFD 10
 
 
 int main()
@@ -39,19 +39,19 @@ int main()
 	}*/
 
   
-    //test_routineFD(SEUILFD);
-    //test_routineSD();
+    test_routineFD(SEUILFD);
+    test_routineSD();
    
    
-    //test_routineFDmorpho3xOuv(SEUILFD);
-    //test_routineFDmorpho3xFerm(SEUILFD);
-    //test_routineFDmorpho3xOuvFerm(SEUILFD);
-    //test_routineFDmorpho3xFermOuv(SEUILFD);
+    test_routineFDmorpho3xOuv(SEUILFD);
+    test_routineFDmorpho3xFerm(SEUILFD);
+    test_routineFDmorpho3xOuvFerm(SEUILFD);
+    test_routineFDmorpho3xFermOuv(SEUILFD);
     
-    //test_routineSDmorpho3xOuv();
-    //test_routineSDmorpho3xFerm();
-    //test_routineSDmorpho3xOuvFerm();
-    //test_routineSDmorpho3xFermOuv();
+    test_routineSDmorpho3xOuv();
+    test_routineSDmorpho3xFerm();
+    test_routineSDmorpho3xOuvFerm();
+    test_routineSDmorpho3xFermOuv();
     
     //matriceROC(testFD);
     //matriceROC(testFDmorphoO);

@@ -99,9 +99,6 @@ void routine_SigmaDelta_1step(uint8 **V, uint8 **Vtm1, uint8 **M, uint8 **Mtm1, 
 			    Et[i][j] = 0;
 			else Et[i][j] = 255; //ou 1
 			
-			if(i<10){
-			    printf("Et = %d \n",Et[i][j]);
-			}
 		}
 	}
 	
