@@ -19,12 +19,14 @@ void routine_FrameDifference(uint8 **in1, uint8 **in2, uint8 **res,  long nrl, l
     //uint8 ** res=ui8matrix(nrl,nrh,ncl,nch);
     
     int i,j;
+    uint8 Ot;
     
     for(i=nrl;i<=nrh;i++){
         for(j=ncl;j<=nch;j++){
-            if(abs(in1[i][j]-in2[i][j]) < seuil)
-                res[i][j]=255; //blanc
-            else res[i][j]=0; //noir
+            Ot = abs(in2[i][j]-in1[i][j]);
+            if(Ot < seuil)
+                res[i][j]=0; //noir
+            else res[i][j]=255; //blanc
         }
     }
     
@@ -41,12 +43,13 @@ void routine_FrameDifference(uint8 **in1, uint8 **in2, uint8 **res,  long nrl, l
 void routine_SigmaDelta_step0(uint8 **V, uint8 **M, uint8 **I, long nrl, long nrh, long ncl, long nch)
 {
 	int i,j;
+	uint8 vmin = (uint8) VMIN;
 	for(i = nrl; i<=nrh;i++)
 	{
 		for(j=ncl;j<=nch;j++)
 		{
-			V[i][j] = VMIN;
 			M[i][j] =  I[i][j];
+			V[i][j] = vmin;
 		}
 	
 	}
@@ -64,7 +67,42 @@ void routine_SigmaDelta_1step(uint8 **V, uint8 **Vtm1, uint8 **M, uint8 **Mtm1, 
     int i,j;
     uint8 **Ot=ui8matrix(nrl,nrh,ncl,nch);
     
-    //Step 1 Estimation
+    uint8 n = (uint8) N;
+    uint8 vmax = (uint8) VMAX;
+    uint8 vmin = (uint8) VMIN;
+    
+    for(i = nrl; i<=nrh;i++)
+	{
+		for(j=ncl;j<=nch;j++)
+		{
+		    //Step 1 Estimation
+			if(Mtm1[i][j] < I[i][j])
+			    M[i][j] = Mtm1[i][j]+1;
+			else if(Mtm1[i][j] > I[i][j])
+			    M[i][j] = Mtm1[i][j]-1;
+			else M[i][j] = Mtm1[i][j];
+	
+	        //Step 2 Difference Computation
+		    Ot[i][j]=abs(M[i][j]-I[i][j]);
+	
+            //Step 3 Update and clamping    
+			if(Vtm1[i][j] < (n * Ot[i][j]))
+			    V[i][j] = Vtm1[i][j]+1;
+			else if(Vtm1[i][j] > (n * Ot[i][j]))
+			    V[i][j] = Vtm1[i][j]-1;
+			else V[i][j] = Vtm1[i][j];
+			//Clamp to [VMIN,VMAX]
+			V[i][j]=max(min(V[i][j],vmax),vmin);
+	
+	        //Step 4 Estimation
+			if(Ot[i][j] < V[i][j])
+			    Et[i][j] = 0;
+			else Et[i][j] = 255; //ou 1
+			
+		}
+	}
+	
+    /*//Step 1 Estimation
     for(i = nrl; i<=nrh;i++)
 	{
 		for(j=ncl;j<=nch;j++)
@@ -91,13 +129,13 @@ void routine_SigmaDelta_1step(uint8 **V, uint8 **Vtm1, uint8 **M, uint8 **Mtm1, 
 	{
 		for(j=ncl;j<=nch;j++)
 		{
-			if(Vtm1[i][j] < N * Ot[i][j])
+			if(Vtm1[i][j] < (n * Ot[i][j]))
 			    V[i][j] = Vtm1[i][j]+1;
-			else if(Vtm1[i][j] > N * Ot[i][j])
+			else if(Vtm1[i][j] > n * Ot[i][j])
 			    V[i][j] = Vtm1[i][j]-1;
 			else V[i][j] = Vtm1[i][j];
 			//Clamp to [VMIN,VMAX]
-			V[i][j]=max(min(V[i][j],VMAX),VMIN);
+			V[i][j]=max(min(V[i][j],vmax),vmin);
 		}
 	}
 	
@@ -110,7 +148,7 @@ void routine_SigmaDelta_1step(uint8 **V, uint8 **Vtm1, uint8 **M, uint8 **Mtm1, 
 			    Et[i][j] = 0;
 			else Et[i][j] = 255; //ou 1
 		}
-	}
+	}*/
 	//return Et;
 }	 
 

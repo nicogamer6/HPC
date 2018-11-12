@@ -15,6 +15,8 @@ void test_routineSDmorpho3xFerm();
 void test_routineSDmorpho3xOuvFerm();
 void test_routineSDmorpho3xFermOuv();
 
+void test_Etapemorpho(void);
+
     
 #endif // __TEST_MORPHO_H__
 

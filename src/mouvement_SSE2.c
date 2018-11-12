@@ -10,6 +10,8 @@
 #include "mouvement_SSE2.h"
 #include "vnrutil.h"
 
+#define NB_IMAGE 299
+#define SEUILFD 25
 
 ////////////////////////////////////
 //      FRAME DIFFERENCE SSE      //
@@ -17,7 +19,7 @@
 
 
 
-void routine_FrameDifference_SSE2(vuint8** It, vuint8** It_1, vuint8** Ot, vuint8** Et, long nrl, long nrh, long ncl, long nch)
+void routine_FrameDifference_SSE2(vuint8** It, vuint8** It_1, vuint8** Et, long nrl, long nrh, long ncl, long nch)
 {
 	int i, j;
 
@@ -30,6 +32,7 @@ void routine_FrameDifference_SSE2(vuint8** It, vuint8** It_1, vuint8** Ot, vuint
 
 	vuint8 v_it;
 	vuint8 v_it_1;
+	vuint8 **Ot;
 
 	for (i=nrl;i<=nrh;i++) {
 		for(j=ncl;j<=nch;j++) {

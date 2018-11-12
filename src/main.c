@@ -7,8 +7,10 @@
 #include "test_morpho.h"
 #include "matriceROC.h"
 
+#include "morpho.h"
+
 #define NB 2
-#define SEUILFD 20
+#define SEUILFD 10
 
 
 int main()
@@ -62,6 +64,9 @@ int main()
     //matriceROC(testSDmorphoF);
     //matriceROC(testSDmorphoOF);
     //matriceROC(testSDmorphoFO);
+    
+    
+    test_Etapemorpho();
     
 
 
