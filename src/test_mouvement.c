@@ -59,14 +59,15 @@ void test_routineSD(void){
 	
 	for(i=1;i<=NBIMAGES;i++){
 	        sprintf(nameload,"hall/hall000%03d.pgm",i);
-	        I= LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+	        I=LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
 	        routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
 	        
             sprintf(namesave,"testSD/hall000%03d.pgm",i);
             SavePGM_ui8matrix(Et,nrl,nrh,ncl,nch,namesave);
             //On doit copier M dan Mtm1, V dans Vtm1 et I dans Itm1
-            copy_ui8matrix_ui8matrix(M, nrl, nrh, ncl, nch, Mtm1);
+            
             copy_ui8matrix_ui8matrix(V, nrl, nrh, ncl, nch, Vtm1);
+            copy_ui8matrix_ui8matrix(M, nrl, nrh, ncl, nch, Mtm1);
             copy_ui8matrix_ui8matrix(I, nrl, nrh, ncl, nch, Itm1);
            
 	} 
