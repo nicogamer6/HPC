@@ -25,6 +25,7 @@ void matriceROC(char dossier[]){
     
     int k; 
     int i,j;
+    int perdu;
     
     VP = matROC[0][0];
     FN = matROC[0][1];
@@ -32,7 +33,7 @@ void matriceROC(char dossier[]){
     VN = matROC[1][1];
     
     for(k=0; k<=NBIMAGESVERITE;k++){
-        sprintf(nameload1,"verite/hall000%03d.pgm",k*10); //Image verite terrain à comparer avec image du dossier arg
+        sprintf(nameload1,"verite2/hall000%03d.pgm",k*10); //Image verite terrain à comparer avec image du dossier arg
 	    //printf("%s\n",nameload1);
 	    Itverite=LoadPGM_ui8matrix(nameload1,&nrl,&nrh,&ncl,&nch);
 	    
@@ -50,16 +51,18 @@ void matriceROC(char dossier[]){
                     FP++;
                 else if(It[i][j] == 0 && Itverite[i][j] == 0) //VN
                     VN++;
+                else perdu++;
             }
         }
     }
     
     mcc = (VP * VN - FP * FN)/(sqrt((VP+FP)*(VP+FN)*(VN+FP)*(VN+FN)));
     
-    printf("Matrice ROC pour %s : \n VP FN \t %0.0f %0.0f \n FP VN \t %0.0f %0.0f \n", dossier, VP, FN, FP, VN);
-    printf("pixel analysé : %0.0f\n",VP+FN+FP+VN);
+    printf("Matrice ROC pour %s : \n \tVP FN \t %0.0f %0.0f \n \tFP VN \t %0.0f %0.0f \n", dossier, VP, FN, FP, VN);
+    printf("\tpixel analysé : %0.0f\n",VP+FN+FP+VN);
+    printf("\tpixel perdu : %d\n",perdu);
     
-    printf("MCC = %f\n",mcc); //Valeur entre -1 et 1, 1 = perfect prediction, -1 = Total disagreement between prediction and observation
+    printf("\tMCC = %f\n",mcc); //Valeur entre -1 et 1, 1 = perfect prediction, -1 = Total disagreement between prediction and observation
     
     free_ui8matrix(Itverite,nrl,nrh,ncl,nch);
 	free_ui8matrix(It,nrl,nrh,ncl,nch);
