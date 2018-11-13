@@ -43,7 +43,7 @@ int main()
     test_routineSD();
    
    
-    test_routineFDmorpho3xOuv(SEUILFD);
+    /*test_routineFDmorpho3xOuv(SEUILFD);
     test_routineFDmorpho3xFerm(SEUILFD);
     test_routineFDmorpho3xOuvFerm(SEUILFD);
     test_routineFDmorpho3xFermOuv(SEUILFD);
@@ -51,7 +51,7 @@ int main()
     test_routineSDmorpho3xOuv();
     test_routineSDmorpho3xFerm();
     test_routineSDmorpho3xOuvFerm();
-    test_routineSDmorpho3xFermOuv();
+    test_routineSDmorpho3xFermOuv();*/
     
     //matriceROC(testFD);
     //matriceROC(testFDmorphoO);
@@ -67,6 +67,8 @@ int main()
     
     
     test_Etapemorpho();
+    
+    matriceROC("testSD");
     
 
 

@@ -4,7 +4,7 @@
 
 
 # -- Lile list ----------
-FILE = main.c mouvement.c nrutil.c test_mouvement.c vnrutil.c morpho.c test_morpho.c matriceROC.c mouvement_SSE2.c
+FILE = main.c mouvement.c nrutil.c test_mouvement.c vnrutil.c morpho.c test_morpho.c matriceROC.c #mouvement_SSE2.c
 
 # -- Paths ----------
 SRC_PATH = src
