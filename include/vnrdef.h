@@ -28,6 +28,8 @@ extern "C" {
 #include <xmmintrin.h>
 #include <emmintrin.h>
 #include <mmintrin.h>
+#include <tmmintrin.h>
+#include <immintrin.h>
 
 typedef __m128i vuint8;
 typedef __m128i vsint8;

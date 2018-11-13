@@ -10,7 +10,7 @@
 #include "morpho.h"
 
 #define NB 2
-#define SEUILFD 10
+#define SEUILFD 20
 
 
 int main()
@@ -43,7 +43,7 @@ int main()
     test_routineSD();
    
    
-    /*test_routineFDmorpho3xOuv(SEUILFD);
+    test_routineFDmorpho3xOuv(SEUILFD);
     test_routineFDmorpho3xFerm(SEUILFD);
     test_routineFDmorpho3xOuvFerm(SEUILFD);
     test_routineFDmorpho3xFermOuv(SEUILFD);
@@ -51,25 +51,24 @@ int main()
     test_routineSDmorpho3xOuv();
     test_routineSDmorpho3xFerm();
     test_routineSDmorpho3xOuvFerm();
-    test_routineSDmorpho3xFermOuv();*/
+    test_routineSDmorpho3xFermOuv();
     
-    //matriceROC(testFD);
-    //matriceROC(testFDmorphoO);
-    //matriceROC(testFDmorphoF);
-    //matriceROC(testFDmorphoOF);
-    //matriceROC(testFDmorphoFO);
+    matriceROC("testFD");
+    //matriceROC("testFDmorphoO");
+    //matriceROC("testFDmorphoF");
+    matriceROC("testFDmorphoOF");
+    //matriceROC("testFDmorphoFO");
+    printf("\n");
     
-    //matriceROC(testSD);
-    //matriceROC(testSDmorphoO);
-    //matriceROC(testSDmorphoF);
-    //matriceROC(testSDmorphoOF);
-    //matriceROC(testSDmorphoFO);
+    matriceROC("testSD");
+    //matriceROC("testSDmorphoO");
+    //matriceROC("testSDmorphoF");
+    matriceROC("testSDmorphoOF");
+    //matriceROC("testSDmorphoFO");
     
     
     test_Etapemorpho();
-    
-    matriceROC("testSD");
-    
+      
 
 
     return 0;
