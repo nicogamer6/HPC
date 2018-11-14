@@ -25,11 +25,11 @@
 
 
 
-void routine_FrameDifference_SSE2(vuint8** It, vuint8** It_1, vuint8** Et, long nrl, long nrh, long ncl, long nch)
+void routine_FrameDifference_SSE2(vuint8** It, vuint8** It_1, vuint8** Et, long nrl, long nrh, long ncl, long nch, int seuil)
 {
 	int i, j;
 
-	vuint8 v_SEUILFD = init_vuint8(SEUILFD);
+	vuint8 v_SEUILFD = init_vuint8(seuil);
 	vuint8 v_255 = init_vuint8(255);
 	vuint8 v_128 = init_vuint8(128);
 

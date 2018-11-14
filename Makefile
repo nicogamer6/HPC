@@ -4,7 +4,7 @@
 
 
 # -- Lile list ----------
-FILE = main.c mouvement.c nrutil.c test_mouvement.c vnrutil.c morpho.c test_morpho.c matriceROC.c #mouvement_SSE2.c
+FILE = main.c mouvement.c nrutil.c test_mouvement.c vnrutil.c morpho.c test_morpho.c matriceROC.c mouvement_SSE2.c test_mouvement_SSE2.c
 
 # -- Paths ----------
 SRC_PATH = src
@@ -13,8 +13,8 @@ EXE_PATH = exe
 INC_PATH = include
 
 # -- OS ----------
-#OS = MACH_OSX
-OS = LINUX
+OS = MACH_OSX
+#OS = LINUX
 
 # -- Config ----------
 # if CONFIG = CLI  (Command Line Interface, no Apple Framework)
@@ -26,7 +26,7 @@ AR = ar -rc
 
 # -- Flags ----------
 C_DEBUG_FLAGS = -O0
-C_CC_FLAGS = -std=c99 -DNOALIAS -DALIGNED
+C_CC_FLAGS = -std=c99 -DNOALIAS -DALIGNED -mssse3 
 C_SSE_FLAGS = -mfpmath=sse -mmmx -msse -msse2 -msse3
 C_OPTIMISATION_FLAGS = -O3 -fstrict-aliasing
 
@@ -37,9 +37,9 @@ C_OS_FLAGS = -D$(OS)
 C_CONFIG_FLAGS = -D$(CONFIG)
 C_INC_FLAGS = -I$(INC_PATH)
 
-CFLAGS =  $(C_CC_FLAGS) $(C_DEBUG_FLAGS)        $(C_ARCH_FLAGS) $(C_OS_FLAGS) $(C_CONFIG_FLAGS) $(C_INC_FLAGS) $(LIB_INC_PATH) $(C_SSE_FLAGS)
-CFLAGS = $(C_CC_FLAGS) $(C_OPTIMISATION_FLAGS) $(C_ARCH_FLAGS) $(C_OS_FLAGS) $(C_CONFIG_FLAGS) $(C_INC_FLAGS) $(LIB_INC_PATH) $(C_SSE_FLAGS)
-LDFLAGS = $(C_CC_FLAGS) $(C_OPTIMISATION_FLAGS) $(C_ARCH_FLAGS) $(C_OS_FLAGS) $(C_CONFIG_FLAGS) $(C_INC_FLAGS) $(LIB_LIB_PATH) $(C_SSE_FLAGS)
+CFLAGS =  $(C_CC_FLAGS) $(C_DEBUG_FLAGS)        $(C_ARCH_FLAGS) $(C_OS_FLAGS) $(C_CONFIG_FLAGS) $(C_INC_FLAGS) $(LIB_INC_PATH) 
+CFLAGS = $(C_CC_FLAGS) $(C_OPTIMISATION_FLAGS) $(C_ARCH_FLAGS) $(C_OS_FLAGS) $(C_CONFIG_FLAGS) $(C_INC_FLAGS) $(LIB_INC_PATH)
+LDFLAGS = $(C_CC_FLAGS) $(C_OPTIMISATION_FLAGS) $(C_ARCH_FLAGS) $(C_OS_FLAGS) $(C_CONFIG_FLAGS) $(C_INC_FLAGS) $(LIB_LIB_PATH) 
 
 # -- Final product ----------
 PRODUCT   = hpc

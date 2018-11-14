@@ -4,6 +4,7 @@
 #include "string.h"
 #include "mouvement.h"
 #include "test_mouvement.h"
+#include "test_mouvement_SSE2.h"
 #include "test_morpho.h"
 #include "matriceROC.h"
 
@@ -38,7 +39,7 @@ int main()
 		strcpy(res,"test/");
 	}*/
 
-  
+  /*
     test_routineFD(SEUILFD);
     test_routineSD();
    
@@ -69,7 +70,9 @@ int main()
     
     test_Etapemorpho();
       
-
+*/
+    
+    test_routineFD_SSE(SEUILFD);
 
     return 0;
 }

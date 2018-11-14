@@ -42,7 +42,9 @@ void v2m1D(int vj0, int vj1, int c, int *mj0, int *mj1);
 
 void s2v(int si0, int si1, int sj0, int sj1, int c, int *vi0, int *vi1, int *vj0, int *vj1);
 void v2m(int vi0, int vi1, int vj0, int vj1, int c, int *mi0, int *mi1, int *mj0, int *mj1);
-
+void dup_vui8matrix(vuint8 **X, int i0, int i1, int j0, int j1, vuint8 **Y);
+    
+    
 /*
  * card function: number of scalar items within a vector register
  * - to prevent human error

@@ -950,10 +950,10 @@ uint8** LoadPGM_ui8matrix(char *filename, long *nrl, long *nrh, long *ncl, long 
   long height, width, gris;
   uint8 **m;
   FILE *file;
-  /*int   format;/**/
+  /*int   format;*/
 
   char *buffer;
-  /*char  c;/**/
+  /*char  c;*/
   int i;
   
   buffer = (char*) calloc(80, sizeof(char));
@@ -1081,10 +1081,10 @@ rgb8** LoadPPM_rgb8matrix(char *filename, long *nrl, long *nrh, long *ncl, long 
   long height, width, gris;
   rgb8 **m;
   FILE *file;
-  /*int   format;/**/
+  /*int   format;*/
 
   char *buffer;
-  /*char  c;/**/
+  /*char  c;*/
   int i;
   
   buffer = (char*) calloc(80, sizeof(char));
