@@ -34,8 +34,6 @@ void routine_FrameDifference_SSE2(vuint8** It, vuint8** It_1, vuint8** Et, long 
 	vuint8 v_128 = init_vuint8(128);
 
 	vuint8 a,b;
-
-
 	vuint8 v_it;
 	vuint8 v_it_1;
 	vuint8 **Ot;
@@ -50,16 +48,16 @@ void routine_FrameDifference_SSE2(vuint8** It, vuint8** It_1, vuint8** Et, long 
 			// On fait la valeur absolue
             a = _mm_abs_epi8 (_mm_sub_epi8(v_it , v_it_1));
  			// On sauvegarde la valeur de abs dans Ot
- 			_mm_store_si128(&Ot[i][j], a);
-		}
+ 			//_mm_store_si128(&Ot[i][j], a);
+     /*   }
 	}
     
 	for (i=nrl;i<=nrh;i++) {
-		for(j=ncl;j<=nch;j++) {
+		for(j=ncl;j<=nch;j++) {*/
 		
             // si Ot < SEUILFD donc dépasse le seuil alors a_0 reçoit 255 sinon 0
 
-            a = _mm_cmplt_epi8(Ot[i][j],v_SEUILFD);
+            b = _mm_cmplt_epi8(v_SEUILFD,a);
 
             //  On sauvegarde la valeur de b dans Et
             _mm_store_si128(&Et[i][j], a);
