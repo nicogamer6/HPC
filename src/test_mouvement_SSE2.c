@@ -48,7 +48,7 @@ void vuint_to_uint(uint8 ** scal, vuint ** vect, int vi0, int vi1, int vj0, int 
 void test_routineFD_SSE(int seuil)
 {
     
-    printf("PDPDDPDPDPD");
+    //printf("TEST1");
     long nrl, nrh, ncl, nch;
     int vi0, vi1, vj0, vj1;
     char nameload1[100], nameload2[100], namesave[100];
@@ -56,7 +56,7 @@ void test_routineFD_SSE(int seuil)
 
     sprintf(nameload1,"hall/hall000000.pgm");
     
-     printf("PDPDDPDPDPD");
+    
     
     uint8 **Itm1 = LoadPGM_ui8matrix(nameload1,&nrl,&nrh,&ncl,&nch);
     s2v(nrl, nrh, ncl, nch, card_vuint8(), &vi0, &vi1, &vj0, &vj1);
@@ -78,10 +78,10 @@ void test_routineFD_SSE(int seuil)
         sprintf(nameload2,"hall/hall000%03d.pgm",i);
         
         a = LoadPGM_ui8matrix(nameload2,&nrl,&nrh,&ncl,&nch);
-        //TODO convertir uint** en vuint** (m)
+        //todo convertir uint** en vuint** (m)
         
 
-        //TODO convertir m en uint **
+        //todo convertir m en uint **
         uint_to_vuint(a, It, vi0, vi1, vj0, vj1);
         routine_FrameDifference_SSE2(I0,It,m,vi0, vi1,vj0,vj1,seuil);
         vuint_to_uint(out, m, vi0, vi1, vj0, vj1);

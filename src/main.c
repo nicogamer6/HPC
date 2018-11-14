@@ -39,11 +39,11 @@ int main()
 		strcpy(res,"test/");
 	}*/
 
-  /*
+  
     test_routineFD(SEUILFD);
     test_routineSD();
    
-   
+    /*
     test_routineFDmorpho3xOuv(SEUILFD);
     test_routineFDmorpho3xFerm(SEUILFD);
     test_routineFDmorpho3xOuvFerm(SEUILFD);
@@ -69,7 +69,7 @@ int main()
     
     
     test_Etapemorpho();
-      
+     
 */
     
     test_routineFD_SSE(SEUILFD);
