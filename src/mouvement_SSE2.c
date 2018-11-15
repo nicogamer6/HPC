@@ -64,7 +64,7 @@ void routine_FrameDifference_SSE2(vuint8** It, vuint8** It_1, vuint8** Et, long 
 //       SIGMA DELTA STEP0 SSE        //
 ////////////////////////////////////////
 
-void SigmaDelta_1step0_SSE2 (vuint8** V, vuint8** M, vuint8** It,long nrl, long nrh, long ncl, long nch)
+void SigmaDelta_step0_SSE2 (vuint8** V, vuint8** M, vuint8** It,long nrl, long nrh, long ncl, long nch)
 {
     int i,j;
     vuint8 v_vmin = init_vuint8(VMIN);
@@ -230,7 +230,7 @@ void SigmaDelta_1step_SSE2 (vuint8** V,vuint8** Vtm1, vuint8** M, vuint8** Mtm1,
             _mm_store_si128(&Et[i][j] , a);
         }
     }
-    display_vui8matrix(Et, n1, n2, n3, n4," %d ","\nimage scal\n");
+    //display_vui8matrix(Et, n1, n2, n3, n4," %d ","\nimage scal\n");
 
     
 

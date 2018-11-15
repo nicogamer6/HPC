@@ -139,7 +139,6 @@ void test_unitaire_fd_SSE()
 
 void test_routineSD_SSE()
 {
-    printf("PDPDDPDPDPD");
     int n1, n2, n3, n4;
     long nrl, nrh, ncl, nch;
     char nameload[100];     //"hall/hall000..";
@@ -173,7 +172,7 @@ void test_routineSD_SSE()
     vuint8 ** Iv = vui8matrix(n1,n2,n3,n4);
     uint8 ** res = ui8matrix(nrl, nrh, ncl, nch);
     
-    SigmaDelta_1step0_SSE2 (Vtm1, Mtm1, Itm1v, n1, n2, n3, n4);
+    SigmaDelta_step0_SSE2 (Vtm1, Mtm1, Itm1v, n1, n2, n3, n4);
 
     
     
@@ -183,21 +182,21 @@ void test_routineSD_SSE()
         //Conversion
         uint_to_vuint(a, Iv, n1, n2, n3, n4);
         
-       SigmaDelta_1step_SSE2(V, Vtm1, M, Mtm1, Iv, Et, n1, n2, n3, n4);
+        SigmaDelta_1step_SSE2(V, Vtm1, M, Mtm1, Iv, Et, n1, n2, n3, n4);
         
         sprintf(namesave,"testSD_SSE/hall000%03d.pgm",i);
         
-       vuint_to_uint(res, Et, n1, n2, n3, n4);
+        vuint_to_uint(res, Et, n1, n2, n3, n4);
         
         SavePGM_ui8matrix(res,nrl,nrh,ncl,nch,namesave);
         //On doit copier M dan Mtm1, V dans Vtm1 et I dans Itm1
         
-       // copy_ui8matrix_ui8matrix(V, nrl, nrh, ncl, nch, Vtm1);
+        //copy_ui8matrix_ui8matrix(V, nrl, nrh, ncl, nch, Vtm1);
         //copy_ui8matrix_ui8matrix(M, nrl, nrh, ncl, nch, Mtm1);
-     //   copy_ui8matrix_ui8matrix(I, nrl, nrh, ncl, nch, Itm1);
+        //copy_ui8matrix_ui8matrix(I, nrl, nrh, ncl, nch, Itm1);
         
-         dup_vui8matrix(V, n1, n2, n3, n4, Vtm1);
-         dup_vui8matrix(M, n1, n2, n3, n4, Mtm1);
+        dup_vui8matrix(V, n1, n2, n3, n4, Vtm1);
+        dup_vui8matrix(M, n1, n2, n3, n4, Mtm1);
         dup_vui8matrix(Iv, n1, n2, n3, n4, Itm1v);
         
         

@@ -81,6 +81,11 @@ int main()
     test_routineFD_SSEmorpho3xOuvFerm(SEUILFD);
     test_routineFD_SSEmorpho3xFermOuv(SEUILFD);
 
+    test_routineSD_SSEmorpho3xOuv();
+    test_routineSD_SSEmorpho3xFerm();
+    test_routineSD_SSEmorpho3xOuvFerm();
+    test_routineSD_SSEmorpho3xFermOuv();
+
     return 0;
 }
 
