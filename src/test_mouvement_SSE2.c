@@ -154,11 +154,13 @@ void test_routineSD_SSE()
 
     vuint8 ** Itm1v = vui8matrix(n1,n2,n3,n4);
     uint_to_vuint(Itm1, Itm1v, n1, n2, n3, n4);
+
+
    
     uint8** a = ui8matrix(nrl, nrh, ncl, nch);
     vuint8 ** I = vui8matrix(n1,n2,n3,n4);
     vuint8 ** V  = vui8matrix(n1,n2,n3,n4);
-     vuint8 ** Vtm1 = vui8matrix(n1,n2,n3,n4);
+    vuint8 ** Vtm1 = vui8matrix(n1,n2,n3,n4);
     vuint8** M  = vui8matrix(n1,n2,n3,n4);
      vuint8 ** Mtm1 = vui8matrix(n1,n2,n3,n4);
     vuint8 ** Et = vui8matrix(n1-BORD,n2+BORD,n3-BORD,n4+BORD);
@@ -170,7 +172,8 @@ void test_routineSD_SSE()
    
     vuint8 ** Iv = vui8matrix(n1,n2,n3,n4);
     uint8 ** res = ui8matrix(nrl, nrh, ncl, nch);
-    SigmaDelta_1step0_SSE2 (Vtm1, Mtm1, Itm1v, nrl, nrh, ncl, nch);
+    
+    SigmaDelta_1step0_SSE2 (Vtm1, Mtm1, Itm1v, n1, n2, n3, n4);
 
     
     
@@ -222,6 +225,7 @@ void test_routineSD_SSE()
 
 void test_unitaire_SD_SSE()
 {
+    //vuint8 im =
     vuint8 M = init_vuint8_all(127, 255, 0, 0, 1, 255, 254, 50,127, 255, 0, 0, 1, 255, 254, 200);
     vuint8 It = init_vuint8_all( 128, 255, 0, 1, 0, 254, 255, 60,128, 245, 0, 1, 0, 254, 255, 1);
     vuint8 Vtm1 = init_vuint8_all( 128, 245, 0, 1, 0, 254, 255, 60,128, 245, 0, 1, 0, 254, 255, 60);
@@ -255,47 +259,47 @@ void test_unitaire_SD_SSE()
 
     //  On rajoute 128 parce qu'il n'existe pas de comparaisons signées en SSE
     
-    sel = _mm_cmpgt_epi8 (_mm_sub_epi8(M,v_128),_mm_sub_epi8(It,v_128));
-    v_M = vec_sel (_mm_sub_epi8 (M , one),v_M , sel);
-    
     sel = _mm_cmplt_epi8 (_mm_sub_epi8(M,v_128) , _mm_sub_epi8(It,v_128));
-    v_M = vec_sel (M,_mm_add_epi8 (M , one) , sel);
-     
+    v_M = vec_sel (_mm_add_epi8 (M , one), M , sel);
+    
+    sel = _mm_cmpgt_epi8 (_mm_sub_epi8(M,v_128),_mm_sub_epi8(It,v_128));
+    v_M = vec_sel (_mm_sub_epi8 (M , one), v_M , sel);
+    
+   
      // égalité
     sel = _mm_cmpeq_epi8 (_mm_sub_epi8(M,v_128) , _mm_sub_epi8(It,v_128));
-    v_M = vec_sel (M, _mm_add_epi8 (M , one) , sel);
+    v_M = vec_sel (M, v_M , sel);
      
  
     
-    //printf("TEST ESTIMATION\n");
-    //display_vuint8(v_M," %.3d ", "\nv_M\n");
+    printf("\n/////////////////TEST ESTIMATION//////////////");
+    display_vuint8(v_M," %.3d ", "\nv_M\n");
+    
+       printf("\n\n\n");
     
     
     //////////////// Différence computation ////////////////
     
     // Valeur absolue
-    vuint8 max = _mm_max_epu8(M,It);
-    vuint8 min = _mm_min_epu8(M,It);
+    vuint8 max = _mm_max_epu8(v_M,It);
+    vuint8 min = _mm_min_epu8(v_M,It);
     Ot = _mm_sub_epi8(max,min);
    
-    printf("\nTEST COMPUTATION\n");
+    printf("\n/////////////TEST COMPUTATION////////////////");
     display_vuint8(Ot," %.3d ", "\nOt\n");
     
-    
+    printf("\n\n\n");
     
     // UPDATE AND CLAMPING
     
     //Ici ilfaut d'abord faire la multiplication de n et Ot
-    vuint8 a,v_Ot;
+    vuint8 a = init_vuint8(0);
+    vuint8 v_Ot = init_vuint8(0);
     a= Ot;
-    
-    
-    display_vuint8(Ot," %.3d ","\nOtavant\n");
-    
+
     for(int k = 0; k < N; k++)    {
         v_Ot = _mm_adds_epu8(v_Ot , a);
     }
-    
     // De base c'est non signé, on soustrait 128 pour les recentrer et faitre les comparaisons.
     //On a un problème avec le bit de signe
     
@@ -317,14 +321,16 @@ void test_unitaire_SD_SSE()
     
     
   
-    printf("\nUPDATE AND CLAMPING\n");
+    printf("\n////////////////////TEST UPDATE AND CLAMPING////////////////////");
+    display_vuint8(v_Ot," %.3d ","\nOtavant\n");
+
     
-   // display_vuint8(Vtm1," %.3d ","Vtm1\n");
+   display_vuint8(Vtm1," %.3d ","\nVtm1\n");
     display_vuint8(v_Ot," %.3d ","\nOt\n");
 
 
     display_vuint8(Vt," %.3d ", "\nVt\n");
-  //  display_vuint8(b," %.3d ", "\nBBBB\n");*/
+    display_vuint8(b," %.3d ", "\nBBBB\n");
     printf("\n");
     
     
@@ -336,5 +342,6 @@ void test_unitaire_SD_SSE()
     //Le retour de cmplt est de 1 si l'inégalité est vraie
     Et = _mm_andnot_si128(Et , v_255);
     display_vuint8(Et," %.3d ", "\nEt\n");
+    printf("\n");
     
 }

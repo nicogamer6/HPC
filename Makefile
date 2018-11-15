@@ -4,7 +4,7 @@
 
 
 # -- Lile list ----------
-FILE = main.c mouvement.c nrutil.c test_mouvement.c vnrutil.c morpho.c test_morpho.c matriceROC.c mouvement_SSE2.c test_mouvement_SSE2.c
+FILE = main.c mouvement.c nrutil.c test_mouvement.c vnrutil.c morpho.c test_morpho.c matriceROC.c mouvement_SSE2.c test_mouvement_SSE2.c morpho_SSE2.C test_morpho_SSE2.C
 
 # -- Paths ----------
 SRC_PATH = src
@@ -13,8 +13,8 @@ EXE_PATH = exe
 INC_PATH = include
 
 # -- OS ----------
-OS = MACH_OSX
-#OS = LINUX
+#OS = MACH_OSX
+OS = LINUX
 
 # -- Config ----------
 # if CONFIG = CLI  (Command Line Interface, no Apple Framework)
@@ -62,5 +62,5 @@ depend:
 
 clean:
 	rm -f $(OBJ)
-	rm -f ${LIB_PATH}/${PRODUCT}
+	rm -f ${EXE_PATH}/${PRODUCT}
 
