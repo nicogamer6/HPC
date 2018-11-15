@@ -2,13 +2,16 @@
 #include "nrutil.h"
 #include "nrdef.h"
 #include "string.h"
+
 #include "mouvement.h"
 #include "test_mouvement.h"
 #include "test_mouvement_SSE2.h"
+#include "morpho.h"
 #include "test_morpho.h"
 #include "matriceROC.h"
 
-#include "morpho.h"
+#include "morpho_SSE2.h"
+#include "test_morpho_SSE2.h"
 
 #define NB 2
 #define SEUILFD 20
@@ -40,8 +43,8 @@ int main()
 	}*/
 
   
-    test_routineFD(SEUILFD);
-    test_routineSD();
+    //test_routineFD(SEUILFD);
+    //test_routineSD();
    
     /*
     test_routineFDmorpho3xOuv(SEUILFD);
@@ -67,12 +70,16 @@ int main()
     matriceROC("testSDmorphoOF");
     //matriceROC("testSDmorphoFO");
     
-    
+    */
     test_Etapemorpho();
-     
-*/
     
     test_routineFD_SSE(SEUILFD);
+    test_EtapemorphoSSE();
+
+    test_routineFD_SSEmorpho3xOuv(SEUILFD);
+    test_routineFD_SSEmorpho3xFerm(SEUILFD);
+    test_routineFD_SSEmorpho3xOuvFerm(SEUILFD);
+    test_routineFD_SSEmorpho3xFermOuv(SEUILFD);
 
     return 0;
 }

@@ -3,6 +3,8 @@
 
 #include "nrutil.h"
 #include "nrdef.h"
+#include "vnrdef.h"
+#include "vnrutil.h"
 
 //#define NB_IMAGE 299
 //#define SEUILFD 25

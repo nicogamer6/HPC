@@ -27,16 +27,16 @@ void test_Etapemorpho(void){
         }
     }
     erosion3(bord,m2,nrl,nrh,ncl,nch);
-    SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testero.pgm");
+    SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testero.pgm");
     
     dilatation3(bord,m2,nrl,nrh,ncl,nch);
-    SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testdil.pgm");
+    SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testdil.pgm");
     
     ouverture3(bord,m2,nrl,nrh,ncl,nch);
-    SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testouv.pgm");
+    SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testouv.pgm");
     
     fermeture3(bord,m2,nrl,nrh,ncl,nch);
-    SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testferm.pgm");
+    SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testferm.pgm");
 }
 
 
