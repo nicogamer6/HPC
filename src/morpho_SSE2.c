@@ -138,8 +138,8 @@ void erosion5SSE(uint8 ** Et, uint8 **EtE, long nrl, long nrh, long ncl, long nc
 }
 void dilatation5SSE(uint8 ** Et, uint8 **EtD, long nrl, long nrh, long ncl, long nch){
 	uint8 ** tmp = ui8matrix(nrl-BORD, nrh+BORD, ncl-BORD, nch+BORD);
-    dilatation5SSE(Et, tmp, nrl, nrh, ncl, nch);
-    dilatation5SSE(tmp, EtD, nrl, nrh, ncl, nch);
+    dilatation3SSE(Et, tmp, nrl, nrh, ncl, nch);
+    dilatation3SSE(tmp, EtD, nrl, nrh, ncl, nch);
     free_ui8matrix(tmp, nrl-BORD, nrh+BORD, ncl-BORD, nch+BORD);
 }
 void ouverture5SSE(uint8 ** Et, uint8 **Etout, long nrl, long nrh, long ncl, long nch){

@@ -60,7 +60,7 @@ void test_routineFD_SSE(int seuil)
     long nrl, nrh, ncl, nch;
     int n1, n2, n3, n4;
     char nameload1[100], nameload2[100], namesave[100];
-    vuint8 vseuil=init_vuint8(seuil);
+    //vuint8 vseuil=init_vuint8(seuil);
 
 
     sprintf(nameload1,"hall/hall000000.pgm");
@@ -91,7 +91,7 @@ void test_routineFD_SSE(int seuil)
 
         //TODO convertir m en uint **
         uint_to_vuint(a, It, n1, n2, n3, n4);
-        routine_FrameDifference_SSE2(I0,It,m,n1, n2,n3,n4,vseuil);
+        routine_FrameDifference_SSE2(I0,It,m,n1, n2,n3,n4,seuil);
         vuint_to_uint(out, m, n1, n2, n3, n4);
 
         

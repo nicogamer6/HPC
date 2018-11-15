@@ -25,38 +25,38 @@
 
 
 
-void routine_FrameDifference_SSE2(vuint8** It, vuint8** It_1, vuint8** Et, long nrl, long nrh, long ncl, long nch, vuint8 seuil)
+void routine_FrameDifference_SSE2(vuint8** It, vuint8** It_1, vuint8** Et, long nrl, long nrh, long ncl, long nch, int seuil)
 {
-	int i, j;
+    int i, j;
 
-	//vuint8 v_SEUILFD = init_vuint8(seuil);
-	vuint8 v_255 = init_vuint8(255);
-	vuint8 v_128 = init_vuint8(128);
+    vuint8 v_SEUILFD = init_vuint8(seuil);
+    vuint8 v_255 = init_vuint8(255);
+    vuint8 v_128 = init_vuint8(128);
 
-	vuint8 a,b;
-	vuint8 v_it;
-	vuint8 v_it_1;
-	vuint8 **Ot;
+    vuint8 a,b;
+    vuint8 v_it;
+    vuint8 v_it_1;
+    vuint8 **Ot;
 
-	for (i=nrl;i<=nrh;i++) {
-		for(j=ncl;j<=nch;j++) {
-		
-			// Ici on load les images
-			v_it = _mm_load_si128(&It[i][j]);
- 			v_it_1 = _mm_load_si128(&It_1[i][j]);
-		
-			// On fait la valeur absolue
+    for (i=nrl;i<=nrh;i++) {
+        for(j=ncl;j<=nch;j++) {
+        
+            // Ici on load les images
+            v_it = _mm_load_si128(&It[i][j]);
+            v_it_1 = _mm_load_si128(&It_1[i][j]);
+        
+            // On fait la valeur absolue
             a = _mm_abs_epi8 (_mm_sub_epi8(v_it , v_it_1));
             
             // si a < SEUILFD donc dépasse le seuil alors a_0 reçoit 255 sinon 0
 
-            b = _mm_cmplt_epi8(seuil,a);
+            b = _mm_cmplt_epi8(v_SEUILFD,a);
 
             //  On sauvegarde la valeur de b dans Et
             _mm_store_si128(&Et[i][j], a);
-		}
-	}
-	// return Et;
+        }
+    }
+    // return Et;
 }
 
 
