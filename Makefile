@@ -62,5 +62,5 @@ depend:
 
 clean:
 	rm -f $(OBJ)
-	rm -f ${LIB_PATH}/${PRODUCT}
+	rm -f ${EXE_PATH}/${PRODUCT}
 
