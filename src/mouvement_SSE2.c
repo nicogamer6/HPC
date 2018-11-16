@@ -14,7 +14,7 @@
 #define SEUILFD 25
 #define VMIN 1
 #define VMAX 254
-#define N 6
+#define N 2
 //SI a = 1 alors resultat = a sinon resultat = b
 #define vec_sel(a,b,c) _mm_or_si128(_mm_and_si128(c,a),_mm_andnot_si128(c,b));
 
@@ -89,7 +89,7 @@ void SigmaDelta_step0_SSE2 (vuint8** V, vuint8** M, vuint8** It,long nrl, long n
 //       SIGMA DELTA STEP1 SSE        //
 ////////////////////////////////////////
 
-
+/*
 void SigmaDelta_1step_SSE2 (vuint8** V,vuint8** Vtm1, vuint8** M, vuint8** Mtm1, vuint8** It, vuint8** Et,long nrl, long nrh, long ncl, long nch)
 {
     int i,j,k;
@@ -178,6 +178,9 @@ void SigmaDelta_1step_SSE2 (vuint8** V,vuint8** Vtm1, vuint8** M, vuint8** Mtm1,
             
             sel = _mm_cmpeq_epi8 (_mm_sub_epi8(v_Vtm1,v_128) , _mm_sub_epi8(v_Ot,v_128));
             v_V = vec_sel (v_Vtm1 , v_V, sel);
+     
+
+           
 
 
             v_V = _mm_min_epu8(v_V, v_max);
@@ -186,6 +189,9 @@ void SigmaDelta_1step_SSE2 (vuint8** V,vuint8** Vtm1, vuint8** M, vuint8** Mtm1,
         
             _mm_store_si128(&V[i][j] , v_V);
             
+  
+    
+
     
        /////////////////// //Step 4 Estimation///////////////////////////
             
@@ -199,4 +205,112 @@ void SigmaDelta_1step_SSE2 (vuint8** V,vuint8** Vtm1, vuint8** M, vuint8** Mtm1,
     }
     //display_vui8matrix(Et, n1, n2, n3, n4," %d ","\n Debug \n");
 
+    
+
 }
+
+*/
+
+
+
+
+
+void SigmaDelta_1step_SSE2 (vuint8** V,vuint8** Vtm1, vuint8** M, vuint8** Mtm1, vuint8** It, vuint8** Et,long nrl, long nrh, long ncl, long nch)
+{
+  //  vuint8 Mtmoins1, Mt, It, Vtmoins1, Vt, Et, res;
+    vuint8 v_M, v_It, v_Mtm1, v_V, v_Vtm1, sel;
+    vuint8 Ot;
+
+    
+    vuint8 v_min = init_vuint8(VMIN);
+    vuint8 v_max = init_vuint8(VMAX);
+    vuint8 un = init_vuint8(1);
+    vuint8 zero = init_vuint8(0);
+    vuint8 v_128 = init_vuint8(128);
+    vuint8 v_255 = init_vuint8(255);
+
+    
+    for (int i = nrl ; i < nrh + 1 ; i++){
+        for (int j = ncl ; j < nch + 1 ; j++){
+          
+            
+            v_Vtm1 = _mm_load_si128((vuint8*) &Vtm1[i][j]);
+            v_It = _mm_load_si128((vuint8*) &It[i][j]);
+            v_Mtm1 = _mm_load_si128((vuint8*) &Mtm1[i][j]);
+            
+
+            
+            ////////////////////Step 1 Estimation/////////////////////////////
+
+ 
+            //Si M < I. Stocke 1 dans a si M < I, sinon 0
+
+            sel = _mm_cmplt_epi8(_mm_sub_epi8(v_Mtm1,v_128), _mm_sub_epi8(v_It, v_128));
+            v_M = vec_sel( _mm_add_epi8(v_Mtm1, un), v_Mtm1, sel);
+            
+            // Cas le plus grand
+
+            sel = _mm_cmpgt_epi8(_mm_sub_epi8(v_Mtm1,v_128), _mm_sub_epi8(v_It, v_128));
+            v_M = vec_sel( _mm_sub_epi8(v_Mtm1, un), v_M, sel);
+            
+            // égalité
+
+            sel = _mm_cmpeq_epi8(_mm_sub_epi8(v_Mtm1,v_128), _mm_sub_epi8(v_It, v_128));
+            v_M = vec_sel(v_Mtm1,  v_M, sel);
+            
+            _mm_store_si128(&M[i][j],v_M);
+       
+            
+            //////////////////// //Step 2 Difference Computation//////////////////
+            
+            vuint8 max = init_vuint8(0);
+            max = _mm_max_epu8(v_M,v_It);
+            vuint8 min = init_vuint8(0);
+            min = _mm_min_epu8(v_M,v_It);
+            Ot = _mm_sub_epi8(max,min);
+           
+
+            ///////////////   //Step 3 Update and clamping//////////////////////////////
+
+
+            vuint8 v_Ot = init_vuint8(0);;
+            
+            //Ici ilfaut d'abord faire la multiplication de n et Ot
+
+            
+            for(int k = 0; k < N; k++)    {
+                v_Ot = _mm_adds_epu8(v_Ot, Ot);
+            }
+            
+
+            sel = _mm_cmplt_epi8(_mm_sub_epi8(v_Vtm1,v_128), _mm_sub_epi8(v_Ot,v_128));
+            v_V = vec_sel(_mm_add_epi8(v_Vtm1, un), v_Vtm1, sel);
+            
+            sel = _mm_cmpgt_epi8(_mm_sub_epi8(v_Vtm1,v_128), _mm_sub_epi8(v_Ot,v_128));
+            v_V = vec_sel(_mm_sub_epi8(v_Vtm1, un), v_V, sel);
+            
+            sel = _mm_cmpeq_epi8(_mm_sub_epi8(v_Vtm1,v_128), _mm_sub_epi8(v_Ot, v_128));
+            v_V = vec_sel(v_Vtm1, v_V, sel);
+            
+            
+            //MAX ET MIN
+            
+            v_V = _mm_min_epu8(v_V, v_max);
+            // a <- max(a, VMIN)
+            v_V = _mm_max_epu8(v_V, v_min);
+            
+            _mm_store_si128(&V[i][j],v_V);
+           
+    
+            
+       /////////////////// //Step 4 Estimation///////////////////////////
+            
+            vuint8 a  = _mm_cmplt_epi8(_mm_sub_epi8(Ot,v_128), _mm_sub_epi8(v_V,v_128));
+            
+            //Le retour de cmplt est de 1 si l'inégalité est vraie
+            a = _mm_andnot_si128(a , v_255);
+            _mm_store_si128(&Et[i][j],a);
+        }
+    }
+}
+
