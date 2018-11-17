@@ -86,20 +86,20 @@ int main()
     //matriceROC("testSDmorphoF");
     //matriceROC("testSDmorphoOF");
     //matriceROC("testSDmorphoFO");
-    printf("\n");
+    //printf("\n");
     
     //matriceROC("testFD_SSE");
     //matriceROC("testFD_SSEmorphoO");
     //matriceROC("testFD_SSEmorphoF");
     //matriceROC("testFD_SSEmorphoOF");
     //matriceROC("testFD_SSEmorphoFO");
-    printf("\n");
-    //matriceROC("testSD");
-    //matriceROC("testSD_SSEmorphoO");
-    //matriceROC("testSD_SSEmorphoF");
-    //matriceROC("testSD_SSEmorphoOF");
-    //matriceROC("testSD_SSEmorphoFO");
-    printf("\n");
+    //printf("\n");
+    matriceROC("testSD_SSE");
+    matriceROC("testSD_SSEmorphoO");
+    matriceROC("testSD_SSEmorphoF");
+    matriceROC("testSD_SSEmorphoOF");
+    matriceROC("testSD_SSEmorphoFO");
+    //printf("\n");
     ///////////////////////////////////////////////////////////////////////////
     
     // Tests unitaires pour SD ET FD en SSE

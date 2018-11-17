@@ -17,7 +17,7 @@ void matriceROC(char dossier[]){
     int matROC[2][2]={0};
     
     char nameload1[100], nameload2[100];
-    double mcc;
+    double mcc,acc;
     double VP,FN,FP,VN;
     
     uint8 **Itverite = LoadPGM_ui8matrix("hall/hall000000.pgm",&nrl,&nrh,&ncl,&nch); //Pour récup les tailles images
@@ -57,13 +57,14 @@ void matriceROC(char dossier[]){
     }
     
     mcc = (VP * VN - FP * FN)/(sqrt((VP+FP)*(VP+FN)*(VN+FP)*(VN+FN)));
+    acc = (VP + VN) / (VP + VN + FP + FN);
     
     printf("Matrice ROC pour %s : \n \tVP FN \t %0.0f %0.0f \n \tFP VN \t %0.0f %0.0f \n", dossier, VP, FN, FP, VN);
     printf("\tpixel analysé : %0.0f\n",VP+FN+FP+VN);
     printf("\tpixel perdu : %d\n",perdu);
     
     printf("\tMCC = %f\n",mcc); //Valeur entre -1 et 1, 1 = perfect prediction, -1 = Total disagreement between prediction and observation
-    
+    printf("\tACCURACY = %f\n",acc); //Accuracy de ce dossier
     free_ui8matrix(Itverite,nrl,nrh,ncl,nch);
 	free_ui8matrix(It,nrl,nrh,ncl,nch);
 }
