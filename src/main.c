@@ -88,17 +88,17 @@ int main()
     //matriceROC("testSDmorphoFO");
     //printf("\n");
     
-    //matriceROC("testFD_SSE");
-    //matriceROC("testFD_SSEmorphoO");
-    //matriceROC("testFD_SSEmorphoF");
-    //matriceROC("testFD_SSEmorphoOF");
-    //matriceROC("testFD_SSEmorphoFO");
+    matriceROC("testFD_SSE");
+    matriceROC("testFD_SSEmorphoO");
+    matriceROC("testFD_SSEmorphoF");
+    matriceROC("testFD_SSEmorphoOF");
+    matriceROC("testFD_SSEmorphoFO");
     //printf("\n");
-    matriceROC("testSD_SSE");
-    matriceROC("testSD_SSEmorphoO");
-    matriceROC("testSD_SSEmorphoF");
-    matriceROC("testSD_SSEmorphoOF");
-    matriceROC("testSD_SSEmorphoFO");
+    //matriceROC("testSD_SSE");
+    //matriceROC("testSD_SSEmorphoO");
+    //matriceROC("testSD_SSEmorphoF");
+    //matriceROC("testSD_SSEmorphoOF");
+    //matriceROC("testSD_SSEmorphoFO");
     //printf("\n");
     ///////////////////////////////////////////////////////////////////////////
     

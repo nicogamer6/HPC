@@ -235,7 +235,7 @@ void test_routineSD_SSE()
         //Conversion
         uint_to_vuint(a, Iv, n1, n2, n3, n4);
         
-        SigmaDelta_1step_SSE2(V, Vtm1, M, Iv, Mtm1 , Et, n1, n2, n3, n4);
+        //SigmaDelta_1step_SSE2(V, Vtm1, M, Iv, Mtm1 , Et, n1, n2, n3, n4);
         CHRONO(SigmaDelta_1step_SSE2(V, Vtm1, M, Mtm1, Iv, Et, n1, n2, n3, n4),cycles);
         totalcy += cycles;
         

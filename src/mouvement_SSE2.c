@@ -52,7 +52,7 @@ void routine_FrameDifference_SSE2(vuint8** It, vuint8** It_1, vuint8** Et, long 
             b = _mm_cmplt_epi8(v_SEUILFD,a);
 
             //  On sauvegarde la valeur de b dans Et
-            _mm_store_si128(&Et[i][j], a);
+            _mm_store_si128(&Et[i][j], b);
         }
     }
     // return Et;
