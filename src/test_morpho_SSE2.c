@@ -12,6 +12,7 @@
 #include "vnrdef.h"
 #include "morpho_SSE2.h"
 #include "vnrutil.h"
+#include "mymacro.h"
 
 //#define SEUILFD 20
 #define NBIMAGES 299
@@ -72,6 +73,15 @@ void test_EtapemorphoSSE(void){
 ///////////////////////////////////////////////////
 
 void test_routineFD_SSEmorpho3xOuv(int seuil){
+
+    //Cycle par point//
+    double cycles, totalcy=0;
+    int iter, niter=2;
+    int run, nrun = 5;
+    double t0,t1,dt,tmin,t;
+
+    char *format = "%6.2f\n";
+    ///////////////////
     
     long nrl, nrh, ncl, nch;
     int vi0, vi1, vj0, vj1;
@@ -104,17 +114,33 @@ void test_routineFD_SSEmorpho3xOuv(int seuil){
         routine_FrameDifference_SSE2(It0,It,m,vi0, vi1,vj0,vj1,seuil);
         vuint_to_uint(out, m, vi0, vi1, vj0, vj1);
 
-
-        ouverture3SSE(out,Etout,nrl,nrh,ncl,nch);
-
+        CHRONO(ouverture3SSE(out,Etout,nrl,nrh,ncl,nch),cycles);
+        totalcy += cycles;
         
         sprintf(namesave,"testFD_SSEmorphoO/hall000%03d.pgm",i);
         SavePGM_ui8matrix(Etout,nrl,nrh,ncl,nch,namesave);
         dup_vui8matrix(It, vi0, vi1, vj0, vj1, It0);
     }
+
+    totalcy = totalcy / NBIMAGES; //on doit rediviser par le nombre de points pour l'avoir par point
+    totalcy = totalcy / ((nch+1)*(nrh+1));
+
+    BENCH(printf("Cycles FD_SSE, only OuvSSE = "));
+    BENCH(printf(format,totalcy));
+
 }
 
 void test_routineFD_SSEmorpho3xFerm(int seuil){
+
+    //Cycle par point//
+    double cycles, totalcy=0;
+    int iter, niter=2;
+    int run, nrun = 5;
+    double t0,t1,dt,tmin,t;
+
+    char *format = "%6.2f\n";
+    ///////////////////
+
     long nrl, nrh, ncl, nch;
     int vi0, vi1, vj0, vj1;
     char nameload1[100], nameload2[100], namesave[100];
@@ -146,17 +172,33 @@ void test_routineFD_SSEmorpho3xFerm(int seuil){
         routine_FrameDifference_SSE2(It0,It,m,vi0, vi1,vj0,vj1,seuil);
         vuint_to_uint(out, m, vi0, vi1, vj0, vj1);
 
-
-        fermeture3SSE(out,Etout,nrl,nrh,ncl,nch);
-
+        CHRONO(fermeture3SSE(out,Etout,nrl,nrh,ncl,nch),cycles);
+        totalcy += cycles;
         
         sprintf(namesave,"testFD_SSEmorphoF/hall000%03d.pgm",i);
         SavePGM_ui8matrix(Etout,nrl,nrh,ncl,nch,namesave);
         dup_vui8matrix(It, vi0, vi1, vj0, vj1, It0);
     }
+
+    totalcy = totalcy / NBIMAGES; //on doit rediviser par le nombre de points pour l'avoir par point
+    totalcy = totalcy / ((nch+1)*(nrh+1));
+
+    BENCH(printf("Cycles FD_SSE, only FermSSE = "));
+    BENCH(printf(format,totalcy));
+
 }
 
 void test_routineFD_SSEmorpho3xOuvFerm(int seuil){
+
+    //Cycle par point//
+    double cycles, totalcy=0;
+    int iter, niter=2;
+    int run, nrun = 5;
+    double t0,t1,dt,tmin,t;
+
+    char *format = "%6.2f\n";
+    ///////////////////
+
     long nrl, nrh, ncl, nch;
     int vi0, vi1, vj0, vj1;
     char nameload1[100], nameload2[100], namesave[100];
@@ -190,16 +232,35 @@ void test_routineFD_SSEmorpho3xOuvFerm(int seuil){
         vuint_to_uint(out, m, vi0, vi1, vj0, vj1);
 
 
-        ouverture3SSE(out,Etout,nrl,nrh,ncl,nch);
-        fermeture3SSE(Etout,Etout2,nrl,nrh,ncl,nch);
+        CHRONO(ouverture3SSE(out,Etout,nrl,nrh,ncl,nch),cycles);
+        totalcy += cycles;
+        CHRONO(fermeture3SSE(Etout,Etout2,nrl,nrh,ncl,nch),cycles);
+        totalcy += cycles;
         
         sprintf(namesave,"testFD_SSEmorphoOF/hall000%03d.pgm",i);
         SavePGM_ui8matrix(Etout2,nrl,nrh,ncl,nch,namesave);
         dup_vui8matrix(It, vi0, vi1, vj0, vj1, It0);
     }
+
+    totalcy = totalcy / NBIMAGES; //on doit rediviser par le nombre de points pour l'avoir par point
+    totalcy = totalcy / ((nch+1)*(nrh+1));
+
+    BENCH(printf("Cycles FD_SSE, only OuvFermSSE = "));
+    BENCH(printf(format,totalcy));
+
 }
 
 void test_routineFD_SSEmorpho3xFermOuv(int seuil){
+
+    //Cycle par point//
+    double cycles, totalcy=0;
+    int iter, niter=2;
+    int run, nrun = 5;
+    double t0,t1,dt,tmin,t;
+
+    char *format = "%6.2f\n";
+    ///////////////////
+
     long nrl, nrh, ncl, nch;
     int vi0, vi1, vj0, vj1;
     char nameload1[100], nameload2[100], namesave[100];
@@ -233,20 +294,40 @@ void test_routineFD_SSEmorpho3xFermOuv(int seuil){
         vuint_to_uint(out, m, vi0, vi1, vj0, vj1);
 
 
-        fermeture3SSE(out,Etout,nrl,nrh,ncl,nch);
-        ouverture3SSE(Etout,Etout2,nrl,nrh,ncl,nch);
+        CHRONO(fermeture3SSE(out,Etout,nrl,nrh,ncl,nch),cycles);
+        totalcy += cycles;
+        CHRONO(ouverture3SSE(Etout,Etout2,nrl,nrh,ncl,nch),cycles);
+        totalcy += cycles;
         
         sprintf(namesave,"testFD_SSEmorphoFO/hall000%03d.pgm",i);
         SavePGM_ui8matrix(Etout2,nrl,nrh,ncl,nch,namesave);
         dup_vui8matrix(It, vi0, vi1, vj0, vj1, It0);
     }
+    totalcy = totalcy / NBIMAGES; //on doit rediviser par le nombre de points pour l'avoir par point
+    totalcy = totalcy / ((nch+1)*(nrh+1));
+    //printf("%ld",((nch+1)*(nrh+1)));
+
+    BENCH(printf("Cycles FD_SSE, only FermOuvSSE = "));
+    BENCH(printf(format,totalcy));
+
 }
+
 
 //////////////////////////////////////////////
 //     TEST SIGMA DELTA SSE O,OF,F,FO       //
 //////////////////////////////////////////////
 
 void test_routineSD_SSEmorpho3xOuv(){
+
+    //Cycle par point//
+    double cycles, totalcy=0;
+    int iter, niter=2;
+    int run, nrun = 5;
+    double t0,t1,dt,tmin,t;
+
+    char *format = "%6.2f\n";
+    ///////////////////
+
     int n1, n2, n3, n4;
     long nrl, nrh, ncl, nch;
     char nameload[100];     //"hall/hall000..";
@@ -269,7 +350,7 @@ void test_routineSD_SSEmorpho3xOuv(){
     vuint8 ** V  = vui8matrix(n1,n2,n3,n4);
     vuint8 ** Vtm1 = vui8matrix(n1,n2,n3,n4);
     vuint8** M  = vui8matrix(n1,n2,n3,n4);
-     vuint8 ** Mtm1 = vui8matrix(n1,n2,n3,n4);
+    vuint8 ** Mtm1 = vui8matrix(n1,n2,n3,n4);
     vuint8 ** Et = vui8matrix(n1-BORD,n2+BORD,n3-BORD,n4+BORD);
     //uint8 **Ot = ui8matrix(nrl,nrh,ncl,nch);
     
@@ -296,8 +377,8 @@ void test_routineSD_SSEmorpho3xOuv(){
         
         vuint_to_uint(out, Et, n1, n2, n3, n4);
 
-        ouverture3SSE(out,Etout,nrl,nrh,ncl,nch);
-
+        CHRONO(ouverture3SSE(out,Etout,nrl,nrh,ncl,nch),cycles);
+        totalcy += cycles;
         
         SavePGM_ui8matrix(Etout,nrl,nrh,ncl,nch,namesave);
         //On doit copier M dan Mtm1, V dans Vtm1 et I dans Itm1
@@ -314,6 +395,12 @@ void test_routineSD_SSEmorpho3xOuv(){
         
     }
     
+    totalcy = totalcy / NBIMAGES; //on doit rediviser par le nombre de points pour l'avoir par point
+    totalcy = totalcy / ((nch+1)*(nrh+1));
+
+    BENCH(printf("Cycles SD_SSE, only OuvSSE = "));
+    BENCH(printf(format,totalcy));
+
  /*   free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
     free_ui8matrix(I,nrl,nrh,ncl,nch);
     free_ui8matrix(V,nrl,nrh,ncl,nch);
@@ -326,6 +413,16 @@ void test_routineSD_SSEmorpho3xOuv(){
 
 
 void test_routineSD_SSEmorpho3xFerm(){
+
+    //Cycle par point//
+    double cycles, totalcy=0;
+    int iter, niter=2;
+    int run, nrun = 5;
+    double t0,t1,dt,tmin,t;
+
+    char *format = "%6.2f\n";
+    ///////////////////
+
     int n1, n2, n3, n4;
     long nrl, nrh, ncl, nch;
     char nameload[100];     //"hall/hall000..";
@@ -348,7 +445,7 @@ void test_routineSD_SSEmorpho3xFerm(){
     vuint8 ** V  = vui8matrix(n1,n2,n3,n4);
     vuint8 ** Vtm1 = vui8matrix(n1,n2,n3,n4);
     vuint8** M  = vui8matrix(n1,n2,n3,n4);
-     vuint8 ** Mtm1 = vui8matrix(n1,n2,n3,n4);
+    vuint8 ** Mtm1 = vui8matrix(n1,n2,n3,n4);
     vuint8 ** Et = vui8matrix(n1-BORD,n2+BORD,n3-BORD,n4+BORD);
     //uint8 **Ot = ui8matrix(nrl,nrh,ncl,nch);
     
@@ -375,7 +472,8 @@ void test_routineSD_SSEmorpho3xFerm(){
         
         vuint_to_uint(out, Et, n1, n2, n3, n4);
 
-        fermeture3SSE(out,Etout,nrl,nrh,ncl,nch);
+        CHRONO(fermeture3SSE(out,Etout,nrl,nrh,ncl,nch),cycles);
+        totalcy += cycles;
 
         
         SavePGM_ui8matrix(Etout,nrl,nrh,ncl,nch,namesave);
@@ -393,6 +491,12 @@ void test_routineSD_SSEmorpho3xFerm(){
         
     }
     
+    totalcy = totalcy / NBIMAGES; //on doit rediviser par le nombre de points pour l'avoir par point
+    totalcy = totalcy / ((nch+1)*(nrh+1));
+
+    BENCH(printf("Cycles SD_SSE, only FermSSE = "));
+    BENCH(printf(format,totalcy));
+
  /*   free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
     free_ui8matrix(I,nrl,nrh,ncl,nch);
     free_ui8matrix(V,nrl,nrh,ncl,nch);
@@ -404,6 +508,16 @@ void test_routineSD_SSEmorpho3xFerm(){
 }
 
 void test_routineSD_SSEmorpho3xOuvFerm(){
+
+    //Cycle par point//
+    double cycles, totalcy=0;
+    int iter, niter=2;
+    int run, nrun = 5;
+    double t0,t1,dt,tmin,t;
+
+    char *format = "%6.2f\n";
+    ///////////////////
+
     int n1, n2, n3, n4;
     long nrl, nrh, ncl, nch;
     char nameload[100];     //"hall/hall000..";
@@ -426,7 +540,7 @@ void test_routineSD_SSEmorpho3xOuvFerm(){
     vuint8 ** V  = vui8matrix(n1,n2,n3,n4);
     vuint8 ** Vtm1 = vui8matrix(n1,n2,n3,n4);
     vuint8** M  = vui8matrix(n1,n2,n3,n4);
-     vuint8 ** Mtm1 = vui8matrix(n1,n2,n3,n4);
+    vuint8 ** Mtm1 = vui8matrix(n1,n2,n3,n4);
     vuint8 ** Et = vui8matrix(n1-BORD,n2+BORD,n3-BORD,n4+BORD);
     //uint8 **Ot = ui8matrix(nrl,nrh,ncl,nch);
     
@@ -453,8 +567,10 @@ void test_routineSD_SSEmorpho3xOuvFerm(){
         
         vuint_to_uint(out, Et, n1, n2, n3, n4);
 
-        ouverture3SSE(out,Etout,nrl,nrh,ncl,nch);
-        fermeture3SSE(Etout,Etout2,nrl,nrh,ncl,nch);
+        CHRONO(ouverture3SSE(out,Etout,nrl,nrh,ncl,nch),cycles);
+        totalcy += cycles;
+        CHRONO(fermeture3SSE(Etout,Etout2,nrl,nrh,ncl,nch),cycles);
+        totalcy += cycles;
 
         
         SavePGM_ui8matrix(Etout2,nrl,nrh,ncl,nch,namesave);
@@ -471,6 +587,12 @@ void test_routineSD_SSEmorpho3xOuvFerm(){
         
         
     }
+
+    totalcy = totalcy / NBIMAGES; //on doit rediviser par le nombre de points pour l'avoir par point
+    totalcy = totalcy / ((nch+1)*(nrh+1));
+
+    BENCH(printf("Cycles SD_SSE, only OuvFermSSE = "));
+    BENCH(printf(format,totalcy));
     
  /*   free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
     free_ui8matrix(I,nrl,nrh,ncl,nch);
@@ -483,6 +605,16 @@ void test_routineSD_SSEmorpho3xOuvFerm(){
 }
 
 void test_routineSD_SSEmorpho3xFermOuv(){
+
+    //Cycle par point//
+    double cycles, totalcy=0;
+    int iter, niter=2;
+    int run, nrun = 5;
+    double t0,t1,dt,tmin,t;
+
+    char *format = "%6.2f\n";
+    ///////////////////
+
     int n1, n2, n3, n4;
     long nrl, nrh, ncl, nch;
     char nameload[100];     //"hall/hall000..";
@@ -505,7 +637,7 @@ void test_routineSD_SSEmorpho3xFermOuv(){
     vuint8 ** V  = vui8matrix(n1,n2,n3,n4);
     vuint8 ** Vtm1 = vui8matrix(n1,n2,n3,n4);
     vuint8** M  = vui8matrix(n1,n2,n3,n4);
-     vuint8 ** Mtm1 = vui8matrix(n1,n2,n3,n4);
+    vuint8 ** Mtm1 = vui8matrix(n1,n2,n3,n4);
     vuint8 ** Et = vui8matrix(n1-BORD,n2+BORD,n3-BORD,n4+BORD);
     //uint8 **Ot = ui8matrix(nrl,nrh,ncl,nch);
     
@@ -532,10 +664,11 @@ void test_routineSD_SSEmorpho3xFermOuv(){
         
         vuint_to_uint(out, Et, n1, n2, n3, n4);
 
-        fermeture3SSE(out,Etout,nrl,nrh,ncl,nch);
-        ouverture3SSE(Etout,Etout2,nrl,nrh,ncl,nch);
+        CHRONO(fermeture3SSE(out,Etout,nrl,nrh,ncl,nch),cycles);
+        totalcy += cycles;
+        CHRONO(ouverture3SSE(Etout,Etout2,nrl,nrh,ncl,nch),cycles);
+        totalcy += cycles;
 
-        
         SavePGM_ui8matrix(Etout2,nrl,nrh,ncl,nch,namesave);
         //On doit copier M dan Mtm1, V dans Vtm1 et I dans Itm1
         
@@ -551,6 +684,12 @@ void test_routineSD_SSEmorpho3xFermOuv(){
         
     }
     
+    totalcy = totalcy / NBIMAGES; //on doit rediviser par le nombre de points pour l'avoir par point
+    totalcy = totalcy / ((nch+1)*(nrh+1));
+
+    BENCH(printf("Cycles SD_SSE, only FermOuvSSE = "));
+    BENCH(printf(format,totalcy));
+
  /*   free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
     free_ui8matrix(I,nrl,nrh,ncl,nch);
     free_ui8matrix(V,nrl,nrh,ncl,nch);

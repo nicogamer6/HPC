@@ -33,7 +33,7 @@ void matriceROC(char dossier[]){
     VN = matROC[1][1];
     
     for(k=0; k<=NBIMAGESVERITE;k++){
-        sprintf(nameload1,"verite2/hall000%03d.pgm",k*10); //Image verite terrain à comparer avec image du dossier arg
+        sprintf(nameload1,"verite/hall000%03d.pgm",k*10); //Image verite terrain à comparer avec image du dossier arg
 	    //printf("%s\n",nameload1);
 	    Itverite=LoadPGM_ui8matrix(nameload1,&nrl,&nrh,&ncl,&nch);
 	    

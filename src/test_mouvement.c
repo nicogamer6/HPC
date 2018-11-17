@@ -4,12 +4,24 @@
 #include "string.h"
 #include "test_mouvement.h"
 #include "mouvement.h"
+#include "mymacro.h"
 
 #define NBIMAGES 299
 #define BORD 2
 
 //Permet de remplir le dossier /testFD et de voir les nouvelles images avec algo FD sur l'ensemble du dossier /hall
 void test_routineFD(int seuil){
+
+	//Cycle par point//
+	double cycles, totalcy=0;
+	int iter, niter=2;
+	int run, nrun = 5;
+	double t0,t1,dt,tmin,t;
+
+	char *format = "%6.2f\n";
+	///////////////////
+
+
     long nrl, nrh, ncl, nch;
     char nameload1[100], nameload2[100], namesave[100];
     
@@ -24,12 +36,18 @@ void test_routineFD(int seuil){
 	for(i=1;i<=NBIMAGES;i++){
 	        sprintf(nameload2,"hall/hall000%03d.pgm",i);
             It=LoadPGM_ui8matrix(nameload2,&nrl,&nrh,&ncl,&nch);
-            routine_FrameDifference(Itm1,It,m,nrl,nrh,ncl,nch,seuil);
+            CHRONO(routine_FrameDifference(Itm1,It,m,nrl,nrh,ncl,nch,seuil),cycles);
+            totalcy += cycles;
             sprintf(namesave,"testFD/hall000%03d.pgm",i);
             SavePGM_ui8matrix(m,nrl,nrh,ncl,nch,namesave);
             copy_ui8matrix_ui8matrix(It, nrl, nrh, ncl, nch, Itm1);
 	}   
-	
+	totalcy = totalcy / NBIMAGES; //on doit rediviser par le nombre de points pour l'avoir par point
+	totalcy = totalcy / ((nch+1)*(nrh+1));
+
+	BENCH(printf("Cycles FD = "));
+	BENCH(printf(format,totalcy));
+
 	free_ui8matrix(m,nrl,nrh,ncl,nch);
 	free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
 	free_ui8matrix(It,nrl,nrh,ncl,nch);
@@ -37,6 +55,16 @@ void test_routineFD(int seuil){
 
 //Permet de remplir le dossier /testSD et de voir les nouvelles images avec algo SD sur l'ensemble du dossier /hall
 void test_routineSD(void){
+
+	//Cycle par point//
+	double cycles, totalcy=0;
+	int iter, niter=2;
+	int run, nrun = 5;
+	double t0,t1,dt,tmin,t;
+
+	char *format = "%6.2f\n";
+	///////////////////
+
     long nrl, nrh, ncl, nch;
     char nameload[100];     //"hall/hall000..";
 	char namesave[100];     //"testSD/SD...";
@@ -60,8 +88,8 @@ void test_routineSD(void){
 	for(i=1;i<=NBIMAGES;i++){
 	        sprintf(nameload,"hall/hall000%03d.pgm",i);
 	        I=LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
-	        routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
-	        
+	        CHRONO(routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch),cycles);
+	        totalcy += cycles;
             sprintf(namesave,"testSD/hall000%03d.pgm",i);
             SavePGM_ui8matrix(Et,nrl,nrh,ncl,nch,namesave);
             //On doit copier M dan Mtm1, V dans Vtm1 et I dans Itm1
@@ -71,6 +99,12 @@ void test_routineSD(void){
             copy_ui8matrix_ui8matrix(I, nrl, nrh, ncl, nch, Itm1);
            
 	} 
+
+	totalcy = totalcy / NBIMAGES; //on doit rediviser par le nombre de points pour l'avoir par point
+	totalcy = totalcy / ((nch+1)*(nrh+1));
+
+	BENCH(printf("Cycles SD = "));
+	BENCH(printf(format,totalcy));
 	
 	free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
 	free_ui8matrix(I,nrl,nrh,ncl,nch);

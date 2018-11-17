@@ -19,72 +19,93 @@
 
 int main()
 {
-    /*long nrl, nrh, ncl, nch;
-	uint8 **m;
-	uint8 **m1;
-	uint8 **m2;
-	*/
+     
+    // Crée les images FD et SD. 
+    // AFFICHE le CPP juste pour la morpho
+    test_routineFD(SEUILFD);                // Dossier "testFD"
+    test_routineSD();                       // Dossier "testSD"
+    printf("\n");   
+    ///////////////////////////////////////////////////////////////////////////
 
-   //m= LoadPGM_ui8matrix("hall000000.pgm",&nrl,&nrh,&ncl,&nch);
-	
-	 //MLoadPGM_ui8matrix("hall000291.pgm",nrl,nrh,ncl,nch,m);
-	
-	//SavePGM_ui8matrix(m,nrl,nrh,ncl,nch,"test");
-	    
-	//char * filename [NB]= {"hall/hall000000.pgm","hall/hall000291.pgm"};
-	//char nom[4];
-	//char res[20]="test/";
-	/*for (int i=0;i<2;i++)
-	{
-		m= LoadPGM_ui8matrix(filename[i],&nrl,&nrh,&ncl,&nch);
-		sprintf(nom,"%d",i);
-		SavePGM_ui8matrix(m,nrl,nrh,ncl,nch, strcat (res,nom));
-		strcpy(res,"test/");
-	}*/
+    // Crée les images FD et SD SSE
+    // AFFICHE le CPP juste pour la morpho
+    test_routineFD_SSE(SEUILFD);            // Dossier "testFD_SSE"
+    test_routineSD_SSE();                   // Dossier "testSD_SSE"
+    printf("\n");
+    ///////////////////////////////////////////////////////////////////////////
+    
+    // Crée les images FD avec les morpho 3x3, O, F, OF et FO. 
+    // AFFICHE le CPP juste pour la morpho et morphoSSE
+    test_routineFDmorpho3xOuv(SEUILFD);     // Dossier "testFDmorphoO"
+    test_routineFDmorpho3xFerm(SEUILFD);    // Dossier "testFDmorphoF"
+    test_routineFDmorpho3xOuvFerm(SEUILFD); // Dossier "testFDmorphoOF"
+    test_routineFDmorpho3xFermOuv(SEUILFD); // Dossier "testFDmorphoFO"
+    printf("\n");
 
-  
-    //test_routineFD(SEUILFD);
-    //test_routineSD();
-   
-    /*
-    test_routineFDmorpho3xOuv(SEUILFD);
-    test_routineFDmorpho3xFerm(SEUILFD);
-    test_routineFDmorpho3xOuvFerm(SEUILFD);
-    test_routineFDmorpho3xFermOuv(SEUILFD);
+    test_routineFD_SSEmorpho3xOuv(SEUILFD);     // Dossier "testFD_SSEmorphoO"
+    test_routineFD_SSEmorpho3xFerm(SEUILFD);    // Dossier "testFD_SSEmorphoF"
+    test_routineFD_SSEmorpho3xOuvFerm(SEUILFD); // Dossier "testFD_SSEmorphoOF"
+    test_routineFD_SSEmorpho3xFermOuv(SEUILFD); // Dossier "testFD_SSEmorphoFO"
+    printf("\n");
+    ///////////////////////////////////////////////////////////////////////////
+
+    // Crée les images FD avec les morpho 3x3, O, F, OF et FO.
+    // Affiche le CPP juste pour la morpho et morphoSSE
+    test_routineSDmorpho3xOuv();            // Dossier "testSDmorphoO"
+    test_routineSDmorpho3xFerm();           // Dossier "testSDmorphoF"
+    test_routineSDmorpho3xOuvFerm();        // Dossier "testSDmorphoOF"
+    test_routineSDmorpho3xFermOuv();        // Dossier "testSDmorphoFO"
+    printf("\n");
+
+    test_routineSD_SSEmorpho3xOuv();        // Dossier "testSD_SSEmorphoO"
+    test_routineSD_SSEmorpho3xFerm();       // Dossier "testSD_SSEmorphoF"
+    test_routineSD_SSEmorpho3xOuvFerm();    // Dossier "testSD_SSEmorphoOF"
+    test_routineSD_SSEmorpho3xFermOuv();    // Dossier "testSD_SSEmorphoFO"
+    printf("\n");
+    ///////////////////////////////////////////////////////////////////////////
+
+    // Crée les images morpho et morpho SSE Ero, Dil, ouv et ferm dans des sous dossiers 
+    test_Etapemorpho();                     // Dossier "testmorpho"
+    test_EtapemorphoSSE();                  // Dossier "testmorphoSSE"
+
+    ///////////////////////////////////////////////////////////////////////////
+
+    // Pour créer la matrice ROC à partir d'un dossier d'image comparé au dossier "verite" terrain: 
+    // Utilisation : matriceROC("nomDossier")
+    // Paramètre de comparaison : MCC entre -1 et 1
+    // 1 = perfect prediction, -1 = Total disagreement between prediction and observation
     
-    test_routineSDmorpho3xOuv();
-    test_routineSDmorpho3xFerm();
-    test_routineSDmorpho3xOuvFerm();
-    test_routineSDmorpho3xFermOuv();
-    
-    matriceROC("testFD");
+    //matriceROC("testFD");
     //matriceROC("testFDmorphoO");
     //matriceROC("testFDmorphoF");
-    matriceROC("testFDmorphoOF");
+    //matriceROC("testFDmorphoOF");
     //matriceROC("testFDmorphoFO");
     printf("\n");
-    
-    matriceROC("testSD");
+    //matriceROC("testSD");
     //matriceROC("testSDmorphoO");
     //matriceROC("testSDmorphoF");
-    matriceROC("testSDmorphoOF");
+    //matriceROC("testSDmorphoOF");
     //matriceROC("testSDmorphoFO");
+    printf("\n");
     
-    */
-    test_Etapemorpho();
+    //matriceROC("testFD_SSE");
+    //matriceROC("testFD_SSEmorphoO");
+    //matriceROC("testFD_SSEmorphoF");
+    //matriceROC("testFD_SSEmorphoOF");
+    //matriceROC("testFD_SSEmorphoFO");
+    printf("\n");
+    //matriceROC("testSD");
+    //matriceROC("testSD_SSEmorphoO");
+    //matriceROC("testSD_SSEmorphoF");
+    //matriceROC("testSD_SSEmorphoOF");
+    //matriceROC("testSD_SSEmorphoFO");
+    printf("\n");
+    ///////////////////////////////////////////////////////////////////////////
     
-    test_routineFD_SSE(SEUILFD);
-    test_EtapemorphoSSE();
-
-    test_routineFD_SSEmorpho3xOuv(SEUILFD);
-    test_routineFD_SSEmorpho3xFerm(SEUILFD);
-    test_routineFD_SSEmorpho3xOuvFerm(SEUILFD);
-    test_routineFD_SSEmorpho3xFermOuv(SEUILFD);
-
-    test_routineSD_SSEmorpho3xOuv();
-    test_routineSD_SSEmorpho3xFerm();
-    test_routineSD_SSEmorpho3xOuvFerm();
-    test_routineSD_SSEmorpho3xFermOuv();
+    // Tests unitaires pour SD ET FD en SSE
+    //test_unitaire_SD_SSE();
+    //test_unitaire_FD_SSE();
+    
 
     return 0;
 }

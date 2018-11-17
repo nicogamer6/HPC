@@ -5,6 +5,7 @@
 #include "vnrdef.h"
 #include "nrdef.h"
 #include "vnrutil.h"
+#include "mymacro.h"
 
 #include "mouvement_SSE2.h"
 #include "test_mouvement_SSE2.h"
@@ -78,7 +79,14 @@ void vuint_to_uint(uint8 ** scalaire, vuint ** vecteur, int n1, int n2, int n3, 
 
 void test_routineFD_SSE(int seuil)
 {
-    
+    //Cycle par point//
+    double cycles, totalcy=0;
+    int iter, niter=2;
+    int run, nrun = 5;
+    double t0,t1,dt,tmin,t;
+
+    char *format = "%6.2f\n";
+    ///////////////////
 
     long nrl, nrh, ncl, nch;
     int n1, n2, n3, n4;
@@ -114,7 +122,8 @@ void test_routineFD_SSE(int seuil)
 
         //TODO convertir m en uint **
         uint_to_vuint(a, It, n1, n2, n3, n4);
-        routine_FrameDifference_SSE2(I0,It,m,n1, n2,n3,n4,seuil);
+        CHRONO(routine_FrameDifference_SSE2(I0,It,m,n1, n2,n3,n4,seuil),cycles);
+        totalcy += cycles;
         vuint_to_uint(out, m, n1, n2, n3, n4);
 
         
@@ -122,8 +131,14 @@ void test_routineFD_SSE(int seuil)
         SavePGM_ui8matrix(out,nrl,nrh,ncl,nch,namesave);
         dup_vui8matrix(It, n1, n2, n3, n4, I0);
     }
-    
-   // free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
+    totalcy = totalcy / NBIMAGES; //on doit rediviser par le nombre de points pour l'avoir par point
+    totalcy = totalcy / ((nch+1)*(nrh+1));
+
+    BENCH(printf("Cycles FD_SSE = "));
+    BENCH(printf(format,totalcy));
+    //printf("%ld",((nch+1)*(nrh+1)));
+
+    //free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
     //free_ui8matrix(imaget1,nrl,nrh,ncl,nch);
     //free_ui8matrix(out,nrl,nrh,ncl,nch);
 }
@@ -135,7 +150,7 @@ void test_routineFD_SSE(int seuil)
 ////////////////////////////////////////
 
 
-void test_unitaire_fd_SSE()
+void test_unitaire_FD_SSE()
 {
     vuint8 It = init_vuint8_all(255, 0, 128, 75, 255, 100, 1, 254, 9, 56, 38, 124, 198, 50, 87, 220);
     
@@ -162,6 +177,16 @@ void test_unitaire_fd_SSE()
 
 void test_routineSD_SSE()
 {
+
+    //Cycle par point//
+    double cycles, totalcy=0;
+    int iter, niter=2;
+    int run, nrun = 5;
+    double t0,t1,dt,tmin,t;
+
+    char *format = "%6.2f\n";
+    ///////////////////
+
     int n1, n2, n3, n4;
     long nrl, nrh, ncl, nch;
     char nameload[100];     //"hall/hall000..";
@@ -207,6 +232,8 @@ void test_routineSD_SSE()
         uint_to_vuint(a, Iv, n1, n2, n3, n4);
         
         SigmaDelta_1step_SSE2(V, Vtm1, M, Iv, Mtm1 , Et, n1, n2, n3, n4);
+        CHRONO(SigmaDelta_1step_SSE2(V, Vtm1, M, Mtm1, Iv, Et, n1, n2, n3, n4),cycles);
+        totalcy += cycles;
         
         sprintf(namesave,"testSD_SSE/hall000%03d.pgm",i);
         
@@ -223,6 +250,12 @@ void test_routineSD_SSE()
         
         
     }
+
+    totalcy = totalcy / NBIMAGES; //on doit rediviser par le nombre de points pour l'avoir par point
+    totalcy = totalcy / ((nch+1)*(nrh+1));
+    
+    BENCH(printf("Cycles SD_SSE = "));
+    BENCH(printf(format,totalcy));
     
 }
 

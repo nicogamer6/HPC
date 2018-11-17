@@ -5,6 +5,7 @@
 #include "test_morpho.h"
 #include "morpho.h"
 #include "mouvement.h"
+#include "mymacro.h"
 
 //#define SEUILFD 20
 #define NBIMAGES 299
@@ -45,6 +46,16 @@ void test_Etapemorpho(void){
 //////////////////////////////////////////////
 
 void test_routineFDmorpho3xOuv(int seuil){
+
+	//Cycle par point//
+	double cycles, totalcy=0;
+	int iter, niter=2;
+	int run, nrun = 5;
+	double t0,t1,dt,tmin,t;
+
+	char *format = "%6.2f\n";
+	///////////////////
+
     long nrl, nrh, ncl, nch;
     char nameload1[100], nameload2[100], namesave[100];
     
@@ -62,12 +73,18 @@ void test_routineFDmorpho3xOuv(int seuil){
             
             routine_FrameDifference(Itm1,It,Et,nrl,nrh,ncl,nch,seuil);
             sprintf(namesave,"testFDmorphoO/hall000%03d.pgm",i);
-            ouverture3(Et,Etout,nrl,nrh,ncl,nch);
+            CHRONO(ouverture3(Et,Etout,nrl,nrh,ncl,nch),cycles);
+            totalcy += cycles;
             //ouverture5(Etout,Et,nrl,nrh,ncl,nch);
             SavePGM_ui8matrix(Etout,nrl,nrh,ncl,nch,namesave);
             copy_ui8matrix_ui8matrix(It, nrl, nrh, ncl, nch, Itm1);
 	}   
-	
+	totalcy = totalcy / NBIMAGES; //on doit rediviser par le nombre de points pour l'avoir par point
+	totalcy = totalcy / ((nch+1)*(nrh+1));
+
+	BENCH(printf("Cycles FD, only Ouv = "));
+	BENCH(printf(format,totalcy));
+
 	free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
 	free_ui8matrix(It,nrl,nrh,ncl,nch);
 	free_ui8matrix(Et,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
@@ -76,6 +93,16 @@ void test_routineFDmorpho3xOuv(int seuil){
 }
 
 void test_routineFDmorpho3xFerm(int seuil){
+
+	//Cycle par point//
+	double cycles, totalcy=0;
+	int iter, niter=2;
+	int run, nrun = 5;
+	double t0,t1,dt,tmin,t;
+
+	char *format = "%6.2f\n";
+	///////////////////
+
     long nrl, nrh, ncl, nch;
     char nameload1[100], nameload2[100], namesave[100];
     
@@ -93,12 +120,19 @@ void test_routineFDmorpho3xFerm(int seuil){
             
             routine_FrameDifference(Itm1,It,Et,nrl,nrh,ncl,nch,seuil);
             sprintf(namesave,"testFDmorphoF/hall000%03d.pgm",i);
-            fermeture3(Et,Etout,nrl,nrh,ncl,nch);
+            CHRONO(fermeture3(Et,Etout,nrl,nrh,ncl,nch),cycles);
+            totalcy += cycles;
             //fermeture5(Etout,Et,nrl,nrh,ncl,nch);
             SavePGM_ui8matrix(Etout,nrl,nrh,ncl,nch,namesave);
             copy_ui8matrix_ui8matrix(It, nrl, nrh, ncl, nch, Itm1);
 	}   
 	
+	totalcy = totalcy / NBIMAGES; //on doit rediviser par le nombre de points pour l'avoir par point
+	totalcy = totalcy / ((nch+1)*(nrh+1));
+
+	BENCH(printf("Cycles FD, only Ferm = "));
+	BENCH(printf(format,totalcy));
+
 	free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
 	free_ui8matrix(It,nrl,nrh,ncl,nch);
 	free_ui8matrix(Et,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
@@ -106,6 +140,16 @@ void test_routineFDmorpho3xFerm(int seuil){
 }
 
 void test_routineFDmorpho3xOuvFerm(int seuil){
+
+	//Cycle par point//
+	double cycles, totalcy=0;
+	int iter, niter=2;
+	int run, nrun = 5;
+	double t0,t1,dt,tmin,t;
+
+	char *format = "%6.2f\n";
+	///////////////////
+
     long nrl, nrh, ncl, nch;
     char nameload1[100], nameload2[100], namesave[100];
     
@@ -123,13 +167,21 @@ void test_routineFDmorpho3xOuvFerm(int seuil){
             
             routine_FrameDifference(Itm1,It,Et,nrl,nrh,ncl,nch,seuil);
             sprintf(namesave,"testFDmorphoOF/hall000%03d.pgm",i);
-            ouverture3(Et,Etout,nrl,nrh,ncl,nch);
-            fermeture3(Etout,Et,nrl,nrh,ncl,nch);
+            CHRONO(ouverture3(Et,Etout,nrl,nrh,ncl,nch),cycles);
+            totalcy += cycles;
+            CHRONO(fermeture3(Etout,Et,nrl,nrh,ncl,nch),cycles);
+            totalcy += cycles;
             //ouverture5(Et,Etout,nrl,nrh,ncl,nch);
             //fermeture5(Etout,Et,nrl,nrh,ncl,nch);
             SavePGM_ui8matrix(Et,nrl,nrh,ncl,nch,namesave);
             copy_ui8matrix_ui8matrix(It, nrl, nrh, ncl, nch, Itm1);
 	}   
+
+	totalcy = totalcy / NBIMAGES; //on doit rediviser par le nombre de points pour l'avoir par point
+	totalcy = totalcy / ((nch+1)*(nrh+1));
+
+	BENCH(printf("Cycles FD, only OuvFerm = "));
+	BENCH(printf(format,totalcy));
 	
 	free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
 	free_ui8matrix(It,nrl,nrh,ncl,nch);
@@ -138,6 +190,16 @@ void test_routineFDmorpho3xOuvFerm(int seuil){
 }
 
 void test_routineFDmorpho3xFermOuv(int seuil){
+
+	//Cycle par point//
+	double cycles, totalcy=0;
+	int iter, niter=2;
+	int run, nrun = 5;
+	double t0,t1,dt,tmin,t;
+
+	char *format = "%6.2f\n";
+	///////////////////
+
     long nrl, nrh, ncl, nch;
     char nameload1[100], nameload2[100], namesave[100];
     
@@ -155,14 +217,21 @@ void test_routineFDmorpho3xFermOuv(int seuil){
             
             routine_FrameDifference(Itm1,It,Et,nrl,nrh,ncl,nch,seuil);
             sprintf(namesave,"testFDmorphoFO/hall000%03d.pgm",i);
-            fermeture3(Et,Etout,nrl,nrh,ncl,nch);
-            ouverture3(Etout,Et,nrl,nrh,ncl,nch);
+            CHRONO(fermeture3(Et,Etout,nrl,nrh,ncl,nch),cycles);
+            totalcy += cycles;
+            CHRONO(ouverture3(Etout,Et,nrl,nrh,ncl,nch),cycles);
+            totalcy += cycles;
             //fermeture5(Et,Etout,nrl,nrh,ncl,nch);
             //ouverture5(Etout,Et,nrl,nrh,ncl,nch);
             SavePGM_ui8matrix(Et,nrl,nrh,ncl,nch,namesave);
             copy_ui8matrix_ui8matrix(It, nrl, nrh, ncl, nch, Itm1);
 	}   
-	
+	totalcy = totalcy / NBIMAGES; //on doit rediviser par le nombre de points pour l'avoir par point
+	totalcy = totalcy / ((nch+1)*(nrh+1));
+
+	BENCH(printf("Cycles FD, only FermOuv = "));
+	BENCH(printf(format,totalcy));
+
 	free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
 	free_ui8matrix(It,nrl,nrh,ncl,nch);
 	free_ui8matrix(Et,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
@@ -177,6 +246,16 @@ void test_routineFDmorpho3xFermOuv(int seuil){
     
        
 void test_routineSDmorpho3xOuv(){
+
+	//Cycle par point//
+	double cycles, totalcy=0;
+	int iter, niter=2;
+	int run, nrun = 5;
+	double t0,t1,dt,tmin,t;
+
+	char *format = "%6.2f\n";
+	///////////////////
+
     long nrl, nrh, ncl, nch;
     char nameload[100];     //"hall/hall000..";
 	char namesave[100];     //"testSD/SD...";
@@ -202,7 +281,8 @@ void test_routineSDmorpho3xOuv(){
 	        sprintf(nameload,"hall/hall000%03d.pgm",i);
 	        I= LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
 	        routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
-	        ouverture3(Et,Etout,nrl,nrh,ncl,nch);
+	        CHRONO(ouverture3(Et,Etout,nrl,nrh,ncl,nch),cycles);
+	        totalcy += cycles;
 	        //ouverture5(Etout,Et,nrl,nrh,ncl,nch);
             sprintf(namesave,"testSDmorphoO/hall000%03d.pgm",i);
             SavePGM_ui8matrix(Etout,nrl,nrh,ncl,nch,namesave);
@@ -212,6 +292,12 @@ void test_routineSDmorpho3xOuv(){
             copy_ui8matrix_ui8matrix(I, nrl, nrh, ncl, nch, Itm1);
            
 	} 
+
+	totalcy = totalcy / NBIMAGES; //on doit rediviser par le nombre de points pour l'avoir par point
+	totalcy = totalcy / ((nch+1)*(nrh+1));
+
+	BENCH(printf("Cycles SD, only Ouv = "));
+	BENCH(printf(format,totalcy));
 	
 	free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
 	free_ui8matrix(I,nrl,nrh,ncl,nch);
@@ -224,6 +310,16 @@ void test_routineSDmorpho3xOuv(){
 }
 
 void test_routineSDmorpho3xFerm(){
+
+	//Cycle par point//
+	double cycles, totalcy=0;
+	int iter, niter=2;
+	int run, nrun = 5;
+	double t0,t1,dt,tmin,t;
+
+	char *format = "%6.2f\n";
+	///////////////////
+
     long nrl, nrh, ncl, nch;
     char nameload[100];     //"hall/hall000..";
 	char namesave[100];     //"testSD/SD...";
@@ -249,7 +345,8 @@ void test_routineSDmorpho3xFerm(){
 	        sprintf(nameload,"hall/hall000%03d.pgm",i);
 	        I= LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
 	        routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
-	        fermeture3(Et,Etout,nrl,nrh,ncl,nch);
+	        CHRONO(fermeture3(Et,Etout,nrl,nrh,ncl,nch),cycles);
+	        totalcy += cycles;
 	        //fermeture5(Etout,Et,nrl,nrh,ncl,nch);
             sprintf(namesave,"testSDmorphoF/hall000%03d.pgm",i);
             SavePGM_ui8matrix(Etout,nrl,nrh,ncl,nch,namesave);
@@ -259,6 +356,12 @@ void test_routineSDmorpho3xFerm(){
             copy_ui8matrix_ui8matrix(I, nrl, nrh, ncl, nch, Itm1);
            
 	} 
+
+	totalcy = totalcy / NBIMAGES; //on doit rediviser par le nombre de points pour l'avoir par point
+	totalcy = totalcy / ((nch+1)*(nrh+1));
+
+	BENCH(printf("Cycles SD, only Ferm = "));
+	BENCH(printf(format,totalcy));
 	
 	free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
 	free_ui8matrix(I,nrl,nrh,ncl,nch);
@@ -271,6 +374,16 @@ void test_routineSDmorpho3xFerm(){
 }
 
 void test_routineSDmorpho3xOuvFerm(){
+
+	//Cycle par point//
+	double cycles, totalcy=0;
+	int iter, niter=2;
+	int run, nrun = 5;
+	double t0,t1,dt,tmin,t;
+
+	char *format = "%6.2f\n";
+	///////////////////
+
     long nrl, nrh, ncl, nch;
     char nameload[100];     //"hall/hall000..";
 	char namesave[100];     //"testSD/SD...";
@@ -296,8 +409,10 @@ void test_routineSDmorpho3xOuvFerm(){
 	        sprintf(nameload,"hall/hall000%03d.pgm",i);
 	        I= LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
 	        routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
-	        ouverture3(Et,Etout,nrl,nrh,ncl,nch);
-	        fermeture3(Etout,Et,nrl,nrh,ncl,nch);
+	        CHRONO(ouverture3(Et,Etout,nrl,nrh,ncl,nch),cycles);
+	        totalcy += cycles;
+	        CHRONO(fermeture3(Etout,Et,nrl,nrh,ncl,nch),cycles);
+	        totalcy += cycles;
 	        //ouverture5(Et,Etout,nrl,nrh,ncl,nch);
 	        //fermeture5(Etout,Et,nrl,nrh,ncl,nch);
             sprintf(namesave,"testSDmorphoOF/hall000%03d.pgm",i);
@@ -308,6 +423,12 @@ void test_routineSDmorpho3xOuvFerm(){
             copy_ui8matrix_ui8matrix(I, nrl, nrh, ncl, nch, Itm1);
            
 	} 
+
+	totalcy = totalcy / NBIMAGES; //on doit rediviser par le nombre de points pour l'avoir par point
+	totalcy = totalcy / ((nch+1)*(nrh+1));
+
+	BENCH(printf("Cycles SD, only OuvFerm = "));
+	BENCH(printf(format,totalcy));
 	
 	free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
 	free_ui8matrix(I,nrl,nrh,ncl,nch);
@@ -320,6 +441,16 @@ void test_routineSDmorpho3xOuvFerm(){
 }
 
 void test_routineSDmorpho3xFermOuv(){
+
+	//Cycle par point//
+	double cycles, totalcy=0;
+	int iter, niter=2;
+	int run, nrun = 5;
+	double t0,t1,dt,tmin,t;
+
+	char *format = "%6.2f\n";
+	///////////////////
+
     long nrl, nrh, ncl, nch;
     char nameload[100];     //"hall/hall000..";
 	char namesave[100];     //"testSD/SD...";
@@ -345,8 +476,10 @@ void test_routineSDmorpho3xFermOuv(){
 	        sprintf(nameload,"hall/hall000%03d.pgm",i);
 	        I= LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
 	        routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
-	        fermeture3(Et,Etout,nrl,nrh,ncl,nch);
-	        ouverture3(Etout,Et,nrl,nrh,ncl,nch);
+	        CHRONO(fermeture3(Et,Etout,nrl,nrh,ncl,nch),cycles);
+	        totalcy += cycles;
+	        CHRONO(ouverture3(Etout,Et,nrl,nrh,ncl,nch),cycles);
+	        totalcy += cycles;
 	        //fermeture5(Et,Etout,nrl,nrh,ncl,nch);
 	        //ouverture5(Etout,Et,nrl,nrh,ncl,nch);
             sprintf(namesave,"testSDmorphoFO/hall000%03d.pgm",i);
@@ -358,6 +491,12 @@ void test_routineSDmorpho3xFermOuv(){
            
 	} 
 	
+	totalcy = totalcy / NBIMAGES; //on doit rediviser par le nombre de points pour l'avoir par point
+	totalcy = totalcy / ((nch+1)*(nrh+1));
+
+	BENCH(printf("Cycles SD, only FermOuv = "));
+	BENCH(printf(format,totalcy));
+
 	free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
 	free_ui8matrix(I,nrl,nrh,ncl,nch);
 	free_ui8matrix(V,nrl,nrh,ncl,nch);

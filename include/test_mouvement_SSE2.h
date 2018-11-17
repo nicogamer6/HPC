@@ -14,7 +14,7 @@ void vuint_to_uint(uint8 ** scalaire, vuint ** vecteur, int vi0, int vi1, int vj
 
 void test_routineFD_SSE(int seuil);
 
-void test_unitaire_fd_SSE();
+void test_unitaire_FD_SSE();
 
 void test_routineSD_SSE();
 void test_unitaire_SD_SSE();
