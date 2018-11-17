@@ -21,7 +21,7 @@
 
 void test_EtapemorphoSSE(void){
     long nrl, nrh, ncl, nch;
-    int vi0, vi1, vj0, vj1;
+    int n1, n2, n3, n4;
 
     vuint8 tmp;
     
@@ -30,28 +30,28 @@ void test_EtapemorphoSSE(void){
     int i=0,j=0;
     
     Et= LoadPGM_ui8matrix("smile.pgm",&nrl,&nrh,&ncl,&nch);
-    //s2v(nrl, nrh, ncl, nch, card_vuint8(), &vi0, &vi1, &vj0, &vj1);
-    //vuint8 ** It = vui8matrix(vi0,vi1,vj0,vj1);
+    //s2v(nrl, nrh, ncl, nch, card_vuint8(), &n1, &n2, &n3, &n4);
+    //vuint8 ** It = vui8matrix(n1,n2,n3,n4);
     uint8 **Etbord = ui8matrix(nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
     uint8 **Etout = ui8matrix(nrl, nrh, ncl, nch);
 
-    //uint_to_vuint(Et, It, vi0, vi1, vj0, vj1);
+    //uint_to_vuint(Et, It, n1, n2, n3, n4);
     
 
-    /*for(i=vi0;i<=vi1;i++){
-        for(j=vj0;j<=vj1;j++){
+    /*for(i=n1;i<=n2;i++){
+        for(j=n3;j<=n4;j++){
             //_mm_store_si128(&Itbord[i][j],It[i][j]);
             tmp = _mm_load_si128(&It[i][j]);
             _mm_store_si128(&Itbord[i][j], tmp);
         }
     }*/
-    //dup_vui8matrix(It, vi0, vi1, vj0, vj1, Itbord);
+    //dup_vui8matrix(It, n1, n2, n3, n4, Itbord);
     //**Etbord=Et[1][1];
     copy_ui8matrix_ui8matrix(Et,nrl,nrh,ncl,nch,Etbord);
     
     erosion3SSE(Etbord,Etout,nrl,nrh,ncl,nch);
-    //display_vui8matrix(Itbord,vi0-BORD,vi1+BORD,vj0-BORD,vj1+BORD,"%3d","\nItbord\n");
-    //vuint_to_uint(Etout, It, vi0, vi1, vj0, vj1);
+    //display_vui8matrix(Itbord,n1-BORD,n2+BORD,n3-BORD,n4+BORD,"%3d","\nItbord\n");
+    //vuint_to_uint(Etout, It, n1, n2, n3, n4);
     //display_ui8matrix(Etout ,nrl,nrh,ncl,nch,"%3d","Etout");
     SavePGM_ui8matrix(Etout,nrl,nrh,ncl,nch,"testmorphoSSE/testeroSSE.pgm");
     
@@ -64,6 +64,10 @@ void test_EtapemorphoSSE(void){
     
     fermeture3(Etbord,Etout,nrl,nrh,ncl,nch);
     SavePGM_ui8matrix(Etout,nrl,nrh,ncl,nch,"testmorphoSSE/testfermSSE.pgm");
+
+    free_ui8matrix(Etbord,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+    free_ui8matrix(Etout,nrl,nrh,ncl,nch);
+    free_ui8matrix(Et,nrl,nrh,ncl,nch);
     
 }
 
@@ -84,20 +88,20 @@ void test_routineFD_SSEmorpho3xOuv(int seuil){
     ///////////////////
     
     long nrl, nrh, ncl, nch;
-    int vi0, vi1, vj0, vj1;
+    int n1, n2, n3, n4;
     char nameload1[100], nameload2[100], namesave[100];
 
 
     sprintf(nameload1,"hall/hall000000.pgm");
     
     uint8 **Itm1 = LoadPGM_ui8matrix(nameload1,&nrl,&nrh,&ncl,&nch);
-    s2v(nrl, nrh, ncl, nch, card_vuint8(), &vi0, &vi1, &vj0, &vj1);
+    s2v(nrl, nrh, ncl, nch, card_vuint8(), &n1, &n2, &n3, &n4);
 
     
     vuint8 ** m = vui8matrix(nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
     vuint8 ** It = vui8matrix(nrl,nrh,ncl,nch);
     vuint8 ** It0 = vui8matrix(nrl,nrh,ncl,nch);
-    uint_to_vuint(Itm1, It0, vi0, vi1, vj0, vj1);
+    uint_to_vuint(Itm1, It0, n1, n2, n3, n4);
     uint8** a = ui8matrix(nrl, nrh, ncl, nch);
     uint8** out = ui8matrix(nrl-BORD, nrh+BORD, ncl-BORD, nch+BORD);
     uint8** Etout = ui8matrix(nrl, nrh, ncl, nch);
@@ -110,16 +114,16 @@ void test_routineFD_SSEmorpho3xOuv(int seuil){
         
         a = LoadPGM_ui8matrix(nameload2,&nrl,&nrh,&ncl,&nch);
         
-        uint_to_vuint(a, It, vi0, vi1, vj0, vj1);
-        routine_FrameDifference_SSE2(It0,It,m,vi0, vi1,vj0,vj1,seuil);
-        vuint_to_uint(out, m, vi0, vi1, vj0, vj1);
+        uint_to_vuint(a, It, n1, n2, n3, n4);
+        routine_FrameDifference_SSE2(It0,It,m,n1, n2,n3,n4,seuil);
+        vuint_to_uint(out, m, n1, n2, n3, n4);
 
         CHRONO(ouverture3SSE(out,Etout,nrl,nrh,ncl,nch),cycles);
         totalcy += cycles;
         
         sprintf(namesave,"testFD_SSEmorphoO/hall000%03d.pgm",i);
         SavePGM_ui8matrix(Etout,nrl,nrh,ncl,nch,namesave);
-        dup_vui8matrix(It, vi0, vi1, vj0, vj1, It0);
+        dup_vui8matrix(It, n1, n2, n3, n4, It0);
     }
 
     totalcy = totalcy / NBIMAGES; //on doit rediviser par le nombre de points pour l'avoir par point
@@ -127,6 +131,14 @@ void test_routineFD_SSEmorpho3xOuv(int seuil){
 
     BENCH(printf("Cycles FD_SSE, only OuvSSE = "));
     BENCH(printf(format,totalcy));
+
+    free_vui8matrix(m,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+    free_vui8matrix(It,nrl,nrh,ncl,nch);
+    free_vui8matrix(It0,nrl,nrh,ncl,nch);
+    free_ui8matrix(out,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+    free_ui8matrix(a,nrl,nrh,ncl,nch);
+    free_ui8matrix(Etout,nrl,nrh,ncl,nch);
+    free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
 
 }
 
@@ -142,20 +154,20 @@ void test_routineFD_SSEmorpho3xFerm(int seuil){
     ///////////////////
 
     long nrl, nrh, ncl, nch;
-    int vi0, vi1, vj0, vj1;
+    int n1, n2, n3, n4;
     char nameload1[100], nameload2[100], namesave[100];
 
 
     sprintf(nameload1,"hall/hall000000.pgm");
     
     uint8 **Itm1 = LoadPGM_ui8matrix(nameload1,&nrl,&nrh,&ncl,&nch);
-    s2v(nrl, nrh, ncl, nch, card_vuint8(), &vi0, &vi1, &vj0, &vj1);
+    s2v(nrl, nrh, ncl, nch, card_vuint8(), &n1, &n2, &n3, &n4);
 
     
     vuint8 ** m = vui8matrix(nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
     vuint8 ** It = vui8matrix(nrl,nrh,ncl,nch);
     vuint8 ** It0 = vui8matrix(nrl,nrh,ncl,nch);
-    uint_to_vuint(Itm1, It0, vi0, vi1, vj0, vj1);
+    uint_to_vuint(Itm1, It0, n1, n2, n3, n4);
     uint8** a = ui8matrix(nrl, nrh, ncl, nch);
     uint8** out = ui8matrix(nrl-BORD, nrh+BORD, ncl-BORD, nch+BORD);
     uint8** Etout = ui8matrix(nrl, nrh, ncl, nch);
@@ -168,16 +180,16 @@ void test_routineFD_SSEmorpho3xFerm(int seuil){
         
         a = LoadPGM_ui8matrix(nameload2,&nrl,&nrh,&ncl,&nch);
         
-        uint_to_vuint(a, It, vi0, vi1, vj0, vj1);
-        routine_FrameDifference_SSE2(It0,It,m,vi0, vi1,vj0,vj1,seuil);
-        vuint_to_uint(out, m, vi0, vi1, vj0, vj1);
+        uint_to_vuint(a, It, n1, n2, n3, n4);
+        routine_FrameDifference_SSE2(It0,It,m,n1, n2,n3,n4,seuil);
+        vuint_to_uint(out, m, n1, n2, n3, n4);
 
         CHRONO(fermeture3SSE(out,Etout,nrl,nrh,ncl,nch),cycles);
         totalcy += cycles;
         
         sprintf(namesave,"testFD_SSEmorphoF/hall000%03d.pgm",i);
         SavePGM_ui8matrix(Etout,nrl,nrh,ncl,nch,namesave);
-        dup_vui8matrix(It, vi0, vi1, vj0, vj1, It0);
+        dup_vui8matrix(It, n1, n2, n3, n4, It0);
     }
 
     totalcy = totalcy / NBIMAGES; //on doit rediviser par le nombre de points pour l'avoir par point
@@ -185,6 +197,14 @@ void test_routineFD_SSEmorpho3xFerm(int seuil){
 
     BENCH(printf("Cycles FD_SSE, only FermSSE = "));
     BENCH(printf(format,totalcy));
+
+    free_vui8matrix(m,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+    free_vui8matrix(It,nrl,nrh,ncl,nch);
+    free_vui8matrix(It0,nrl,nrh,ncl,nch);
+    free_ui8matrix(out,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+    free_ui8matrix(a,nrl,nrh,ncl,nch);
+    free_ui8matrix(Etout,nrl,nrh,ncl,nch);
+    free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
 
 }
 
@@ -200,20 +220,20 @@ void test_routineFD_SSEmorpho3xOuvFerm(int seuil){
     ///////////////////
 
     long nrl, nrh, ncl, nch;
-    int vi0, vi1, vj0, vj1;
+    int n1, n2, n3, n4;
     char nameload1[100], nameload2[100], namesave[100];
 
 
     sprintf(nameload1,"hall/hall000000.pgm");
     
     uint8 **Itm1 = LoadPGM_ui8matrix(nameload1,&nrl,&nrh,&ncl,&nch);
-    s2v(nrl, nrh, ncl, nch, card_vuint8(), &vi0, &vi1, &vj0, &vj1);
+    s2v(nrl, nrh, ncl, nch, card_vuint8(), &n1, &n2, &n3, &n4);
 
     
     vuint8 ** m = vui8matrix(nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
     vuint8 ** It = vui8matrix(nrl,nrh,ncl,nch);
     vuint8 ** It0 = vui8matrix(nrl,nrh,ncl,nch);
-    uint_to_vuint(Itm1, It0, vi0, vi1, vj0, vj1);
+    uint_to_vuint(Itm1, It0, n1, n2, n3, n4);
     uint8** a = ui8matrix(nrl, nrh, ncl, nch);
     uint8** out = ui8matrix(nrl-BORD, nrh+BORD, ncl-BORD, nch+BORD);
     uint8** Etout = ui8matrix(nrl-BORD, nrh+BORD, ncl-BORD, nch+BORD);
@@ -227,9 +247,9 @@ void test_routineFD_SSEmorpho3xOuvFerm(int seuil){
         
         a = LoadPGM_ui8matrix(nameload2,&nrl,&nrh,&ncl,&nch);
         
-        uint_to_vuint(a, It, vi0, vi1, vj0, vj1);
-        routine_FrameDifference_SSE2(It0,It,m,vi0, vi1,vj0,vj1,seuil);
-        vuint_to_uint(out, m, vi0, vi1, vj0, vj1);
+        uint_to_vuint(a, It, n1, n2, n3, n4);
+        routine_FrameDifference_SSE2(It0,It,m,n1, n2,n3,n4,seuil);
+        vuint_to_uint(out, m, n1, n2, n3, n4);
 
 
         CHRONO(ouverture3SSE(out,Etout,nrl,nrh,ncl,nch),cycles);
@@ -239,7 +259,7 @@ void test_routineFD_SSEmorpho3xOuvFerm(int seuil){
         
         sprintf(namesave,"testFD_SSEmorphoOF/hall000%03d.pgm",i);
         SavePGM_ui8matrix(Etout2,nrl,nrh,ncl,nch,namesave);
-        dup_vui8matrix(It, vi0, vi1, vj0, vj1, It0);
+        dup_vui8matrix(It, n1, n2, n3, n4, It0);
     }
 
     totalcy = totalcy / NBIMAGES; //on doit rediviser par le nombre de points pour l'avoir par point
@@ -247,6 +267,15 @@ void test_routineFD_SSEmorpho3xOuvFerm(int seuil){
 
     BENCH(printf("Cycles FD_SSE, only OuvFermSSE = "));
     BENCH(printf(format,totalcy));
+
+    free_vui8matrix(m,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+    free_vui8matrix(It,nrl,nrh,ncl,nch);
+    free_vui8matrix(It0,nrl,nrh,ncl,nch);
+    free_ui8matrix(out,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+    free_ui8matrix(a,nrl,nrh,ncl,nch);
+    free_ui8matrix(Etout,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+    free_ui8matrix(Etout2,nrl,nrh,ncl,nch);
+    free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
 
 }
 
@@ -262,20 +291,20 @@ void test_routineFD_SSEmorpho3xFermOuv(int seuil){
     ///////////////////
 
     long nrl, nrh, ncl, nch;
-    int vi0, vi1, vj0, vj1;
+    int n1, n2, n3, n4;
     char nameload1[100], nameload2[100], namesave[100];
 
 
     sprintf(nameload1,"hall/hall000000.pgm");
     
     uint8 **Itm1 = LoadPGM_ui8matrix(nameload1,&nrl,&nrh,&ncl,&nch);
-    s2v(nrl, nrh, ncl, nch, card_vuint8(), &vi0, &vi1, &vj0, &vj1);
+    s2v(nrl, nrh, ncl, nch, card_vuint8(), &n1, &n2, &n3, &n4);
 
     
     vuint8 ** m = vui8matrix(nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
     vuint8 ** It = vui8matrix(nrl,nrh,ncl,nch);
     vuint8 ** It0 = vui8matrix(nrl,nrh,ncl,nch);
-    uint_to_vuint(Itm1, It0, vi0, vi1, vj0, vj1);
+    uint_to_vuint(Itm1, It0, n1, n2, n3, n4);
     uint8** a = ui8matrix(nrl, nrh, ncl, nch);
     uint8** out = ui8matrix(nrl-BORD, nrh+BORD, ncl-BORD, nch+BORD);
     uint8** Etout = ui8matrix(nrl-BORD, nrh+BORD, ncl-BORD, nch+BORD);
@@ -289,9 +318,9 @@ void test_routineFD_SSEmorpho3xFermOuv(int seuil){
         
         a = LoadPGM_ui8matrix(nameload2,&nrl,&nrh,&ncl,&nch);
         
-        uint_to_vuint(a, It, vi0, vi1, vj0, vj1);
-        routine_FrameDifference_SSE2(It0,It,m,vi0, vi1,vj0,vj1,seuil);
-        vuint_to_uint(out, m, vi0, vi1, vj0, vj1);
+        uint_to_vuint(a, It, n1, n2, n3, n4);
+        routine_FrameDifference_SSE2(It0,It,m,n1, n2,n3,n4,seuil);
+        vuint_to_uint(out, m, n1, n2, n3, n4);
 
 
         CHRONO(fermeture3SSE(out,Etout,nrl,nrh,ncl,nch),cycles);
@@ -301,7 +330,7 @@ void test_routineFD_SSEmorpho3xFermOuv(int seuil){
         
         sprintf(namesave,"testFD_SSEmorphoFO/hall000%03d.pgm",i);
         SavePGM_ui8matrix(Etout2,nrl,nrh,ncl,nch,namesave);
-        dup_vui8matrix(It, vi0, vi1, vj0, vj1, It0);
+        dup_vui8matrix(It, n1, n2, n3, n4, It0);
     }
     totalcy = totalcy / NBIMAGES; //on doit rediviser par le nombre de points pour l'avoir par point
     totalcy = totalcy / ((nch+1)*(nrh+1));
@@ -309,6 +338,15 @@ void test_routineFD_SSEmorpho3xFermOuv(int seuil){
 
     BENCH(printf("Cycles FD_SSE, only FermOuvSSE = "));
     BENCH(printf(format,totalcy));
+
+    free_vui8matrix(m,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+    free_vui8matrix(It,nrl,nrh,ncl,nch);
+    free_vui8matrix(It0,nrl,nrh,ncl,nch);
+    free_ui8matrix(out,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+    free_ui8matrix(a,nrl,nrh,ncl,nch);
+    free_ui8matrix(Etout,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+    free_ui8matrix(Etout2,nrl,nrh,ncl,nch);
+    free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
 
 }
 
@@ -401,14 +439,21 @@ void test_routineSD_SSEmorpho3xOuv(){
     BENCH(printf("Cycles SD_SSE, only OuvSSE = "));
     BENCH(printf(format,totalcy));
 
- /*   free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
-    free_ui8matrix(I,nrl,nrh,ncl,nch);
-    free_ui8matrix(V,nrl,nrh,ncl,nch);
-    free_ui8matrix(Vtm1,nrl,nrh,ncl,nch);
-    free_ui8matrix(M,nrl,nrh,ncl,nch);
-    free_ui8matrix(Mtm1,nrl,nrh,ncl,nch);
-    free_ui8matrix(Et,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);*/
-    //free_ui8matrix(Ot,nrl,nrh,ncl,nch);
+    free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
+    free_ui8matrix(a,nrl,nrh,ncl,nch);
+    free_vui8matrix(I,n1,n2,n3,n4);
+    free_vui8matrix(V,n1,n2,n3,n4);
+    free_vui8matrix(Vtm1,n1,n2,n3,n4);
+    free_vui8matrix(M,n1,n2,n3,n4);
+    free_vui8matrix(Mtm1,n1,n2,n3,n4);
+    free_vui8matrix(Et,n1-BORD,n2+BORD,n3-BORD,n4+BORD);
+    free_ui8matrix(out,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+    free_ui8matrix(Etout,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+    free_ui8matrix(Etout2,nrl,nrh,ncl,nch);
+    free_vui8matrix(Iv,n1,n2,n3,n4);
+    free_vui8matrix(Itm1v,n1,n2,n3,n4);
+    free_ui8matrix(res,nrl,nrh,ncl,nch);
+    
 }
 
 
@@ -497,14 +542,21 @@ void test_routineSD_SSEmorpho3xFerm(){
     BENCH(printf("Cycles SD_SSE, only FermSSE = "));
     BENCH(printf(format,totalcy));
 
- /*   free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
-    free_ui8matrix(I,nrl,nrh,ncl,nch);
-    free_ui8matrix(V,nrl,nrh,ncl,nch);
-    free_ui8matrix(Vtm1,nrl,nrh,ncl,nch);
-    free_ui8matrix(M,nrl,nrh,ncl,nch);
-    free_ui8matrix(Mtm1,nrl,nrh,ncl,nch);
-    free_ui8matrix(Et,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);*/
-    //free_ui8matrix(Ot,nrl,nrh,ncl,nch);
+    free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
+    free_ui8matrix(a,nrl,nrh,ncl,nch);
+    free_vui8matrix(I,n1,n2,n3,n4);
+    free_vui8matrix(V,n1,n2,n3,n4);
+    free_vui8matrix(Vtm1,n1,n2,n3,n4);
+    free_vui8matrix(M,n1,n2,n3,n4);
+    free_vui8matrix(Mtm1,n1,n2,n3,n4);
+    free_vui8matrix(Et,n1-BORD,n2+BORD,n3-BORD,n4+BORD);
+    free_ui8matrix(out,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+    free_ui8matrix(Etout,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+    free_ui8matrix(Etout2,nrl,nrh,ncl,nch);
+    free_vui8matrix(Iv,n1,n2,n3,n4);
+    free_vui8matrix(Itm1v,n1,n2,n3,n4);
+    free_ui8matrix(res,nrl,nrh,ncl,nch);
+
 }
 
 void test_routineSD_SSEmorpho3xOuvFerm(){
@@ -594,14 +646,20 @@ void test_routineSD_SSEmorpho3xOuvFerm(){
     BENCH(printf("Cycles SD_SSE, only OuvFermSSE = "));
     BENCH(printf(format,totalcy));
     
- /*   free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
-    free_ui8matrix(I,nrl,nrh,ncl,nch);
-    free_ui8matrix(V,nrl,nrh,ncl,nch);
-    free_ui8matrix(Vtm1,nrl,nrh,ncl,nch);
-    free_ui8matrix(M,nrl,nrh,ncl,nch);
-    free_ui8matrix(Mtm1,nrl,nrh,ncl,nch);
-    free_ui8matrix(Et,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);*/
-    //free_ui8matrix(Ot,nrl,nrh,ncl,nch);
+    free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
+    free_ui8matrix(a,nrl,nrh,ncl,nch);
+    free_vui8matrix(I,n1,n2,n3,n4);
+    free_vui8matrix(V,n1,n2,n3,n4);
+    free_vui8matrix(Vtm1,n1,n2,n3,n4);
+    free_vui8matrix(M,n1,n2,n3,n4);
+    free_vui8matrix(Mtm1,n1,n2,n3,n4);
+    free_vui8matrix(Et,n1-BORD,n2+BORD,n3-BORD,n4+BORD);
+    free_ui8matrix(out,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+    free_ui8matrix(Etout,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+    free_ui8matrix(Etout2,nrl,nrh,ncl,nch);
+    free_vui8matrix(Iv,n1,n2,n3,n4);
+    free_vui8matrix(Itm1v,n1,n2,n3,n4);
+    free_ui8matrix(res,nrl,nrh,ncl,nch);
 }
 
 void test_routineSD_SSEmorpho3xFermOuv(){
@@ -690,13 +748,19 @@ void test_routineSD_SSEmorpho3xFermOuv(){
     BENCH(printf("Cycles SD_SSE, only FermOuvSSE = "));
     BENCH(printf(format,totalcy));
 
- /*   free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
-    free_ui8matrix(I,nrl,nrh,ncl,nch);
-    free_ui8matrix(V,nrl,nrh,ncl,nch);
-    free_ui8matrix(Vtm1,nrl,nrh,ncl,nch);
-    free_ui8matrix(M,nrl,nrh,ncl,nch);
-    free_ui8matrix(Mtm1,nrl,nrh,ncl,nch);
-    free_ui8matrix(Et,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);*/
-    //free_ui8matrix(Ot,nrl,nrh,ncl,nch);
+    free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
+    free_ui8matrix(a,nrl,nrh,ncl,nch);
+    free_vui8matrix(I,n1,n2,n3,n4);
+    free_vui8matrix(V,n1,n2,n3,n4);
+    free_vui8matrix(Vtm1,n1,n2,n3,n4);
+    free_vui8matrix(M,n1,n2,n3,n4);
+    free_vui8matrix(Mtm1,n1,n2,n3,n4);
+    free_vui8matrix(Et,n1-BORD,n2+BORD,n3-BORD,n4+BORD);
+    free_ui8matrix(out,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+    free_ui8matrix(Etout,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+    free_ui8matrix(Etout2,nrl,nrh,ncl,nch);
+    free_vui8matrix(Iv,n1,n2,n3,n4);
+    free_vui8matrix(Itm1v,n1,n2,n3,n4);
+    free_ui8matrix(res,nrl,nrh,ncl,nch);
 }
 

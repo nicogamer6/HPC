@@ -38,6 +38,10 @@ void test_Etapemorpho(void){
     
     fermeture3(bord,m2,nrl,nrh,ncl,nch);
     SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testferm.pgm");
+
+    free_ui8matrix(bord,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+    free_ui8matrix(m,nrl,nrh,ncl,nch);
+    free_ui8matrix(m2,nrl,nrh,ncl,nch);
 }
 
 

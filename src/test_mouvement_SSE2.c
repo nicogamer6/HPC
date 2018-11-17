@@ -71,7 +71,7 @@ void vuint_to_uint(uint8 ** scalaire, vuint ** vecteur, int n1, int n2, int n3, 
 
 
 
-/////////////////////////////////////////
+////////////////////////////////////////
 //      TEST ROUTINE FD_SSE           //
 ////////////////////////////////////////
 
@@ -138,14 +138,18 @@ void test_routineFD_SSE(int seuil)
     BENCH(printf(format,totalcy));
     //printf("%ld",((nch+1)*(nrh+1)));
 
-    //free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
-    //free_ui8matrix(imaget1,nrl,nrh,ncl,nch);
-    //free_ui8matrix(out,nrl,nrh,ncl,nch);
+    free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
+    free_ui8matrix(a,nrl,nrh,ncl,nch);
+    free_ui8matrix(out,nrl,nrh,ncl,nch);
+    free_vui8matrix(m,n1,n2,n3,n4);
+    free_vui8matrix(It,n1,n2,n3,n4);
+    free_vui8matrix(I0,n1,n2,n3,n4);
+    
 }
 
 
 
-/////////////////////////////////////////
+////////////////////////////////////////
 //      TEST UNITAIRE FD_SSE          //
 ////////////////////////////////////////
 
@@ -170,7 +174,7 @@ void test_unitaire_FD_SSE()
 
 
 
-/////////////////////////////////////////
+////////////////////////////////////////
 //      TEST ROUTINE SD_SSE           //
 ////////////////////////////////////////
 
@@ -256,17 +260,26 @@ void test_routineSD_SSE()
     
     BENCH(printf("Cycles SD_SSE = "));
     BENCH(printf(format,totalcy));
+
+    free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
+    free_ui8matrix(a,nrl,nrh,ncl,nch);
+    free_ui8matrix(res,nrl,nrh,ncl,nch);
+    free_vui8matrix(I,n1,n2,n3,n4);
+    free_vui8matrix(V,n1,n2,n3,n4);
+    free_vui8matrix(Vtm1,n1,n2,n3,n4);
+    free_vui8matrix(M,n1,n2,n3,n4);
+    free_vui8matrix(Mtm1,n1,n2,n3,n4);
+    free_vui8matrix(Iv,n1,n2,n3,n4);
+    free_vui8matrix(Itm1v,n1,n2,n3,n4);
+    free_vui8matrix(Et,n1,n2,n3,n4);
+    
     
 }
 
 
-
-
-
-
-
-
-
+////////////////////////////////////////
+//      TEST UNITAIRE SD SSE          //
+////////////////////////////////////////
 
 void test_unitaire_SD_SSE()
 {
