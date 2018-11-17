@@ -17,29 +17,52 @@
 #define vec_sel(a,b,c) _mm_or_si128(_mm_and_si128(c, a), _mm_andnot_si128(c, b));
 
 
-void uint_to_vuint(uint8 ** scal, vuint ** vect, int n1, int n2, int n3, int n4){
+/////////////////////////////////////////////////
+//      CONVERSION SCALIRE EN VECTEUR          //
+/////////////////////////////////////////////////
+
+
+
+
+void uint_to_vuint(uint8 ** scalaire, vuint ** vecteur, int n1, int n2, int n3, int n4)
+{
+    int i,j,k;
     vuint8 tmp[1];
     uint8 *p = (uint8*) tmp;
-    for (int i = n1 ; i < n2 + 1 ; i++){
-        for (int j = n3 ; j < n4 + 1 ; j++){
-            for (int k = 0 ; k < 16; k++){
-                p[k] = scal[i][j*16+k];
+    for (i = n1 ; i <= n2 ; i++)
+    {
+        for (j = n3 ;j <= n4  ;j++)
+        {
+            for (k = 0 ;k < 16;k++)
+            {
+                p[k] = scalaire[i][j*16+k];
             }
-            vect[i][j]= tmp[0];
+            vecteur[i][j]= tmp[0];
         }
     }
 }
 
-void vuint_to_uint(uint8 ** scal, vuint ** vect, int n1, int n2, int n3, int n4){
+/////////////////////////////////////////////////
+//      CONVERSION VECTEUR EN SCALAIRE         //
+/////////////////////////////////////////////////
+
+
+
+void vuint_to_uint(uint8 ** scalaire, vuint ** vecteur, int n1, int n2, int n3, int n4)
+{
+    int i,j,k;
+    vuint8 a;
     vuint8 tmp[1];
-    vuint8 x;
-    uint8 * p = (uint8*) tmp;
-    for (int i = n1 ; i < n2 + 1 ; i++){
-        for (int j = n3 ; j < n4 + 1 ; j++){
-            x = _mm_load_si128((vuint*)&vect[i][j]);
-            _mm_store_si128(tmp, x);
-            for (int k = 0 ; k < 16; k++){
-                scal[i][j*16+k]= p[k];
+    uint8 * b = (uint8*) tmp;
+    for (i = n1 ; i <= n2 ; i++)
+    {
+        for (j = n3 ;j <= n4 ;j++)
+        {
+            a = _mm_load_si128(&vecteur[i][j]);
+            _mm_store_si128(tmp, a);
+            for (k = 0 ;k < 16 ;k++)
+            {
+                scalaire[i][j*16+k]= b[k];
             }
         }
     }
@@ -151,38 +174,39 @@ void test_routineSD_SSE()
     uint8 **Itm1 = LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
     s2v(nrl, nrh, ncl, nch, card_vuint8(), &n1, &n2, &n3, &n4);
 
-    vuint8 ** Itm1v = vui8matrix(n1,n2,n3,n4);
-    uint_to_vuint(Itm1, Itm1v, n1, n2, n3, n4);
+
 
 
    
-    uint8** a = ui8matrix(nrl, nrh, ncl, nch);
+    uint8 ** a = ui8matrix(nrl, nrh, ncl, nch);
     vuint8 ** I = vui8matrix(n1,n2,n3,n4);
     vuint8 ** V  = vui8matrix(n1,n2,n3,n4);
     vuint8 ** Vtm1 = vui8matrix(n1,n2,n3,n4);
-    vuint8** M  = vui8matrix(n1,n2,n3,n4);
-     vuint8 ** Mtm1 = vui8matrix(n1,n2,n3,n4);
-    vuint8 ** Et = vui8matrix(n1-BORD,n2+BORD,n3-BORD,n4+BORD);
+    vuint8 ** M  = vui8matrix(n1,n2,n3,n4);
+    vuint8 ** Mtm1 = vui8matrix(n1,n2,n3,n4);
+    vuint8 ** Et = vui8matrix(n1,n2,n3,n4);
     //uint8 **Ot = ui8matrix(nrl,nrh,ncl,nch);
     
-    //printf("name=%s",nameload);
-    
-   // routine_SigmaDelta_step0(Vtm1, Mtm1, Itm1, nrl, nrh, ncl, nch);
    
     vuint8 ** Iv = vui8matrix(n1,n2,n3,n4);
     uint8 ** res = ui8matrix(nrl, nrh, ncl, nch);
     
-    SigmaDelta_step0_SSE2 (Vtm1, Mtm1, Itm1v, n1, n2, n3, n4);
-
+    vuint8 ** Itm1v = vui8matrix(n1,n2,n3,n4);
+    uint_to_vuint(Itm1, Itm1v, n1, n2, n3, n4);
+    
+    SigmaDelta_step0_SSE2 (Mtm1, Vtm1, Itm1v, n1, n2, n3, n4);
     
     
     for(i=1;i<=NBIMAGES;i++){
+        
         sprintf(nameload,"hall/hall000%03d.pgm",i);
         a=LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+        
+        
         //Conversion
         uint_to_vuint(a, Iv, n1, n2, n3, n4);
         
-        SigmaDelta_1step_SSE2(V, Vtm1, M, Mtm1, Iv, Et, n1, n2, n3, n4);
+        SigmaDelta_1step_SSE2(V, Vtm1, M, Iv, Mtm1 , Et, n1, n2, n3, n4);
         
         sprintf(namesave,"testSD_SSE/hall000%03d.pgm",i);
         
@@ -190,10 +214,7 @@ void test_routineSD_SSE()
         
         SavePGM_ui8matrix(res,nrl,nrh,ncl,nch,namesave);
         //On doit copier M dan Mtm1, V dans Vtm1 et I dans Itm1
-        
-        //copy_ui8matrix_ui8matrix(V, nrl, nrh, ncl, nch, Vtm1);
-        //copy_ui8matrix_ui8matrix(M, nrl, nrh, ncl, nch, Mtm1);
-        //copy_ui8matrix_ui8matrix(I, nrl, nrh, ncl, nch, Itm1);
+     
         
         dup_vui8matrix(V, n1, n2, n3, n4, Vtm1);
         dup_vui8matrix(M, n1, n2, n3, n4, Mtm1);
@@ -203,14 +224,6 @@ void test_routineSD_SSE()
         
     }
     
- /*   free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
-    free_ui8matrix(I,nrl,nrh,ncl,nch);
-    free_ui8matrix(V,nrl,nrh,ncl,nch);
-    free_ui8matrix(Vtm1,nrl,nrh,ncl,nch);
-    free_ui8matrix(M,nrl,nrh,ncl,nch);
-    free_ui8matrix(Mtm1,nrl,nrh,ncl,nch);
-    free_ui8matrix(Et,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);*/
-    //free_ui8matrix(Ot,nrl,nrh,ncl,nch);
 }
 
 
@@ -246,9 +259,6 @@ void test_unitaire_SD_SSE()
     
     display_vuint8(It," %.3d ","It\n");
     display_vuint8(M," %.3d ","\nmtm1\n");
-    
-
-
     
     
    /////////////// //Estimation////////////////////////
@@ -329,7 +339,7 @@ void test_unitaire_SD_SSE()
 
 
     display_vuint8(Vt," %.3d ", "\nVt\n");
-    display_vuint8(b," %.3d ", "\nBBBB\n");
+    display_vuint8(b," %.3d ", "\nB\n");
     printf("\n");
     
     

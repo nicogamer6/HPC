@@ -8,9 +8,9 @@
 //#define NBIMAGES 299
 //#define SEUILFD 20
 
-void uint_to_vuint(uint8 ** scal, vuint ** vect, int vi0, int vi1, int vj0, int vj1);
+void uint_to_vuint(uint8 ** scalaire, vuint ** vecteur, int vi0, int vi1, int vj0, int vj1);
 
-void vuint_to_uint(uint8 ** scal, vuint ** vect, int vi0, int vi1, int vj0, int vj1);
+void vuint_to_uint(uint8 ** scalaire, vuint ** vecteur, int vi0, int vi1, int vj0, int vj1);
 
 void test_routineFD_SSE(int seuil);
 
