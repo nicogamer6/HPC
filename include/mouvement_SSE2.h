@@ -13,9 +13,12 @@
 void routine_FrameDifference_SSE2(vuint8** It, vuint8** It_1, vuint8** Et, long nrl, long nrh, long ncl, long nch, int seuil);
 
 void SigmaDelta_step0_SSE2 (vuint8** M, vuint8** V, vuint8** It,long nrl, long nrh, long ncl, long nch);
+void SigmaDelta_step0_SSE2_OMP (vuint8** M, vuint8** V,  vuint8** It,long nrl, long nrh, long ncl, long nch);
 
 void SigmaDelta_1step_SSE2 (vuint8** V,vuint8** Vtm1, vuint8** M, vuint8** Mtm1, vuint8** It, vuint8** Et,long nrl, long nrh, long ncl, long nch);
+void SigmaDelta_1step_SSE2_OMP (vuint8** V,vuint8** Vtm1, vuint8** M, vuint8** Mtm1, vuint8** It, vuint8** Et,long nrl, long nrh, long ncl, long nch);
 
+void routine_FrameDifference_SSE2_OMP(vuint8** It, vuint8** It_1, vuint8** Et, long nrl, long nrh, long ncl, long nch, int seuil);
 
 
 #endif // __#endif // __MOUVEMENT_SSE_H___H__

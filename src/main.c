@@ -2,6 +2,7 @@
 #include "nrutil.h"
 #include "nrdef.h"
 #include "string.h"
+#include <omp.h>
 
 #include "mouvement.h"
 #include "test_mouvement.h"
@@ -30,7 +31,9 @@ int main()
     // Crée les images FD et SD SSE
     // AFFICHE le CPP juste pour la morpho
     test_routineFD_SSE(SEUILFD);            // Dossier "testFD_SSE"
+    test_routineFD_SSE_OMP(SEUILFD);        // Dossier "testFD_SSE_OMP"
     test_routineSD_SSE();                   // Dossier "testSD_SSE"
+    test_routineSD_SSE_OMP();               // Dossier "testSD_SSE_OMP"
     printf("\n");
     ///////////////////////////////////////////////////////////////////////////
     
@@ -94,11 +97,11 @@ int main()
     matriceROC("testFD_SSEmorphoOF");
     matriceROC("testFD_SSEmorphoFO");
     //printf("\n");
-    //matriceROC("testSD_SSE");
-    //matriceROC("testSD_SSEmorphoO");
-    //matriceROC("testSD_SSEmorphoF");
-    //matriceROC("testSD_SSEmorphoOF");
-    //matriceROC("testSD_SSEmorphoFO");
+    matriceROC("testSD_SSE");
+    matriceROC("testSD_SSEmorphoO");
+    matriceROC("testSD_SSEmorphoF");
+    matriceROC("testSD_SSEmorphoOF");
+    matriceROC("testSD_SSEmorphoFO");
     //printf("\n");
     ///////////////////////////////////////////////////////////////////////////
     
