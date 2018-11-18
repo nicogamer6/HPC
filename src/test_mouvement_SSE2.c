@@ -230,14 +230,14 @@ void test_unitaire_FD_SSE()
     vuint8 It = init_vuint8_all(255, 0, 7, 100, 255, 255, 4, 254, 128, 79, 38, 102, 99, 200, 255, 0);
     
     vuint8 It_1 = init_vuint8_all(254, 255, 3, 80, 235, 1, 8, 128, 128, 35, 30, 101, 100, 201, 255, 255);
-    
-    vuint8 Imagefinal;
+
+    vuint8 fin;
     vuint8 seuil = init_vuint8(25);
-    vuint8 tempSeuil = _mm_abs_epi8(_mm_sub_epi8(It,It_1));
-    Imagefinal = _mm_cmpgt_epi8(tempSeuil,seuil);
+    vuint8 tmp = _mm_abs_epi8(_mm_sub_epi8(It,It_1));
+    fin = _mm_cmpgt_epi8(tmp,seuil);
     
    // vuint8 res= _mm_cmpeq_epi8(Imagefinal, ImageReel);
-    display_vuint8(Imagefinal,"%d ","res=");
+    display_vuint8(fin,"%d ","res=");
     printf("\n");
     
     

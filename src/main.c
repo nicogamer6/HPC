@@ -106,8 +106,8 @@ int main()
     ///////////////////////////////////////////////////////////////////////////
     
     // Tests unitaires pour SD ET FD en SSE
-    //test_unitaire_SD_SSE();
-    //test_unitaire_FD_SSE();
+    test_unitaire_SD_SSE();
+    test_unitaire_FD_SSE();
     
 
     return 0;
