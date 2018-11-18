@@ -13,7 +13,7 @@
 
 #define NBIMAGES 299
 #define BORD 2
-#define VMIN 1
+#define VMIN 20
 #define VMAX 255
 #define N 4
 #define vec_sel(a,b,c) _mm_or_si128(_mm_and_si128(c, a), _mm_andnot_si128(c, b));

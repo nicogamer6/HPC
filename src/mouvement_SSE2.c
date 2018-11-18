@@ -13,7 +13,7 @@
 
 #define NB_IMAGE 299
 #define SEUILFD 25
-#define VMIN 1
+#define VMIN 20
 #define VMAX 254
 #define N 2
 //SI a = 1 alors resultat = a sinon resultat = b

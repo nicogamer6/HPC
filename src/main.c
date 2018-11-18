@@ -23,6 +23,7 @@ int main()
      
     // Crée les images FD et SD. 
     // AFFICHE le CPP juste pour la morpho
+    printf("SEUIL FD = %d\n",SEUILFD);
     test_routineFD(SEUILFD);                // Dossier "testFD"
     test_routineSD();                       // Dossier "testSD"
     printf("\n");   
@@ -91,23 +92,23 @@ int main()
     //matriceROC("testSDmorphoFO");
     //printf("\n");
     
-    matriceROC("testFD_SSE");
-    matriceROC("testFD_SSEmorphoO");
-    matriceROC("testFD_SSEmorphoF");
-    matriceROC("testFD_SSEmorphoOF");
-    matriceROC("testFD_SSEmorphoFO");
+    //matriceROC("testFD_SSE");
+    //matriceROC("testFD_SSEmorphoO");
+    //matriceROC("testFD_SSEmorphoF");
+    //matriceROC("testFD_SSEmorphoOF");
+    //matriceROC("testFD_SSEmorphoFO");
     //printf("\n");
-    matriceROC("testSD_SSE");
-    matriceROC("testSD_SSEmorphoO");
-    matriceROC("testSD_SSEmorphoF");
-    matriceROC("testSD_SSEmorphoOF");
-    matriceROC("testSD_SSEmorphoFO");
+    //matriceROC("testSD_SSE");
+    //matriceROC("testSD_SSEmorphoO");
+    //matriceROC("testSD_SSEmorphoF");
+    //matriceROC("testSD_SSEmorphoOF");
+    //matriceROC("testSD_SSEmorphoFO");
     //printf("\n");
     ///////////////////////////////////////////////////////////////////////////
     
     // Tests unitaires pour SD ET FD en SSE
-    test_unitaire_SD_SSE();
-    test_unitaire_FD_SSE();
+    //test_unitaire_SD_SSE();
+    //test_unitaire_FD_SSE();
     
 
     return 0;

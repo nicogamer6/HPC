@@ -6,7 +6,7 @@
 #include "nrdef.h"
 #include "mouvement.h"
 
-#define VMIN 1
+#define VMIN 20
 #define VMAX 254
 #define N 4
 
