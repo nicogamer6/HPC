@@ -13,8 +13,8 @@ EXE_PATH = exe
 INC_PATH = include
 
 # -- OS ----------
-#OS = MACH_OSX
-OS = LINUX
+OS = MACH_OSX
+#OS = LINUX
 
 # -- Config ----------
 # if CONFIG = CLI  (Command Line Interface, no Apple Framework)
@@ -26,7 +26,7 @@ AR = ar -rc
 
 # -- Flags ----------
 C_DEBUG_FLAGS = -O0
-C_CC_FLAGS = -std=c99 -DNOALIAS -DALIGNED -mssse3 -fopenmp -lpthread
+C_CC_FLAGS = -std=c99 -DNOALIAS -DALIGNED -mssse3 
 C_SSE_FLAGS = -mfpmath=sse -mmmx -msse -msse2 -msse3
 C_OPTIMISATION_FLAGS = -O3 -fstrict-aliasing
 
