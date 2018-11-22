@@ -25,6 +25,7 @@ void erosion3(uint8 ** Et, uint8 **EtE, long nrl, long nrh, long ncl, long nch){
             EtE[i][j]=val;
         }
     }
+    //printf("nrl,nrh %d %d",ncl,nch);
 }
 
 void dilatation3(uint8 ** Et, uint8 **EtD, long nrl, long nrh, long ncl, long nch){

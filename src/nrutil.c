@@ -1,4 +1,3 @@
-/* -------------- */
 /* --- nrutil --- */
 /* -------------- */
 
@@ -179,7 +178,12 @@ uint8** ui8matrix(long nrl, long nrh, long ncl, long nch)
   m[nrl] -= ncl;
 
   for(i=nrl+1;i<=nrh;i++) m[i]=m[i-1]+ncol;
-
+    int j  ;
+    for(i=nrl;i<=nrh;i++){
+                for(j=ncl;j<=nch;j++){
+                    m[i][j]=0;
+                }
+            }
   /* return pointer to array of pointers to rows */
   return m;
 }

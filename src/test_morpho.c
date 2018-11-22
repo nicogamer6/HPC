@@ -16,19 +16,31 @@
 void test_Etapemorpho(void){
     long nrl, nrh, ncl, nch;
     
-	uint8 **m;
+	uint8 **m=LoadPGM_ui8matrix("smile.pgm",&nrl,&nrh,&ncl,&nch);
     int i,j;
-    
-    m= LoadPGM_ui8matrix("smile.pgm",&nrl,&nrh,&ncl,&nch);
-    uint8 **bord=ui8matrix(nrl-2,nrh+2,ncl-2,nch+2);
+    uint8 **bord=ui8matrix(nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
     uint8 **m2=ui8matrix(nrl,nrh,ncl,nch);
+    
     for(i=nrl;i<=nrh;i++){
         for(j=ncl;j<=nch;j++){
-            bord[i][j]=m[i][j];
+            bord[i][j]=m[i][j]; 
         }
     }
+    for(i=nrl-2;i<=nrh+2;i++){
+        for(j=ncl-2;j<=nch+2;j++){
+             printf("%0.3ld",bord[i][j]);
+        }
+        printf("\n");
+    }
+   
     erosion3(bord,m2,nrl,nrh,ncl,nch);
     SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testero.pgm");
+    for(i=nrl;i<=nrh;i++){
+        for(j=ncl;j<=nch;j++){
+             printf("%0.3ld",m2[i][j]);
+        }
+        printf("\n");
+    }
     
     dilatation3(bord,m2,nrl,nrh,ncl,nch);
     SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testdil.pgm");
