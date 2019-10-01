@@ -28,6 +28,7 @@ void erosion3(uint8 ** Et, uint8 **EtE, long nrl, long nrh, long ncl, long nch){
     //printf("nrl,nrh %d %d",ncl,nch);
 }
 
+
 // Suppression des boucles pour le voisinnage et déroulage de 2 avec RR
 //  val0    val3    val6
 //  val1    val4    val7
