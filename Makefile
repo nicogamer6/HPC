@@ -12,6 +12,10 @@ OBJ_PATH = obj
 EXE_PATH = exe
 INC_PATH = include
 
+IMG_PATH_FD = testFD/* testFDmorphoF/* testFDmorphoFO/* testFDmorphoO/* testFDmorphoOF/* testFD_SSE/* testFD_SSEmorphoF/* testFD_SSEmorphoFO/* testFD_SSEmorphoO/* testFD_SSEmorphoOF/* testFD_SSE_OMP/*
+IMG_PATH_SD = testSD/* testSDmorphoF/* testSDmorphoFO/* testSDmorphoO/* testSDmorphoOF/* testSD_SSE/* testSD_SSEmorphoF/* testSD_SSEmorphoFO/* testSD_SSEmorphoO/* testSD_SSEmorphoOF/* testSD_SSE_OMP/*
+IMG_PATH_morpho = testmorpho/* testmorphoSSE/*
+
 # -- OS ----------
 OS = MACH_OSX
 #OS = LINUX
@@ -26,7 +30,7 @@ AR = ar -rc
 
 # -- Flags ----------
 C_DEBUG_FLAGS = -O0
-C_CC_FLAGS = -std=c99 -DNOALIAS -DALIGNED -mssse3 -fopenmp -pg
+C_CC_FLAGS = -std=c99 -DNOALIAS -DALIGNED -mssse3 -fopenmp 
 C_SSE_FLAGS = -mfpmath=sse -mmmx -msse -msse2 -msse3
 C_OPTIMISATION_FLAGS = -O3 -fstrict-aliasing
 
@@ -63,4 +67,5 @@ depend:
 clean:
 	rm -f $(OBJ)
 	rm -f ${EXE_PATH}/${PRODUCT}
+	rm -f $(IMG_PATH_FD) $(IMG_PATH_SD) $(IMG_PATH_morpho)
 

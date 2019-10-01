@@ -28,6 +28,61 @@ void erosion3(uint8 ** Et, uint8 **EtE, long nrl, long nrh, long ncl, long nch){
     //printf("nrl,nrh %d %d",ncl,nch);
 }
 
+// Suppression des boucles pour le voisinnage et déroulage de 2 avec RR
+//  val0    val3    val6
+//  val1    val4    val7
+//  val2    val5    val8
+void erosion3_opti_lu_rr(uint8 ** Et, uint8 **EtE, long nrl, long nrh, long ncl, long nch){  
+    int i,j; // pour tous les pixels
+    int m,n; // pour le voisinnage
+    uint8 val;
+    
+    int r = nrh % 2;
+    
+    for(i=nrl;i<=nrh - r;i+=2){
+        for(j=ncl;j<=nch;j++){
+            val = 255;
+            
+            val0 = Et[i-1][j-1];
+            val1 = Et[i-1][j];
+            val2 = Et[i-1][j+1];
+            
+            val3 = Et[i][j-1];
+            val4 = Et[i][j];
+            val5 = Et[i][j+1];
+            val6 = Et[i+1][j-1];
+            val7 = Et[i+1][j];
+            val8 = Et[i+1][j+1];
+            
+            val = val0 & val1 & val2 & val3 & val4 & val5 & val6 & val7 & val8;
+            
+            EtE[i][j]=val;
+            
+            //Rotation de variables
+            val0 = val3;
+            val1 = val4;
+            val2 = val5; 
+            
+            val3 = val6; 
+            val4 = val7;
+            val5 = val8;
+            
+            val6 = Et[i+2][j-1];
+            val7 = Et[i+2][j];
+            val8 = Et[i+2][j+1];
+            
+            val = val0 & val1 & val2 & val3 & val4 & val5 & val6 & val7 & val8;
+            
+            EtE[i+1][j]=val;
+            
+        }
+    }
+    switch(r){
+        case 0 : break;
+        case 1 : 
+    }
+}
+
 void dilatation3(uint8 ** Et, uint8 **EtD, long nrl, long nrh, long ncl, long nch){
     int i,j; // pour tous les pixels
     int m,n; // pour le voisinnage
@@ -45,6 +100,7 @@ void dilatation3(uint8 ** Et, uint8 **EtD, long nrl, long nrh, long ncl, long nc
     }
 }
 
+// Cette version est lente, c'est un "slug", la refaire plus rapide au niveau accès mémoire de ui8matrix
 void ouverture3(uint8 ** Et, uint8 **Etout, long nrl, long nrh, long ncl, long nch){
     uint8 ** tmp = ui8matrix(nrl-BORD, nrh+BORD, ncl-BORD, nch+BORD);
     erosion3(Et, tmp, nrl, nrh, ncl, nch);

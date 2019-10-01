@@ -34,6 +34,26 @@ void routine_FrameDifference(uint8 **in1, uint8 **in2, uint8 **res,  long nrl, l
 
 }
 
+void routine_FrameDifference_opti(uint8 **in1, uint8 **in2, uint8 **res,  long nrl, long nrh, long ncl, long nch, int seuil){
+    //uint8 ** res=ui8matrix(nrl,nrh,ncl,nch);
+    
+    int i,j;
+    uint8 Ot;
+    uint8 a = 0;
+    
+    for(i=nrl;i<=nrh;i++){
+        for(j=ncl;j<=nch;j++){
+            Ot = abs(in2[i][j]-in1[i][j]);
+            if(Ot < seuil)
+                a=0; //noir
+            else a=255; //blanc
+        }
+        res[i][j]=a; //Scalarisation 
+    }
+    
+    //return res;
+
+}
 
 ///////////////////////////////////
 //	   SIGMA DELTA STEP0	     //

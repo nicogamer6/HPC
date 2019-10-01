@@ -26,21 +26,23 @@ void test_Etapemorpho(void){
             bord[i][j]=m[i][j]; 
         }
     }
-    for(i=nrl-2;i<=nrh+2;i++){
+    
+    //Affichage
+    /*for(i=nrl-2;i<=nrh+2;i++){
         for(j=ncl-2;j<=nch+2;j++){
              printf("%0.3ld",bord[i][j]);
         }
         printf("\n");
-    }
+    }*/
    
     erosion3(bord,m2,nrl,nrh,ncl,nch);
     SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testero.pgm");
-    for(i=nrl;i<=nrh;i++){
+    /*for(i=nrl;i<=nrh;i++){
         for(j=ncl;j<=nch;j++){
              printf("%0.3ld",m2[i][j]);
         }
         printf("\n");
-    }
+    }*/
     
     dilatation3(bord,m2,nrl,nrh,ncl,nch);
     SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testdil.pgm");
