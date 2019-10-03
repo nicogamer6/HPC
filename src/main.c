@@ -48,10 +48,10 @@ int main()
     //test_routineFDmorpho3xFermOuv(SEUILFD); // Dossier "testFDmorphoFO"
     //printf("\n");
 
-	test_routineFDmorpho3xOuv_opti(SEUILFD);		// Dossier "testOpti"
-	//test_routineFDmorpho3xFerm_opti(SEUILFD);		// Dossier "testOpti"
-	//test_routineFDmorpho3xOuvFerm_opti(SEUILFD);	// Dossier "testOpti"
-	//test_routineFDmorpho3xFermOuv_opti(SEUILFD);	// Dossier "testOpti"
+	test_routineFDmorpho3xOuv_opti(SEUILFD);		// Dossier "testOptiFD"
+	//test_routineFDmorpho3xFerm_opti(SEUILFD);		// Dossier "testOptiFD"
+	//test_routineFDmorpho3xOuvFerm_opti(SEUILFD);	// Dossier "testOptiFD"
+	//test_routineFDmorpho3xFermOuv_opti(SEUILFD);	// Dossier "testOptiFD"
 
     //test_routineFD_SSEmorpho3xOuv(SEUILFD);     // Dossier "testFD_SSEmorphoO"
     //test_routineFD_SSEmorpho3xFerm(SEUILFD);    // Dossier "testFD_SSEmorphoF"
@@ -69,10 +69,10 @@ int main()
     //test_routineSDmorpho3xFermOuv();        // Dossier "testSDmorphoFO"
     //printf("\n");
 
-	test_routineSDmorpho3xOuv_opti();		// Dossier "testOpti"
-	//test_routineSDmorpho3xFerm_opti();	// Dossier "testOpti"
-	//test_routineSDmorpho3xOuvFerm_opti();	// Dossier "testOpti"
-	//test_routineSDmorpho3xFermOuv_opti();	// Dossier "testOpti"
+	test_routineSDmorpho3xOuv_opti();		// Dossier "testOptiSD"
+	//test_routineSDmorpho3xFerm_opti();	// Dossier "testOptiSD"
+	//test_routineSDmorpho3xOuvFerm_opti();	// Dossier "testOptiSD"
+	//test_routineSDmorpho3xFermOuv_opti();	// Dossier "testOptiSD"
 
 
     //test_routineSD_SSEmorpho3xOuv();        // Dossier "testSD_SSEmorphoO"
