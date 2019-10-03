@@ -15,6 +15,7 @@ INC_PATH = include
 IMG_PATH_FD = testFD/* testFDmorphoF/* testFDmorphoFO/* testFDmorphoO/* testFDmorphoOF/* testFD_SSE/* testFD_SSEmorphoF/* testFD_SSEmorphoFO/* testFD_SSEmorphoO/* testFD_SSEmorphoOF/* testFD_SSE_OMP/*
 IMG_PATH_SD = testSD/* testSDmorphoF/* testSDmorphoFO/* testSDmorphoO/* testSDmorphoOF/* testSD_SSE/* testSD_SSEmorphoF/* testSD_SSEmorphoFO/* testSD_SSEmorphoO/* testSD_SSEmorphoOF/* testSD_SSE_OMP/*
 IMG_PATH_morpho = testmorpho/* testmorphoSSE/*
+IMG_TESTOPTI = testOpti/*
 
 # -- OS ----------
 OS = MACH_OSX
@@ -67,5 +68,5 @@ depend:
 clean:
 	rm -f $(OBJ)
 	rm -f ${EXE_PATH}/${PRODUCT}
-	rm -f $(IMG_PATH_FD) $(IMG_PATH_SD) $(IMG_PATH_morpho)
+	rm -f $(IMG_PATH_FD) $(IMG_PATH_SD) $(IMG_PATH_morpho) $(IMG_TESTOPTI)
 

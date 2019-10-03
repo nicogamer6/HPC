@@ -21,7 +21,7 @@
 int main()
 {
      
-    // Crée les images FD et SD. 
+    // Crée les images FD et SD
     // AFFICHE le CPP juste pour la morpho
     //printf("SEUIL FD = %d\n",SEUILFD);
     //test_routineFD(SEUILFD);                // Dossier "testFD"

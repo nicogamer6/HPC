@@ -37,6 +37,9 @@ void test_Etapemorpho(void){
    
     erosion3(bord,m2,nrl,nrh,ncl,nch);
     SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testero.pgm");
+
+    erosion3_opti_lu_rr(bord,m2,nrl,nrh,ncl,nch);
+    SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testeroopti.pgm");
     /*for(i=nrl;i<=nrh;i++){
         for(j=ncl;j<=nch;j++){
              printf("%0.3ld",m2[i][j]);
@@ -47,11 +50,20 @@ void test_Etapemorpho(void){
     dilatation3(bord,m2,nrl,nrh,ncl,nch);
     SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testdil.pgm");
     
+    dilatation3_opti_lu_rr(bord,m2,nrl,nrh,ncl,nch);
+    SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testdilopti.pgm");
+
     ouverture3(bord,m2,nrl,nrh,ncl,nch);
     SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testouv.pgm");
     
+    ouverture3_opti(bord,m2,nrl,nrh,ncl,nch);
+    SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testouvopti.pgm");
+
     fermeture3(bord,m2,nrl,nrh,ncl,nch);
     SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testferm.pgm");
+
+    fermeture3_opti(bord,m2,nrl,nrh,ncl,nch);
+    SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testfermopti.pgm");
 
     free_ui8matrix(bord,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
     free_ui8matrix(m,nrl,nrh,ncl,nch);

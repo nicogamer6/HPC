@@ -33,29 +33,33 @@ void erosion3(uint8 ** Et, uint8 **EtE, long nrl, long nrh, long ncl, long nch){
 //  val0    val3    val6
 //  val1    val4    val7
 //  val2    val5    val8
+
 void erosion3_opti_lu_rr(uint8 ** Et, uint8 **EtE, long nrl, long nrh, long ncl, long nch){  
-    int i,j; // pour tous les pixels
-    int m,n; // pour le voisinnage
-    uint8 val;
+    int i = nrl, j=ncl; // pour tous les pixels
+
+    uint8 val, valdefaut;
+    uint8 val0, val1, val2, val3, val4, val5, val6, val7, val8;
     
-    int r = nrh % 2;
+    int r = (nrh-nrl+1) % 2;
     
-    for(i=nrl;i<=nrh - r;i+=2){
-        for(j=ncl;j<=nch;j++){
-            val = 255;
+    for(j=ncl;j<=nch;j++){
+
+    	val0 = Et[i-1][j-1];
+    	val1 = Et[i-1][j];
+    	val2 = Et[i-1][j+1];
+
+    	val3 = Et[i][j-1];
+    	val4 = Et[i][j];
+    	val5 = Et[i][j+1];
+
+        for(i=nrl;i<=nrh-r;i+=2){
+            valdefaut = 255;
             
-            val0 = Et[i-1][j-1];
-            val1 = Et[i-1][j];
-            val2 = Et[i-1][j+1];
-            
-            val3 = Et[i][j-1];
-            val4 = Et[i][j];
-            val5 = Et[i][j+1];
             val6 = Et[i+1][j-1];
             val7 = Et[i+1][j];
             val8 = Et[i+1][j+1];
             
-            val = val0 & val1 & val2 & val3 & val4 & val5 & val6 & val7 & val8;
+            val = valdefaut & val0 & val1 & val2 & val3 & val4 & val5 & val6 & val7 & val8;
             
             EtE[i][j]=val;
             
@@ -68,20 +72,37 @@ void erosion3_opti_lu_rr(uint8 ** Et, uint8 **EtE, long nrl, long nrh, long ncl,
             val4 = val7;
             val5 = val8;
             
+
             val6 = Et[i+2][j-1];
             val7 = Et[i+2][j];
             val8 = Et[i+2][j+1];
             
-            val = val0 & val1 & val2 & val3 & val4 & val5 & val6 & val7 & val8;
+            val = valdefaut & val0 & val1 & val2 & val3 & val4 & val5 & val6 & val7 & val8;
             
             EtE[i+1][j]=val;
             
+            // RR
+            val0 = val3;
+            val1 = val4;
+            val2 = val5;
+
+            val3 = val6;
+            val4 = val7;
+            val5 = val8;
+
+        }
+        switch(r){
+                case 0 : 	break;
+                case 1 : 	val6 = Et[i+1][j-1];
+                			val7 = Et[i+1][j];
+                			val8 = Et[i+1][j+1];
+
+                			val = valdefaut & val0 & val1 & val2 & val3 & val4 & val5 & val6 & val7 & val8;
+
+                			EtE[i][j]=val;
         }
     }
-    switch(r){
-        case 0 : break;
-        case 1 : 
-    }
+
 }
 
 void dilatation3(uint8 ** Et, uint8 **EtD, long nrl, long nrh, long ncl, long nch){
@@ -101,6 +122,79 @@ void dilatation3(uint8 ** Et, uint8 **EtD, long nrl, long nrh, long ncl, long nc
     }
 }
 
+
+void dilatation3_opti_lu_rr(uint8 ** Et, uint8 **EtE, long nrl, long nrh, long ncl, long nch){
+    int i = nrl, j=ncl; // pour tous les pixels
+
+    uint8 val, valdefaut;
+    uint8 val0, val1, val2, val3, val4, val5, val6, val7, val8;
+
+    int r = (nrh-nrl+1) % 2;
+
+    for(j=ncl;j<=nch;j++){
+
+    	val0 = Et[i-1][j-1];
+    	val1 = Et[i-1][j];
+    	val2 = Et[i-1][j+1];
+
+    	val3 = Et[i][j-1];
+    	val4 = Et[i][j];
+    	val5 = Et[i][j+1];
+
+        for(i=nrl;i<=nrh-r;i+=2){
+        	valdefaut = 0;
+
+            val6 = Et[i+1][j-1];
+            val7 = Et[i+1][j];
+            val8 = Et[i+1][j+1];
+
+            val = valdefaut | val0 | val1 | val2 | val3 | val4 | val5 | val6 | val7 | val8;
+
+            EtE[i][j]=val;
+
+            //Rotation de variables
+            val0 = val3;
+            val1 = val4;
+            val2 = val5;
+
+            val3 = val6;
+            val4 = val7;
+            val5 = val8;
+
+
+            val6 = Et[i+2][j-1];
+            val7 = Et[i+2][j];
+            val8 = Et[i+2][j+1];
+
+            val = valdefaut | val0 | val1 | val2 | val3 | val4 | val5 | val6 | val7 | val8;
+
+            EtE[i+1][j]=val;
+
+            // RR
+            val0 = val3;
+            val1 = val4;
+            val2 = val5;
+
+            val3 = val6;
+            val4 = val7;
+            val5 = val8;
+
+        }
+        switch(r){
+                case 0 : 	break;
+                case 1 : 	val6 = Et[i+1][j-1];
+                			val7 = Et[i+1][j];
+                			val8 = Et[i+1][j+1];
+
+                			val = valdefaut | val0 | val1 | val2 | val3 | val4 | val5 | val6 | val7 | val8;
+
+                			EtE[i][j]=val;
+        }
+    }
+
+}
+
+
 // Cette version est lente, c'est un "slug", la refaire plus rapide au niveau accès mémoire de ui8matrix
 void ouverture3(uint8 ** Et, uint8 **Etout, long nrl, long nrh, long ncl, long nch){
     uint8 ** tmp = ui8matrix(nrl-BORD, nrh+BORD, ncl-BORD, nch+BORD);
@@ -109,10 +203,24 @@ void ouverture3(uint8 ** Et, uint8 **Etout, long nrl, long nrh, long ncl, long n
     free_ui8matrix(tmp, nrl-BORD, nrh+BORD, ncl-BORD, nch+BORD);
 }
 
+void ouverture3_opti(uint8 ** Et, uint8 **Etout, long nrl, long nrh, long ncl, long nch){
+    uint8 ** tmp = ui8matrix(nrl-BORD, nrh+BORD, ncl-BORD, nch+BORD);
+    erosion3_opti_lu_rr(Et, tmp, nrl, nrh, ncl, nch);
+    dilatation3_opti_lu_rr(tmp, Etout, nrl, nrh, ncl, nch);
+    free_ui8matrix(tmp, nrl-BORD, nrh+BORD, ncl-BORD, nch+BORD);
+}
+
 void fermeture3(uint8 ** Et, uint8 **Etout, long nrl, long nrh, long ncl, long nch){
     uint8 ** tmp = ui8matrix(nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
     dilatation3(Et, tmp, nrl, nrh, ncl, nch);
     erosion3(tmp, Etout, nrl, nrh, ncl, nch);
+    free_ui8matrix(tmp, nrl-BORD, nrh+BORD, ncl-BORD, nch+BORD);
+}
+
+void fermeture3_opti(uint8 ** Et, uint8 **Etout, long nrl, long nrh, long ncl, long nch){
+    uint8 ** tmp = ui8matrix(nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+    dilatation3_opti_lu_rr(Et, tmp, nrl, nrh, ncl, nch);
+    erosion3_opti_lu_rr(tmp, Etout, nrl, nrh, ncl, nch);
     free_ui8matrix(tmp, nrl-BORD, nrh+BORD, ncl-BORD, nch+BORD);
 }
 
