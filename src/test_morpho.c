@@ -28,13 +28,13 @@ void test_Etapemorpho(void){
     }
     
     //Affichage
-    for(i=nrl;i<=nrh;i++){
+    /*for(i=nrl;i<=nrh;i++){
         for(j=ncl;j<=nch;j++){
              printf("%0.3ld ",bord[i][j]);
         }
         printf("\n");
     }
-    printf("\n\n");
+    printf("\n\n");*/
    
     erosion3(bord,m2,nrl,nrh,ncl,nch);
     SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testero.pgm");
@@ -58,23 +58,23 @@ void test_Etapemorpho(void){
     
     dilatation3(bord,m2,nrl,nrh,ncl,nch);
     SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testdil.pgm");
-    for(i=nrl;i<=nrh;i++){
+    /*for(i=nrl;i<=nrh;i++){
             for(j=ncl;j<=nch;j++){
                  printf("%0.3ld ",m2[i][j]);
             }
             printf("\n");
         }
-        printf("\n\n");
+        printf("\n\n");*/
     
     dilatation3_opti_lu_rr(bord,m2,nrl,nrh,ncl,nch);
     SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testdilopti.pgm");
-    for(i=nrl;i<=nrh;i++){
+    /*for(i=nrl;i<=nrh;i++){
             for(j=ncl;j<=nch;j++){
                  printf("%0.3ld ",m2[i][j]);
             }
             printf("\n");
         }
-        printf("\n\n");
+        printf("\n\n");*/
 
     ouverture3(bord,m2,nrl,nrh,ncl,nch);
     SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testouv.pgm");

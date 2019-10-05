@@ -43,7 +43,7 @@ void erosion3_opti_lu_rr(uint8 ** Et, uint8 **EtE, long nrl, long nrh, long ncl,
     int r = (nrh+1-nrl) % 2;
     
     for(j=ncl;j<=nch;j++){
-
+    	i=nrl;
     	val0 = Et[i-1][j-1];
     	val1 = Et[i-1][j];
     	val2 = Et[i-1][j+1];
@@ -132,7 +132,7 @@ void dilatation3_opti_lu_rr(uint8 ** Et, uint8 **EtD, long nrl, long nrh, long n
     int r = (nrh+1-nrl) % 2;
 
     for(j=ncl;j<=nch;j++){
-
+    	i=nrl;
     	val0 = Et[i-1][j-1];
     	val1 = Et[i-1][j];
     	val2 = Et[i-1][j+1];
