@@ -40,7 +40,7 @@ void erosion3_opti_lu_rr(uint8 ** Et, uint8 **EtE, long nrl, long nrh, long ncl,
     uint8 val, valdefaut;
     uint8 val0, val1, val2, val3, val4, val5, val6, val7, val8;
     
-    int r = (nrh-nrl+1) % 2;
+    int r = (nrh+1-nrl) % 2;
     
     for(j=ncl;j<=nch;j++){
 
@@ -52,7 +52,7 @@ void erosion3_opti_lu_rr(uint8 ** Et, uint8 **EtE, long nrl, long nrh, long ncl,
     	val4 = Et[i][j];
     	val5 = Et[i][j+1];
 
-        for(i=nrl;i<=nrh-r;i+=2){
+        for(i=nrl;i<=(nrh-r);i+=2){
             valdefaut = 255;
             
             val6 = Et[i+1][j-1];
@@ -123,13 +123,13 @@ void dilatation3(uint8 ** Et, uint8 **EtD, long nrl, long nrh, long ncl, long nc
 }
 
 
-void dilatation3_opti_lu_rr(uint8 ** Et, uint8 **EtE, long nrl, long nrh, long ncl, long nch){
+void dilatation3_opti_lu_rr(uint8 ** Et, uint8 **EtD, long nrl, long nrh, long ncl, long nch){
     int i = nrl, j=ncl; // pour tous les pixels
 
     uint8 val, valdefaut;
     uint8 val0, val1, val2, val3, val4, val5, val6, val7, val8;
 
-    int r = (nrh-nrl+1) % 2;
+    int r = (nrh+1-nrl) % 2;
 
     for(j=ncl;j<=nch;j++){
 
@@ -141,7 +141,7 @@ void dilatation3_opti_lu_rr(uint8 ** Et, uint8 **EtE, long nrl, long nrh, long n
     	val4 = Et[i][j];
     	val5 = Et[i][j+1];
 
-        for(i=nrl;i<=nrh-r;i+=2){
+        for(i=nrl;i<=(nrh-r);i+=2){
         	valdefaut = 0;
 
             val6 = Et[i+1][j-1];
@@ -150,7 +150,7 @@ void dilatation3_opti_lu_rr(uint8 ** Et, uint8 **EtE, long nrl, long nrh, long n
 
             val = valdefaut | val0 | val1 | val2 | val3 | val4 | val5 | val6 | val7 | val8;
 
-            EtE[i][j]=val;
+            EtD[i][j]=val;
 
             //Rotation de variables
             val0 = val3;
@@ -161,14 +161,13 @@ void dilatation3_opti_lu_rr(uint8 ** Et, uint8 **EtE, long nrl, long nrh, long n
             val4 = val7;
             val5 = val8;
 
-
             val6 = Et[i+2][j-1];
             val7 = Et[i+2][j];
             val8 = Et[i+2][j+1];
 
             val = valdefaut | val0 | val1 | val2 | val3 | val4 | val5 | val6 | val7 | val8;
 
-            EtE[i+1][j]=val;
+            EtD[i+1][j]=val;
 
             // RR
             val0 = val3;
@@ -187,10 +186,43 @@ void dilatation3_opti_lu_rr(uint8 ** Et, uint8 **EtE, long nrl, long nrh, long n
                 			val8 = Et[i+1][j+1];
 
                 			val = valdefaut | val0 | val1 | val2 | val3 | val4 | val5 | val6 | val7 | val8;
-
-                			EtE[i][j]=val;
+                			EtD[i][j]=val;
         }
     }
+
+
+    //Fonctionne sans le déroulage de 2 !
+    /*for(j=ncl;j<=nch;j++){
+
+        	val0 = Et[i-1][j-1];
+        	val1 = Et[i-1][j];
+        	val2 = Et[i-1][j+1];
+
+        	val3 = Et[i][j-1];
+        	val4 = Et[i][j];
+        	val5 = Et[i][j+1];
+
+            for(i=nrl;i<=(nrh);i++){
+            	valdefaut = 0;
+
+                val6 = Et[i+1][j-1];
+                val7 = Et[i+1][j];
+                val8 = Et[i+1][j+1];
+
+                val = valdefaut | val0 | val1 | val2 | val3 | val4 | val5 | val6 | val7 | val8;
+
+                EtD[i][j]=val;
+
+                //Rotation de variables
+                val0 = val3;
+                val1 = val4;
+                val2 = val5;
+
+                val3 = val6;
+                val4 = val7;
+                val5 = val8;
+            }
+        }*/
 
 }
 
