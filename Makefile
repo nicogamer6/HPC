@@ -31,7 +31,7 @@ AR = ar -rc
 
 # -- Flags ----------
 C_DEBUG_FLAGS = -O0
-C_CC_FLAGS = -std=c99 -DNOALIAS -DALIGNED -mssse3 -fopenmp 
+C_CC_FLAGS = -std=c99 -DNOALIAS -DALIGNED -mssse3 -fopenmp
 C_SSE_FLAGS = -mfpmath=sse -mmmx -msse -msse2 -msse3
 C_OPTIMISATION_FLAGS = -O3 -fstrict-aliasing
 
