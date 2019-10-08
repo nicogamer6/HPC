@@ -37,7 +37,7 @@ void test_Etapemorpho(void){
     printf("\n\n");*/
    
     erosion3(bord,m2,nrl,nrh,ncl,nch);
-    SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testero.pgm");
+    SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testero3.pgm");
     /*for(i=nrl;i<=nrh;i++){
             for(j=ncl;j<=nch;j++){
                  printf("%0.3ld ",m2[i][j]);
@@ -47,46 +47,52 @@ void test_Etapemorpho(void){
     printf("\n\n");*/
 
     erosion3_opti_lu_rr(bord,m2,nrl,nrh,ncl,nch);
-    SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testeroopti.pgm");
-    /*for(i=nrl;i<=nrh;i++){
-        for(j=ncl;j<=nch;j++){
-             printf("%0.3ld ",m2[i][j]);
-        }
-        printf("\n");
-    }
-    printf("\n\n");*/
+    SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testeroopti3.pgm");
+
+    erosion5(bord,m2,nrl,nrh,ncl,nch);
+    SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testero5.pgm");
+
+    erosion5_opti_lu_rr(bord,m2,nrl,nrh,ncl,nch);
+    SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testeroopti5.pgm");
     
+
     dilatation3(bord,m2,nrl,nrh,ncl,nch);
-    SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testdil.pgm");
-    /*for(i=nrl;i<=nrh;i++){
-            for(j=ncl;j<=nch;j++){
-                 printf("%0.3ld ",m2[i][j]);
-            }
-            printf("\n");
-        }
-        printf("\n\n");*/
+    SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testdil3.pgm");
     
     dilatation3_opti_lu_rr(bord,m2,nrl,nrh,ncl,nch);
-    SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testdilopti.pgm");
-    /*for(i=nrl;i<=nrh;i++){
-            for(j=ncl;j<=nch;j++){
-                 printf("%0.3ld ",m2[i][j]);
-            }
-            printf("\n");
-        }
-        printf("\n\n");*/
+    SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testdilopti3.pgm");
+
+    dilatation5(bord,m2,nrl,nrh,ncl,nch);
+    SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testdil5.pgm");
+
+    dilatation5_opti_lu_rr(bord,m2,nrl,nrh,ncl,nch);
+    SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testdilopti5.pgm");
+
 
     ouverture3(bord,m2,nrl,nrh,ncl,nch);
-    SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testouv.pgm");
+    SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testouv3.pgm");
     
     ouverture3_opti(bord,m2,nrl,nrh,ncl,nch);
-    SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testouvopti.pgm");
+    SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testouvopti3.pgm");
+
+    ouverture5(bord,m2,nrl,nrh,ncl,nch);
+    SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testouv5.pgm");
+
+    ouverture5_opti(bord,m2,nrl,nrh,ncl,nch);
+    SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testouvopti5.pgm");
+
 
     fermeture3(bord,m2,nrl,nrh,ncl,nch);
-    SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testferm.pgm");
+    SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testferm3.pgm");
 
     fermeture3_opti(bord,m2,nrl,nrh,ncl,nch);
-    SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testfermopti.pgm");
+    SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testfermopti3.pgm");
+
+    fermeture5(bord,m2,nrl,nrh,ncl,nch);
+    SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testferm5.pgm");
+
+    fermeture5_opti(bord,m2,nrl,nrh,ncl,nch);
+    SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testfermopti5.pgm");
 
     free_ui8matrix(bord,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
     free_ui8matrix(m,nrl,nrh,ncl,nch);
