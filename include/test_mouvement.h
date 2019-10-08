@@ -13,5 +13,6 @@
 
 void test_routineFD(int seuil);
 void test_routineSD(void);
+void test_routineSD_opti(void);
 
 #endif // __TEST_MOUVEMENT_H__
