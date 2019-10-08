@@ -42,13 +42,13 @@ int main()
     // Crée les images FD avec les morpho 3x3, O, F, OF et FO. 
     // AFFICHE le CPP juste pour la morpho et morphoSSE
 
-    test_routineFDmorpho3xOuv(SEUILFD);     // Dossier "testFDmorphoO"
+    //test_routineFDmorpho3xOuv(SEUILFD);     // Dossier "testFDmorphoO"
     //test_routineFDmorpho3xFerm(SEUILFD);    // Dossier "testFDmorphoF"
     //test_routineFDmorpho3xOuvFerm(SEUILFD); // Dossier "testFDmorphoOF"
     //test_routineFDmorpho3xFermOuv(SEUILFD); // Dossier "testFDmorphoFO"
     //printf("\n");
 
-	test_routineFDmorpho3xOuv_opti(SEUILFD);		// Dossier "testOptiFD"
+	//test_routineFDmorpho3xOuv_opti(SEUILFD);		// Dossier "testOptiFD"
 	//test_routineFDmorpho3xFerm_opti(SEUILFD);		// Dossier "testOptiFD"
 	//test_routineFDmorpho3xOuvFerm_opti(SEUILFD);	// Dossier "testOptiFD"
 	//test_routineFDmorpho3xFermOuv_opti(SEUILFD);	// Dossier "testOptiFD"
@@ -75,8 +75,8 @@ int main()
 	//test_routineSDmorpho3xFermOuv_opti();	// Dossier "testOptiSD"
 
 
-    //test_routineSD_SSEmorpho3xOuv();        // Dossier "testSD_SSEmorphoO"
-    //test_routineSD_SSEmorpho3xFerm();       // Dossier "testSD_SSEmorphoF"
+    test_routineSD_SSEmorpho3xOuv();        // Dossier "testSD_SSEmorphoO"
+    test_routineSD_SSEmorpho3xFerm();       // Dossier "testSD_SSEmorphoF"
     //test_routineSD_SSEmorpho3xOuvFerm();    // Dossier "testSD_SSEmorphoOF"
     //test_routineSD_SSEmorpho3xFermOuv();    // Dossier "testSD_SSEmorphoFO"
     //printf("\n");

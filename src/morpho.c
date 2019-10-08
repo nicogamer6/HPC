@@ -126,7 +126,7 @@ void dilatation3(uint8 ** Et, uint8 **EtD, long nrl, long nrh, long ncl, long nc
 void dilatation3_opti_lu_rr(uint8 ** Et, uint8 **EtD, long nrl, long nrh, long ncl, long nch){
     int i = nrl, j=ncl; // pour tous les pixels
 
-    uint8 val, valdefaut;
+    uint8 val, valdefaut, val_lu2;
     uint8 val0, val1, val2, val3, val4, val5, val6, val7, val8;
 
     int r = (nrh+1-nrl) % 2;
@@ -141,6 +141,9 @@ void dilatation3_opti_lu_rr(uint8 ** Et, uint8 **EtD, long nrl, long nrh, long n
     	val4 = Et[i][j];
     	val5 = Et[i][j+1];
 
+    	val = valdefaut | val0 | val1 | val2 | val3 | val4 | val5; //réduction par colonne
+    	val_lu2 = valdefaut | val3 | val4 | val5;
+
         for(i=nrl;i<=(nrh-r);i+=2){
         	valdefaut = 0;
 
@@ -148,7 +151,7 @@ void dilatation3_opti_lu_rr(uint8 ** Et, uint8 **EtD, long nrl, long nrh, long n
             val7 = Et[i+1][j];
             val8 = Et[i+1][j+1];
 
-            val = valdefaut | val0 | val1 | val2 | val3 | val4 | val5 | val6 | val7 | val8;
+            val = val | val6 | val7 | val8;
 
             EtD[i][j]=val;
 
@@ -165,7 +168,7 @@ void dilatation3_opti_lu_rr(uint8 ** Et, uint8 **EtD, long nrl, long nrh, long n
             val7 = Et[i+2][j];
             val8 = Et[i+2][j+1];
 
-            val = valdefaut | val0 | val1 | val2 | val3 | val4 | val5 | val6 | val7 | val8;
+            val = val_lu2 | val3 | val4 | val5 | val6 | val7 | val8;
 
             EtD[i+1][j]=val;
 
