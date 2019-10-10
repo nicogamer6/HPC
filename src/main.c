@@ -25,8 +25,8 @@ int main()
     // AFFICHE le CPP juste pour la morpho
     //printf("SEUIL FD = %d\n",SEUILFD);
     //test_routineFD(SEUILFD);                // Dossier "testFD"
-    //test_routineSD();                       // Dossier "testSD"
-    //test_routineSD_opti();                  // Dossier "testOptiSD"
+    test_routineSD();                       // Dossier "testSD"
+    test_routineSD_opti();                  // Dossier "testOptiSD"
 
     //printf("\n");   
     ///////////////////////////////////////////////////////////////////////////
