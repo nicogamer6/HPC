@@ -15,7 +15,7 @@
 #include "mymacro.h"
 
 //#define SEUILFD 20
-#define NBIMAGES 299
+#define NBIMAGES 199
 #define BORD 2
 
 
@@ -92,7 +92,7 @@ void test_routineFD_SSEmorpho3xOuv(int seuil){
     char nameload1[100], nameload2[100], namesave[100];
 
 
-    sprintf(nameload1,"hall/hall000000.pgm");
+    sprintf(nameload1,"car3/car_3000.pgm");
     
     uint8 **Itm1 = LoadPGM_ui8matrix(nameload1,&nrl,&nrh,&ncl,&nch);
     s2v(nrl, nrh, ncl, nch, card_vuint8(), &n1, &n2, &n3, &n4);
@@ -110,7 +110,7 @@ void test_routineFD_SSEmorpho3xOuv(int seuil){
     int i;
    
     for(i=1;i<=NBIMAGES;i++){
-        sprintf(nameload2,"hall/hall000%03d.pgm",i);
+        sprintf(nameload2,"car3/car_3%03d.pgm",i);
         
         a = LoadPGM_ui8matrix(nameload2,&nrl,&nrh,&ncl,&nch);
         
@@ -121,7 +121,7 @@ void test_routineFD_SSEmorpho3xOuv(int seuil){
         CHRONO(ouverture3SSE(out,Etout,nrl,nrh,ncl,nch),cycles);
         totalcy += cycles;
         
-        sprintf(namesave,"testFD_SSEmorphoO/hall000%03d.pgm",i);
+        sprintf(namesave,"testFD_SSEmorphoO/car_3%03d.pgm",i);
         SavePGM_ui8matrix(Etout,nrl,nrh,ncl,nch,namesave);
         dup_vui8matrix(It, n1, n2, n3, n4, It0);
     }
@@ -158,7 +158,7 @@ void test_routineFD_SSEmorpho3xFerm(int seuil){
     char nameload1[100], nameload2[100], namesave[100];
 
 
-    sprintf(nameload1,"hall/hall000000.pgm");
+    sprintf(nameload1,"car3/car_3000.pgm");
     
     uint8 **Itm1 = LoadPGM_ui8matrix(nameload1,&nrl,&nrh,&ncl,&nch);
     s2v(nrl, nrh, ncl, nch, card_vuint8(), &n1, &n2, &n3, &n4);
@@ -176,7 +176,7 @@ void test_routineFD_SSEmorpho3xFerm(int seuil){
     int i;
    
     for(i=1;i<=NBIMAGES;i++){
-        sprintf(nameload2,"hall/hall000%03d.pgm",i);
+        sprintf(nameload2,"car3/car_3%03d.pgm",i);
         
         a = LoadPGM_ui8matrix(nameload2,&nrl,&nrh,&ncl,&nch);
         
@@ -187,7 +187,7 @@ void test_routineFD_SSEmorpho3xFerm(int seuil){
         CHRONO(fermeture3SSE(out,Etout,nrl,nrh,ncl,nch),cycles);
         totalcy += cycles;
         
-        sprintf(namesave,"testFD_SSEmorphoF/hall000%03d.pgm",i);
+        sprintf(namesave,"testFD_SSEmorphoF/car_3%03d.pgm",i);
         SavePGM_ui8matrix(Etout,nrl,nrh,ncl,nch,namesave);
         dup_vui8matrix(It, n1, n2, n3, n4, It0);
     }
@@ -224,7 +224,7 @@ void test_routineFD_SSEmorpho3xOuvFerm(int seuil){
     char nameload1[100], nameload2[100], namesave[100];
 
 
-    sprintf(nameload1,"hall/hall000000.pgm");
+    sprintf(nameload1,"car3/car_3000.pgm");
     
     uint8 **Itm1 = LoadPGM_ui8matrix(nameload1,&nrl,&nrh,&ncl,&nch);
     s2v(nrl, nrh, ncl, nch, card_vuint8(), &n1, &n2, &n3, &n4);
@@ -243,7 +243,7 @@ void test_routineFD_SSEmorpho3xOuvFerm(int seuil){
     int i;
    
     for(i=1;i<=NBIMAGES;i++){
-        sprintf(nameload2,"hall/hall000%03d.pgm",i);
+        sprintf(nameload2,"car3/car_3%03d.pgm",i);
         
         a = LoadPGM_ui8matrix(nameload2,&nrl,&nrh,&ncl,&nch);
         
@@ -257,7 +257,7 @@ void test_routineFD_SSEmorpho3xOuvFerm(int seuil){
         CHRONO(fermeture3SSE(Etout,Etout2,nrl,nrh,ncl,nch),cycles);
         totalcy += cycles;
         
-        sprintf(namesave,"testFD_SSEmorphoOF/hall000%03d.pgm",i);
+        sprintf(namesave,"testFD_SSEmorphoOF/car_3%03d.pgm",i);
         SavePGM_ui8matrix(Etout2,nrl,nrh,ncl,nch,namesave);
         dup_vui8matrix(It, n1, n2, n3, n4, It0);
     }
@@ -295,7 +295,7 @@ void test_routineFD_SSEmorpho3xFermOuv(int seuil){
     char nameload1[100], nameload2[100], namesave[100];
 
 
-    sprintf(nameload1,"hall/hall000000.pgm");
+    sprintf(nameload1,"car3/car_3000.pgm");
     
     uint8 **Itm1 = LoadPGM_ui8matrix(nameload1,&nrl,&nrh,&ncl,&nch);
     s2v(nrl, nrh, ncl, nch, card_vuint8(), &n1, &n2, &n3, &n4);
@@ -314,7 +314,7 @@ void test_routineFD_SSEmorpho3xFermOuv(int seuil){
     int i;
    
     for(i=1;i<=NBIMAGES;i++){
-        sprintf(nameload2,"hall/hall000%03d.pgm",i);
+        sprintf(nameload2,"car3/car_3%03d.pgm",i);
         
         a = LoadPGM_ui8matrix(nameload2,&nrl,&nrh,&ncl,&nch);
         
@@ -328,7 +328,7 @@ void test_routineFD_SSEmorpho3xFermOuv(int seuil){
         CHRONO(ouverture3SSE(Etout,Etout2,nrl,nrh,ncl,nch),cycles);
         totalcy += cycles;
         
-        sprintf(namesave,"testFD_SSEmorphoFO/hall000%03d.pgm",i);
+        sprintf(namesave,"testFD_SSEmorphoFO/car_3%03d.pgm",i);
         SavePGM_ui8matrix(Etout2,nrl,nrh,ncl,nch,namesave);
         dup_vui8matrix(It, n1, n2, n3, n4, It0);
     }
@@ -368,12 +368,12 @@ void test_routineSD_SSEmorpho3xOuv(){
 
     int n1, n2, n3, n4;
     long nrl, nrh, ncl, nch;
-    char nameload[100];     //"hall/hall000..";
+    char nameload[100];     //"car3/car_3..";
     char namesave[100];     //"testSD/SD...";
     int i;
     s2v(nrl, nrh, ncl, nch, card_vuint8(), &n1, &n2, &n3, &n4);
 
-    sprintf(nameload,"hall/hall000000.pgm");
+    sprintf(nameload,"car3/car_3000.pgm");
     
     uint8 **Itm1 = LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
     s2v(nrl, nrh, ncl, nch, card_vuint8(), &n1, &n2, &n3, &n4);
@@ -404,14 +404,14 @@ void test_routineSD_SSEmorpho3xOuv(){
     
     
     for(i=1;i<=NBIMAGES;i++){
-        sprintf(nameload,"hall/hall000%03d.pgm",i);
+        sprintf(nameload,"car3/car_3%03d.pgm",i);
         a=LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
         //Conversion
         uint_to_vuint(a, Iv, n1, n2, n3, n4);
         
         SigmaDelta_1step_SSE2(V, Vtm1, M, Mtm1, Iv, Et, n1, n2, n3, n4);
         
-        sprintf(namesave,"testSD_SSEmorphoO/hall000%03d.pgm",i);
+        sprintf(namesave,"testSD_SSEmorphoO/car_3%03d.pgm",i);
         
         vuint_to_uint(out, Et, n1, n2, n3, n4);
 
@@ -470,12 +470,12 @@ void test_routineSD_SSEmorpho3xFerm(){
 
     int n1, n2, n3, n4;
     long nrl, nrh, ncl, nch;
-    char nameload[100];     //"hall/hall000..";
+    char nameload[100];     //"car3/car_3..";
     char namesave[100];     //"testSD/SD...";
     int i;
     s2v(nrl, nrh, ncl, nch, card_vuint8(), &n1, &n2, &n3, &n4);
 
-    sprintf(nameload,"hall/hall000000.pgm");
+    sprintf(nameload,"car3/car_3000.pgm");
     
     uint8 **Itm1 = LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
     s2v(nrl, nrh, ncl, nch, card_vuint8(), &n1, &n2, &n3, &n4);
@@ -506,14 +506,14 @@ void test_routineSD_SSEmorpho3xFerm(){
     
     
     for(i=1;i<=NBIMAGES;i++){
-        sprintf(nameload,"hall/hall000%03d.pgm",i);
+        sprintf(nameload,"car3/car_3%03d.pgm",i);
         a=LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
         //Conversion
         uint_to_vuint(a, Iv, n1, n2, n3, n4);
         
         SigmaDelta_1step_SSE2(V, Vtm1, M, Mtm1, Iv, Et, n1, n2, n3, n4);
         
-        sprintf(namesave,"testSD_SSEmorphoF/hall000%03d.pgm",i);
+        sprintf(namesave,"testSD_SSEmorphoF/car_3%03d.pgm",i);
         
         vuint_to_uint(out, Et, n1, n2, n3, n4);
 
@@ -572,12 +572,12 @@ void test_routineSD_SSEmorpho3xOuvFerm(){
 
     int n1, n2, n3, n4;
     long nrl, nrh, ncl, nch;
-    char nameload[100];     //"hall/hall000..";
+    char nameload[100];     //"car3/car_3..";
     char namesave[100];     //"testSD/SD...";
     int i;
     s2v(nrl, nrh, ncl, nch, card_vuint8(), &n1, &n2, &n3, &n4);
 
-    sprintf(nameload,"hall/hall000000.pgm");
+    sprintf(nameload,"car3/car_3000.pgm");
     
     uint8 **Itm1 = LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
     s2v(nrl, nrh, ncl, nch, card_vuint8(), &n1, &n2, &n3, &n4);
@@ -608,14 +608,14 @@ void test_routineSD_SSEmorpho3xOuvFerm(){
     
     
     for(i=1;i<=NBIMAGES;i++){
-        sprintf(nameload,"hall/hall000%03d.pgm",i);
+        sprintf(nameload,"car3/car_3%03d.pgm",i);
         a=LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
         //Conversion
         uint_to_vuint(a, Iv, n1, n2, n3, n4);
         
         SigmaDelta_1step_SSE2(V, Vtm1, M, Mtm1, Iv, Et, n1, n2, n3, n4);
         
-        sprintf(namesave,"testSD_SSEmorphoOF/hall000%03d.pgm",i);
+        sprintf(namesave,"testSD_SSEmorphoOF/car_3%03d.pgm",i);
         
         vuint_to_uint(out, Et, n1, n2, n3, n4);
 
@@ -675,12 +675,12 @@ void test_routineSD_SSEmorpho3xFermOuv(){
 
     int n1, n2, n3, n4;
     long nrl, nrh, ncl, nch;
-    char nameload[100];     //"hall/hall000..";
+    char nameload[100];     //"car3/car_3..";
     char namesave[100];     //"testSD/SD...";
     int i;
     s2v(nrl, nrh, ncl, nch, card_vuint8(), &n1, &n2, &n3, &n4);
 
-    sprintf(nameload,"hall/hall000000.pgm");
+    sprintf(nameload,"car3/car_3000.pgm");
     
     uint8 **Itm1 = LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
     s2v(nrl, nrh, ncl, nch, card_vuint8(), &n1, &n2, &n3, &n4);
@@ -711,14 +711,14 @@ void test_routineSD_SSEmorpho3xFermOuv(){
     
     
     for(i=1;i<=NBIMAGES;i++){
-        sprintf(nameload,"hall/hall000%03d.pgm",i);
+        sprintf(nameload,"car3/car_3%03d.pgm",i);
         a=LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
         //Conversion
         uint_to_vuint(a, Iv, n1, n2, n3, n4);
         
         SigmaDelta_1step_SSE2(V, Vtm1, M, Mtm1, Iv, Et, n1, n2, n3, n4);
         
-        sprintf(namesave,"testSD_SSEmorphoFO/hall000%03d.pgm",i);
+        sprintf(namesave,"testSD_SSEmorphoFO/car_3%03d.pgm",i);
         
         vuint_to_uint(out, Et, n1, n2, n3, n4);
 

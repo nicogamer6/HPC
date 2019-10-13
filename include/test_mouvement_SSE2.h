@@ -5,7 +5,7 @@
 #include "nrdef.h"
 #include "vnrdef.h"
 
-//#define NBIMAGES 299
+//#define NBIMAGES 199
 //#define SEUILFD 20
 
 void uint_to_vuint(uint8 ** scalaire, vuint ** vecteur, int vi0, int vi1, int vj0, int vj1);

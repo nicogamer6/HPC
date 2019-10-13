@@ -24,11 +24,11 @@ int main()
     // Crée les images FD et SD
     // AFFICHE le CPP juste pour la morpho
     //printf("SEUIL FD = %d\n",SEUILFD);
-    //test_routineFD(SEUILFD);                // Dossier "testFD"
+    test_routineFD(SEUILFD);                // Dossier "testFD"
     test_routineSD();                       // Dossier "testSD"
     test_routineSD_opti();                  // Dossier "testOptiSD"
 
-    //printf("\n");   
+    printf("\n");
     ///////////////////////////////////////////////////////////////////////////
 
     // Crée les images FD et SD SSE
@@ -55,14 +55,16 @@ int main()
 	//test_routineFDmorpho3xOuvFerm_opti(SEUILFD);	// Dossier "testOptiFD"
 	//test_routineFDmorpho3xFermOuv_opti(SEUILFD);	// Dossier "testOptiFD"
 
+	test_routineFDmorpho3xOuv_pipe(SEUILFD);	// Dossier "testFDmorphoOpipe"
+	//test_routineFDmorpho3xFerm_pipe(SEUILFD);	// Dossier "testFDmorphoFpipe"
+
+
     test_routineFD_SSEmorpho3xOuv(SEUILFD);     // Dossier "testFD_SSEmorphoO"
     //test_routineFD_SSEmorpho3xFerm(SEUILFD);    // Dossier "testFD_SSEmorphoF"
     //test_routineFD_SSEmorpho3xOuvFerm(SEUILFD); // Dossier "testFD_SSEmorphoOF"
     //test_routineFD_SSEmorpho3xFermOuv(SEUILFD); // Dossier "testFD_SSEmorphoFO"
-    //printf("\n");
+    printf("\n");
 
-    test_routineFDmorpho3xOuv_pipe(SEUILFD);	// Dossier "testFDmorphoOpipe"
-    //test_routineFDmorpho3xFerm_pipe(SEUILFD);	// Dossier "testFDmorphoFpipe"
 
 
     ///////////////////////////////////////////////////////////////////////////
@@ -80,14 +82,15 @@ int main()
 	//test_routineSDmorpho3xOuvFerm_opti();	// Dossier "testOptiSD"
 	//test_routineSDmorpho3xFermOuv_opti();	// Dossier "testOptiSD"
 
+	test_routineSDmorpho3xOuv_pipe();	// Dossier "testSDmorphoOpipe"
+	//test_routineSDmorpho3xFerm_pipe();	// Dossier "testSDmorphoFpipe"
+
     test_routineSD_SSEmorpho3xOuv();        // Dossier "testSD_SSEmorphoO"
     //test_routineSD_SSEmorpho3xFerm();       // Dossier "testSD_SSEmorphoF"
     //test_routineSD_SSEmorpho3xOuvFerm();    // Dossier "testSD_SSEmorphoOF"
     //test_routineSD_SSEmorpho3xFermOuv();    // Dossier "testSD_SSEmorphoFO"
     //printf("\n");
 
-	test_routineSDmorpho3xOuv_pipe();	// Dossier "testSDmorphoOpipe"
-	//test_routineSDmorpho3xFerm_pipe();	// Dossier "testSDmorphoFpipe"
 
     ///////////////////////////////////////////////////////////////////////////
 

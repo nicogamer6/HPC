@@ -6,10 +6,10 @@
 #include "mouvement.h"
 #include "mymacro.h"
 
-#define NBIMAGES 299
+#define NBIMAGES 199
 #define BORD 2
 
-//Permet de remplir le dossier /testFD et de voir les nouvelles images avec algo FD sur l'ensemble du dossier /hall
+//Permet de remplir le dossier /testFD et de voir les nouvelles images avec algo FD sur l'ensemble du dossier /car3
 void test_routineFD(int seuil){
 
 	//Cycle par point//
@@ -25,7 +25,7 @@ void test_routineFD(int seuil){
     long nrl, nrh, ncl, nch;
     char nameload1[100], nameload2[100], namesave[100];
     
-    sprintf(nameload1,"hall/hall000000.pgm");
+    sprintf(nameload1,"car3/car_3000.pgm");
        
 	uint8 **Itm1 = LoadPGM_ui8matrix(nameload1,&nrl,&nrh,&ncl,&nch);
 	uint8 **m = ui8matrix(nrl,nrh,ncl,nch);
@@ -34,11 +34,11 @@ void test_routineFD(int seuil){
 		
 	int i;
 	for(i=1;i<=NBIMAGES;i++){
-	        sprintf(nameload2,"hall/hall000%03d.pgm",i);
+	        sprintf(nameload2,"car3/car_3%03d.pgm",i);
             It=LoadPGM_ui8matrix(nameload2,&nrl,&nrh,&ncl,&nch);
             CHRONO(routine_FrameDifference(Itm1,It,m,nrl,nrh,ncl,nch,seuil),cycles);
             totalcy += cycles;
-            sprintf(namesave,"testFD/hall000%03d.pgm",i);
+            sprintf(namesave,"testFD/car_3%03d.pgm",i);
             SavePGM_ui8matrix(m,nrl,nrh,ncl,nch,namesave);
             copy_ui8matrix_ui8matrix(It, nrl, nrh, ncl, nch, Itm1);
 	}   
@@ -53,7 +53,7 @@ void test_routineFD(int seuil){
 	free_ui8matrix(It,nrl,nrh,ncl,nch);
 }
 
-//Permet de remplir le dossier /testSD et de voir les nouvelles images avec algo SD sur l'ensemble du dossier /hall
+//Permet de remplir le dossier /testSD et de voir les nouvelles images avec algo SD sur l'ensemble du dossier /car3
 void test_routineSD(void){
 
 	//Cycle par point//
@@ -66,11 +66,11 @@ void test_routineSD(void){
 	///////////////////
 
     long nrl, nrh, ncl, nch;
-    char nameload[100];     //"hall/hall000..";
+    char nameload[100];     //"car3/car_3..";
 	char namesave[100];     //"testSD/SD...";
 	int i;
 	
-	sprintf(nameload,"hall/hall000000.pgm");
+	sprintf(nameload,"car3/car_3000.pgm");
 	
     uint8 **Itm1 = LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
     uint8 **I = ui8matrix(nrl,nrh,ncl,nch);
@@ -86,11 +86,11 @@ void test_routineSD(void){
 	routine_SigmaDelta_step0(Vtm1, Mtm1, Itm1, nrl, nrh, ncl, nch);
 	
 	for(i=1;i<=NBIMAGES;i++){
-	        sprintf(nameload,"hall/hall000%03d.pgm",i);
+	        sprintf(nameload,"car3/car_3%03d.pgm",i);
 	        I=LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
 	        CHRONO(routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch),cycles);
 	        totalcy += cycles;
-            sprintf(namesave,"testSD/hall000%03d.pgm",i);
+            sprintf(namesave,"testSD/car_3%03d.pgm",i);
             SavePGM_ui8matrix(Et,nrl,nrh,ncl,nch,namesave);
             //On doit copier M dan Mtm1, V dans Vtm1 et I dans Itm1
             
@@ -117,7 +117,7 @@ void test_routineSD(void){
 }
 
 
-//Permet de remplir le dossier /testSD et de voir les nouvelles images avec algo SD sur l'ensemble du dossier /hall
+//Permet de remplir le dossier /testSD et de voir les nouvelles images avec algo SD sur l'ensemble du dossier /car3
 void test_routineSD_opti(void){
 
     //Cycle par point//
@@ -130,11 +130,11 @@ void test_routineSD_opti(void){
     ///////////////////
 
     long nrl, nrh, ncl, nch;
-    char nameload[100];     //"hall/hall000..";
+    char nameload[100];     //"car3/car_3..";
     char namesave[100];     //"testSD/SD...";
     int i;
     
-    sprintf(nameload,"hall/hall000000.pgm");
+    sprintf(nameload,"car3/car_3000.pgm");
     
     uint8 **Itm1 = LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
     uint8 **I = ui8matrix(nrl,nrh,ncl,nch);
@@ -150,11 +150,11 @@ void test_routineSD_opti(void){
     routine_SigmaDelta_step0(Vtm1, Mtm1, Itm1, nrl, nrh, ncl, nch);
     
     for(i=1;i<=NBIMAGES;i++){
-            sprintf(nameload,"hall/hall000%03d.pgm",i);
+            sprintf(nameload,"car3/car_3%03d.pgm",i);
             I=LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
             CHRONO(routine_SigmaDelta_1step_opti(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch),cycles);
             totalcy += cycles;
-            sprintf(namesave,"testOptiSD/hall000%03d.pgm",i);
+            sprintf(namesave,"testOptiSD/car_3%03d.pgm",i);
             SavePGM_ui8matrix(Et,nrl,nrh,ncl,nch,namesave);
             //On doit copier M dan Mtm1, V dans Vtm1 et I dans Itm1
             

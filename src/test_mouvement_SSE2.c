@@ -11,7 +11,7 @@
 #include "mouvement_SSE2.h"
 #include "test_mouvement_SSE2.h"
 
-#define NBIMAGES 299
+#define NBIMAGES 199
 #define BORD 2
 #define VMIN 20
 #define VMAX 255
@@ -93,7 +93,7 @@ void test_routineFD_SSE(int seuil)
     //vuint8 vseuil=init_vuint8(seuil);
 
 
-    sprintf(nameload1,"hall/hall000000.pgm");
+    sprintf(nameload1,"car3/car_3000.pgm");
     
     
     uint8 **Itm1 = LoadPGM_ui8matrix(nameload1,&nrl,&nrh,&ncl,&nch);
@@ -113,7 +113,7 @@ void test_routineFD_SSE(int seuil)
     int i;
    
     for(i=1;i<=NBIMAGES;i++){
-        sprintf(nameload2,"hall/hall000%03d.pgm",i);
+        sprintf(nameload2,"car3/car_3%03d.pgm",i);
         
         a = LoadPGM_ui8matrix(nameload2,&nrl,&nrh,&ncl,&nch);
         //TODO convertir uint** en vuint** (m)
@@ -126,7 +126,7 @@ void test_routineFD_SSE(int seuil)
         vuint_to_uint(out, m, n1, n2, n3, n4);
 
         
-        sprintf(namesave,"testFD_SSE/hall000%03d.pgm",i);
+        sprintf(namesave,"testFD_SSE/car_3%03d.pgm",i);
         SavePGM_ui8matrix(out,nrl,nrh,ncl,nch,namesave);
         dup_vui8matrix(It, n1, n2, n3, n4, I0);
     }
@@ -163,7 +163,7 @@ void test_routineFD_SSE_OMP(int seuil)
     //vuint8 vseuil=init_vuint8(seuil);
 
 
-    sprintf(nameload1,"hall/hall000000.pgm");
+    sprintf(nameload1,"car3/car_3000.pgm");
     
     
     uint8 **Itm1 = LoadPGM_ui8matrix(nameload1,&nrl,&nrh,&ncl,&nch);
@@ -183,7 +183,7 @@ void test_routineFD_SSE_OMP(int seuil)
     int i;
    
     for(i=1;i<=NBIMAGES;i++){
-        sprintf(nameload2,"hall/hall000%03d.pgm",i);
+        sprintf(nameload2,"car3/car_3%03d.pgm",i);
         
         a = LoadPGM_ui8matrix(nameload2,&nrl,&nrh,&ncl,&nch);
         //TODO convertir uint** en vuint** (m)
@@ -196,7 +196,7 @@ void test_routineFD_SSE_OMP(int seuil)
         vuint_to_uint(out, m, n1, n2, n3, n4);
 
         
-        sprintf(namesave,"testFD_SSE_OMP/hall000%03d.pgm",i);
+        sprintf(namesave,"testFD_SSE_OMP/car_3%03d.pgm",i);
         SavePGM_ui8matrix(out,nrl,nrh,ncl,nch,namesave);
         dup_vui8matrix(It, n1, n2, n3, n4, I0);
     }
@@ -264,12 +264,12 @@ void test_routineSD_SSE()
 
     int n1, n2, n3, n4;
     long nrl, nrh, ncl, nch;
-    char nameload[100];     //"hall/hall000..";
+    char nameload[100];     //"car3/car_3..";
     char namesave[100];     //"testSD/SD...";
     int i;
     s2v(nrl, nrh, ncl, nch, card_vuint8(), &n1, &n2, &n3, &n4);
 
-    sprintf(nameload,"hall/hall000000.pgm");
+    sprintf(nameload,"car3/car_3000.pgm");
     
     uint8 **Itm1 = LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
     s2v(nrl, nrh, ncl, nch, card_vuint8(), &n1, &n2, &n3, &n4);
@@ -299,7 +299,7 @@ void test_routineSD_SSE()
     
     for(i=1;i<=NBIMAGES;i++){
         
-        sprintf(nameload,"hall/hall000%03d.pgm",i);
+        sprintf(nameload,"car3/car_3%03d.pgm",i);
         a=LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
         
         
@@ -310,7 +310,7 @@ void test_routineSD_SSE()
         CHRONO(SigmaDelta_1step_SSE2(V, Vtm1, M, Mtm1, Iv, Et, n1, n2, n3, n4),cycles);
         totalcy += cycles;
         
-        sprintf(namesave,"testSD_SSE/hall000%03d.pgm",i);
+        sprintf(namesave,"testSD_SSE/car_3%03d.pgm",i);
         
         vuint_to_uint(res, Et, n1, n2, n3, n4);
         
@@ -361,12 +361,12 @@ void test_routineSD_SSE_OMP()
 
     int n1, n2, n3, n4;
     long nrl, nrh, ncl, nch;
-    char nameload[100];     //"hall/hall000..";
+    char nameload[100];     //"car3/car_3..";
     char namesave[100];     //"testSD/SD...";
     int i;
     s2v(nrl, nrh, ncl, nch, card_vuint8(), &n1, &n2, &n3, &n4);
 
-    sprintf(nameload,"hall/hall000000.pgm");
+    sprintf(nameload,"car3/car_3000.pgm");
     
     uint8 **Itm1 = LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
     s2v(nrl, nrh, ncl, nch, card_vuint8(), &n1, &n2, &n3, &n4);
@@ -396,7 +396,7 @@ void test_routineSD_SSE_OMP()
     
     for(i=1;i<=NBIMAGES;i++){
         
-        sprintf(nameload,"hall/hall000%03d.pgm",i);
+        sprintf(nameload,"car3/car_3%03d.pgm",i);
         a=LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
         
         
@@ -407,7 +407,7 @@ void test_routineSD_SSE_OMP()
         CHRONO(SigmaDelta_1step_SSE2_OMP(V, Vtm1, M, Mtm1, Iv, Et, n1, n2, n3, n4),cycles);
         totalcy += cycles;
         
-        sprintf(namesave,"testSD_SSE_OMP/hall000%03d.pgm",i);
+        sprintf(namesave,"testSD_SSE_OMP/car_3%03d.pgm",i);
         
         vuint_to_uint(res, Et, n1, n2, n3, n4);
         

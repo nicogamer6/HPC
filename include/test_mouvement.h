@@ -6,7 +6,7 @@
 #include "nrdef.h"
 #include "string.h"
 
-//#define NBIMAGES 299
+//#define NBIMAGES 199
 //#define SEUILFD 20
 
 
