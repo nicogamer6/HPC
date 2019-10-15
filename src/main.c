@@ -27,6 +27,7 @@ int main()
     test_routineFD(SEUILFD);                // Dossier "testFD"
     test_routineSD();                       // Dossier "testSD"
     test_routineSD_opti();                  // Dossier "testOptiSD"
+    test_routineSD_soa();                   // Dossier "testOptiSD_SoA"
 
     printf("\n");
     ///////////////////////////////////////////////////////////////////////////

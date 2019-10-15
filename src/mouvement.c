@@ -191,6 +191,7 @@ void routine_SigmaDelta_1step_opti(uint8 **V, uint8 **Vtm1, uint8 **M, uint8 **M
     {
         for(j=ncl;j<=nch;j++)
         {
+            
             //Step 1 Estimation
             if(Mtm1[i][j] < I[i][j])
                 a = Mtm1[i][j]+1;
@@ -224,6 +225,74 @@ void routine_SigmaDelta_1step_opti(uint8 **V, uint8 **Vtm1, uint8 **M, uint8 **M
         }
     }
 }
+
+
+
+
+void routine_SigmaDelta_1step_soa(SoA Vm, uint8 **Vtm1, uint8 **M, uint8 **Mtm1, uint8 **Et, long nrl, long nrh, long ncl, long nch)
+{
+    int i,j;
+    uint8 **Ot=ui8matrix(nrl,nrh,ncl,nch);
+    
+    uint8 n = (uint8) N;
+    uint8 vmax = (uint8) VMAX;
+    uint8 vmin = (uint8) VMIN;
+    uint8 a = 0;
+    uint8 b = 0;
+    uint8 c = 0;
+    
+    //STEP 0
+    for(i = nrl; i<=nrh;i++)
+    {
+        for(j=ncl;j<=nch;j++)
+        {
+            Mtm1[i][j] =  Vm.p1[i][j];
+            Vtm1[i][j] = vmin;
+        }
+    
+    }
+    
+    //STEP 1
+    for(i = nrl; i<=nrh;i++)
+    {
+        for(j=ncl;j<=nch;j++)
+        {
+            //Step 1 Estimation
+            if(Mtm1[i][j] < Vm.p2[i][j])
+                a = Mtm1[i][j]+1;
+            else if(Mtm1[i][j] > Vm.p2[i][j])
+                a = Mtm1[i][j]-1;
+            else a = Mtm1[i][j];
+    
+            M[i][j] = a;
+            
+            //Step 2 Difference Computation
+            Ot[i][j]=abs(M[i][j]-Vm.p2[i][j]);
+    
+            //Step 3 Update and clamping
+            if(Vtm1[i][j] < (n * Ot[i][j]))
+                b = Vtm1[i][j]+1;
+            else if(Vtm1[i][j] > (n * Ot[i][j]))
+                b = Vtm1[i][j]-1;
+            else b = Vtm1[i][j];
+            //Clamp to [VMIN,VMAX]
+            b = max(min(b,vmax),vmin);
+    
+            Vtm1[i][j] = b;
+            
+            //Step 4 Estimation
+            if(Ot[i][j] < Vtm1[i][j])
+                c = 0;
+            else c = 255; //ou 1
+            
+            Et[i][j] = c;
+            
+        }
+    }
+}
+
+
+
 
 
 

@@ -24,6 +24,14 @@ extern "C" {
 extern long nr_end;
 
 
+//Structure pour entrelacement mémoire (SoA)
+typedef struct {
+    uint8 **p1,**p2
+} SoA;
+
+
+
+
 void generate_filename_k_ndigit                 (            char *filename, int k, int ndigit,                         char *complete_filename);
 void generate_filename_k_ndigit_extension       (            char *filename, int k, int ndigit,        char *extension, char *complete_filename);
 void generate_path_filename                     (char *path, char *filename,                                            char *complete_filename);

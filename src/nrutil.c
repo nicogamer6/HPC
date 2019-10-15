@@ -22,6 +22,7 @@
 
 long nr_end = NR_END;
 
+
 /* ------------------------- */
 void nrerror(char error_text[])
 /* ------------------------- */
