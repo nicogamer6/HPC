@@ -6,7 +6,13 @@
 #ifndef __NR_DEF_H__
 #define __NR_DEF_H__
 
+#include <stdint.h>
+
+#define NBBITS 64
+
 typedef unsigned char byte;
+typedef uint32_t ulong32;
+typedef uint64_t ulong64;
 
 typedef          char  int8;
 typedef unsigned char uint8;

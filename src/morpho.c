@@ -5,7 +5,7 @@
 #include "nrdef.h"
 #include "morpho.h"
 
-
+//#define NBBITS 32
 #define BORD 2
 
 //Pour chaque pixel on va comparer la valeur du voisinnage du pixel avec 255
@@ -26,6 +26,17 @@ void erosion3(uint8 ** Et, uint8 **EtE, long nrl, long nrh, long ncl, long nch){
         }
     }
     //printf("nrl,nrh %d %d",ncl,nch);
+}
+
+
+void erosion3_bin(ulong64 ** Et, ulong64 **EtE, long nrl, long nrh, long ncl, long nch){
+	int i,j;
+	ulong64 res;
+	for(i=nrl;i<=nrh;i++){
+		for(j=ncl;j<=nch;j++){
+
+		}
+	}
 }
 
 
@@ -216,6 +227,15 @@ void dilatation3(uint8 ** Et, uint8 **EtD, long nrl, long nrh, long ncl, long nc
     }
 }
 
+void dilatation3_bin(ulong64 ** Et, ulong64 **EtD, long nrl, long nrh, long ncl, long nch){
+	int i,j;
+	ulong64 res;
+	for(i=nrl;i<=nrh;i++){
+		for(j=ncl;j<=nch;j++){
+
+		}
+	}
+}
 
 void dilatation3_opti_lu_rr(uint8 ** Et, uint8 **EtD, long nrl, long nrh, long ncl, long nch){
     int i = nrl, j=ncl; // pour tous les pixels
@@ -733,6 +753,11 @@ void ouverture3_pipe(uint8 ** Et, uint8 ** tmp, uint8 **Etout, long nrl, long nr
 	dilatation3_column(tmp, Etout, j+1, nrl, nrh, ncl, nch); //Dernière colonne
 }
 
+void ouverture3_bin(ulong64 ** Et, ulong64 ** tmp, ulong64 **Etout, long nrl, long nrh, long ncl, long nch){
+	erosion3_bin(Et, tmp, nrl, nrh, ncl, nch);
+	dilatation3_bin(tmp, Etout, nrl, nrh, ncl, nch);
+}
+
 void fermeture3(uint8 ** Et, uint8 **Etout, long nrl, long nrh, long ncl, long nch){
     uint8 ** tmp = ui8matrix(nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
     dilatation3(Et, tmp, nrl, nrh, ncl, nch);
@@ -761,8 +786,10 @@ void fermeture3_pipe(uint8 ** Et, uint8 ** tmp, uint8 **Etout, long nrl, long nr
 
 }
 
-
-
+void fermeture3_bin(ulong64 ** Et, ulong64 ** tmp, ulong64 **Etout, long nrl, long nrh, long ncl, long nch){
+	dilatation3_bin(Et, tmp, nrl, nrh, ncl, nch);
+	erosion3_bin(tmp, Etout, nrl, nrh, ncl, nch);
+}
 
 
 

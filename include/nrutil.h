@@ -26,10 +26,13 @@ extern long nr_end;
 
 //Structure pour entrelacement mémoire (SoA)
 typedef struct {
-    uint8 **p1,**p2
+    uint8 **p1,**p2;
 } SoA;
 
-
+//Structure pour entrelacement mémoire (AoS)
+typedef struct {
+    uint8 p1,p2;
+} AoS;
 
 
 void generate_filename_k_ndigit                 (            char *filename, int k, int ndigit,                         char *complete_filename);
@@ -58,6 +61,8 @@ sint32** qi32matrix(long nrl, long nrh, long ncl, long nch);
 float32** f32matrix(long nrl, long nrh, long ncl, long nch);
 float64** f64matrix(long nrl, long nrh, long ncl, long nch);
 
+ulong64** ui64matrix(long nrl, long nrh, long ncl, long nch);
+
     
 void free_ui8matrix(uint8   **m, long nrl, long nrh, long ncl, long nch);
 void free_si8matrix(sint8   **m, long nrl, long nrh, long ncl, long nch);
@@ -67,6 +72,8 @@ void free_ui32matrix(uint32 **m, long nrl, long nrh, long ncl, long nch);
 void free_si32matrix(sint32 **m, long nrl, long nrh, long ncl, long nch);
 void free_f32matrix(float32 **m, long nrl, long nrh, long ncl, long nch);
 void free_f64matrix(float64 **m, long nrl, long nrh, long ncl, long nch);
+
+void free_ui64matrix(ulong64 **m, long nrl, long nrh, long ncl, long nch);
 
 /* ------------ */
 /* --- zero --- */
