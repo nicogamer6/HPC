@@ -5,7 +5,7 @@
 #include "nrdef.h"
 #include "morpho.h"
 
-//#define NBBITS 32
+//#define NBBITS 64
 #define BORD 2
 
 //Pour chaque pixel on va comparer la valeur du voisinnage du pixel avec 255

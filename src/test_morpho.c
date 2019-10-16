@@ -8,7 +8,7 @@
 #include "mymacro.h"
 
 //#define SEUILFD 20
-//#define NBBITS 32
+//#define NBBITS 64
 #define NBIMAGES 199
 #define BORD 2
 
@@ -153,6 +153,14 @@ void test_Etapemorpho(void){
 	convBinToChar(Etbin,m2,nrl,nrh,ncl,nch);
 	SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testfermbin3.pgm");
 
+
+
+	for(i=nrl-BORD;i<=nrh+BORD;i++){
+		for(j=(ncl/NBBITS-BORD);j<=(nch/NBBITS)+BORD;j++){
+			printf("%lu  ",Etbin[i][0]);
+		}
+		printf("\n");
+	}
 
     free_ui8matrix(bord,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
     free_ui8matrix(m,nrl,nrh,ncl,nch);
