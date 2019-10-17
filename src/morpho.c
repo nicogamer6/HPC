@@ -32,9 +32,20 @@ void erosion3(uint8 ** Et, uint8 **EtE, long nrl, long nrh, long ncl, long nch){
 void erosion3_bin(ulong64 ** Et, ulong64 **EtE, long nrl, long nrh, long ncl, long nch){
 	int i,j;
 	ulong64 res;
+	ulong64 leftc, rightc; // Colonne gauche et droite i.e ulong64 avant et après
+
+
 	for(i=nrl;i<=nrh;i++){
 		for(j=ncl;j<=nch;j++){
+			res = 0;
+			res = ~res;
+			res &= (Et[i-1][j] & Et[i][j] & Et[i+1][j]);
 
+			res &= (res>>1) & (res <<1);
+
+			//res &=  rightc & leftc;
+
+			EtE[i][j] = res;
 		}
 	}
 }
@@ -230,9 +241,16 @@ void dilatation3(uint8 ** Et, uint8 **EtD, long nrl, long nrh, long ncl, long nc
 void dilatation3_bin(ulong64 ** Et, ulong64 **EtD, long nrl, long nrh, long ncl, long nch){
 	int i,j;
 	ulong64 res;
+	ulong64 leftc, rightc; // Colonne gauche et droite i.e ulong64 avant et après
 	for(i=nrl;i<=nrh;i++){
 		for(j=ncl;j<=nch;j++){
+			res = 0;
+			res |= (Et[i-1][j] | Et[i][j] | Et[i+1][j]);
 
+
+			res |= (res>>1) | (res <<1);
+
+			EtD[i][j] = res;
 		}
 	}
 }

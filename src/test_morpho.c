@@ -142,25 +142,25 @@ void test_Etapemorpho(void){
 
 
     convCharToBin(bord,Etbin,nrl,nrh,ncl,nch);
-    //ouverture3_bin(Etbin,tmpbin,Etoutbin,nrl,nrh,(ncl/NBBITS),(nch/NBBITS));
-    convBinToChar(Etbin,m2,nrl,nrh,ncl,nch);
+    ouverture3_bin(Etbin,tmpbin,Etoutbin,nrl,nrh,(ncl/NBBITS),(nch/NBBITS));
+    convBinToChar(Etoutbin,m2,nrl,nrh,ncl,nch);
 	SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testouvbin3.pgm");
 	//printf("%lu\n",Etbin[1][0]);
-	//printf("%lu",Etbin[2][0]);
+	//printf("%lu",Etbin[1][-1]);
+	//printf("%lu",Etbin[1][-2]);
 
 	convCharToBin(bord,Etbin,nrl,nrh,ncl,nch);
-	//fermeture3_bin(Etbin,tmpbin,Etoutbin,nrl,nrh,(ncl/NBBITS),(nch/NBBITS));
-	convBinToChar(Etbin,m2,nrl,nrh,ncl,nch);
+	fermeture3_bin(Etbin,tmpbin,Etoutbin,nrl,nrh,(ncl/NBBITS),(nch/NBBITS));
+	convBinToChar(Etoutbin,m2,nrl,nrh,ncl,nch);
 	SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testfermbin3.pgm");
 
 
-
-	for(i=nrl-BORD;i<=nrh+BORD;i++){
+	/*for(i=nrl-BORD;i<=nrh+BORD;i++){
 		for(j=(ncl/NBBITS-BORD);j<=(nch/NBBITS)+BORD;j++){
 			printf("%lu  ",Etbin[i][0]);
 		}
 		printf("\n");
-	}
+	}*/
 
     free_ui8matrix(bord,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
     free_ui8matrix(m,nrl,nrh,ncl,nch);
