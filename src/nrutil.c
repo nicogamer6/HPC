@@ -339,7 +339,8 @@ float32** f32matrix(long nrl, long nrh, long ncl, long nch)
   return m;
 }
 /* --------------------------------------------------- */
-ulong64** ui64matrix(long nrl, long nrh, long ncl, long nch)
+
+ulong64** long64matrix(long nrl, long nrh, long ncl, long nch)
 /* --------------------------------------------------- */
 /* allocate an uint32 matrix with subscript range m[nrl..nrh][ncl..nch] */
 {
@@ -348,25 +349,54 @@ ulong64** ui64matrix(long nrl, long nrh, long ncl, long nch)
 
   /* allocate pointers to rows */
   m=(ulong64 **) malloc((size_t)((nrow+NR_END)*sizeof(ulong64*)));
-  if (!m) nrerror("allocation failure 1 in ui16matrix()");
+  if (!m) nrerror("allocation failure 1 in long64matrix()");
   m += NR_END;
   m -= nrl;
 
   /* allocate rows and set pointers to them */
   m[nrl]=(ulong64 *) malloc((size_t)((nrow*ncol+NR_END)*sizeof(ulong64)));
-  if (!m[nrl]) nrerror("allocation failure 2 in ui16matrix()");
+  if (!m[nrl]) nrerror("allocation failure 2 in long64matrix()");
   m[nrl] += NR_END;
   m[nrl] -= ncl;
 
   for(i=nrl+1;i<=nrh;i++) m[i]=m[i-1]+ncol;
+  	int j  ;
+  	for(i=nrl;i<=nrh;i++){
+  		for(j=ncl;j<=nch;j++){
+  			m[i][j]=0;
+  		}
+  	}
+
+  /* return pointer to array of pointers to rows */
+  return m;
+}
+/* ----------------------------------------------------- */
+ulong32** long32matrix(long nrl, long nrh, long ncl, long nch)
+/* --------------------------------------------------- */
+/* allocate an uint32 matrix with subscript range m[nrl..nrh][ncl..nch] */
+{
+  long i, nrow=nrh-nrl+1,ncol=nch-ncl+1;
+  ulong32 **m;
+
+  /* allocate pointers to rows */
+  m=(ulong32 **) malloc((size_t)((nrow+NR_END)*sizeof(ulong32*)));
+  if (!m) nrerror("allocation failure 1 in long32matrix()");
+  m += NR_END;
+  m -= nrl;
+
+  /* allocate rows and set pointers to them */
+  m[nrl]=(ulong32 *) malloc((size_t)((nrow*ncol+NR_END)*sizeof(ulong32)));
+  if (!m[nrl]) nrerror("allocation failure 2 in long32matrix()");
+  m[nrl] += NR_END;
+  m[nrl] -= ncl;
 
   for(i=nrl+1;i<=nrh;i++) m[i]=m[i-1]+ncol;
-  int j  ;
-  for(i=nrl;i<=nrh;i++){
-	  for(j=ncl;j<=nch;j++){
-		  m[i][j]=0;
-	  }
-  }
+  	int j  ;
+  	for(i=nrl;i<=nrh;i++){
+  		for(j=ncl;j<=nch;j++){
+  			m[i][j]=0;
+  		}
+  	}
 
   /* return pointer to array of pointers to rows */
   return m;
@@ -507,7 +537,14 @@ void free_rgb8matrix(rgb8 **m, long nrl, long nrh, long ncl, long nch)
   free((FREE_ARG) (m+nrl-NR_END));
 }
 /* ------------------------------------------------------------------ */
-void free_ui64matrix(ulong64 **m, long nrl, long nrh, long ncl, long nch)
+void free_long64matrix(ulong64 **m, long nrl, long nrh, long ncl, long nch)
+/* ------------------------------------------------------------------ */
+{
+  free((FREE_ARG) (m[nrl]+ncl-NR_END));
+  free((FREE_ARG) (m+nrl-NR_END));
+}
+/* ------------------------------------------------------------------ */
+void free_long32matrix(ulong32 **m, long nrl, long nrh, long ncl, long nch)
 /* ------------------------------------------------------------------ */
 {
   free((FREE_ARG) (m[nrl]+ncl-NR_END));

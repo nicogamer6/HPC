@@ -43,8 +43,6 @@ void erosion3_bin(ulong64 ** Et, ulong64 **EtE, long nrl, long nrh, long ncl, lo
 
 			res &= (res>>1) & (res <<1);
 
-			//res &=  rightc & leftc;
-
 			EtE[i][j] = res;
 		}
 	}
@@ -246,7 +244,6 @@ void dilatation3_bin(ulong64 ** Et, ulong64 **EtD, long nrl, long nrh, long ncl,
 		for(j=ncl;j<=nch;j++){
 			res = 0;
 			res |= (Et[i-1][j] | Et[i][j] | Et[i+1][j]);
-
 
 			res |= (res>>1) | (res <<1);
 
