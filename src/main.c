@@ -16,6 +16,46 @@
 
 #define NB 2
 #define SEUILFD 20
+#define BORD 2
+
+#define NBIMAGES 199
+
+
+void diffImages(char dossier1[], char dossier2[]){
+    long nrl,nrh,ncl,nch;
+    int k;
+    int i,j;
+    int cpt=0;
+    char nameload1[100], nameload2[100];
+
+    uint8 **It0 = LoadPGM_ui8matrix("car3/car_3000.pgm",&nrl,&nrh,&ncl,&nch);
+	uint8 **It1 = ui8matrix(nrl,nrh,ncl,nch);
+
+	printf("\nDIFF entre %s et %s \n\n", dossier1, dossier2);
+
+    for(k=1; k<=NBIMAGES;k++){
+    	cpt=0;
+        sprintf(nameload1,"%s/car_3%03d.pgm",dossier1, k);
+        sprintf(nameload2,"%s/car_3%03d.pgm",dossier2, k);
+
+	    It0=LoadPGM_ui8matrix(nameload1,&nrl,&nrh,&ncl,&nch);
+	    It1=LoadPGM_ui8matrix(nameload2,&nrl,&nrh,&ncl,&nch);
+
+        for(i=nrl;i<=nrh;i++){
+            for(j=ncl;j<=nch;j++){
+            	if(It0[i][j] != It1[i][j]){
+            		cpt++;
+            		printf("Pixel different : i,j = [%d][%d], Image n° %d\t",i,j,k);
+            	}
+            }
+        }
+        printf("\nImage n° %d : pixel diff = %d\n\n",k,cpt);
+    }
+
+    free_ui8matrix(It0,nrl,nrh,ncl,nch);
+	free_ui8matrix(It1,nrl,nrh,ncl,nch);
+}
+
 
 
 int main()
@@ -106,7 +146,7 @@ int main()
     //test_EtapemorphoSSE();                  // Dossier "testmorphoSSE"
 
 
-
+    diffImages("testSDmorphoO", "testSDmorphoOpipe");
 
 
 
