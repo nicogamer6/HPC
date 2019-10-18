@@ -37,18 +37,17 @@ void erosion3_bin(ulong64 ** Et, ulong64 **EtE, long nrl, long nrh, long ncl, lo
 	for(i=nrl;i<=nrh;i++){
 		for(j=ncl;j<=nch;j++){
 			res = 0;
-			res = ~res;
-			res &= (Et[i-1][j] & Et[i][j] & Et[i+1][j]);
+			res = ~res; //Passer tout à 1
+			res &= (Et[i-1][j] & Et[i][j] & Et[i+1][j]);	// 3 premiers ulong64 pour les 3 1ères lignes
 
-			binleft = (Et[i-1][j-1] & Et[i][j-1] & Et[i+1][j-1]);
+			binleft = (Et[i-1][j-1] & Et[i][j-1] & Et[i+1][j-1]);	// 3 ulong64 de gauche pour faire la morpho du dernier pixel du ulong64 res (bit poid fort)
 			binleft = (res << 1) | (binleft >> (NBBITS-1) & 1);
 
-			binright = (Et[i-1][j+1] & Et[i][j+1] & Et[i+1][j+1]);
+			binright = (Et[i-1][j+1] & Et[i][j+1] & Et[i+1][j+1]);	// 3 ulong64 de droite pour faire la morpho du premier pixel du ulong64 res (bit poid faible)
 			binright = ((res >> 1) & ~(1<<(NBBITS-1))) | (binright & 1 << (NBBITS-1));
 
-			res &= binright & binleft;
 
-			EtE[i][j] = res;
+			EtE[i][j] = (res & binright & binleft);
 		}
 	}
 }
@@ -249,17 +248,16 @@ void dilatation3_bin(ulong64 ** Et, ulong64 **EtD, long nrl, long nrh, long ncl,
 	for(i=nrl;i<=nrh;i++){
 		for(j=ncl;j<=nch;j++){
 			res = 0;
-			res |= (Et[i-1][j] | Et[i][j] | Et[i+1][j]);
+			res |= (Et[i-1][j] | Et[i][j] | Et[i+1][j]); // 3 premiers ulong64 pour les 3 1ères lignes
 
-			binleft = (Et[i-1][j-1] | Et[i][j-1] | Et[i+1][j-1]);
+			binleft = (Et[i-1][j-1] | Et[i][j-1] | Et[i+1][j-1]); // 3 ulong64 de gauche pour faire la morpho du dernier pixel du ulong64 res (bit poid fort)
 			binleft = (res << 1) | (binleft >> (NBBITS-1) & 1);
 
-			binright = (Et[i-1][j+1] | Et[i][j+1] | Et[i+1][j+1]);
+			binright = (Et[i-1][j+1] | Et[i][j+1] | Et[i+1][j+1]); // 3 ulong64 de droite pour faire la morpho du premier pixel du ulong64 res (bit poid faible)
 			binright = ((res >> 1)& ~(1<<(NBBITS-1))) | (binright & 1 << (NBBITS-1));
 
-			res |= binright | binleft;
 
-			EtD[i][j] = res;
+			EtD[i][j] = (res | binright | binleft);
 		}
 	}
 }
