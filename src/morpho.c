@@ -32,8 +32,7 @@ void erosion3(uint8 ** Et, uint8 **EtE, long nrl, long nrh, long ncl, long nch){
 void erosion3_bin(ulong64 ** Et, ulong64 **EtE, long nrl, long nrh, long ncl, long nch){
 	int i,j;
 	ulong64 res;
-	ulong64 leftc, rightc; // Colonne gauche et droite i.e ulong64 avant et après
-
+	ulong64 binleft, binright; // Colonne gauche et droite i.e ulong64 avant et après
 
 	for(i=nrl;i<=nrh;i++){
 		for(j=ncl;j<=nch;j++){
@@ -41,9 +40,13 @@ void erosion3_bin(ulong64 ** Et, ulong64 **EtE, long nrl, long nrh, long ncl, lo
 			res = ~res;
 			res &= (Et[i-1][j] & Et[i][j] & Et[i+1][j]);
 
-			res &= (res>>1) & (res <<1);
+			binleft = (Et[i-1][j-1] & Et[i][j-1] & Et[i+1][j-1]);
+			binleft = (res << 1) | (binleft >> (NBBITS-1) & 1);
 
-			//Manque la gestion des fin de ulong64 pour faire l'ero avec les points du ulong64 suivants
+			binright = (Et[i-1][j+1] & Et[i][j+1] & Et[i+1][j+1]);
+			binright = ((res >> 1) & ~(1<<(NBBITS-1))) | (binright & 1 << (NBBITS-1));
+
+			res &= binright & binleft;
 
 			EtE[i][j] = res;
 		}
@@ -241,15 +244,20 @@ void dilatation3(uint8 ** Et, uint8 **EtD, long nrl, long nrh, long ncl, long nc
 void dilatation3_bin(ulong64 ** Et, ulong64 **EtD, long nrl, long nrh, long ncl, long nch){
 	int i,j;
 	ulong64 res;
-	ulong64 leftc, rightc; // Colonne gauche et droite i.e ulong64 avant et après
+	ulong64 binleft, binright; // Colonne gauche et droite i.e ulong64 avant et après
+
 	for(i=nrl;i<=nrh;i++){
 		for(j=ncl;j<=nch;j++){
 			res = 0;
 			res |= (Et[i-1][j] | Et[i][j] | Et[i+1][j]);
 
-			res |= (res>>1) | (res <<1);
+			binleft = (Et[i-1][j-1] | Et[i][j-1] | Et[i+1][j-1]);
+			binleft = (res << 1) | (binleft >> (NBBITS-1) & 1);
 
-			//Manque la gestion des fin de ulong64 pour faire l'ero avec les points du ulong64 suivants
+			binright = (Et[i-1][j+1] | Et[i][j+1] | Et[i+1][j+1]);
+			binright = ((res >> 1)& ~(1<<(NBBITS-1))) | (binright & 1 << (NBBITS-1));
+
+			res |= binright | binleft;
 
 			EtD[i][j] = res;
 		}

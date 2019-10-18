@@ -146,7 +146,7 @@ int main()
     //test_EtapemorphoSSE();                  // Dossier "testmorphoSSE"
 
 
-    diffImages("testSDmorphoO", "testSDmorphoOpipe");
+    diffImages("testSDmorphoObin", "testSDmorphoO");
 
 
 
