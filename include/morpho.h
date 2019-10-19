@@ -15,6 +15,9 @@ void dilatation3_column(uint8 ** Et, uint8 **EtD, int j, long nrl, long nrh, lon
 void erosion3_bin(ulong64 ** Et, ulong64 **EtE, long nrl, long nrh, long ncl, long nch);
 void dilatation3_bin(ulong64 ** Et, ulong64 **EtD, long nrl, long nrh, long ncl, long nch);
 
+void erosion3_line_bin(ulong64 ** Et, ulong64 **EtE, int i, long nrl, long nrh, long ncl, long nch);
+void dilatation3_line_bin(ulong64 ** Et, ulong64 **EtD, int i, long nrl, long nrh, long ncl, long nch);
+
 void ouverture3(uint8 ** Et, uint8 **Etout, long nrl, long nrh, long ncl, long nch);
 void ouverture3_opti(uint8 ** Et, uint8 **Etout, long nrl, long nrh, long ncl, long nch);
 void ouverture3_pipe(uint8 ** Et, uint8 ** tmp, uint8 **Etout, long nrl, long nrh, long ncl, long nch);
@@ -24,6 +27,9 @@ void fermeture3_pipe(uint8 ** Et, uint8 ** tmp, uint8 **Etout, long nrl, long nr
 
 void ouverture3_bin(ulong64 ** Et, ulong64 ** tmp, ulong64 **Etout, long nrl, long nrh, long ncl, long nch);
 void fermeture3_bin(ulong64 ** Et, ulong64 ** tmp, ulong64 **Etout, long nrl, long nrh, long ncl, long nch);
+
+void ouverture3_pipe_bin(ulong64 ** Et, ulong64 ** tmp, ulong64 **Etout, long nrl, long nrh, long ncl, long nch);
+void fermeture3_pipe_bin(ulong64 ** Et, ulong64 ** tmp, ulong64 **Etout, long nrl, long nrh, long ncl, long nch);
 
 
 void erosion5(uint8 ** Et, uint8 **EtE, long nrl, long nrh, long ncl, long nch);

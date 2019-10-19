@@ -41,10 +41,10 @@ void erosion3_bin(ulong64 ** Et, ulong64 **EtE, long nrl, long nrh, long ncl, lo
 			res &= (Et[i-1][j] & Et[i][j] & Et[i+1][j]);	// 3 premiers ulong64 pour les 3 1ères lignes
 
 			binleft = (Et[i-1][j-1] & Et[i][j-1] & Et[i+1][j-1]);	// 3 ulong64 de gauche pour faire la morpho du dernier pixel du ulong64 res (bit poid fort)
-			binleft = (res << 1) | (binleft >> (NBBITS-1) & 1);
+			binleft = (res << 1) | (binleft >> (NBBITS-1) & 1);	// pour ajouter les 3 pixels du ulong de gauche pour faire l'erosion
 
 			binright = (Et[i-1][j+1] & Et[i][j+1] & Et[i+1][j+1]);	// 3 ulong64 de droite pour faire la morpho du premier pixel du ulong64 res (bit poid faible)
-			binright = ((res >> 1) & ~(1<<(NBBITS-1))) | (binright & 1 << (NBBITS-1));
+			binright = ((res >> 1) & ~(1<<(NBBITS-1))) | (binright & 1) << (NBBITS-1); // pour ajouter les 3 pixels du ulong de droite pour faire l'erosion
 
 
 			EtE[i][j] = (res & binright & binleft);
@@ -251,10 +251,10 @@ void dilatation3_bin(ulong64 ** Et, ulong64 **EtD, long nrl, long nrh, long ncl,
 			res |= (Et[i-1][j] | Et[i][j] | Et[i+1][j]); // 3 premiers ulong64 pour les 3 1ères lignes
 
 			binleft = (Et[i-1][j-1] | Et[i][j-1] | Et[i+1][j-1]); // 3 ulong64 de gauche pour faire la morpho du dernier pixel du ulong64 res (bit poid fort)
-			binleft = (res << 1) | (binleft >> (NBBITS-1) & 1);
+			binleft = (res << 1) | (binleft >> (NBBITS-1) & 1);	// pour ajouter les 3 pixels du ulong de gauche pour faire la dilatation
 
 			binright = (Et[i-1][j+1] | Et[i][j+1] | Et[i+1][j+1]); // 3 ulong64 de droite pour faire la morpho du premier pixel du ulong64 res (bit poid faible)
-			binright = ((res >> 1)& ~(1<<(NBBITS-1))) | (binright & 1 << (NBBITS-1));
+			binright = ((res >> 1)& ~(1<<(NBBITS-1))) | (binright & 1) << (NBBITS-1);	// pour ajouter les 3 pixels du ulong de droite pour faire la dilatation
 
 
 			EtD[i][j] = (res | binright | binleft);
@@ -818,6 +818,73 @@ void fermeture3_bin(ulong64 ** Et, ulong64 ** tmp, ulong64 **Etout, long nrl, lo
 
 
 
+void erosion3_line_bin(ulong64 ** Et, ulong64 **EtE, int i, long nrl, long nrh, long ncl, long nch){
+	int j;
+	ulong64 res;
+	ulong64 binleft, binright; // Colonne gauche et droite i.e ulong64 avant et après
+
+	for(j=ncl;j<=nch;j++){
+		res = 0;
+		res = ~res; //Passer tout à 1
+		res &= (Et[i-1][j] & Et[i][j] & Et[i+1][j]);	// 3 premiers ulong64 pour les 3 1ères lignes
+
+		binleft = (Et[i-1][j-1] & Et[i][j-1] & Et[i+1][j-1]);	// 3 ulong64 de gauche pour faire la morpho du dernier pixel du ulong64 res (bit poid fort)
+		binleft = (res << 1) | (binleft >> (NBBITS-1) & 1);	// pour ajouter les 3 pixels du ulong de gauche pour faire l'erosion
+
+		binright = (Et[i-1][j+1] & Et[i][j+1] & Et[i+1][j+1]);	// 3 ulong64 de droite pour faire la morpho du premier pixel du ulong64 res (bit poid faible)
+		binright = ((res >> 1) & ~(1<<(NBBITS-1))) | (binright & 1) << (NBBITS-1); // pour ajouter les 3 pixels du ulong de droite pour faire l'erosion
+
+
+		EtE[i][j] = (res & binright & binleft);
+	}
+
+}
+
+void dilatation3_line_bin(ulong64 ** Et, ulong64 **EtD, int i, long nrl, long nrh, long ncl, long nch){
+	int j;
+	ulong64 res;
+	ulong64 binleft, binright; // Colonne gauche et droite i.e ulong64 avant et après
+
+	for(j=ncl;j<=nch;j++){
+		res = 0;
+		res |= (Et[i-1][j] | Et[i][j] | Et[i+1][j]); // 3 premiers ulong64 pour les 3 1ères lignes
+
+		binleft = (Et[i-1][j-1] | Et[i][j-1] | Et[i+1][j-1]); // 3 ulong64 de gauche pour faire la morpho du dernier pixel du ulong64 res (bit poid fort)
+		binleft = (res << 1) | (binleft >> (NBBITS-1) & 1);	// pour ajouter les 3 pixels du ulong de gauche pour faire la dilatation
+
+		binright = (Et[i-1][j+1] | Et[i][j+1] | Et[i+1][j+1]); // 3 ulong64 de droite pour faire la morpho du premier pixel du ulong64 res (bit poid faible)
+		binright = ((res >> 1)& ~(1<<(NBBITS-1))) | (binright & 1) << (NBBITS-1);	// pour ajouter les 3 pixels du ulong de droite pour faire la dilatation
+
+
+		EtD[i][j] = (res | binright | binleft);
+	}
+
+}
+
+
+void ouverture3_pipe_bin(ulong64 ** Et, ulong64 ** tmp, ulong64 **Etout, long nrl, long nrh, long ncl, long nch){
+	int i=nrl, j=ncl;
+
+	erosion3_line_bin(Et, tmp, i, nrl, nrh, ncl, nch); //1ère ligne
+
+	for(i=nrl;i<=nrh-1;i++){
+		erosion3_line_bin(Et, tmp, i+1, nrl, nrh, ncl, nch);
+		dilatation3_line_bin(tmp, Etout, i, nrl, nrh, ncl, nch);
+	}
+	dilatation3_line_bin(tmp, Etout, i+1, nrl, nrh, ncl, nch); //Dernière ligne
+}
+
+void fermeture3_pipe_bin(ulong64 ** Et, ulong64 ** tmp, ulong64 **Etout, long nrl, long nrh, long ncl, long nch){
+	int i=nrl, j=ncl;
+
+	dilatation3_line_bin(Et, tmp, i, nrl, nrh, ncl, nch); //1ère ligne
+
+	for(i=nrl;i<=nrh-1;i++){
+		dilatation3_line_bin(Et, tmp, i+1, nrl, nrh, ncl, nch);
+		erosion3_line_bin(tmp, Etout, i, nrl, nrh, ncl, nch);
+	}
+	erosion3_line_bin(tmp, Etout, i+1, nrl, nrh, ncl, nch); //Dernière ligne
+}
 
 
 /////////////////////////////////////////////////////////////////////////////

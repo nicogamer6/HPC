@@ -1592,4 +1592,587 @@ void test_routineSDmorpho3xFermOuv_opti(){
 	free_ui8matrix(Etout,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
 }
 
+void test_routineSDmorpho3xOuvFerm_pipe(){
+	//Cycle par point//
+	double cycles, totalcy=0;
+	int iter, niter=2;
+	int run, nrun = 5;
+	double t0,t1,dt,tmin,t;
+
+	char *format = "%6.2f\n";
+	///////////////////
+
+	long nrl, nrh, ncl, nch;
+	char nameload[100];     //"car3/car_3..";
+	char namesave[100];     //"testSD/SD...";
+	int i;
+
+	sprintf(nameload,"car3/car_3000.pgm");
+
+	uint8 **Itm1 = LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+	uint8 **I = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **V  = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **Vtm1 = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **M  = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **Mtm1 = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **Et = ui8matrix(nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+	uint8 **Etout = ui8matrix(nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+	uint8 **tmp = ui8matrix(nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD); //Matrice tmp entre dil et ero pour le pipe
+	//uint8 **Ot = ui8matrix(nrl,nrh,ncl,nch);
+
+	//printf("name=%s",nameload);
+
+	routine_SigmaDelta_step0(Vtm1, Mtm1, Itm1, nrl, nrh, ncl, nch);
+
+	for(i=1;i<=NBIMAGES;i++){
+			sprintf(nameload,"car3/car_3%03d.pgm",i);
+			I= LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+			routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
+			CHRONO(ouverture3_pipe(Et,tmp,Etout,nrl,nrh,ncl,nch),cycles);
+			totalcy += cycles;
+			CHRONO(fermeture3_pipe(Etout,tmp,Et,nrl,nrh,ncl,nch),cycles);
+			totalcy += cycles;
+			//ouverture5(Etout,Et,nrl,nrh,ncl,nch);
+			sprintf(namesave,"testSDmorphoOFpipe/car_3%03d.pgm",i);
+			SavePGM_ui8matrix(Et,nrl,nrh,ncl,nch,namesave);
+			//On doit copier M dan Mtm1, V dans Vtm1 et I dans Itm1
+			copy_ui8matrix_ui8matrix(M, nrl, nrh, ncl, nch, Mtm1);
+			copy_ui8matrix_ui8matrix(V, nrl, nrh, ncl, nch, Vtm1);
+			copy_ui8matrix_ui8matrix(I, nrl, nrh, ncl, nch, Itm1);
+
+	}
+
+	totalcy = totalcy / NBIMAGES; //on doit rediviser par le nombre de points pour l'avoir par point
+	totalcy = totalcy / ((nch+1)*(nrh+1));
+
+	BENCH(printf("Cycles SD, only OuvFerm pipe = "));
+	BENCH(printf(format,totalcy));
+
+	free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
+	free_ui8matrix(I,nrl,nrh,ncl,nch);
+	free_ui8matrix(V,nrl,nrh,ncl,nch);
+	free_ui8matrix(Vtm1,nrl,nrh,ncl,nch);
+	free_ui8matrix(M,nrl,nrh,ncl,nch);
+	free_ui8matrix(Mtm1,nrl,nrh,ncl,nch);
+	free_ui8matrix(Et,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+	free_ui8matrix(Etout,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+
+}
+
+void test_routineSDmorpho3xFermOuv_pipe(){
+	//Cycle par point//
+	double cycles, totalcy=0;
+	int iter, niter=2;
+	int run, nrun = 5;
+	double t0,t1,dt,tmin,t;
+
+	char *format = "%6.2f\n";
+	///////////////////
+
+	long nrl, nrh, ncl, nch;
+	char nameload[100];     //"car3/car_3..";
+	char namesave[100];     //"testSD/SD...";
+	int i;
+
+	sprintf(nameload,"car3/car_3000.pgm");
+
+	uint8 **Itm1 = LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+	uint8 **I = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **V  = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **Vtm1 = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **M  = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **Mtm1 = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **Et = ui8matrix(nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+	uint8 **Etout = ui8matrix(nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+	uint8 **tmp = ui8matrix(nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD); //Matrice tmp entre dil et ero pour le pipe
+	//uint8 **Ot = ui8matrix(nrl,nrh,ncl,nch);
+
+	//printf("name=%s",nameload);
+
+	routine_SigmaDelta_step0(Vtm1, Mtm1, Itm1, nrl, nrh, ncl, nch);
+
+	for(i=1;i<=NBIMAGES;i++){
+			sprintf(nameload,"car3/car_3%03d.pgm",i);
+			I= LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+			routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
+			CHRONO(fermeture3_pipe(Et,tmp,Etout,nrl,nrh,ncl,nch),cycles);
+			totalcy += cycles;
+			CHRONO(ouverture3_pipe(Etout,tmp,Et,nrl,nrh,ncl,nch),cycles);
+			totalcy += cycles;
+			//ouverture5(Etout,Et,nrl,nrh,ncl,nch);
+			sprintf(namesave,"testSDmorphoFOpipe/car_3%03d.pgm",i);
+			SavePGM_ui8matrix(Et,nrl,nrh,ncl,nch,namesave);
+			//On doit copier M dan Mtm1, V dans Vtm1 et I dans Itm1
+			copy_ui8matrix_ui8matrix(M, nrl, nrh, ncl, nch, Mtm1);
+			copy_ui8matrix_ui8matrix(V, nrl, nrh, ncl, nch, Vtm1);
+			copy_ui8matrix_ui8matrix(I, nrl, nrh, ncl, nch, Itm1);
+
+	}
+
+	totalcy = totalcy / NBIMAGES; //on doit rediviser par le nombre de points pour l'avoir par point
+	totalcy = totalcy / ((nch+1)*(nrh+1));
+
+	BENCH(printf("Cycles SD, only FermOuv pipe = "));
+	BENCH(printf(format,totalcy));
+
+	free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
+	free_ui8matrix(I,nrl,nrh,ncl,nch);
+	free_ui8matrix(V,nrl,nrh,ncl,nch);
+	free_ui8matrix(Vtm1,nrl,nrh,ncl,nch);
+	free_ui8matrix(M,nrl,nrh,ncl,nch);
+	free_ui8matrix(Mtm1,nrl,nrh,ncl,nch);
+	free_ui8matrix(Et,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+	free_ui8matrix(Etout,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+}
+
+void test_routineSDmorpho3xOuvFerm_bin(){
+	//Cycle par point//
+	double cycles, totalcy=0;
+	int iter, niter=2;
+	int run, nrun = 5;
+	double t0,t1,dt,tmin,t;
+
+	char *format = "%6.2f\n";
+	///////////////////
+
+    long nrl, nrh, ncl, nch;
+    char nameload[100];     //"car3/car_3..";
+	char namesave[100];     //"testSD/SD...";
+	int i;
+
+	sprintf(nameload,"car3/car_3000.pgm");
+
+    uint8 **Itm1 = LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+    uint8 **I = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **V  = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **Vtm1 = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **M  = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **Mtm1 = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **Et = ui8matrix(nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+	uint8 **Etout = ui8matrix(nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+	//uint8 **Ot = ui8matrix(nrl,nrh,ncl,nch);
+
+	ulong64 **Etbin=long64matrix(nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
+	ulong64 **Etoutbin=long64matrix(nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
+	ulong64 **tmpbin=long64matrix(nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
+
+	//printf("name=%s",nameload);
+
+	routine_SigmaDelta_step0(Vtm1, Mtm1, Itm1, nrl, nrh, ncl, nch);
+
+	for(i=1;i<=NBIMAGES;i++){
+	        sprintf(nameload,"car3/car_3%03d.pgm",i);
+	        I= LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+	        routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
+	        convCharToBin(Et,Etbin,nrl,nrh,ncl,nch);
+			CHRONO(ouverture3_bin(Etbin,tmpbin,Etoutbin,nrl,nrh,(ncl/NBBITS),(nch/NBBITS)),cycles);
+			totalcy += cycles;
+			CHRONO(fermeture3_bin(Etoutbin,tmpbin,Etbin,nrl,nrh,(ncl/NBBITS),(nch/NBBITS)),cycles);
+			convBinToChar(Etbin,Etout,nrl,nrh,ncl,nch);
+	        totalcy += cycles;
+	        //ouverture5(Etout,Et,nrl,nrh,ncl,nch);
+            sprintf(namesave,"testSDmorphoOFbin/car_3%03d.pgm",i);
+            SavePGM_ui8matrix(Etout,nrl,nrh,ncl,nch,namesave);
+            //On doit copier M dan Mtm1, V dans Vtm1 et I dans Itm1
+            copy_ui8matrix_ui8matrix(M, nrl, nrh, ncl, nch, Mtm1);
+            copy_ui8matrix_ui8matrix(V, nrl, nrh, ncl, nch, Vtm1);
+            copy_ui8matrix_ui8matrix(I, nrl, nrh, ncl, nch, Itm1);
+
+	}
+
+	totalcy = totalcy / NBIMAGES; //on doit rediviser par le nombre de points pour l'avoir par point
+	totalcy = totalcy / ((nch+1)*(nrh+1));
+
+	BENCH(printf("Cycles SD, only OuvFerm bin = "));
+	BENCH(printf(format,totalcy));
+
+	free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
+	free_ui8matrix(I,nrl,nrh,ncl,nch);
+	free_ui8matrix(V,nrl,nrh,ncl,nch);
+	free_ui8matrix(Vtm1,nrl,nrh,ncl,nch);
+	free_ui8matrix(M,nrl,nrh,ncl,nch);
+	free_ui8matrix(Mtm1,nrl,nrh,ncl,nch);
+	free_ui8matrix(Et,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+	free_ui8matrix(Etout,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+
+	free_long64matrix(Etbin,nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
+	free_long64matrix(Etoutbin,nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
+	free_long64matrix(tmpbin,nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
+}
+
+void test_routineSDmorpho3xFermOuv_bin(){
+	//Cycle par point//
+	double cycles, totalcy=0;
+	int iter, niter=2;
+	int run, nrun = 5;
+	double t0,t1,dt,tmin,t;
+
+	char *format = "%6.2f\n";
+	///////////////////
+
+    long nrl, nrh, ncl, nch;
+    char nameload[100];     //"car3/car_3..";
+	char namesave[100];     //"testSD/SD...";
+	int i;
+
+	sprintf(nameload,"car3/car_3000.pgm");
+
+    uint8 **Itm1 = LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+    uint8 **I = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **V  = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **Vtm1 = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **M  = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **Mtm1 = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **Et = ui8matrix(nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+	uint8 **Etout = ui8matrix(nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+	//uint8 **Ot = ui8matrix(nrl,nrh,ncl,nch);
+
+	ulong64 **Etbin=long64matrix(nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
+	ulong64 **Etoutbin=long64matrix(nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
+	ulong64 **tmpbin=long64matrix(nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
+
+	//printf("name=%s",nameload);
+
+	routine_SigmaDelta_step0(Vtm1, Mtm1, Itm1, nrl, nrh, ncl, nch);
+
+	for(i=1;i<=NBIMAGES;i++){
+	        sprintf(nameload,"car3/car_3%03d.pgm",i);
+	        I= LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+	        routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
+	        convCharToBin(Et,Etbin,nrl,nrh,ncl,nch);
+			CHRONO(fermeture3_bin(Etbin,tmpbin,Etoutbin,nrl,nrh,(ncl/NBBITS),(nch/NBBITS)),cycles);
+			totalcy += cycles;
+			CHRONO(ouverture3_bin(Etoutbin,tmpbin,Etbin,nrl,nrh,(ncl/NBBITS),(nch/NBBITS)),cycles);
+			convBinToChar(Etbin,Etout,nrl,nrh,ncl,nch);
+	        totalcy += cycles;
+	        //ouverture5(Etout,Et,nrl,nrh,ncl,nch);
+            sprintf(namesave,"testSDmorphoFObin/car_3%03d.pgm",i);
+            SavePGM_ui8matrix(Etout,nrl,nrh,ncl,nch,namesave);
+            //On doit copier M dan Mtm1, V dans Vtm1 et I dans Itm1
+            copy_ui8matrix_ui8matrix(M, nrl, nrh, ncl, nch, Mtm1);
+            copy_ui8matrix_ui8matrix(V, nrl, nrh, ncl, nch, Vtm1);
+            copy_ui8matrix_ui8matrix(I, nrl, nrh, ncl, nch, Itm1);
+
+	}
+
+	totalcy = totalcy / NBIMAGES; //on doit rediviser par le nombre de points pour l'avoir par point
+	totalcy = totalcy / ((nch+1)*(nrh+1));
+
+	BENCH(printf("Cycles SD, only FermOuv bin = "));
+	BENCH(printf(format,totalcy));
+
+	free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
+	free_ui8matrix(I,nrl,nrh,ncl,nch);
+	free_ui8matrix(V,nrl,nrh,ncl,nch);
+	free_ui8matrix(Vtm1,nrl,nrh,ncl,nch);
+	free_ui8matrix(M,nrl,nrh,ncl,nch);
+	free_ui8matrix(Mtm1,nrl,nrh,ncl,nch);
+	free_ui8matrix(Et,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+	free_ui8matrix(Etout,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+
+	free_long64matrix(Etbin,nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
+	free_long64matrix(Etoutbin,nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
+	free_long64matrix(tmpbin,nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
+}
+
+
+
+void test_routineSDmorpho3xOuv_pipe_bin(){
+	//Cycle par point//
+	double cycles, totalcy=0;
+	int iter, niter=2;
+	int run, nrun = 5;
+	double t0,t1,dt,tmin,t;
+
+	char *format = "%6.2f\n";
+	///////////////////
+
+	long nrl, nrh, ncl, nch;
+	char nameload[100];     //"car3/car_3..";
+	char namesave[100];     //"testSD/SD...";
+	int i;
+
+	sprintf(nameload,"car3/car_3000.pgm");
+
+	uint8 **Itm1 = LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+	uint8 **I = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **V  = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **Vtm1 = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **M  = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **Mtm1 = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **Et = ui8matrix(nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+	uint8 **Etout = ui8matrix(nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+	//uint8 **Ot = ui8matrix(nrl,nrh,ncl,nch);
+
+	ulong64 **Etbin=long64matrix(nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
+	ulong64 **Etoutbin=long64matrix(nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
+	ulong64 **tmpbin=long64matrix(nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
+
+	//printf("name=%s",nameload);
+
+	routine_SigmaDelta_step0(Vtm1, Mtm1, Itm1, nrl, nrh, ncl, nch);
+
+	for(i=1;i<=NBIMAGES;i++){
+			sprintf(nameload,"car3/car_3%03d.pgm",i);
+			I= LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+			routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
+			convCharToBin(Et,Etbin,nrl,nrh,ncl,nch);
+			CHRONO(ouverture3_pipe_bin(Etbin,tmpbin,Etoutbin,nrl,nrh,(ncl/NBBITS),(nch/NBBITS)),cycles);
+			convBinToChar(Etoutbin,Etout,nrl,nrh,ncl,nch);
+			totalcy += cycles;
+			//ouverture5(Etout,Et,nrl,nrh,ncl,nch);
+			sprintf(namesave,"testSDmorphoOpipebin/car_3%03d.pgm",i);
+			SavePGM_ui8matrix(Etout,nrl,nrh,ncl,nch,namesave);
+			//On doit copier M dan Mtm1, V dans Vtm1 et I dans Itm1
+			copy_ui8matrix_ui8matrix(M, nrl, nrh, ncl, nch, Mtm1);
+			copy_ui8matrix_ui8matrix(V, nrl, nrh, ncl, nch, Vtm1);
+			copy_ui8matrix_ui8matrix(I, nrl, nrh, ncl, nch, Itm1);
+
+	}
+
+	totalcy = totalcy / NBIMAGES; //on doit rediviser par le nombre de points pour l'avoir par point
+	totalcy = totalcy / ((nch+1)*(nrh+1));
+
+	BENCH(printf("Cycles SD, only Ouv pipebin = "));
+	BENCH(printf(format,totalcy));
+
+	free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
+	free_ui8matrix(I,nrl,nrh,ncl,nch);
+	free_ui8matrix(V,nrl,nrh,ncl,nch);
+	free_ui8matrix(Vtm1,nrl,nrh,ncl,nch);
+	free_ui8matrix(M,nrl,nrh,ncl,nch);
+	free_ui8matrix(Mtm1,nrl,nrh,ncl,nch);
+	free_ui8matrix(Et,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+	free_ui8matrix(Etout,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+
+	free_long64matrix(Etbin,nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
+	free_long64matrix(Etoutbin,nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
+	free_long64matrix(tmpbin,nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
+}
+
+void test_routineSDmorpho3xFerm_pipe_bin(){
+	//Cycle par point//
+	double cycles, totalcy=0;
+	int iter, niter=2;
+	int run, nrun = 5;
+	double t0,t1,dt,tmin,t;
+
+	char *format = "%6.2f\n";
+	///////////////////
+
+	long nrl, nrh, ncl, nch;
+	char nameload[100];     //"car3/car_3..";
+	char namesave[100];     //"testSD/SD...";
+	int i;
+
+	sprintf(nameload,"car3/car_3000.pgm");
+
+	uint8 **Itm1 = LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+	uint8 **I = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **V  = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **Vtm1 = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **M  = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **Mtm1 = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **Et = ui8matrix(nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+	uint8 **Etout = ui8matrix(nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+	//uint8 **Ot = ui8matrix(nrl,nrh,ncl,nch);
+
+	ulong64 **Etbin=long64matrix(nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
+	ulong64 **Etoutbin=long64matrix(nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
+	ulong64 **tmpbin=long64matrix(nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
+
+	//printf("name=%s",nameload);
+
+	routine_SigmaDelta_step0(Vtm1, Mtm1, Itm1, nrl, nrh, ncl, nch);
+
+	for(i=1;i<=NBIMAGES;i++){
+			sprintf(nameload,"car3/car_3%03d.pgm",i);
+			I= LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+			routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
+			convCharToBin(Et,Etbin,nrl,nrh,ncl,nch);
+			CHRONO(fermeture3_pipe_bin(Etbin,tmpbin,Etoutbin,nrl,nrh,(ncl/NBBITS),(nch/NBBITS)),cycles);
+			convBinToChar(Etoutbin,Etout,nrl,nrh,ncl,nch);
+			totalcy += cycles;
+			//ouverture5(Etout,Et,nrl,nrh,ncl,nch);
+			sprintf(namesave,"testSDmorphoFpipebin/car_3%03d.pgm",i);
+			SavePGM_ui8matrix(Etout,nrl,nrh,ncl,nch,namesave);
+			//On doit copier M dan Mtm1, V dans Vtm1 et I dans Itm1
+			copy_ui8matrix_ui8matrix(M, nrl, nrh, ncl, nch, Mtm1);
+			copy_ui8matrix_ui8matrix(V, nrl, nrh, ncl, nch, Vtm1);
+			copy_ui8matrix_ui8matrix(I, nrl, nrh, ncl, nch, Itm1);
+
+	}
+
+	totalcy = totalcy / NBIMAGES; //on doit rediviser par le nombre de points pour l'avoir par point
+	totalcy = totalcy / ((nch+1)*(nrh+1));
+
+	BENCH(printf("Cycles SD, only Ferm pipebin = "));
+	BENCH(printf(format,totalcy));
+
+	free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
+	free_ui8matrix(I,nrl,nrh,ncl,nch);
+	free_ui8matrix(V,nrl,nrh,ncl,nch);
+	free_ui8matrix(Vtm1,nrl,nrh,ncl,nch);
+	free_ui8matrix(M,nrl,nrh,ncl,nch);
+	free_ui8matrix(Mtm1,nrl,nrh,ncl,nch);
+	free_ui8matrix(Et,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+	free_ui8matrix(Etout,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+
+	free_long64matrix(Etbin,nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
+	free_long64matrix(Etoutbin,nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
+	free_long64matrix(tmpbin,nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
+}
+void test_routineSDmorpho3xOuvFerm_pipe_bin(){
+	//Cycle par point//
+	double cycles, totalcy=0;
+	int iter, niter=2;
+	int run, nrun = 5;
+	double t0,t1,dt,tmin,t;
+
+	char *format = "%6.2f\n";
+	///////////////////
+
+	long nrl, nrh, ncl, nch;
+	char nameload[100];     //"car3/car_3..";
+	char namesave[100];     //"testSD/SD...";
+	int i;
+
+	sprintf(nameload,"car3/car_3000.pgm");
+
+	uint8 **Itm1 = LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+	uint8 **I = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **V  = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **Vtm1 = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **M  = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **Mtm1 = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **Et = ui8matrix(nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+	uint8 **Etout = ui8matrix(nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+	//uint8 **Ot = ui8matrix(nrl,nrh,ncl,nch);
+
+	ulong64 **Etbin=long64matrix(nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
+	ulong64 **Etoutbin=long64matrix(nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
+	ulong64 **tmpbin=long64matrix(nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
+
+	//printf("name=%s",nameload);
+
+	routine_SigmaDelta_step0(Vtm1, Mtm1, Itm1, nrl, nrh, ncl, nch);
+
+	for(i=1;i<=NBIMAGES;i++){
+			sprintf(nameload,"car3/car_3%03d.pgm",i);
+			I= LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+			routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
+			convCharToBin(Et,Etbin,nrl,nrh,ncl,nch);
+			CHRONO(ouverture3_pipe_bin(Etbin,tmpbin,Etoutbin,nrl,nrh,(ncl/NBBITS),(nch/NBBITS)),cycles);
+			totalcy += cycles;
+			CHRONO(fermeture3_pipe_bin(Etoutbin,tmpbin,Etbin,nrl,nrh,(ncl/NBBITS),(nch/NBBITS)),cycles);
+			convBinToChar(Etbin,Etout,nrl,nrh,ncl,nch);
+			totalcy += cycles;
+			//ouverture5(Etout,Et,nrl,nrh,ncl,nch);
+			sprintf(namesave,"testSDmorphoOFpipebin/car_3%03d.pgm",i);
+			SavePGM_ui8matrix(Etout,nrl,nrh,ncl,nch,namesave);
+			//On doit copier M dan Mtm1, V dans Vtm1 et I dans Itm1
+			copy_ui8matrix_ui8matrix(M, nrl, nrh, ncl, nch, Mtm1);
+			copy_ui8matrix_ui8matrix(V, nrl, nrh, ncl, nch, Vtm1);
+			copy_ui8matrix_ui8matrix(I, nrl, nrh, ncl, nch, Itm1);
+
+	}
+
+	totalcy = totalcy / NBIMAGES; //on doit rediviser par le nombre de points pour l'avoir par point
+	totalcy = totalcy / ((nch+1)*(nrh+1));
+
+	BENCH(printf("Cycles SD, only OuvFerm pipebin = "));
+	BENCH(printf(format,totalcy));
+
+	free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
+	free_ui8matrix(I,nrl,nrh,ncl,nch);
+	free_ui8matrix(V,nrl,nrh,ncl,nch);
+	free_ui8matrix(Vtm1,nrl,nrh,ncl,nch);
+	free_ui8matrix(M,nrl,nrh,ncl,nch);
+	free_ui8matrix(Mtm1,nrl,nrh,ncl,nch);
+	free_ui8matrix(Et,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+	free_ui8matrix(Etout,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+
+	free_long64matrix(Etbin,nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
+	free_long64matrix(Etoutbin,nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
+	free_long64matrix(tmpbin,nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
+}
+void test_routineSDmorpho3xFermOuv_pipe_bin(){
+	//Cycle par point//
+	double cycles, totalcy=0;
+	int iter, niter=2;
+	int run, nrun = 5;
+	double t0,t1,dt,tmin,t;
+
+	char *format = "%6.2f\n";
+	///////////////////
+
+	long nrl, nrh, ncl, nch;
+	char nameload[100];     //"car3/car_3..";
+	char namesave[100];     //"testSD/SD...";
+	int i;
+
+	sprintf(nameload,"car3/car_3000.pgm");
+
+	uint8 **Itm1 = LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+	uint8 **I = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **V  = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **Vtm1 = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **M  = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **Mtm1 = ui8matrix(nrl,nrh,ncl,nch);
+	uint8 **Et = ui8matrix(nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+	uint8 **Etout = ui8matrix(nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+	//uint8 **Ot = ui8matrix(nrl,nrh,ncl,nch);
+
+	ulong64 **Etbin=long64matrix(nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
+	ulong64 **Etoutbin=long64matrix(nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
+	ulong64 **tmpbin=long64matrix(nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
+
+	//printf("name=%s",nameload);
+
+	routine_SigmaDelta_step0(Vtm1, Mtm1, Itm1, nrl, nrh, ncl, nch);
+
+	for(i=1;i<=NBIMAGES;i++){
+			sprintf(nameload,"car3/car_3%03d.pgm",i);
+			I= LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+			routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
+			convCharToBin(Et,Etbin,nrl,nrh,ncl,nch);
+			CHRONO(fermeture3_pipe_bin(Etbin,tmpbin,Etoutbin,nrl,nrh,(ncl/NBBITS),(nch/NBBITS)),cycles);
+			totalcy += cycles;
+			CHRONO(ouverture3_pipe_bin(Etoutbin,tmpbin,Etbin,nrl,nrh,(ncl/NBBITS),(nch/NBBITS)),cycles);
+			convBinToChar(Etbin,Etout,nrl,nrh,ncl,nch);
+			totalcy += cycles;
+			//ouverture5(Etout,Et,nrl,nrh,ncl,nch);
+			sprintf(namesave,"testSDmorphoFOpipebin/car_3%03d.pgm",i);
+			SavePGM_ui8matrix(Etout,nrl,nrh,ncl,nch,namesave);
+			//On doit copier M dan Mtm1, V dans Vtm1 et I dans Itm1
+			copy_ui8matrix_ui8matrix(M, nrl, nrh, ncl, nch, Mtm1);
+			copy_ui8matrix_ui8matrix(V, nrl, nrh, ncl, nch, Vtm1);
+			copy_ui8matrix_ui8matrix(I, nrl, nrh, ncl, nch, Itm1);
+
+	}
+
+	totalcy = totalcy / NBIMAGES; //on doit rediviser par le nombre de points pour l'avoir par point
+	totalcy = totalcy / ((nch+1)*(nrh+1));
+
+	BENCH(printf("Cycles SD, only FermOuv pipebin = "));
+	BENCH(printf(format,totalcy));
+
+	free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
+	free_ui8matrix(I,nrl,nrh,ncl,nch);
+	free_ui8matrix(V,nrl,nrh,ncl,nch);
+	free_ui8matrix(Vtm1,nrl,nrh,ncl,nch);
+	free_ui8matrix(M,nrl,nrh,ncl,nch);
+	free_ui8matrix(Mtm1,nrl,nrh,ncl,nch);
+	free_ui8matrix(Et,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+	free_ui8matrix(Etout,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+
+	free_long64matrix(Etbin,nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
+	free_long64matrix(Etoutbin,nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
+	free_long64matrix(tmpbin,nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
+
+}
+
+
+
+
 
