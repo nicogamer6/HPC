@@ -52,7 +52,6 @@ void erosion3_bin(ulong64 ** Et, ulong64 **EtE, long nrl, long nrh, long ncl, lo
 	}
 }
 
-
 // Suppression des boucles pour le voisinnage et déroulage de 3 avec RR
 //  val0    val1    val2
 //  val3    val4    val5

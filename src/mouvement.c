@@ -228,7 +228,8 @@ void routine_SigmaDelta_1step_opti(uint8 **V, uint8 **Vtm1, uint8 **M, uint8 **M
 
 
 
-void routine_SigmaDelta_1step_SOA(SoA Vm, uint8 **Vtm1, uint8 **M, uint8 **Mtm1, uint8 **Et, long nrl, long nrh, long ncl, long nch)
+void routine_SigmaDelta_1step_SOA(SoA3 Vm, uint8 **V, uint8 **M, uint8 **Et, long nrl, long nrh, long ncl, long nch)
+{
     int i,j;
     uint8 **Ot=ui8matrix(nrl,nrh,ncl,nch);
     
@@ -245,23 +246,23 @@ void routine_SigmaDelta_1step_SOA(SoA Vm, uint8 **Vtm1, uint8 **M, uint8 **Mtm1,
         {
             
             //Step 1 Estimation
-            if(Mtm1[i][j] < I[i][j])
-                a = Mtm1[i][j]+1;
-            else if(Mtm1[i][j] > I[i][j])
-                a = Mtm1[i][j]-1;
-            else a = Mtm1[i][j];
+            if(Vm.Mt[i][j] < Vm.I[i][j])
+                a = Vm.Mt[i][j]+1;
+            else if(Vm.Mt[i][j] > Vm.I[i][j])
+                a = Vm.Mt[i][j]-1;
+            else a = Vm.Mt[i][j];
     
             M[i][j] = a;
             
             //Step 2 Difference Computation
-            Ot[i][j]=abs(M[i][j]-I[i][j]);
+            Ot[i][j]=abs(M[i][j]-Vm.I[i][j]);
     
             //Step 3 Update and clamping
-            if(Vtm1[i][j] < (n * Ot[i][j]))
-                b = Vtm1[i][j]+1;
-            else if(Vtm1[i][j] > (n * Ot[i][j]))
-                b = Vtm1[i][j]-1;
-            else b = Vtm1[i][j];
+            if(Vm.Vt[i][j] < (n * Ot[i][j]))
+                b = Vm.Vt[i][j]+1;
+            else if(Vm.Vt[i][j] > (n * Ot[i][j]))
+                b = Vm.Vt[i][j]-1;
+            else b = Vm.Vt[i][j];
             //Clamp to [VMIN,VMAX]
             b = max(min(b,vmax),vmin);
     
@@ -283,7 +284,7 @@ void routine_SigmaDelta_1step_SOA(SoA Vm, uint8 **Vtm1, uint8 **M, uint8 **Mtm1,
 
 
 
-void routine_SigmaDelta_1step_soa(SoA Vm, uint8 **Vtm1, uint8 **M, uint8 **Mtm1, uint8 **Et, long nrl, long nrh, long ncl, long nch)
+void routine_SigmaDelta_soa(SoA Vm, uint8 **Vtm1, uint8 **M, uint8 **Mtm1, uint8 **Et, long nrl, long nrh, long ncl, long nch)
 {
     int i,j;
     uint8 **Ot=ui8matrix(nrl,nrh,ncl,nch);

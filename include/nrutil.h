@@ -29,6 +29,10 @@ typedef struct {
     uint8 **p1,**p2;
 } SoA;
 
+typedef struct {
+    uint8 **Vt,**Mt, **I;
+} SoA3;
+
 //Structure pour entrelacement mémoire (AoS)
 typedef struct {
     uint8 p1,p2;
