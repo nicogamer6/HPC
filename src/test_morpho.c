@@ -24,7 +24,7 @@ void convCharToBin(uint8 ** Et, ulong64 ** Etout, long nrl, long nrh, long ncl, 
 				Etout[i][k]=0;
 			}
 			if(Et[i][j]==255){
-				Etout[i][k] |= 1 << (j%NBBITS) ;
+				Etout[i][k] |= 1ULL << (j%NBBITS) ;
 			}
 		}
 	}
@@ -42,7 +42,7 @@ void convBinToChar(ulong64 ** Et, uint8 ** Etout, long nrl, long nrh, long ncl, 
 			if((j%NBBITS)==0 && j>0 ){	//j>0 pour commencer Kà0 sinon il va passer direct à 1
 				k++;		// Changement de ulong64 à partir du 65ème pixel
 			}
-			bit = (Et[i][k] >> (j%NBBITS)) & 1;
+			bit = (Et[i][k] >> (j%NBBITS)) & 1ULL;
 			if(bit==1){
 				Etout[i][j] = 255;
 			}
