@@ -41,10 +41,10 @@ void erosion3_bin(ulong64 ** Et, ulong64 **EtE, long nrl, long nrh, long ncl, lo
 			res &= (Et[i-1][j] & Et[i][j] & Et[i+1][j]);	// 3 premiers ulong64 pour les 3 1ères lignes
 
 			binleft = (Et[i-1][j-1] & Et[i][j-1] & Et[i+1][j-1]);	// 3 ulong64 de gauche pour faire la morpho du dernier pixel du ulong64 res (bit poid fort)
-			binleft = (res << 1) | (binleft >> (NBBITS-1) & 1);	// pour ajouter les 3 pixels du ulong de gauche pour faire l'erosion
+			binleft = (res << 1ULL) | (binleft >> (NBBITS-1) & 1ULL);	// pour ajouter les 3 pixels du ulong de gauche pour faire l'erosion
 
 			binright = (Et[i-1][j+1] & Et[i][j+1] & Et[i+1][j+1]);	// 3 ulong64 de droite pour faire la morpho du premier pixel du ulong64 res (bit poid faible)
-			binright = ((res >> 1) & ~(1<<(NBBITS-1))) | (binright & 1) << (NBBITS-1); // pour ajouter les 3 pixels du ulong de droite pour faire l'erosion
+			binright = ((res >> 1ULL) & ~(1ULL<<(NBBITS-1))) | (binright & 1ULL) << (NBBITS-1); // pour ajouter les 3 pixels du ulong de droite pour faire l'erosion
 
 
 			EtE[i][j] = (res & binright & binleft);
@@ -250,10 +250,10 @@ void dilatation3_bin(ulong64 ** Et, ulong64 **EtD, long nrl, long nrh, long ncl,
 			res |= (Et[i-1][j] | Et[i][j] | Et[i+1][j]); // 3 premiers ulong64 pour les 3 1ères lignes
 
 			binleft = (Et[i-1][j-1] | Et[i][j-1] | Et[i+1][j-1]); // 3 ulong64 de gauche pour faire la morpho du dernier pixel du ulong64 res (bit poid fort)
-			binleft = (res << 1) | (binleft >> (NBBITS-1) & 1);	// pour ajouter les 3 pixels du ulong de gauche pour faire la dilatation
+			binleft = (res << 1ULL) | (binleft >> (NBBITS - 1) & 1ULL);	// pour ajouter les 3 pixels du ulong de gauche pour faire la dilatation
 
 			binright = (Et[i-1][j+1] | Et[i][j+1] | Et[i+1][j+1]); // 3 ulong64 de droite pour faire la morpho du premier pixel du ulong64 res (bit poid faible)
-			binright = ((res >> 1)& ~(1<<(NBBITS-1))) | (binright & 1) << (NBBITS-1);	// pour ajouter les 3 pixels du ulong de droite pour faire la dilatation
+			binright = ((res >> 1ULL) & ~(1ULL << (NBBITS - 1))) | (binright & 1ULL) << (NBBITS-1);	// pour ajouter les 3 pixels du ulong de droite pour faire la dilatation
 
 
 			EtD[i][j] = (res | binright | binleft);
@@ -828,10 +828,10 @@ void erosion3_line_bin(ulong64 ** Et, ulong64 **EtE, int i, long nrl, long nrh, 
 		res &= (Et[i-1][j] & Et[i][j] & Et[i+1][j]);	// 3 premiers ulong64 pour les 3 1ères lignes
 
 		binleft = (Et[i-1][j-1] & Et[i][j-1] & Et[i+1][j-1]);	// 3 ulong64 de gauche pour faire la morpho du dernier pixel du ulong64 res (bit poid fort)
-		binleft = (res << 1) | (binleft >> (NBBITS-1) & 1);	// pour ajouter les 3 pixels du ulong de gauche pour faire l'erosion
+		binleft = (res << 1ULL) | (binleft >> (NBBITS-1) & 1ULL);	// pour ajouter les 3 pixels du ulong de gauche pour faire l'erosion
 
 		binright = (Et[i-1][j+1] & Et[i][j+1] & Et[i+1][j+1]);	// 3 ulong64 de droite pour faire la morpho du premier pixel du ulong64 res (bit poid faible)
-		binright = ((res >> 1) & ~(1<<(NBBITS-1))) | (binright & 1) << (NBBITS-1); // pour ajouter les 3 pixels du ulong de droite pour faire l'erosion
+		binright = ((res >> 1ULL) & ~(1ULL<<(NBBITS-1))) | (binright & 1ULL) << (NBBITS-1); // pour ajouter les 3 pixels du ulong de droite pour faire l'erosion
 
 
 		EtE[i][j] = (res & binright & binleft);
@@ -849,10 +849,10 @@ void dilatation3_line_bin(ulong64 ** Et, ulong64 **EtD, int i, long nrl, long nr
 		res |= (Et[i-1][j] | Et[i][j] | Et[i+1][j]); // 3 premiers ulong64 pour les 3 1ères lignes
 
 		binleft = (Et[i-1][j-1] | Et[i][j-1] | Et[i+1][j-1]); // 3 ulong64 de gauche pour faire la morpho du dernier pixel du ulong64 res (bit poid fort)
-		binleft = (res << 1) | (binleft >> (NBBITS-1) & 1);	// pour ajouter les 3 pixels du ulong de gauche pour faire la dilatation
+		binleft = (res << 1ULL) | (binleft >> (NBBITS-1) & 1ULL);	// pour ajouter les 3 pixels du ulong de gauche pour faire la dilatation
 
 		binright = (Et[i-1][j+1] | Et[i][j+1] | Et[i+1][j+1]); // 3 ulong64 de droite pour faire la morpho du premier pixel du ulong64 res (bit poid faible)
-		binright = ((res >> 1)& ~(1<<(NBBITS-1))) | (binright & 1) << (NBBITS-1);	// pour ajouter les 3 pixels du ulong de droite pour faire la dilatation
+		binright = ((res >> 1ULL)& ~(1ULL<<(NBBITS-1))) | (binright & 1ULL) << (NBBITS-1);	// pour ajouter les 3 pixels du ulong de droite pour faire la dilatation
 
 
 		EtD[i][j] = (res | binright | binleft);

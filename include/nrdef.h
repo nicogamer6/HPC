@@ -8,13 +8,13 @@
 
 #include <stdint.h>
 
-#define NBBITS (sizeof(ulong64)*8)
+#define NBBITS (sizeof(ulong) * 8)
 
 typedef uint8_t byte;
 typedef uint32_t ulong32;
-typedef uint64_t ulong64;
+typedef uint64_t ulong64; // Penser à la fin à remettre tous les 32 ou 64 adéquats, pour les fonctions free et long64matrix ou 32
 
-typedef uint64_t uint;
+typedef uint64_t ulong;
 
 typedef          char  int8;
 typedef unsigned char uint8;
