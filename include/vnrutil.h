@@ -35,6 +35,14 @@ extern "C" {
  * otherwise
  * linear by row, lonly
  */
+
+
+typedef struct {
+    vuint8 **p1, **p2, **p3;
+} AoSoA;
+
+
+
 void vnrerror(char error_text[]);
 
 void s2v1D(int sj0, int sj1, int c, int *vj0, int *vj1);

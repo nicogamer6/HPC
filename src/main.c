@@ -66,7 +66,7 @@ int main()
     //test_routineFD(SEUILFD);                // Dossier "testFD"
     test_routineSD();                       // Dossier "testSD"
     test_routineSD_opti();                  // Dossier "testOptiSD"
-    test_routineSD_Opti_SOA();           // Dossier "testSD_SoA"
+    //test_routineSD_Opti_SOA();           // Dossier "testSD_SoA"
 
     printf("\n");
     ///////////////////////////////////////////////////////////////////////////
@@ -121,10 +121,10 @@ int main()
     test_routineSDmorpho3xFermOuv();        // Dossier "testSDmorphoFO"
     //printf("\n");
 
-	test_routineSDmorpho3xOuv_opti();		// Dossier "testOptiSD"
-	test_routineSDmorpho3xFerm_opti();	// Dossier "testOptiSD"
-	test_routineSDmorpho3xOuvFerm_opti();	// Dossier "testOptiSD"
-	test_routineSDmorpho3xFermOuv_opti();	// Dossier "testOptiSD"
+	test_routineSDmorpho3xOuv_opti();		// Dossier "testOptiSDMorphoO"
+	test_routineSDmorpho3xFerm_opti();	// Dossier "testOptiSDMorphoF"
+	test_routineSDmorpho3xOuvFerm_opti();	// Dossier "testOptiSDMorphoOF"
+	test_routineSDmorpho3xFermOuv_opti();	// Dossier "testOptiSDMorphoFO"
 
 	test_routineSDmorpho3xOuv_pipe();	// Dossier "testSDmorphoOpipe"
 	test_routineSDmorpho3xFerm_pipe();	// Dossier "testSDmorphoFpipe"

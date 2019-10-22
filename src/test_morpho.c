@@ -893,7 +893,7 @@ void test_routineSDmorpho3xOuv_opti(){
 	        CHRONO(ouverture3_opti(Et,Etout,nrl,nrh,ncl,nch),cycles);
 	        totalcy += cycles;
 	        //ouverture5(Etout,Et,nrl,nrh,ncl,nch);
-            sprintf(namesave,"testOptiSD/car_3%03d.pgm",i);
+            sprintf(namesave,"testOptiSDMorphoO/car_3%03d.pgm",i);
             SavePGM_ui8matrix(Etout,nrl,nrh,ncl,nch,namesave);
             //On doit copier M dan Mtm1, V dans Vtm1 et I dans Itm1
             copy_ui8matrix_ui8matrix(M, nrl, nrh, ncl, nch, Mtm1);
@@ -1160,7 +1160,7 @@ void test_routineSDmorpho3xFerm_opti(){
 	        CHRONO(fermeture3_opti(Et,Etout,nrl,nrh,ncl,nch),cycles);
 	        totalcy += cycles;
 	        //fermeture5(Etout,Et,nrl,nrh,ncl,nch);
-            sprintf(namesave,"testOptiSD/car_3%03d.pgm",i);
+            sprintf(namesave,"testOptiSDMorphoF/car_3%03d.pgm",i);
             SavePGM_ui8matrix(Etout,nrl,nrh,ncl,nch,namesave);
             //On doit copier M dan Mtm1, V dans Vtm1 et I dans Itm1
             copy_ui8matrix_ui8matrix(M, nrl, nrh, ncl, nch, Mtm1);
@@ -1433,7 +1433,7 @@ void test_routineSDmorpho3xOuvFerm_opti(){
 	        totalcy += cycles;
 	        //ouverture5(Et,Etout,nrl,nrh,ncl,nch);
 	        //fermeture5(Etout,Et,nrl,nrh,ncl,nch);
-            sprintf(namesave,"testOptiSD/car_3%03d.pgm",i);
+            sprintf(namesave,"testOptiSDMorphoOF/car_3%03d.pgm",i);
             SavePGM_ui8matrix(Et,nrl,nrh,ncl,nch,namesave);
             //On doit copier M dan Mtm1, V dans Vtm1 et I dans Itm1
             copy_ui8matrix_ui8matrix(M, nrl, nrh, ncl, nch, Mtm1);
@@ -1567,7 +1567,7 @@ void test_routineSDmorpho3xFermOuv_opti(){
 	        totalcy += cycles;
 	        //fermeture5(Et,Etout,nrl,nrh,ncl,nch);
 	        //ouverture5(Etout,Et,nrl,nrh,ncl,nch);
-            sprintf(namesave,"testOptiSD/car_3%03d.pgm",i);
+            sprintf(namesave,"testOptiSDMorphoFO/car_3%03d.pgm",i);
             SavePGM_ui8matrix(Et,nrl,nrh,ncl,nch,namesave);
             //On doit copier M dan Mtm1, V dans Vtm1 et I dans Itm1
             copy_ui8matrix_ui8matrix(M, nrl, nrh, ncl, nch, Mtm1);
