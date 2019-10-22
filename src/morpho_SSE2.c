@@ -154,3 +154,23 @@ void fermeture5SSE(uint8 ** Et, uint8 **Etout, long nrl, long nrh, long ncl, lon
     erosion5SSE(tmp, Etout, nrl, nrh, ncl, nch);
     free_ui8matrix(tmp, nrl-BORD, nrh+BORD, ncl-BORD, nch+BORD);
 }
+
+
+void erosion3SSE_bin(ulong64 ** Et, ulong64 **EtE, long nrl, long nrh, long ncl, long nch){
+
+}
+
+void dilatation3SSE_bin(ulong64 ** Et, ulong64 **EtD, long nrl, long nrh, long ncl, long nch){
+
+}
+
+void ouverture3SSE_bin(ulong64 ** Et, ulong64 ** tmp, ulong64 **Etout, long nrl, long nrh, long ncl, long nch){
+
+}
+
+void fermeture3SSE_bin(ulong64 ** Et, ulong64 ** tmp, ulong64 **Etout, long nrl, long nrh, long ncl, long nch){
+
+}
+
+
+

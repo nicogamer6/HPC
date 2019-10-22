@@ -59,10 +59,10 @@ void test_EtapemorphoSSE(void){
     SavePGM_ui8matrix(Etout,nrl,nrh,ncl,nch,"testmorphoSSE/testdilSSE.pgm");
     
     
-    ouverture3(Etbord,Etout,nrl,nrh,ncl,nch);
+    ouverture3SSE(Etbord,Etout,nrl,nrh,ncl,nch);
     SavePGM_ui8matrix(Etout,nrl,nrh,ncl,nch,"testmorphoSSE/testouvSSE.pgm");
     
-    fermeture3(Etbord,Etout,nrl,nrh,ncl,nch);
+    fermeture3SSE(Etbord,Etout,nrl,nrh,ncl,nch);
     SavePGM_ui8matrix(Etout,nrl,nrh,ncl,nch,"testmorphoSSE/testfermSSE.pgm");
 
     free_ui8matrix(Etbord,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);

@@ -8,11 +8,13 @@
 
 #include <stdint.h>
 
-#define NBBITS 32
+#define NBBITS (sizeof(ulong64)*8)
 
-typedef unsigned char byte;
+typedef uint8_t byte;
 typedef uint32_t ulong32;
-typedef uint32_t ulong64;
+typedef uint64_t ulong64;
+
+typedef uint64_t uint;
 
 typedef          char  int8;
 typedef unsigned char uint8;

@@ -60,14 +60,12 @@ void diffImages(char dossier1[], char dossier2[]){
 
 int main()
 {
-     
     // Crée les images FD et SD
     // AFFICHE le CPP juste pour la morpho
     //printf("SEUIL FD = %d\n",SEUILFD);
     //test_routineFD(SEUILFD);                // Dossier "testFD"
     test_routineSD();                       // Dossier "testSD"
     test_routineSD_opti();                  // Dossier "testOptiSD"
-    //test_routineSD_soa();                   // Dossier "testSD_SoA"
     test_routineSD_Opti_SOA();           // Dossier "testSD_SoA"
 
     printf("\n");
@@ -143,7 +141,7 @@ int main()
 	test_routineSDmorpho3xOuvFerm_pipe_bin();	// Dossier "testSDmorphoOFpipebin"
 	test_routineSDmorpho3xFermOuv_pipe_bin();	// Dossier "testSDmorphoFOpipebin"
 
-    //test_routineSD_SSEmorpho3xOuv();        // Dossier "testSD_SSEmorphoO"
+    test_routineSD_SSEmorpho3xOuv();        // Dossier "testSD_SSEmorphoO"
     //test_routineSD_SSEmorpho3xFerm();       // Dossier "testSD_SSEmorphoF"
     //test_routineSD_SSEmorpho3xOuvFerm();    // Dossier "testSD_SSEmorphoOF"
     //test_routineSD_SSEmorpho3xFermOuv();    // Dossier "testSD_SSEmorphoFO"
@@ -154,11 +152,11 @@ int main()
 
     // Crée les images morpho et morpho SSE Ero, Dil, ouv et ferm dans des sous dossiers 
     test_Etapemorpho();                     // Dossier "testmorpho"
-    //test_EtapemorphoSSE();                  // Dossier "testmorphoSSE"
+    test_EtapemorphoSSE();                  // Dossier "testmorphoSSE"
 
 
     //diffImages("testSDmorphoOFpipebin", "testSDmorphoOFbin");
-
+    //diffImages("testSD","testOptiSD");
 
 
     ///////////////////////////////////////////////////////////////////////////
