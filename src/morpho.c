@@ -774,7 +774,7 @@ void ouverture3_pipe(uint8 ** Et, uint8 ** tmp, uint8 **Etout, long nrl, long nr
 		erosion3_column(Et, tmp, j+1, nrl, nrh, ncl, nch);
 		dilatation3_column(tmp, Etout, j, nrl, nrh, ncl, nch);
 	}
-	dilatation3_column(tmp, Etout, nrh, nrl, nrh, ncl, nch); //Dernière colonne
+	dilatation3_column(tmp, Etout, nch, nrl, nrh, ncl, nch); //Dernière colonne
 }
 
 void ouverture3_bin(ulong64 ** Et, ulong64 ** tmp, ulong64 **Etout, long nrl, long nrh, long ncl, long nch){
@@ -806,7 +806,7 @@ void fermeture3_pipe(uint8 ** Et, uint8 ** tmp, uint8 **Etout, long nrl, long nr
 		dilatation3_column(Et, tmp, j+1, nrl, nrh, ncl, nch);
 		erosion3_column(tmp, Etout, j, nrl, nrh, ncl, nch);
 	}
-	erosion3_column(tmp, Etout, nrh, nrl, nrh, ncl, nch); //Dernière colonne
+	erosion3_column(tmp, Etout, nch, nrl, nrh, ncl, nch); //Dernière colonne
 
 }
 
@@ -870,7 +870,7 @@ void ouverture3_pipe_bin(ulong64 ** Et, ulong64 ** tmp, ulong64 **Etout, long nr
 		erosion3_line_bin(Et, tmp, i+1, nrl, nrh, ncl, nch);
 		dilatation3_line_bin(tmp, Etout, i, nrl, nrh, ncl, nch);
 	}
-	dilatation3_line_bin(tmp, Etout, i+1, nrl, nrh, ncl, nch); //Dernière ligne
+	dilatation3_line_bin(tmp, Etout, nrh, nrl, nrh, ncl, nch); //Dernière ligne
 }
 
 void fermeture3_pipe_bin(ulong64 ** Et, ulong64 ** tmp, ulong64 **Etout, long nrl, long nrh, long ncl, long nch){
@@ -882,7 +882,7 @@ void fermeture3_pipe_bin(ulong64 ** Et, ulong64 ** tmp, ulong64 **Etout, long nr
 		dilatation3_line_bin(Et, tmp, i+1, nrl, nrh, ncl, nch);
 		erosion3_line_bin(tmp, Etout, i, nrl, nrh, ncl, nch);
 	}
-	erosion3_line_bin(tmp, Etout, i+1, nrl, nrh, ncl, nch); //Dernière ligne
+	erosion3_line_bin(tmp, Etout, nrh, nrl, nrh, ncl, nch); //Dernière ligne
 }
 
 
