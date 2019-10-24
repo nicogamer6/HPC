@@ -20,10 +20,9 @@
 
 
 void test_EtapemorphoSSE(void){
-
     long nrl, nrh, ncl, nch;
     int n1, n2, n3, n4;
-
+    printf("test");
     //vuint8 tmp;
     
     uint8 **Et=LoadPGM_ui8matrix("smile.pgm",&nrl,&nrh,&ncl,&nch);
@@ -42,7 +41,11 @@ void test_EtapemorphoSSE(void){
 
 
     //uint_to_vuint(Et, It, n1, n2, n3, n4);
-    
+    for(i=nrl;i<=nrh;i++){
+		for(j=ncl;j<=nch;j++){
+			Etbord[i][j]=Et[i][j];
+		}
+	}
 
     /*for(i=n1;i<=n2;i++){
         for(j=n3;j<=n4;j++){
@@ -53,7 +56,7 @@ void test_EtapemorphoSSE(void){
     }*/
     //dup_vui8matrix(It, n1, n2, n3, n4, Itbord);
     //**Etbord=Et[1][1];
-    copy_ui8matrix_ui8matrix(Et,nrl,nrh,ncl,nch,Etbord);
+    //copy_ui8matrix_ui8matrix(Et,nrl,nrh,ncl,nch,Etbord);
 
     erosion3SSE(Etbord,Etout,nrl,nrh,ncl,nch);
     //display_vui8matrix(Itbord,n1-BORD,n2+BORD,n3-BORD,n4+BORD,"%3d","\nItbord\n");
