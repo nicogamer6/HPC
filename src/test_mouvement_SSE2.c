@@ -20,7 +20,7 @@
 
 
 /////////////////////////////////////////////////
-//      CONVERSION SCALIRE EN VECTEUR          //
+//      CONVERSION SCALAIRE EN VECTEUR          //
 /////////////////////////////////////////////////
 
 
@@ -31,6 +31,24 @@ void uint_to_vuint(uint8 ** scalaire, vuint ** vecteur, int n1, int n2, int n3, 
     int i,j,k;
     vuint8 tmp[1];
     uint8 *p = (uint8*) tmp;
+    for (i = n1 ; i <= n2 ; i++)
+    {
+        for (j = n3 ;j <= n4  ;j++)
+        {
+            for (k = 0 ;k < 16;k++)
+            {
+                p[k] = scalaire[i][j*16+k];
+            }
+            vecteur[i][j]= tmp[0];
+        }
+    }
+}
+
+void uint_to_vuint64(ulong64 ** scalaire, vuint ** vecteur, int n1, int n2, int n3, int n4)
+{
+    int i,j,k;
+    vuint8 tmp[1];
+    ulong64 *p = (ulong64*) tmp;
     for (i = n1 ; i <= n2 ; i++)
     {
         for (j = n3 ;j <= n4  ;j++)
@@ -56,6 +74,26 @@ void vuint_to_uint(uint8 ** scalaire, vuint ** vecteur, int n1, int n2, int n3, 
     vuint8 a;
     vuint8 tmp[1];
     uint8 * b = (uint8*) tmp;
+    for (i = n1 ; i <= n2 ; i++)
+    {
+        for (j = n3 ;j <= n4 ;j++)
+        {
+            a = _mm_load_si128(&vecteur[i][j]);
+            _mm_store_si128(tmp, a);
+            for (k = 0 ;k < 16 ;k++)
+            {
+                scalaire[i][j*16+k]= b[k];
+            }
+        }
+    }
+}
+
+void vuint_to_uint64(ulong64 ** scalaire, vuint ** vecteur, int n1, int n2, int n3, int n4)
+{
+    int i,j,k;
+    vuint8 a;
+    vuint8 tmp[1];
+    ulong64 * b = (ulong64*) tmp;
     for (i = n1 ; i <= n2 ; i++)
     {
         for (j = n3 ;j <= n4 ;j++)

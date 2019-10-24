@@ -19,5 +19,10 @@ void test_routineSD_SSEmorpho3xFerm();
 void test_routineSD_SSEmorpho3xOuvFerm();
 void test_routineSD_SSEmorpho3xFermOuv();
 
+void test_routineSD_SSEmorpho3xOuv_bin();
+void test_routineSD_SSEmorpho3xFerm_bin();
+void test_routineSD_SSEmorpho3xOuvFerm_bin();
+void test_routineSD_SSEmorpho3xFermOuv_bin();
+
 #endif // __TEST_MORPHO_SSE_H__
 

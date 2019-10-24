@@ -43,6 +43,5 @@ void fermeture5(uint8 ** Et, uint8 **Etout, long nrl, long nrh, long ncl, long n
 void fermeture5_opti(uint8 ** Et, uint8 **Etout, long nrl, long nrh, long ncl, long nch);
 
 
-
 #endif // __MORPHO_H__
 

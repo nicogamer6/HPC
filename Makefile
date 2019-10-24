@@ -16,6 +16,7 @@ IMG_PATH_FD = testFD/* testFDmorphoF/* testFDmorphoFO/* testFDmorphoO/* testFDmo
 IMG_PATH_SD = testSD/* testSDmorphoF/* testSDmorphoFO/* testSDmorphoO/* testSDmorphoOF/* testSD_SSE/* testSD_SSEmorphoF/* testSD_SSEmorphoFO/* testSD_SSEmorphoO/* testSD_SSEmorphoOF/* testSD_SSE_OMP/*
 IMG_PATH_morpho = testmorpho/* testmorphoSSE/*	testSDmorphoOpipebin/*	testSDmorphoFpipebin/*	testSDmorphoFOpipebin/*	testSDmorphoOFpipebin/*	testSDmorphoOFbin/*	testSDmorphoFObin/*	testSDmorphoOFpipe/*	testSDmorphoFOpipe/*
 IMG_TESTOPTI = testOptiFD/* testOptiSD/* testFDmorphoOpipe/* testFDmorphoFpipe/* testSDmorphoOpipe/* testSDmorphoFpipe/* testFDmorphoObin/* testFDmorphoFbin/* testSDmorphoObin/* testSDmorphoFbin/* testSD_SoA/*
+IMG_TESTSSEBIN = testSD_SSEmorphoF_bin/* testSD_SSEmorphoO_bin/* testSD_SSEmorphoFO_bin/* testSD_SSEmorphoOF_bin/*
 
 # -- OS ----------
 OS = MACH_OSX
@@ -31,7 +32,7 @@ AR = ar -rc
 
 # -- Flags ----------
 C_DEBUG_FLAGS = -O0
-C_CC_FLAGS = -std=c99 -DNOALIAS -DALIGNED -mssse3 -fopenmp
+C_CC_FLAGS = -std=c99 -DNOALIAS -DALIGNED -mssse3 -fopenmp -g
 C_SSE_FLAGS = -mfpmath=sse -mmmx -msse -msse2 -msse3
 C_OPTIMISATION_FLAGS = -O3 -fstrict-aliasing
 
@@ -68,5 +69,5 @@ depend:
 clean:
 	rm -f $(OBJ)
 	rm -f ${EXE_PATH}/${PRODUCT}
-	rm -f $(IMG_PATH_FD) $(IMG_PATH_SD) $(IMG_PATH_morpho) $(IMG_TESTOPTI)
+	rm -f $(IMG_PATH_FD) $(IMG_PATH_SD) $(IMG_PATH_morpho) $(IMG_TESTOPTI) $(IMG_TESTSSEBIN)
 

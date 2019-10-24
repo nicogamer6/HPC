@@ -64,11 +64,11 @@ int main()
     // AFFICHE le CPP juste pour la morpho
     //printf("SEUIL FD = %d\n",SEUILFD);
     //test_routineFD(SEUILFD);                // Dossier "testFD"
-    test_routineSD();                       // Dossier "testSD"
+    /*test_routineSD();                       // Dossier "testSD"
     test_routineSD_opti();                  // Dossier "testOptiSD"
     test_routineSD_Opti_SOA();           // Dossier "testSD_SoA"
-
-    printf("\n");
+*/
+    //printf("\n");
     ///////////////////////////////////////////////////////////////////////////
 
     // Crée les images FD et SD SSE
@@ -107,14 +107,14 @@ int main()
     //test_routineFD_SSEmorpho3xFerm(SEUILFD);    // Dossier "testFD_SSEmorphoF"
     //test_routineFD_SSEmorpho3xOuvFerm(SEUILFD); // Dossier "testFD_SSEmorphoOF"
     //test_routineFD_SSEmorpho3xFermOuv(SEUILFD); // Dossier "testFD_SSEmorphoFO"
-    printf("\n");
+    //printf("\n");
 
 
 
     ///////////////////////////////////////////////////////////////////////////
     // Crée les images FD avec les morpho 3x3, O, F, OF et FO.
     // Affiche le CPP juste pour la morpho et morphoSSE
-
+/*
     test_routineSDmorpho3xOuv();            // Dossier "testSDmorphoO"
     test_routineSDmorpho3xFerm();           // Dossier "testSDmorphoF"
     test_routineSDmorpho3xOuvFerm();        // Dossier "testSDmorphoOF"
@@ -140,14 +140,18 @@ int main()
 	test_routineSDmorpho3xFerm_pipe_bin();	// Dossier "testSDmorphoFpipebin"
 	test_routineSDmorpho3xOuvFerm_pipe_bin();	// Dossier "testSDmorphoOFpipebin"
 	test_routineSDmorpho3xFermOuv_pipe_bin();	// Dossier "testSDmorphoFOpipebin"
-
-    test_routineSD_SSEmorpho3xOuv();        // Dossier "testSD_SSEmorphoO"
-    //test_routineSD_SSEmorpho3xFerm();       // Dossier "testSD_SSEmorphoF"
-    //test_routineSD_SSEmorpho3xOuvFerm();    // Dossier "testSD_SSEmorphoOF"
-    //test_routineSD_SSEmorpho3xFermOuv();    // Dossier "testSD_SSEmorphoFO"
+*/
+    /*test_routineSD_SSEmorpho3xOuv();        // Dossier "testSD_SSEmorphoO"
+    test_routineSD_SSEmorpho3xFerm();       // Dossier "testSD_SSEmorphoF"
+    test_routineSD_SSEmorpho3xOuvFerm();    // Dossier "testSD_SSEmorphoOF"
+    test_routineSD_SSEmorpho3xFermOuv();    // Dossier "testSD_SSEmorphoFO"
     //printf("\n");
 
-
+*/
+	test_routineSD_SSEmorpho3xOuv_bin();		// Dossier "testSD_SSEmorphoO_bin"
+	test_routineSD_SSEmorpho3xFerm_bin();		// Dossier "testSD_SSEmorphoF_bin"
+	test_routineSD_SSEmorpho3xOuvFerm_bin();	// Dossier "testSD_SSEmorphoOF_bin"
+	test_routineSD_SSEmorpho3xFermOuv_bin();	// Dossier "testSD_SSEmorphoFO_bin"
     ///////////////////////////////////////////////////////////////////////////
 
     // Crée les images morpho et morpho SSE Ero, Dil, ouv et ferm dans des sous dossiers 
@@ -155,7 +159,7 @@ int main()
     test_EtapemorphoSSE();                  // Dossier "testmorphoSSE"
 
 
-    //diffImages("testSDmorphoOFpipebin", "testSDmorphoOFbin");
+    //diffImages("testSDmorphoOF", "testSDmorphoOFpipebin"); // Pas bon pipe bin
     //diffImages("testSDmorphoOF","testOptiSDMorphoOF");
 
 

@@ -173,6 +173,7 @@ void test_Etapemorpho(void){
 	}*/
 
     free_ui8matrix(bord,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+    free_ui8matrix(tmp,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
     free_ui8matrix(m,nrl,nrh,ncl,nch);
     free_ui8matrix(m2,nrl,nrh,ncl,nch);
 
