@@ -64,10 +64,10 @@ int main()
     // AFFICHE le CPP juste pour la morpho
     //printf("SEUIL FD = %d\n",SEUILFD);
     //test_routineFD(SEUILFD);                // Dossier "testFD"
-    /*test_routineSD();                       // Dossier "testSD"
+    test_routineSD();                       // Dossier "testSD"
     test_routineSD_opti();                  // Dossier "testOptiSD"
     test_routineSD_Opti_SOA();           // Dossier "testSD_SoA"
-*/
+
     //printf("\n");
     ///////////////////////////////////////////////////////////////////////////
 
@@ -76,9 +76,9 @@ int main()
 
     //test_routineFD_SSE(SEUILFD);            // Dossier "testFD_SSE"
     //test_routineFD_SSE_OMP(SEUILFD);        // Dossier "testFD_SSE_OMP"
-    //test_routineSD_SSE();                   // Dossier "testSD_SSE"
+    test_routineSD_SSE();                   // Dossier "testSD_SSE"
     //test_routineSD_SSE_OMP();               // Dossier "testSD_SSE_OMP"
-    //printf("\n");
+    printf("\n");
     ///////////////////////////////////////////////////////////////////////////
     
     // Crée les images FD avec les morpho 3x3, O, F, OF et FO. 
@@ -101,8 +101,6 @@ int main()
 	//test_routineFDmorpho3xOuv_bin(SEUILFD);	// Dossier "testFDmorphoObin"
 	//test_routineFDmorpho3xFerm_bin(SEUILFD);	// Dossier "testFDmorphoFbin"
 
-
-
     //test_routineFD_SSEmorpho3xOuv(SEUILFD);     // Dossier "testFD_SSEmorphoO"
     //test_routineFD_SSEmorpho3xFerm(SEUILFD);    // Dossier "testFD_SSEmorphoF"
     //test_routineFD_SSEmorpho3xOuvFerm(SEUILFD); // Dossier "testFD_SSEmorphoOF"
@@ -114,40 +112,42 @@ int main()
     ///////////////////////////////////////////////////////////////////////////
     // Crée les images FD avec les morpho 3x3, O, F, OF et FO.
     // Affiche le CPP juste pour la morpho et morphoSSE
-/*
+
     test_routineSDmorpho3xOuv();            // Dossier "testSDmorphoO"
     test_routineSDmorpho3xFerm();           // Dossier "testSDmorphoF"
     test_routineSDmorpho3xOuvFerm();        // Dossier "testSDmorphoOF"
     test_routineSDmorpho3xFermOuv();        // Dossier "testSDmorphoFO"
-    //printf("\n");
+    printf("\n");
 
 	test_routineSDmorpho3xOuv_opti();		// Dossier "testOptiSDMorphoO"
 	test_routineSDmorpho3xFerm_opti();	// Dossier "testOptiSDMorphoF"
 	test_routineSDmorpho3xOuvFerm_opti();	// Dossier "testOptiSDMorphoOF"
 	test_routineSDmorpho3xFermOuv_opti();	// Dossier "testOptiSDMorphoFO"
+	printf("\n");
 
 	test_routineSDmorpho3xOuv_pipe();	// Dossier "testSDmorphoOpipe"
 	test_routineSDmorpho3xFerm_pipe();	// Dossier "testSDmorphoFpipe"
 	test_routineSDmorpho3xOuvFerm_pipe();	// Dossier "testSDmorphoOFpipe"
 	test_routineSDmorpho3xFermOuv_pipe();	// Dossier "testSDmorphoFOpipe"
-
+	printf("\n");
 	test_routineSDmorpho3xOuv_bin();	// Dossier "testSDmorphoObin"
 	test_routineSDmorpho3xFerm_bin();	// Dossier "testSDmorphoFbin"
 	test_routineSDmorpho3xOuvFerm_bin();	// Dossier "testSDmorphoOFbin"
 	test_routineSDmorpho3xFermOuv_bin();	// Dossier "testSDmorphoFObin"
+	printf("\n");
 
 	test_routineSDmorpho3xOuv_pipe_bin();	// Dossier "testSDmorphoOpipebin"
 	test_routineSDmorpho3xFerm_pipe_bin();	// Dossier "testSDmorphoFpipebin"
 	test_routineSDmorpho3xOuvFerm_pipe_bin();	// Dossier "testSDmorphoOFpipebin"
 	test_routineSDmorpho3xFermOuv_pipe_bin();	// Dossier "testSDmorphoFOpipebin"
-*/
-    /*test_routineSD_SSEmorpho3xOuv();        // Dossier "testSD_SSEmorphoO"
+	printf("\n");
+
+    test_routineSD_SSEmorpho3xOuv();        // Dossier "testSD_SSEmorphoO"
     test_routineSD_SSEmorpho3xFerm();       // Dossier "testSD_SSEmorphoF"
     test_routineSD_SSEmorpho3xOuvFerm();    // Dossier "testSD_SSEmorphoOF"
     test_routineSD_SSEmorpho3xFermOuv();    // Dossier "testSD_SSEmorphoFO"
-    //printf("\n");
+    printf("\n");
 
-*/
 	test_routineSD_SSEmorpho3xOuv_bin();		// Dossier "testSD_SSEmorphoO_bin"
 	test_routineSD_SSEmorpho3xFerm_bin();		// Dossier "testSD_SSEmorphoF_bin"
 	test_routineSD_SSEmorpho3xOuvFerm_bin();	// Dossier "testSD_SSEmorphoOF_bin"

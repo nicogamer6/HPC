@@ -25,7 +25,7 @@ void erosion3SSE(uint8 ** Et, uint8 **EtE, long nrl, long nrh, long ncl, long nc
 
 
     // Parcours de l'image
-    for(i = nrl; i < nrh; i++)
+    for(i = nrl; i <= nrh; i++)
     {
         for(j = ncl; j < nch; j+=14)
         {
@@ -81,7 +81,7 @@ void dilatation3SSE(uint8 ** Et, uint8 **EtD, long nrl, long nrh, long ncl, long
 
 
     // Parcours de l'image
-    for(i = nrl; i < nrh; i++)
+    for(i = nrl; i <= nrh; i++)
     {
         for(j = ncl; j < nch; j+=14)
         {
