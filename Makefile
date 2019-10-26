@@ -14,13 +14,13 @@ INC_PATH = include
 
 IMG_PATH_FD = testFD/* testFDmorphoF/* testFDmorphoFO/* testFDmorphoO/* testFDmorphoOF/* testFD_SSE/* testFD_SSEmorphoF/* testFD_SSEmorphoFO/* testFD_SSEmorphoO/* testFD_SSEmorphoOF/* testFD_SSE_OMP/*
 IMG_PATH_SD = testSD/* testSDmorphoF/* testSDmorphoFO/* testSDmorphoO/* testSDmorphoOF/* testSD_SSE/* testSD_SSEmorphoF/* testSD_SSEmorphoFO/* testSD_SSEmorphoO/* testSD_SSEmorphoOF/* testSD_SSE_OMP/*
-IMG_PATH_morpho = testmorpho/* testmorphoSSE/*	testSDmorphoOpipebin/*	testSDmorphoFpipebin/*	testSDmorphoFOpipebin/*	testSDmorphoOFpipebin/*	testSDmorphoOFbin/*	testSDmorphoFObin/*	testSDmorphoOFpipe/*	testSDmorphoFOpipe/*
+IMG_PATH_morpho = testSDmorphoOpipebin/*	testSDmorphoFpipebin/*	testSDmorphoFOpipebin/*	testSDmorphoOFpipebin/*	testSDmorphoOFbin/*	testSDmorphoFObin/*	testSDmorphoOFpipe/*	testSDmorphoFOpipe/*
 IMG_TESTOPTI = testOptiFD/* testOptiSD/* testFDmorphoOpipe/* testFDmorphoFpipe/* testSDmorphoOpipe/* testSDmorphoFpipe/* testFDmorphoObin/* testFDmorphoFbin/* testSDmorphoObin/* testSDmorphoFbin/* testSD_SoA/*
 IMG_TESTSSEBIN = testSD_SSEmorphoF_bin/* testSD_SSEmorphoO_bin/* testSD_SSEmorphoFO_bin/* testSD_SSEmorphoOF_bin/*
 
 # -- OS ----------
-OS = MACH_OSX
-#OS = LINUX
+#OS = MACH_OSX
+OS = LINUX
 
 # -- Config ----------
 # if CONFIG = CLI  (Command Line Interface, no Apple Framework)
@@ -33,7 +33,7 @@ AR = ar -rc
 # -- Flags ----------
 C_DEBUG_FLAGS = -O0
 C_CC_FLAGS = -std=c99 -DNOALIAS -DALIGNED -mssse3 -fopenmp -g
-C_SSE_FLAGS = -mfpmath=sse -mmmx -msse -msse2 -msse3
+C_SSE_FLAGS = -mfpmath=sse -mmmx -msse -msse2 -msse3 -msse4.2
 C_OPTIMISATION_FLAGS = -O3 -fstrict-aliasing
 
 #C_ARCH_FLAGS = -xSSE4.2

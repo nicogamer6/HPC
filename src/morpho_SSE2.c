@@ -23,6 +23,8 @@ void erosion3SSE(uint8 ** Et, uint8 **EtE, long nrl, long nrh, long ncl, long nc
     vuint8 y;
     vuint8 ero;
 
+    uint8 un = 255;
+
     // Parcours de l'image
     for(i = nrl; i <= nrh; i++)
     {
@@ -62,8 +64,6 @@ void erosion3SSE(uint8 ** Et, uint8 **EtE, long nrl, long nrh, long ncl, long nc
 
             _mm_storeu_si128((__m128i*)&EtE[i][j], res); //Store dans Et la valeur de l'erosion
         }
-        //j=nch;
-        //EtE[i][j]=(255&Et[i-1][j-1]&Et[i-1][j]&Et[i-1][j+1]&Et[i][j-1]&Et[i][j]&Et[i][j+1]&Et[i+1][j-1]&Et[i+1][j]&Et[i+1][j+1]);
     }
 
 }
@@ -77,14 +77,13 @@ void dilatation3SSE(uint8 ** Et, uint8 **EtD, long nrl, long nrh, long ncl, long
     //vuint8 xl, xr;
     //vuint8 y;
     //vuint8 ero;
-
+    uint8 zero = 0;
 
     // Parcours de l'image
     for(i = nrl; i <= nrh; i++)
     {
         for(j = ncl; j < nch; j+=14)
         {
-
 
         		l_1 = _mm_loadu_si128((__m128i*)&Et[i-1][j-1]);
 				l0  = _mm_loadu_si128((__m128i*)&Et[i][j-1]);
@@ -116,12 +115,8 @@ void dilatation3SSE(uint8 ** Et, uint8 **EtD, long nrl, long nrh, long ncl, long
 */
 
 
-
-
             _mm_storeu_si128((__m128i*)&EtD[i][j], res); //Store dans Et la valeur de l'erosion
         }
-        //j=nch;
-        //EtD[i][j]=(Et[i-1][j-1]|Et[i-1][j]|Et[i-1][j+1]|Et[i][j-1]|Et[i][j]|Et[i][j+1]|Et[i+1][j-1]|Et[i+1][j]|Et[i+1][j+1]);
     }
 
 }

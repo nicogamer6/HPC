@@ -22,7 +22,7 @@
 void test_EtapemorphoSSE(void){
     long nrl, nrh, ncl, nch;
     int n1, n2, n3, n4;
-    printf("test");
+
     //vuint8 tmp;
     
     uint8 **Et=LoadPGM_ui8matrix("smile.pgm",&nrl,&nrh,&ncl,&nch);
@@ -63,11 +63,11 @@ void test_EtapemorphoSSE(void){
     //vuint_to_uint(Etout, It, n1, n2, n3, n4);
     //display_ui8matrix(Etout ,nrl,nrh,ncl,nch,"%3d","Etout");
     SavePGM_ui8matrix(Etout,nrl,nrh,ncl,nch,"testmorphoSSE/testeroSSE.pgm");
-    
+
     dilatation3SSE(Etbord,Etout,nrl,nrh,ncl,nch);
     SavePGM_ui8matrix(Etout,nrl,nrh,ncl,nch,"testmorphoSSE/testdilSSE.pgm");
     
-    
+
     ouverture3SSE(Etbord,Etout,nrl,nrh,ncl,nch);
     SavePGM_ui8matrix(Etout,nrl,nrh,ncl,nch,"testmorphoSSE/testouvSSE.pgm");
     
