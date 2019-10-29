@@ -204,7 +204,7 @@ void erosion3SSE_bin(ulong64 ** Et, ulong64 **EtE, long nrl, long nrh, long ncl,
 	// Parcours de l'image
 	for(i = nrl; i <= nrh; i++)
 	{
-		for(j = ncl; j < nch; j+=2) // pcqu'il y a 2 ulong64 par vulong64
+		for(j = ncl; j <= nch; j+=2) // pcqu'il y a 2 ulong64 par vulong64
 		{
 			res = ~zero; // tout à 1
 
@@ -270,7 +270,7 @@ void dilatation3SSE_bin(ulong64 ** Et, ulong64 **EtD, long nrl, long nrh, long n
 	// Parcours de l'image
 	for(i = nrl; i <= nrh; i++)
 	{
-		for(j = ncl; j < nch; j+=2) // pcqu'il y a 2 ulong64 par vulong64
+		for(j = ncl; j <= nch; j+=2) // pcqu'il y a 2 ulong64 par vulong64
 		{
 			res = zero; // tout à 0
 

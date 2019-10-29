@@ -172,8 +172,8 @@ int main()
 
 
 
-    //diffImages("testFD", "testFD_SSE");
-    //diffImages("testSD_SSEmorphoO","testSDmorphoOpipebin");
+    //diffImages("testSD", "testSD_SSE");
+    //diffImages("testSDmorphoObin","testSD_SSEmorphoO_bin");
 
 
 
