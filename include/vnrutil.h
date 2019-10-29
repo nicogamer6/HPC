@@ -36,10 +36,14 @@ extern "C" {
  * linear by row, lonly
  */
 
-
+/*
 typedef struct {
-    vuint8 **p1, **p2, **p3;
-} AoSoA;
+    vuint8 **p1;
+    vuint8 **p2;
+    vuint8 **p3;
+} SoA;
+*/
+
 
 
 

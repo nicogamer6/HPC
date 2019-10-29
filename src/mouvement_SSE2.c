@@ -15,7 +15,7 @@
 #define SEUILFD 25
 #define VMIN 20
 #define VMAX 254
-#define N 2
+#define N 4
 //SI a = 1 alors resultat = a sinon resultat = b
 #define vec_sel(a,b,c) _mm_or_si128(_mm_and_si128(c,a),_mm_andnot_si128(c,b));
 
@@ -118,6 +118,8 @@ void SigmaDelta_step0_SSE2 (vuint8** M, vuint8** V,  vuint8** It,long nrl, long 
         }
     }
 }
+
+
 void SigmaDelta_step0_SSE2_OMP (vuint8** M, vuint8** V,  vuint8** It,long nrl, long nrh, long ncl, long nch)
 {
     int i,j;
@@ -151,7 +153,6 @@ void SigmaDelta_1step_SSE2 (vuint8** V,vuint8** Vtm1, vuint8** M, vuint8** Mtm1,
   //  vuint8 Mtmoins1, Mt, It, Vtmoins1, Vt, Et, res;
     vuint8 v_M, v_It, v_Mtm1, v_V, v_Vtm1, sel;
     vuint8 Ot;
-
     
     vuint8 v_min = init_vuint8(VMIN);
     vuint8 v_max = init_vuint8(VMAX);
@@ -164,7 +165,6 @@ void SigmaDelta_1step_SSE2 (vuint8** V,vuint8** Vtm1, vuint8** M, vuint8** Mtm1,
     for (int i = nrl ; i <= nrh ; i++){
         for (int j = ncl ; j <= nch ; j++){
           
-            
             v_Vtm1 = _mm_load_si128((vuint8*) &Vtm1[i][j]);
             v_It = _mm_load_si128((vuint8*) &It[i][j]);
             v_Mtm1 = _mm_load_si128((vuint8*) &Mtm1[i][j]);
@@ -250,14 +250,14 @@ void SigmaDelta_1step_SSE2 (vuint8** V,vuint8** Vtm1, vuint8** M, vuint8** Mtm1,
 
 
 
-/*
+
 
 ////////////////////////////////////////
 //       SIGMA DELTA STEP1 SSE AoSoA       //
 ////////////////////////////////////////
 
-
-void SigmaDelta_1step_SSE2 (AoSoA *Vm, vuint8** V, vuint8** M, vuint8** Et,long nrl, long nrh, long ncl, long nch)
+/*
+void SigmaDelta_1step_SSE2_AoSoA (SoA * Vm, vuint8** V, vuint8** M, vuint8** Et,long nrl, long nrh, long ncl, long nch)
 {
   //  vuint8 Mtmoins1, Mt, It, Vtmoins1, Vt, Et, res;
     vuint8 v_M, v_It, v_Mtm1, v_V, v_Vtm1, sel;
@@ -276,8 +276,8 @@ void SigmaDelta_1step_SSE2 (AoSoA *Vm, vuint8** V, vuint8** M, vuint8** Et,long 
         for (int j = ncl ; j <= nch ; j++){
           
             
-            v_Vtm1 = _mm_load_si128((vuint8*) &Vtm1[i][j]);
-            v_It = _mm_load_si128((vuint8*) &It[i][j]);
+            v_Vtm1 = _mm_load_si128((vuint8*) &Vtm1[i][j]); Vm[0].p1[i][j]
+            v_It = _mm_load_si128((vuint8*) &It[i][j]) Vm[0].p2[i][j]
             v_Mtm1 = _mm_load_si128((vuint8*) &Mtm1[i][j]);
             
             //display_vuint8(v_Vtm1," %d ","\ndebug\n");

@@ -65,8 +65,8 @@ int main()
     //printf("SEUIL FD = %d\n",SEUILFD);
     //test_routineFD(SEUILFD);                // Dossier "testFD"
     test_routineSD();                       // Dossier "testSD"
-    test_routineSD_opti();                  // Dossier "testOptiSD"
-    test_routineSD_Opti_SOA();           // Dossier "testSD_SoA"
+    //test_routineSD_opti();                  // Dossier "testOptiSD"
+    //test_routineSD_Opti_SOA();           // Dossier "testSD_SoA"
 
     //printf("\n");
     ///////////////////////////////////////////////////////////////////////////
@@ -159,8 +159,10 @@ int main()
     //test_EtapemorphoSSE();                  // Dossier "testmorphoSSE"
 
 
+
     //diffImages("testFD", "testFD_SSE");
     //diffImages("testSDmorphoOF","testOptiSDMorphoOF");
+
 
 
     ///////////////////////////////////////////////////////////////////////////
