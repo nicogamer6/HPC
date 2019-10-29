@@ -15,7 +15,7 @@
 #define SEUILFD 25
 #define VMIN 20
 #define VMAX 254
-#define N 4
+#define N 2
 //SI a = 1 alors resultat = a sinon resultat = b
 #define vec_sel(a,b,c) _mm_or_si128(_mm_and_si128(c,a),_mm_andnot_si128(c,b));
 

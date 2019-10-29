@@ -69,6 +69,7 @@ int card_vsint16 (void);
 int card_vuint32 (void);
 int card_vsint32 (void);
 int card_vfloat32(void);
+int card_vulong64(void);
 
 /* =========================== */
 /* === 1D ==================== */
@@ -81,6 +82,7 @@ vsint16  *vsi16vector(int nl, int nh);
 vuint32  *vui32vector(int nl, int nh);
 vsint32  *vsi32vector(int nl, int nh);
 vfloat32 *vf32vector (int nl, int nh);
+vulong64* vulong64vector(int nl, int nh);
 
 void free_vui8vector (vuint8*   v, int nl, int nh);
 void free_vsi8vector (vsint8*   v, int nl, int nh);
@@ -89,6 +91,7 @@ void free_vsi16vector(vsint16*  v, int nl, int nh);
 void free_vui32vector(vuint32*  v, int nl, int nh);
 void free_vsi32vector(vsint32*  v, int nl, int nh);
 void free_vf32vector (vfloat32* v, int nl, int nh);
+void free_vulong64vector(vulong64 *v, int nl, int nh);
 
 // alloc used vector index
 vuint8   **vui8matrix (int nrl, int nrh, int ncl, int nch);
@@ -98,6 +101,7 @@ vsint16  **vsi16matrix(int nrl, int nrh, int ncl, int nch);
 vuint32  **vui32matrix(int nrl, int nrh, int ncl, int nch);
 vsint32  **vsi32matrix(int nrl, int nrh, int ncl, int nch);
 vfloat32 **vf32matrix (int nrl, int nrh, int ncl, int nch);
+vulong64 **vulong64matrix(int nrl, int nrh, int ncl, int nch);
 
 // alloc with scalar index
 vuint8   **vui8matrix_s (int si0, int si1, int sj0, int sj1);
@@ -107,6 +111,7 @@ vsint16  **vsi16matrix_s(int si0, int si1, int sj0, int sj1);
 vuint32  **vui32matrix_s(int si0, int si1, int sj0, int sj1);
 vsint32  **vsi32matrix_s(int si0, int si1, int sj0, int sj1);
 vfloat32 **vf32matrix_s (int si0, int si1, int sj0, int sj1);
+vulong64 **vulong64matrix_s(int i0, int i1, int j0, int j1);
 
 /* ---------- */
 /* -- free -- */
@@ -120,6 +125,7 @@ void free_vui32matrix(vuint32  **m, int nrl, int nrh, int ncl, int nch);
 void free_vsi32matrix(vsint32  **m, int nrl, int nrh, int ncl, int nch);
 void free_vfmatrix   (vfloat   **m, int nrl, int nrh, int ncl, int nch);
 void free_vf32matrix (vfloat32 **m, int nrl, int nrh, int ncl, int nch);
+void free_vulong64matrix(vulong64 **m, int nrl, int nrh, int ncl, int nch);
 
 /* ------------------------------------------ */
 /* -- wrapper for general purpose wrapping -- */
@@ -180,6 +186,7 @@ void display_vsint16 (vsint16  x, char *format, char *name);
 void display_vuint32 (vuint32  x, char *format, char *name);
 void display_vsint32 (vsint32  x, char *format, char *name);
 void display_vfloat32(vfloat32 x, char *format, char *name);
+void display_vulong64(vulong64 x, char *format, char *name);
 
 void display_vui8vector (vuint8   *vX, int j0, int j1, char *format, char *name);
 void display_vsi8vector (vsint8   *vX, int j0, int j1, char *format, char *name);
@@ -212,6 +219,7 @@ vsint16  init_vsint16 (sint16  x);
 vuint32  init_vuint32 (uint32  x);
 vsint32  init_vsint32 (sint32  x);
 vfloat32 init_vfloat32(float32 x);
+vulong64 init_vulong64(ulong64 x);
 
 vuint8   init_vuint8_param  (uint8   x0, uint8   step);
 vsint8   init_vsint8_param  (sint8   x0, sint8   step);
@@ -228,6 +236,7 @@ vsint16  init_vsint16_all  (sint16  x0, sint16  x1, sint16  x2, sint16  x3, sint
 vuint32  init_vuint32_all  (uint32  x0, uint32  x1, uint32  x2, uint32  x3);
 vsint32  init_vsint32_all  (sint32  x0, sint32  x1, sint32  x2, sint32  x3);
 vfloat32 init_vfloat32_all (float32 x0, float32 x1, float32 x2, float32 x3);
+vulong64 init_vulong64_all(ulong64 x0, ulong64 x1);
 
 /* --------------- */
 /* --- 1D SIMD --- */

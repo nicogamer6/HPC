@@ -8,7 +8,7 @@
 
 #include <stdint.h>
 
-#define NBBITS (sizeof(ulong) * 8)
+#define NBBITS (sizeof(ulong64) * 8)
 
 typedef uint8_t byte;
 typedef uint32_t ulong32;

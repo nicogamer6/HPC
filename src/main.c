@@ -45,7 +45,7 @@ void diffImages(char dossier1[], char dossier2[]){
             for(j=ncl;j<=nch;j++){
             	if(It0[i][j] != It1[i][j]){
             		cpt++;
-            		printf("Pixel different : i,j = [%d][%d], Image n° %d\t",i,j,k);
+            		printf("Pixel diff : i,j = [%d][%d]\t",i,j);
             	}
             }
         }
@@ -60,13 +60,25 @@ void diffImages(char dossier1[], char dossier2[]){
 
 int main()
 {
+	/*printf("%d",sizeof(ulong64));
+	vulong64 un = init_vulong64(1ULL<<63);
+	vuint8 test = init_vuint8(255);
+	vulong64 zero = init_vulong64_all(256,(1ULL<<63)+255);
+	display_vulong64(zero," %llu ","\ntest\n");
+	//zero = ~zero;
+	//zero=__mm_andnot_si128(zero, zero);
+	zero=_mm_srli_si128(zero,8);
+	zero = _mm_and_si128(zero,un);
+	display_vulong64(zero," %llu ","\ntest\n");
+	*/
+
     // Crée les images FD et SD
     // AFFICHE le CPP juste pour la morpho
     //printf("SEUIL FD = %d\n",SEUILFD);
     //test_routineFD(SEUILFD);                // Dossier "testFD"
     test_routineSD();                       // Dossier "testSD"
-    //test_routineSD_opti();                  // Dossier "testOptiSD"
-    //test_routineSD_Opti_SOA();           // Dossier "testSD_SoA"
+    test_routineSD_opti();                  // Dossier "testOptiSD"
+    test_routineSD_Opti_SOA();           // Dossier "testSD_SoA"
 
     //printf("\n");
     ///////////////////////////////////////////////////////////////////////////
@@ -161,7 +173,7 @@ int main()
 
 
     //diffImages("testFD", "testFD_SSE");
-    //diffImages("testSDmorphoOF","testOptiSDMorphoOF");
+    //diffImages("testSD_SSEmorphoO","testSDmorphoOpipebin");
 
 
 

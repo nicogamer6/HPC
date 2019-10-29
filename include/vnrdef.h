@@ -40,6 +40,9 @@ typedef __m128i vsint16;
 typedef __m128i vuint32;
 typedef __m128i vsint32;
 
+typedef __m128i vulong64;
+typedef __m128i vslong64;
+
 typedef __m128 vfloat32;
 
 typedef __m128i vbool;    

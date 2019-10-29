@@ -8,7 +8,7 @@
 
 #define VMIN 20
 #define VMAX 254
-#define N 4
+#define N 2
 
 //////////////////////////////
 //     FRAME DIFFERENCE	    //

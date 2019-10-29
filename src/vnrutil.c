@@ -68,7 +68,7 @@ void s2v(int si0, int si1, int sj0, int sj1, int c, int *vi0, int *vi1, int *vj0
 void v2m(int vi0, int vi1, int vj0, int vj1, int c, int *mi0, int *mi1, int *mj0, int *mj1)
 /* ------------------------------------------------------------------------------------- */
 {
-    // conversion indices vectoriels en indices scalaires pour malloc alignŽs
+    // conversion indices vectoriels en indices scalaires pour malloc alignï¿½s
     *mi0 = vi0;
     *mi1 = vi1;
     
@@ -118,6 +118,12 @@ int card_vfloat32(void)
 /* ----------------- */
 {
     return 4;
+}
+/* ----------------- */
+int card_vulong64(void)
+/* ----------------- */
+{
+    return 2;
 }
 /* ---------------------------- */
 vuint8* vui8vector(int nl, int nh)
@@ -212,6 +218,19 @@ vfloat32* vf32vector(int nl, int nh)
     //return v-nl;
     return v;
 }
+/* ---------------------------- */
+vulong64* vulong64vector(int nl, int nh)
+/* ---------------------------- */
+{
+	vulong64 *v;
+
+    SSE2(v=(vulong64 *)_mm_malloc ((size_t) ((nh-nl+1)*sizeof(vulong64)), 16));
+    ALTIVEC(v=(vulong64 *)malloc((size_t) ((nh-nl+1)*sizeof(vulong64))));
+
+    if (!v) vnrerror("allocation failure in vulong64vector()");
+    if(!v) return NULL;
+    return v-nl;
+}
 /* ----------------------------------------- */
 void free_vui8vector(vuint8 *v, int nl, int nh)
 /* ----------------------------------------- */
@@ -257,6 +276,12 @@ void free_vfvector(vfloat *v, int nl, int nh)
 /* ------------------------------------------- */
 void free_vf32vector(vfloat32 *v, int nl, int nh)
 /* ------------------------------------------- */
+{
+    _mm_free(v+nl);
+}
+/* ----------------------------------------- */
+void free_vulong64vector(vulong64 *v, int nl, int nh)
+/* ----------------------------------------- */
 {
     _mm_free(v+nl);
 }
@@ -466,6 +491,35 @@ vfloat32 **vf32matrix(int nrl, int nrh, int ncl, int nch)
     /* return pointer to array of pointers to rows */
     return m;
 }
+/* ------------------------------------------------- */
+vulong64 **vulong64matrix(int nrl, int nrh, int ncl, int nch)
+/* ------------------------------------------------- */
+/* allocate a vuint8 matrix with subscript range m[nrl..nrh][ncl..nch] */
+{
+    int i, nrow=nrh-nrl+1,ncol=nch-ncl+1;
+    vulong64 **m;
+
+    /* allocate pointers to rows */
+    m=(vulong64 **) _mm_malloc ((size_t)((nrow)*sizeof(vulong64*)), 16);
+    if (!m) vnrerror("allocation failure 1 in vulong64matrix()");
+    m -= nrl;
+
+    /* allocate rows and set pointers to them */
+#ifdef LINEAR_ALLOCATION
+    m[nrl]=(vulong64 *) _mm_malloc ((size_t)((nrow*ncol)*sizeof(vulong64)), 16);
+    if (!m[nrl]) vnrerror("allocation failure 2 in vulong64matrix()");
+    m[nrl] -= ncl;
+    for(i=nrl+1;i<=nrh;i++) m[i]=m[i-1]+ncol;
+#else
+    for(i=nrl; i<=nrh; i++) {
+        m[i] = (vulong64 *) _mm_malloc (ncol*sizeof(vulong64), 16);
+        if (!m[i]) vnrerror("allocation failure 2 in vulong64matrix()");
+        m[i] -= ncl;
+    }
+#endif
+    /* return pointer to array of pointers to rows */
+    return m;
+}
 /* -------------------------------------------------------------- */
 void free_vui8matrix(vuint8 **m, int nrl, int nrh, int ncl, int nch)
 /* -------------------------------------------------------------- */
@@ -511,6 +565,13 @@ void free_vsi32matrix(vsint32 **m, int nrl, int nrh, int ncl, int nch)
 /* ---------------------------------------------------------------- */
 void free_vf32matrix(vfloat32 **m, int nrl, int nrh, int ncl, int nch)
 /* ---------------------------------------------------------------- */
+{
+    _mm_free(m[nrl]+ncl);
+    _mm_free(m+nrl);
+}
+/* -------------------------------------------------------------- */
+void free_vulong64matrix(vulong64 **m, int nrl, int nrh, int ncl, int nch)
+/* -------------------------------------------------------------- */
 {
     _mm_free(m[nrl]+ncl);
     _mm_free(m+nrl);
@@ -591,6 +652,17 @@ vfloat32 **vf32matrix_s(int i0, int i1, int j0, int j1)
     int vj0, vj1;
     s2v(i0, i1, j0, j1, c, &vi0, &vi1, &vj0, &vj1);
     return vf32matrix(vi0, vi1, vj0, vj1);
+}
+/* ----------------------------------------------- */
+vulong64 **vulong64matrix_s(int i0, int i1, int j0, int j1)
+/* ----------------------------------------------- */
+{
+    int c = 16;
+    int vi0 = i0;
+    int vi1 = i1;
+    int vj0, vj1;
+    s2v(i0, i1, j0, j1, c, &vi0, &vi1, &vj0, &vj1);
+    return vulong64matrix(vi0, vi1, vj0, vj1);
 }
 /* ---------------------------------------------------- */
 vuint8**vui8matrix_map(int nrl, int nrh, int ncl, int nch)
@@ -1197,6 +1269,17 @@ vfloat32 init_vfloat32(float32 x)
     
     return T[0];
 }
+/* ------------------------ */
+vulong64 init_vulong64(ulong64 x)
+/* ------------------------ */
+{
+	vulong64 T[1];
+    ulong64 *p = (ulong64*) T;
+
+    p[0] = p[1] = x;
+
+    return T[0];
+}
 /* ---------------------------------------- */
 vuint8 init_vuint8_param(uint8 x0, uint8 step)
 /* ---------------------------------------- */
@@ -1423,6 +1506,18 @@ vfloat32 init_vfloat32_all(float32 x0, float32 x1, float32 x2, float32 x3)
     p[2] = x2;
     p[3] = x3;
     
+    return T[0];
+}
+/* -------------------------------------------------------------- */
+vulong64 init_vulong64_all(ulong64 x0, ulong64 x1)
+/* -------------------------------------------------------------- */
+{
+	vulong64 T[1];
+    ulong64 *p = (ulong64*) T;
+
+    p[0] = x0;
+    p[1] = x1;
+
     return T[0];
 }
 /* ------------------ */
@@ -2258,6 +2353,22 @@ void display_vfloat32(vfloat32 x, char *format, char *name)
     if(name != NULL) printf("%s", name);
     
     for(i=0; i<4; i++)
+        printf(format, p[i]);
+}
+/* ------------------------------------------------- */
+void display_vulong64(vulong64 x, char *format, char *name)
+/* ------------------------------------------------- */
+{
+    int i;
+    vulong64 T[1];
+    ulong64 *p = (ulong64*) T;
+
+    //vec_st(x, 0, T);
+    _mm_store_si128(T, x);
+
+    if(name != NULL) printf("%s", name);
+
+    for(i=0; i<2; i++)
         printf(format, p[i]);
 }
 /* ---------------------------------------------------------- */

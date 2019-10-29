@@ -353,7 +353,7 @@ void test_routineSD_SSE()
         vuint_to_uint(res, Et, n1, n2, n3, n4);
         
         SavePGM_ui8matrix(res,nrl,nrh,ncl,nch,namesave);
-        //On doit copier M dan Mtm1, V dans Vtm1 et I dans Itm1
+        //On doit copier M dans Mtm1, V dans Vtm1 et I dans Itm1
      
         
         dup_vui8matrix(V, n1, n2, n3, n4, Vtm1);
