@@ -621,7 +621,7 @@ void test_routineSD_SSEmorpho3xOuvFerm(){
     
     uint8** out = ui8matrix(nrl-BORD, nrh+BORD, ncl-BORD, nch+BORD);
     uint8** Etout = ui8matrix(nrl-BORD, nrh+BORD, ncl-BORD, nch+BORD);
-    uint8** Etout2 = ui8matrix(nrl, nrh, ncl, nch);
+    uint8** Etout2 = ui8matrix(nrl-BORD, nrh+BORD, ncl-BORD, nch+BORD);
    
     vuint8 ** Iv = vui8matrix(n1,n2,n3,n4);
     uint8 ** res = ui8matrix(nrl, nrh, ncl, nch);
@@ -679,7 +679,7 @@ void test_routineSD_SSEmorpho3xOuvFerm(){
     free_vui8matrix(Et,n1-BORD,n2+BORD,n3-BORD,n4+BORD);
     free_ui8matrix(out,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
     free_ui8matrix(Etout,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
-    free_ui8matrix(Etout2,nrl,nrh,ncl,nch);
+    free_ui8matrix(Etout2,nrl-BORD, nrh+BORD, ncl-BORD, nch+BORD);
     free_vui8matrix(Iv,n1,n2,n3,n4);
     free_vui8matrix(Itm1v,n1,n2,n3,n4);
     free_ui8matrix(res,nrl,nrh,ncl,nch);
@@ -724,7 +724,7 @@ void test_routineSD_SSEmorpho3xFermOuv(){
     
     uint8** out = ui8matrix(nrl-BORD, nrh+BORD, ncl-BORD, nch+BORD);
     uint8** Etout = ui8matrix(nrl-BORD, nrh+BORD, ncl-BORD, nch+BORD);
-    uint8** Etout2 = ui8matrix(nrl, nrh, ncl, nch);
+    uint8** Etout2 = ui8matrix(nrl-BORD, nrh+BORD, ncl-BORD, nch+BORD);
    
     vuint8 ** Iv = vui8matrix(n1,n2,n3,n4);
     uint8 ** res = ui8matrix(nrl, nrh, ncl, nch);
@@ -781,7 +781,7 @@ void test_routineSD_SSEmorpho3xFermOuv(){
     free_vui8matrix(Et,n1-BORD,n2+BORD,n3-BORD,n4+BORD);
     free_ui8matrix(out,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
     free_ui8matrix(Etout,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
-    free_ui8matrix(Etout2,nrl,nrh,ncl,nch);
+    free_ui8matrix(Etout2,nrl-BORD, nrh+BORD, ncl-BORD, nch+BORD);
     free_vui8matrix(Iv,n1,n2,n3,n4);
     free_vui8matrix(Itm1v,n1,n2,n3,n4);
     free_ui8matrix(res,nrl,nrh,ncl,nch);
