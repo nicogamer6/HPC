@@ -228,6 +228,7 @@ void erosion3SSE_bin(ulong64 ** Et, ulong64 **EtE, long nrl, long nrh, long ncl,
 			res = _mm_and_si128(_mm_and_si128(res,binright),binleft);
 
 			_mm_storeu_si128((__m128i*)&EtE[i][j], res); //Store dans Et la valeur de l'erosion
+
 		}
 
 	}

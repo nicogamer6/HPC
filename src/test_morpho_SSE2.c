@@ -32,7 +32,7 @@ void test_EtapemorphoSSE(void){
     //s2v(nrl, nrh, ncl, nch, card_vuint8(), &n1, &n2, &n3, &n4);
     //vuint8 ** It = vui8matrix(n1,n2,n3,n4);
     uint8 **Etbord = ui8matrix(nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
-    uint8 **Etout=ui8matrix(nrl,nrh,ncl,nch);
+    uint8 **Etout = ui8matrix(nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
 
     //Pour la morpho binaire
 	ulong64 **Etbin=long64matrix(nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
@@ -47,21 +47,8 @@ void test_EtapemorphoSSE(void){
 		}
 	}
 
-    /*for(i=n1;i<=n2;i++){
-        for(j=n3;j<=n4;j++){
-            //_mm_store_si128(&Itbord[i][j],It[i][j]);
-            tmp = _mm_load_si128(&It[i][j]);
-            _mm_store_si128(&Itbord[i][j], tmp);
-        }
-    }*/
-    //dup_vui8matrix(It, n1, n2, n3, n4, Itbord);
-    //**Etbord=Et[1][1];
-    //copy_ui8matrix_ui8matrix(Et,nrl,nrh,ncl,nch,Etbord);
 
     erosion3SSE(Etbord,Etout,nrl,nrh,ncl,nch);
-    //display_vui8matrix(Itbord,n1-BORD,n2+BORD,n3-BORD,n4+BORD,"%3d","\nItbord\n");
-    //vuint_to_uint(Etout, It, n1, n2, n3, n4);
-    //display_ui8matrix(Etout ,nrl,nrh,ncl,nch,"%3d","Etout");
     SavePGM_ui8matrix(Etout,nrl,nrh,ncl,nch,"testmorphoSSE/testeroSSE.pgm");
 
     dilatation3SSE(Etbord,Etout,nrl,nrh,ncl,nch);
@@ -73,6 +60,7 @@ void test_EtapemorphoSSE(void){
     
     fermeture3SSE(Etbord,Etout,nrl,nrh,ncl,nch);
     SavePGM_ui8matrix(Etout,nrl,nrh,ncl,nch,"testmorphoSSE/testfermSSE.pgm");
+
 
 
     convCharToBin(Etbord,Etbin,nrl,nrh,ncl,nch);
@@ -97,7 +85,7 @@ void test_EtapemorphoSSE(void){
 
 
     free_ui8matrix(Etbord,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
-    free_ui8matrix(Etout,nrl,nrh,ncl,nch);
+    free_ui8matrix(Etout,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
     free_ui8matrix(Et,nrl,nrh,ncl,nch);
     
     free_long64matrix(Etbin,nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
