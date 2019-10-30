@@ -167,8 +167,8 @@ int main()
     ///////////////////////////////////////////////////////////////////////////
 
     // Crée les images morpho et morpho SSE Ero, Dil, ouv et ferm dans des sous dossiers 
-    //test_Etapemorpho();                     // Dossier "testmorpho"
-    //test_EtapemorphoSSE();                  // Dossier "testmorphoSSE"
+    test_Etapemorpho();                     // Dossier "testmorpho"
+    test_EtapemorphoSSE();                  // Dossier "testmorphoSSE"
 
 
 

@@ -34,10 +34,10 @@ void test_EtapemorphoSSE(void){
     uint8 **Etbord = ui8matrix(nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
     uint8 **Etout=ui8matrix(nrl,nrh,ncl,nch);
 
-    /*//Pour la morpho binaire
+    //Pour la morpho binaire
 	ulong64 **Etbin=long64matrix(nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
 	ulong64 **Etoutbin=long64matrix(nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
-	ulong64 **tmpbin=long64matrix(nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);*/
+	ulong64 **tmpbin=long64matrix(nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
 
 
     //uint_to_vuint(Et, It, n1, n2, n3, n4);
@@ -74,32 +74,35 @@ void test_EtapemorphoSSE(void){
     fermeture3SSE(Etbord,Etout,nrl,nrh,ncl,nch);
     SavePGM_ui8matrix(Etout,nrl,nrh,ncl,nch,"testmorphoSSE/testfermSSE.pgm");
 
-    /*convCharToBin(bord,Etbin,nrl,nrh,ncl,nch);
-   	erosion3_bin(Etbin,Etoutbin,nrl,nrh,(ncl/NBBITS),(nch/NBBITS));
-   	convBinToChar(Etoutbin,m2,nrl,nrh,ncl,nch);
-   	SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testerobin3.pgm");
 
-   	convCharToBin(bord,Etbin,nrl,nrh,ncl,nch);
-   	dilatation3_bin(Etbin,Etoutbin,nrl,nrh,(ncl/NBBITS),(nch/NBBITS));
-   	convBinToChar(Etoutbin,m2,nrl,nrh,ncl,nch);
-   	SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testdilbin3.pgm");
+    convCharToBin(Etbord,Etbin,nrl,nrh,ncl,nch);
+   	erosion3SSE_bin(Etbin,Etoutbin,nrl,nrh,(ncl/NBBITS),(nch/NBBITS));
+   	convBinToChar(Etoutbin,Etout,nrl,nrh,ncl,nch);
+   	SavePGM_ui8matrix(Etout,nrl,nrh,ncl,nch,"testmorphoSSE/testerobin3.pgm");
 
-   	convCharToBin(bord,Etbin,nrl,nrh,ncl,nch);
-    ouverture3_bin(Etbin,tmpbin,Etoutbin,nrl,nrh,(ncl/NBBITS),(nch/NBBITS));
-    convBinToChar(Etoutbin,m2,nrl,nrh,ncl,nch);
-   	SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testouvbin3.pgm");
+   	convCharToBin(Etbord,Etbin,nrl,nrh,ncl,nch);
+   	dilatation3SSE_bin(Etbin,Etoutbin,nrl,nrh,(ncl/NBBITS),(nch/NBBITS));
+   	convBinToChar(Etoutbin,Etout,nrl,nrh,ncl,nch);
+   	SavePGM_ui8matrix(Etout,nrl,nrh,ncl,nch,"testmorphoSSE/testdilbin3.pgm");
 
-   	convCharToBin(bord,Etbin,nrl,nrh,ncl,nch);
-   	fermeture3_bin(Etbin,tmpbin,Etoutbin,nrl,nrh,(ncl/NBBITS),(nch/NBBITS));
-   	convBinToChar(Etoutbin,m2,nrl,nrh,ncl,nch);
-   	SavePGM_ui8matrix(m2,nrl,nrh,ncl,nch,"testmorpho/testfermbin3.pgm");
-*/
+   	convCharToBin(Etbord,Etbin,nrl,nrh,ncl,nch);
+    ouverture3SSE_bin(Etbin,tmpbin,Etoutbin,nrl,nrh,(ncl/NBBITS),(nch/NBBITS));
+    convBinToChar(Etoutbin,Etout,nrl,nrh,ncl,nch);
+   	SavePGM_ui8matrix(Etout,nrl,nrh,ncl,nch,"testmorphoSSE/testouvbin3.pgm");
+
+   	convCharToBin(Etbord,Etbin,nrl,nrh,ncl,nch);
+   	fermeture3SSE_bin(Etbin,tmpbin,Etoutbin,nrl,nrh,(ncl/NBBITS),(nch/NBBITS));
+   	convBinToChar(Etoutbin,Etout,nrl,nrh,ncl,nch);
+   	SavePGM_ui8matrix(Etout,nrl,nrh,ncl,nch,"testmorphoSSE/testfermbin3.pgm");
+
 
     free_ui8matrix(Etbord,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
     free_ui8matrix(Etout,nrl,nrh,ncl,nch);
     free_ui8matrix(Et,nrl,nrh,ncl,nch);
     
-
+    free_long64matrix(Etbin,nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
+	free_long64matrix(Etoutbin,nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
+	free_long64matrix(tmpbin,nrl-BORD,nrh+BORD,(ncl/NBBITS)-BORD,(nch/NBBITS)+BORD);
 
 }
 
