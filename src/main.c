@@ -173,7 +173,7 @@ int main()
 
 
     //diffImages("testSD", "testSD_SSE");
-    //diffImages("testSDmorphoObin","testSD_SSEmorphoO_bin");
+    //diffImages("testSD_SSEmorphoF_bin","testSD_SSEmorphoO_bin");
 
 
 

@@ -292,7 +292,7 @@ void dilatation3SSE_bin(ulong64 ** Et, ulong64 **EtD, long nrl, long nrh, long n
 			binright = _mm_srli_si128(res,8); //2ème ulong64 de res qui est le vecteur de droite
 			binright = _mm_or_si128(_mm_and_si128((res>> 1ULL),test),((_mm_and_si128(binright,un))<<(NBBITS-1)));
 
-			res = _mm_and_si128(_mm_and_si128(res,binright),binleft);
+			res = _mm_or_si128(_mm_or_si128(res,binright),binleft);
 
 			_mm_storeu_si128((__m128i*)&EtD[i][j], res); //Store dans Et la valeur de la dilatation
 
