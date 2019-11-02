@@ -216,6 +216,8 @@ int main()
     // Tests unitaires pour SD ET FD en SSE
     //test_unitaire_SD_SSE();
     //test_unitaire_FD_SSE();
+    test_unitaire_erosion3SSE;
+    test_unitaire_dilatation3SSE
     
 
     return 0;
