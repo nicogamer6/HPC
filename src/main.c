@@ -76,7 +76,7 @@ int main()
     // AFFICHE le CPP juste pour la morpho
     //printf("SEUIL FD = %d\n",SEUILFD);
     //test_routineFD(SEUILFD);                // Dossier "testFD"
-    test_routineSD();                       // Dossier "testSD"
+   /* test_routineSD();                       // Dossier "testSD"
     test_routineSD_opti();                  // Dossier "testOptiSD"
     test_routineSD_Opti_SOA();           // Dossier "testSD_SoA"
 
@@ -216,8 +216,9 @@ int main()
     // Tests unitaires pour SD ET FD en SSE
     //test_unitaire_SD_SSE();
     //test_unitaire_FD_SSE();
-    test_unitaire_erosion3SSE;
-    test_unitaire_dilatation3SSE
+   */
+    test_unitaire_erosion3SSE();
+    test_unitaire_dilatation3SSE();
     
 
     return 0;

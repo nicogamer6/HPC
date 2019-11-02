@@ -1232,15 +1232,16 @@ void test_routineSD_SSEmorpho3xFermOuv_bin(){
 void test_unitaire_erosion3SSE(){
 
     int m;
-    vuint8 l_1 = init_vuint8_all(255,126, 255, 0, 0, 254, 24, 250,128, 0, 10, 1, 0, 254,128, 200);
-    vuint8 l0 = init_vuint8_all(255,126, 0, 1, 0, 0, 24, 250,128, 0, 10, 1, 0, 254,128, 200);
-    vuint8 l1 = init_vuint8_all(255,126, 255, 1, 1, 254, 24, 250,128, 0, 10, 1, 0, 254,128, 200);
+    vuint8 l_1 = init_vuint8_all(255,0, 255, 0, 0, 255, 0, 255,255, 0, 0, 255, 0, 255,255, 0);
+    vuint8 l0 = init_vuint8_all(0,255, 255, 255, 0, 0, 0, 255,255, 255, 0, 255, 0, 0,255, 0);
+    vuint8 l1 = init_vuint8_all(255,255, 255, 0, 0, 0, 0, 255,0, 255, 255, 255, 0, 0,255, 0);
     
     vuint8 tmp_1,tmp0,tmp1;
     vuint8 res;
     vuint8 xl, xr;
     vuint8 y;
     vuint8 ero;
+    printf("/////////////////test_unitaire_erosion3SSE////////////////\n");
     
     display_vuint8(l_1," %.3d ","l_1\n");
     display_vuint8(l0," %.3d ","\nl0\n");
@@ -1250,12 +1251,13 @@ void test_unitaire_erosion3SSE(){
     // Parcours de l'image
 
                 res=_mm_and_si128(_mm_and_si128(l_1,l0),l1); //On met dans res l1 & l0 & l_1
-                
-               // tmp0=_mm_srli_si128(res,1);
-                //tmp1=_mm_slli_si128(res,1);
-                //res=_mm_and_si128(_mm_and_si128(tmp0,tmp1),res);
+                display_vuint8(res," %.3d ","\nres\n");
 
-                //res = _mm_srli_si128(res,1);
+                tmp0=_mm_srli_si128(res,1);
+                tmp1=_mm_slli_si128(res,1);
+                res=_mm_and_si128(_mm_and_si128(tmp0,tmp1),res);
+
+                res = _mm_srli_si128(res,1);
                 display_vuint8(res," %.3d ","\nres\n");
 
 
@@ -1264,16 +1266,17 @@ void test_unitaire_erosion3SSE(){
 void test_unitaire_dilatation3SSE(){
 
     int m;
-    vuint8 l_1 = init_vuint8_all(255,126, 255, 1, 0, 254, 24, 250,128, 0, 10, 1, 0, 254,128, 200);
-    vuint8 l0 = init_vuint8_all(255,0, 0, 1, 0, 254, 24, 250,128, 0, 10, 1, 0, 254,0, 200);
-    vuint8 l1 = init_vuint8_all(255,126, 255, 1, 0, 254, 0, 250,128, 0, 10, 1, 0, 254,128, 200);
+    vuint8 l_1 = init_vuint8_all(255,0, 255, 0, 0, 255, 0, 255,255, 0, 0, 255, 0, 255,255, 0);
+    vuint8 l0 = init_vuint8_all(0,255, 255, 255, 0, 0, 0, 255,255, 255, 0, 255, 0, 0,255, 0);
+    vuint8 l1 = init_vuint8_all(255,255, 255, 0, 0, 0, 0, 255,0, 255, 255, 255, 0, 0,255, 0);
     
     vuint8 tmp_1,tmp0,tmp1;
     vuint8 res;
     vuint8 xl, xr;
     vuint8 y;
     vuint8 ero;
-    
+    printf("\n\n/////////////////test_unitaire_dilatation3SSE////////////////\n");
+
     display_vuint8(l_1," %.3d ","l_1\n");
     display_vuint8(l0," %.3d ","\nl0\n");
     display_vuint8(l1," %.3d ","\nl1\n");
@@ -1281,13 +1284,16 @@ void test_unitaire_dilatation3SSE(){
     // Parcours de l'image
 
                 res=_mm_or_si128(_mm_or_si128(l_1,l0),l1); //On met dans res l1 & l0 & l_1
-
-               // tmp0=_mm_srli_si128(res,1);
-                //tmp1=_mm_slli_si128(res,1);
-                //res=_mm_and_si128(_mm_and_si128(tmp0,tmp1),res);
-
-                //res = _mm_srli_si128(res,1);
                 display_vuint8(res," %.3d ","\nres\n");
+
+                tmp0=_mm_srli_si128(res,1);
+                tmp1=_mm_slli_si128(res,1);
+                res=_mm_and_si128(_mm_and_si128(tmp0,tmp1),res);
+
+                res = _mm_srli_si128(res,1);
+                display_vuint8(res," %.3d ","\nres\n");
+    
+    printf("\n");
 
 
 }
