@@ -60,25 +60,26 @@ void diffImages(char dossier1[], char dossier2[]){
 
 int main()
 {
-	/*printf("%d",sizeof(ulong64));
-	vulong64 un = init_vulong64(1ULL<<63);
+
+	/*vulong64 un = init_vulong64(1);
 	vuint8 test = init_vuint8(255);
-	vulong64 zero = init_vulong64_all(256,(1ULL<<63)+255);
+	vulong64 zero = init_vulong64_all(60,1);
 	display_vulong64(zero," %llu ","\ntest\n");
 	//zero = ~zero;
 	//zero=__mm_andnot_si128(zero, zero);
-	zero=_mm_srli_si128(zero,8);
-	zero = _mm_and_si128(zero,un);
-	display_vulong64(zero," %llu ","\ntest\n");
-	*/
+	zero=_mm_srli_epi64(zero,1); // pour décaler d'UN BIT un truc de 64 bits
+	//zero = _mm_and_si128(zero,un);
+
+	display_vulong64(zero," %llu ","\ntest\n");*/
+
 
     // Crée les images FD et SD
     // AFFICHE le CPP juste pour la morpho
     //printf("SEUIL FD = %d\n",SEUILFD);
-    //test_routineFD(SEUILFD);                // Dossier "testFD"
-   /* test_routineSD();                       // Dossier "testSD"
-    test_routineSD_opti();                  // Dossier "testOptiSD"
-    test_routineSD_Opti_SOA();           // Dossier "testSD_SoA"
+    //test_routineFD(SEUILFD);               	// Dossier "testFD"
+	/*test_routineSD();                    	 	// Dossier "testSD"
+    test_routineSD_opti();                  	// Dossier "testOptiSD"
+    test_routineSD_Opti_SOA();          		// Dossier "testSD_SoA"
 
     //printf("\n");
     ///////////////////////////////////////////////////////////////////////////
@@ -170,7 +171,7 @@ int main()
     test_Etapemorpho();                     // Dossier "testmorpho"
     test_EtapemorphoSSE();                  // Dossier "testmorphoSSE"
 
-
+*/
 
     //diffImages("testSD", "testSD_SSE");
     //diffImages("testSD_SSEmorphoF_bin","testSD_SSEmorphoO_bin");
@@ -216,9 +217,9 @@ int main()
     // Tests unitaires pour SD ET FD en SSE
     //test_unitaire_SD_SSE();
     //test_unitaire_FD_SSE();
-   */
-    test_unitaire_erosion3SSE();
-    test_unitaire_dilatation3SSE();
+
+    //test_unitaire_erosion3SSE();
+    //test_unitaire_dilatation3SSE();
     
 
     return 0;

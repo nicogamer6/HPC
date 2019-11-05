@@ -161,29 +161,6 @@ void fermeture5SSE(uint8 ** Et, uint8 **Etout, long nrl, long nrh, long ncl, lon
 
 
 void erosion3SSE_bin(ulong64 ** Et, ulong64 **EtE, long nrl, long nrh, long ncl, long nch){
-/*
-	int i,j;
-	ulong64 res;
-	ulong64 binleft, binright; // Colonne gauche et droite i.e ulong64 avant et après
-
-	for(i=nrl;i<=nrh;i++){
-		for(j=ncl;j<=nch;j++){
-			res = 0;
-			res = ~res; //Passer tout à 1
-			res &= (Et[i-1][j] & Et[i][j] & Et[i+1][j]);	// 3 premiers ulong64 pour les 3 1ères lignes
-
-			binleft = (Et[i-1][j-1] & Et[i][j-1] & Et[i+1][j-1]);	// 3 ulong64 de gauche pour faire la morpho du dernier pixel du ulong64 res (bit poid fort)
-			binleft = (res << 1ULL) | (binleft >> (NBBITS-1) & 1ULL);	// pour ajouter les 3 pixels du ulong de gauche pour faire l'erosion
-
-			binright = (Et[i-1][j+1] & Et[i][j+1] & Et[i+1][j+1]);	// 3 ulong64 de droite pour faire la morpho du premier pixel du ulong64 res (bit poid faible)
-			binright = ((res >> 1ULL) & ~(1ULL<<(NBBITS-1))) | (binright & 1ULL) << (NBBITS-1); // pour ajouter les 3 pixels du ulong de droite pour faire l'erosion
-
-
-			EtE[i][j] = (res & binright & binleft);
-		}
-	}
-	*/
-
 	/*
 	 * Il faut récupérer pour chaque ulong64(donc 1 truc sur 16 de chaque vuint) le pixel suivant et le pixel d'avant dans le ulong64 suivant ou précédent
 	 * Il faut donc récup le poids faible du ulong64 suivant et le poids fort du ulong64 d'avant (si 1er du vuint, ça sera le dernier ulong64 du vuint d'avant)
@@ -195,10 +172,13 @@ void erosion3SSE_bin(ulong64 ** Et, ulong64 **EtE, long nrl, long nrh, long ncl,
 	vulong64 res;
 	vulong64 binleft, binright;
 
-	vulong64 zero = init_vulong64(0); // Problème c'est que ce n'est pas des unsigned, faut faire attention pour les 64 bits à les ramener en positif
+	vulong64 zero = init_vulong64(0);
 	//display_vulong64(zero," %d ","\ntest\n");
 	vulong64 un = init_vulong64(1);
-	vulong64 test = init_vulong64(~(1ULL<<(NBBITS-1)));
+
+	//vulong64 bitfort = init_vulong64(~(1ULL<<(NBBITS-1)));
+	vulong64 bitfort = _mm_slli_epi64(un,(NBBITS-1));
+	bitfort = ~bitfort;
 
 
 	// Parcours de l'image
@@ -219,11 +199,13 @@ void erosion3SSE_bin(ulong64 ** Et, ulong64 **EtE, long nrl, long nrh, long ncl,
 			l1  = _mm_loadu_si128((__m128i*)&Et[i+1][j-1]);
 
 			binleft = _mm_and_si128(_mm_and_si128(l_1,l0),l1);
-			binleft = _mm_or_si128((res<< 1ULL),_mm_and_si128((binleft>>(NBBITS-1)),un));
+			//binleft = _mm_or_si128((res<< 1ULL),_mm_and_si128((binleft>>(NBBITS-1)),un));
+			binleft = _mm_or_si128(_mm_slli_epi64(res,1),_mm_and_si128(_mm_slli_epi64(binleft,(NBBITS-1)),un));
 
 
 			binright = _mm_srli_si128(res,8); //2ème ulong64 de res qui est le vecteur de droite
-			binright = _mm_or_si128(_mm_and_si128((res>> 1ULL),test),((_mm_and_si128(binright,un))<<(NBBITS-1)));
+			//binright = _mm_or_si128(_mm_and_si128((res>> 1ULL),bitfort),((_mm_and_si128(binright,un))<<(NBBITS-1)));
+			binright = _mm_or_si128(_mm_and_si128(_mm_srli_epi64(res,1),bitfort),(_mm_slli_epi64((_mm_and_si128(binright,un)),(NBBITS-1))));
 
 			res = _mm_and_si128(_mm_and_si128(res,binright),binleft);
 
@@ -236,27 +218,6 @@ void erosion3SSE_bin(ulong64 ** Et, ulong64 **EtE, long nrl, long nrh, long ncl,
 }
 
 void dilatation3SSE_bin(ulong64 ** Et, ulong64 **EtD, long nrl, long nrh, long ncl, long nch){
-/*
-	int i,j;
-	ulong64 res;
-	ulong64 binleft, binright; // Colonne gauche et droite i.e ulong64 avant et après
-
-	for(i=nrl;i<=nrh;i++){
-		for(j=ncl;j<=nch;j++){
-			res = 0;
-			res |= (Et[i-1][j] | Et[i][j] | Et[i+1][j]); // 3 premiers ulong64 pour les 3 1ères lignes
-
-			binleft = (Et[i-1][j-1] | Et[i][j-1] | Et[i+1][j-1]); // 3 ulong64 de gauche pour faire la morpho du dernier pixel du ulong64 res (bit poid fort)
-			binleft = (res << 1ULL) | (binleft >> (NBBITS - 1) & 1ULL);	// pour ajouter les 3 pixels du ulong de gauche pour faire la dilatation
-
-			binright = (Et[i-1][j+1] | Et[i][j+1] | Et[i+1][j+1]); // 3 ulong64 de droite pour faire la morpho du premier pixel du ulong64 res (bit poid faible)
-			binright = ((res >> 1ULL) & ~(1ULL << (NBBITS - 1))) | (binright & 1ULL) << (NBBITS-1);	// pour ajouter les 3 pixels du ulong de droite pour faire la dilatation
-
-
-			EtD[i][j] = (res | binright | binleft);
-		}
-	}
- */
 
 	int i, j;
 	vulong64 l_1, l0, l1;
@@ -266,7 +227,10 @@ void dilatation3SSE_bin(ulong64 ** Et, ulong64 **EtD, long nrl, long nrh, long n
 
 	vulong64 zero = init_vulong64(0);
 	vulong64 un = init_vulong64(1);
-	vulong64 test = init_vulong64(~(1ULL<<(NBBITS-1)));
+
+	//vulong64 bitfort = init_vulong64(~(1ULL<<(NBBITS-1)));
+	vulong64 bitfort = (_mm_slli_epi64(un,(NBBITS-1)));
+	bitfort = ~bitfort;
 
 	// Parcours de l'image
 	for(i = nrl; i <= nrh; i++)
@@ -286,11 +250,13 @@ void dilatation3SSE_bin(ulong64 ** Et, ulong64 **EtD, long nrl, long nrh, long n
 			l1  = _mm_loadu_si128((__m128i*)&Et[i+1][j-1]);
 
 			binleft = _mm_or_si128(_mm_or_si128(l_1,l0),l1);
-			binleft = _mm_or_si128((res<< 1ULL),_mm_and_si128((binleft>>(NBBITS-1)),un));
+			//binleft = _mm_or_si128((res<< 1ULL),_mm_and_si128((binleft>>(NBBITS-1)),un));
+			binleft = _mm_or_si128(_mm_slli_epi64(res,1),_mm_and_si128(_mm_slli_epi64(binleft,(NBBITS-1)),un));
 
 
 			binright = _mm_srli_si128(res,8); //2ème ulong64 de res qui est le vecteur de droite
-			binright = _mm_or_si128(_mm_and_si128((res>> 1ULL),test),((_mm_and_si128(binright,un))<<(NBBITS-1)));
+			//binright = _mm_or_si128(_mm_and_si128((res>> 1ULL),bitfort),((_mm_and_si128(binright,un))<<(NBBITS-1)));
+			binright = _mm_or_si128(_mm_and_si128(_mm_srli_epi64(res,1),bitfort),(_mm_slli_epi64((_mm_and_si128(binright,un)),(NBBITS-1))));
 
 			res = _mm_or_si128(_mm_or_si128(res,binright),binleft);
 
