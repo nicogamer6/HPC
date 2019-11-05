@@ -220,6 +220,10 @@ int main()
 
     //test_unitaire_erosion3SSE();
     //test_unitaire_dilatation3SSE();
+    test_unitaire_erosion3SSE_bin();
+    test_unitaire_dilatation3SSE_bin();
+
+
     
 
     return 0;

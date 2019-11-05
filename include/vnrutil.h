@@ -41,8 +41,8 @@ typedef struct {
     vuint8 **p1;
     vuint8 **p2;
     vuint8 **p3;
-} SoA;
-*/
+} SoA;*/
+
 
 
 

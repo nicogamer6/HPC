@@ -1297,3 +1297,145 @@ void test_unitaire_dilatation3SSE(){
 
 
 }
+
+
+void test_unitaire_erosion3SSE_bin(){
+    /*
+     * Il faut récupérer pour chaque ulong64(donc 1 truc sur 16 de chaque vuint) le pixel suivant et le pixel d'avant dans le ulong64 suivant ou précédent
+     * Il faut donc récup le poids faible du ulong64 suivant et le poids fort du ulong64 d'avant (si 1er du vuint, ça sera le dernier ulong64 du vuint d'avant)
+     */
+    
+    printf("\n\n/////////////////test_unitaire_erosion3SSE_bin////////////////\n");
+    
+    vulong64 res;
+    vulong64 binleft, binright;
+
+    vulong64 zero = init_vulong64(0);
+    //display_vulong64(zero," %d ","\ntest\n");
+    vulong64 un = init_vulong64(1);
+
+    //vulong64 bitfort = init_vulong64(~(1ULL<<(NBBITS-1)));
+    vulong64 bitfort = _mm_slli_epi64(un,(NBBITS-1));
+    bitfort = ~bitfort;
+
+
+    // Parcours de l'image
+
+    res = ~zero; // tout à 1
+
+    vulong64 l_1 = init_vulong64_all(247,156);
+    vulong64 l0 = init_vulong64_all(207,207);
+    vulong64 l1 = init_vulong64_all(63,63);
+
+    //l_1 : 1111 0111   1001 1100
+    //l0  : 1100 1111   1100 1111
+    //l1  : 0011 1111   0011 1111
+    
+    //and = 0000 0111   0000 1100
+    //         7            12
+
+    display_vulong64(l_1," %llu ","l_1\n");
+    display_vulong64(l0," %llu","\nl0\n");
+    display_vulong64(l1," %llu ","\nl1\n");
+    
+    res = _mm_and_si128(_mm_and_si128(_mm_and_si128(res,l_1),l0),l1);
+    
+    display_vulong64(res," %llu ","\nres\n");
+
+
+    l_1 = init_vulong64_all(0,0);
+    l0 = init_vulong64_all(0,0);
+    l1 = init_vulong64_all(0,0);
+
+    binleft = _mm_and_si128(_mm_and_si128(l_1,l0),l1);
+    display_vulong64(binleft," %llu ","\nbinleft\n");
+
+    //binleft = _mm_or_si128((res<< 1ULL),_mm_and_si128((binleft>>(NBBITS-1)),un));
+    binleft = _mm_or_si128(_mm_slli_epi64(res,1),_mm_and_si128(_mm_slli_epi64(binleft,(NBBITS-1)),un));
+
+
+    binright = _mm_srli_si128(res,8); //2ème ulong64 de res qui est le vecteur de droite
+    display_vulong64(binright," %llu ","\nbinright\n");
+
+    
+    //binright = _mm_or_si128(_mm_and_si128((res>> 1ULL),bitfort),((_mm_and_si128(binright,un))<<(NBBITS-1)));
+    binright = _mm_or_si128(_mm_and_si128(_mm_srli_epi64(res,1),bitfort),(_mm_slli_epi64((_mm_and_si128(binright,un)),(NBBITS-1))));
+
+    res = _mm_and_si128(_mm_and_si128(res,binright),binleft);
+    
+    display_vulong64(res," %llu ","\nres\n");
+    // A la fin l'érosion doi nous afficher :
+    //    0000 0010  0000 0000
+    //        2          0
+
+}
+
+
+
+
+void test_unitaire_dilatation3SSE_bin(){
+    
+    printf("\n\n/////////////////test_unitaire_dilatation3SSE_bin////////////////\n");
+
+    
+    vulong64 res;
+    vulong64 binleft, binright;
+
+    vulong64 zero = init_vulong64(0);
+    vulong64 un = init_vulong64(1);
+
+    //vulong64 bitfort = init_vulong64(~(1ULL<<(NBBITS-1)));
+    vulong64 bitfort = (_mm_slli_epi64(un,(NBBITS-1)));
+    bitfort = ~bitfort;
+
+    // Parcours de l'image
+    res = zero; // tout à 0
+
+    vulong64 l_1 = init_vulong64_all(7,156);
+    vulong64 l0 = init_vulong64_all(135,135);
+    vulong64 l1 = init_vulong64_all(23,23);
+    
+    //l_1 : 0000 0111   1001 1100
+    //l0  : 1000 0111   1000 0111
+    //l1  : 0001 0111   0001 0111
+    
+    //or = 1001 0111   1001 1111
+    //         151         159
+    
+    
+    display_vulong64(l_1," %llu ","l_1\n");
+    display_vulong64(l0," %llu","\nl0\n");
+    display_vulong64(l1," %llu ","\nl1\n");
+
+    res = _mm_or_si128(_mm_or_si128(_mm_or_si128(res,l_1),l0),l1);
+    display_vulong64(res," %llu ","\nres\n");
+
+    l_1 = init_vulong64_all(0,0);
+    l0 = init_vulong64_all(0,0);
+    l1 = init_vulong64_all(0,0);
+
+    binleft = _mm_or_si128(_mm_or_si128(l_1,l0),l1);
+    //binleft = _mm_or_si128((res<< 1ULL),_mm_and_si128((binleft>>(NBBITS-1)),un));
+    binleft = _mm_or_si128(_mm_slli_epi64(res,1),_mm_and_si128(_mm_slli_epi64(binleft,(NBBITS-1)),un));
+    display_vulong64(binleft," %llu ","\nbinleft\n");
+
+
+    binright = _mm_srli_si128(res,8); //2ème ulong64 de res qui est le vecteur de droite
+    //binright = _mm_or_si128(_mm_and_si128((res>> 1ULL),bitfort),((_mm_and_si128(binright,un))<<(NBBITS-1)));
+    display_vulong64(binright," %llu ","\nbinright\n");
+
+    binright = _mm_or_si128(_mm_and_si128(_mm_srli_epi64(res,1),bitfort),(_mm_slli_epi64((_mm_and_si128(binright,un)),(NBBITS-1))));
+    // binright = 1<<63 = 9223372036854775883
+
+    res = _mm_or_si128(_mm_or_si128(res,binright),binleft);
+    display_vulong64(res," %llu ","\nres\n");
+    printf("\n");
+
+}
+/*
+1000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000010010111000000000000000000000000100111110
+0000000000000000000000001001011100000000000000000000000100101111
+
+1000000000000000000000011111111100000000000000000000000100111111
+*/

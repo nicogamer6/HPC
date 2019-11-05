@@ -257,12 +257,13 @@ void SigmaDelta_1step_SSE2 (vuint8** V,vuint8** Vtm1, vuint8** M, vuint8** Mtm1,
 ////////////////////////////////////////
 
 /*
-void SigmaDelta_1step_SSE2_AoSoA (SoA * Vm, vuint8** V, vuint8** M, vuint8** Et,long nrl, long nrh, long ncl, long nch)
+void SigmaDelta_1step_SSE2_AoSoA (SoA *Vm, vuint8** V, vuint8** M, vuint8** Et,long nrl, long nrh, long ncl, long nch)
 {
   //  vuint8 Mtmoins1, Mt, It, Vtmoins1, Vt, Et, res;
     vuint8 v_M, v_It, v_Mtm1, v_V, v_Vtm1, sel;
     vuint8 Ot;
 
+    // Créer un tableau de vuint8 et stocker au fur et à mesure V I et M
     
     vuint8 v_min = init_vuint8(VMIN);
     vuint8 v_max = init_vuint8(VMAX);
@@ -356,8 +357,8 @@ void SigmaDelta_1step_SSE2_AoSoA (SoA * Vm, vuint8** V, vuint8** M, vuint8** Et,
         }
     }
 }
-*/
 
+*/
 
 
 

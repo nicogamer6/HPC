@@ -25,6 +25,8 @@ void test_routineSD_SSEmorpho3xOuvFerm_bin();
 void test_routineSD_SSEmorpho3xFermOuv_bin();
 void test_unitaire_erosion3SSE();
 void test_unitaire_dilatation3SSE();
+void test_unitaire_erosion3SSE_bin();
+void test_unitaire_dilatation3SSE_bin();
 
 #endif // __TEST_MORPHO_SSE_H__
 
