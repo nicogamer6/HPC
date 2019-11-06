@@ -17,6 +17,7 @@ IMG_PATH_SD = testSD/* testSDmorphoF/* testSDmorphoFO/* testSDmorphoO/* testSDmo
 IMG_PATH_morpho = testSDmorphoOpipebin/*	testSDmorphoFpipebin/*	testSDmorphoFOpipebin/*	testSDmorphoOFpipebin/*	testSDmorphoOFbin/*	testSDmorphoFObin/*	testSDmorphoOFpipe/*	testSDmorphoFOpipe/*
 IMG_TESTOPTI = testOptiFD/* testOptiSD/* testFDmorphoOpipe/* testFDmorphoFpipe/* testSDmorphoOpipe/* testSDmorphoFpipe/* testFDmorphoObin/* testFDmorphoFbin/* testSDmorphoObin/* testSDmorphoFbin/* testSD_SoA/*
 IMG_TESTSSEBIN = testSD_SSEmorphoF_bin/* testSD_SSEmorphoO_bin/* testSD_SSEmorphoFO_bin/* testSD_SSEmorphoOF_bin/* testOptiSDMorphoO/* testOptiSDMorphoF/* testOptiSDMorphoOF/* testOptiSDMorphoFO/* testmorpho/* testmorphoSSE/* 
+IMG_PIPESSE = testSD_SSEmorphoO_pipebin/* testSD_SSEmorphoF_pipebin/* testSD_SSEmorphoOF_pipebin/* testSD_SSEmorphoFO_pipebin/*
 
 # -- OS ----------
 #OS = MACH_OSX
@@ -69,5 +70,5 @@ depend:
 clean:
 	rm -f $(OBJ)
 	rm -f ${EXE_PATH}/${PRODUCT}
-	rm -f $(IMG_PATH_FD) $(IMG_PATH_SD) $(IMG_PATH_morpho) $(IMG_TESTOPTI) $(IMG_TESTSSEBIN)
+	rm -f $(IMG_PATH_FD) $(IMG_PATH_SD) $(IMG_PATH_morpho) $(IMG_TESTOPTI) $(IMG_TESTSSEBIN) $(IMG_PIPESSE)
 

@@ -23,6 +23,12 @@ void test_routineSD_SSEmorpho3xOuv_bin();
 void test_routineSD_SSEmorpho3xFerm_bin();
 void test_routineSD_SSEmorpho3xOuvFerm_bin();
 void test_routineSD_SSEmorpho3xFermOuv_bin();
+
+void test_routineSD_SSEmorpho3xOuv_pipebin();
+void test_routineSD_SSEmorpho3xFerm_pipebin();
+void test_routineSD_SSEmorpho3xOuvFerm_pipebin();
+void test_routineSD_SSEmorpho3xFermOuv_pipebin();
+
 void test_unitaire_erosion3SSE();
 void test_unitaire_dilatation3SSE();
 void test_unitaire_erosion3SSE_bin();

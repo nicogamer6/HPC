@@ -160,21 +160,26 @@ int main()
     test_routineSD_SSEmorpho3xOuvFerm();    // Dossier "testSD_SSEmorphoOF"
     test_routineSD_SSEmorpho3xFermOuv();    // Dossier "testSD_SSEmorphoFO"
     printf("\n");
-
+*/
 	test_routineSD_SSEmorpho3xOuv_bin();		// Dossier "testSD_SSEmorphoO_bin"
 	test_routineSD_SSEmorpho3xFerm_bin();		// Dossier "testSD_SSEmorphoF_bin"
 	test_routineSD_SSEmorpho3xOuvFerm_bin();	// Dossier "testSD_SSEmorphoOF_bin"
 	test_routineSD_SSEmorpho3xFermOuv_bin();	// Dossier "testSD_SSEmorphoFO_bin"
+	printf("\n");
+	test_routineSD_SSEmorpho3xOuv_pipebin(); 		// Dossier "testSD_SSEmorphoO_pipebin"
+	test_routineSD_SSEmorpho3xFerm_pipebin();		// Dossier "testSD_SSEmorphoF_pipebin"
+	test_routineSD_SSEmorpho3xOuvFerm_pipebin();	// Dossier "testSD_SSEmorphoOF_pipebin"
+	test_routineSD_SSEmorpho3xFermOuv_pipebin();	// Dossier "testSD_SSEmorphoFO_pipebin"
     ///////////////////////////////////////////////////////////////////////////
 
     // Crée les images morpho et morpho SSE Ero, Dil, ouv et ferm dans des sous dossiers 
     test_Etapemorpho();                     // Dossier "testmorpho"
     test_EtapemorphoSSE();                  // Dossier "testmorphoSSE"
 
-*/
+
 
     //diffImages("testSD", "testSD_SSE");
-    //diffImages("testSD_SSEmorphoF_bin","testSD_SSEmorphoO_bin");
+    //diffImages("testSD_SSEmorphoO_bin","testSD_SSEmorphoO_pipebin");
 
 
 
@@ -220,8 +225,8 @@ int main()
 
     //test_unitaire_erosion3SSE();
     //test_unitaire_dilatation3SSE();
-    test_unitaire_erosion3SSE_bin();
-    test_unitaire_dilatation3SSE_bin();
+    //test_unitaire_erosion3SSE_bin();
+    //test_unitaire_dilatation3SSE_bin();
 
 
     
