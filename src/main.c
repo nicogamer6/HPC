@@ -77,7 +77,7 @@ int main()
     // AFFICHE le CPP juste pour la morpho
     //printf("SEUIL FD = %d\n",SEUILFD);
     //test_routineFD(SEUILFD);               	// Dossier "testFD"
-	/*test_routineSD();                    	 	// Dossier "testSD"
+	test_routineSD();                    	 	// Dossier "testSD"
     test_routineSD_opti();                  	// Dossier "testOptiSD"
     test_routineSD_Opti_SOA();          		// Dossier "testSD_SoA"
 
@@ -90,7 +90,7 @@ int main()
     //test_routineFD_SSE(SEUILFD);            // Dossier "testFD_SSE"
     //test_routineFD_SSE_OMP(SEUILFD);        // Dossier "testFD_SSE_OMP"
     test_routineSD_SSE();                   // Dossier "testSD_SSE"
-    //test_routineSD_SSE_OMP();               // Dossier "testSD_SSE_OMP"
+    test_routineSD_SSE_OMP();               // Dossier "testSD_SSE_OMP"
     printf("\n");
     ///////////////////////////////////////////////////////////////////////////
     
@@ -160,7 +160,7 @@ int main()
     test_routineSD_SSEmorpho3xOuvFerm();    // Dossier "testSD_SSEmorphoOF"
     test_routineSD_SSEmorpho3xFermOuv();    // Dossier "testSD_SSEmorphoFO"
     printf("\n");
-*/
+
 	test_routineSD_SSEmorpho3xOuv_bin();		// Dossier "testSD_SSEmorphoO_bin"
 	test_routineSD_SSEmorpho3xFerm_bin();		// Dossier "testSD_SSEmorphoF_bin"
 	test_routineSD_SSEmorpho3xOuvFerm_bin();	// Dossier "testSD_SSEmorphoOF_bin"

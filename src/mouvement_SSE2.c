@@ -126,7 +126,7 @@ void SigmaDelta_step0_SSE2_OMP (vuint8** M, vuint8** V,  vuint8** It,long nrl, l
     vuint8 v_vmin = init_vuint8(VMIN);
     vuint8 I;
     
-    #pragma omp parallel for schedule(static)
+    #pragma omp parallel for
     
         for(i=nrl; i<=nrh; i++)
         {
@@ -376,7 +376,7 @@ void SigmaDelta_1step_SSE2_OMP (vuint8** V,vuint8** Vtm1, vuint8** M, vuint8** M
     vuint8 v_128 = init_vuint8(128);
     vuint8 v_255 = init_vuint8(255);
 
-    #pragma omp parallel for schedule(static)
+    #pragma omp parallel for
     
         for (int i = nrl ; i <= nrh ; i++){
             for (int j = ncl ; j <= nch ; j++){
