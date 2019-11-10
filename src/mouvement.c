@@ -121,6 +121,7 @@ void routine_SigmaDelta_1step(uint8 **V, uint8 **Vtm1, uint8 **M, uint8 **Mtm1, 
 			
 		}
 	}
+    free_ui8matrix(Ot,nrl,nrh,ncl,nch);
 	
     /*//Step 1 Estimation
     for(i = nrl; i<=nrh;i++)
@@ -225,6 +226,7 @@ void routine_SigmaDelta_1step_opti(uint8 **V, uint8 **Vtm1, uint8 **M, uint8 **M
             
         }
     }
+    free_ui8matrix(Ot,nrl,nrh,ncl,nch);
 }
 
 
@@ -278,6 +280,7 @@ void routine_SigmaDelta_1step_SOA(SoA3 Vm, uint8 **V, uint8 **M, uint8 **Et, lon
             
         }
     }
+    free_ui8matrix(Ot,nrl,nrh,ncl,nch);
 }
 
 

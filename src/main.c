@@ -91,7 +91,7 @@ int main()
     //test_routineFD_SSE_OMP(SEUILFD);        // Dossier "testFD_SSE_OMP"
     test_routineSD_SSE();                   // Dossier "testSD_SSE"
     test_routineSD_SSE_OMP();               // Dossier "testSD_SSE_OMP"
-    printf("\n");
+    //printf("\n");
     ///////////////////////////////////////////////////////////////////////////
     
     // Crée les images FD avec les morpho 3x3, O, F, OF et FO. 
@@ -126,55 +126,55 @@ int main()
     // Crée les images FD avec les morpho 3x3, O, F, OF et FO.
     // Affiche le CPP juste pour la morpho et morphoSSE
 
-    test_routineSDmorpho3xOuv();            // Dossier "testSDmorphoO"
-    test_routineSDmorpho3xFerm();           // Dossier "testSDmorphoF"
+    //test_routineSDmorpho3xOuv();            // Dossier "testSDmorphoO"
+    //test_routineSDmorpho3xFerm();           // Dossier "testSDmorphoF"
     test_routineSDmorpho3xOuvFerm();        // Dossier "testSDmorphoOF"
-    test_routineSDmorpho3xFermOuv();        // Dossier "testSDmorphoFO"
+    //test_routineSDmorpho3xFermOuv();        // Dossier "testSDmorphoFO"
     printf("\n");
 
-	test_routineSDmorpho3xOuv_opti();		// Dossier "testOptiSDMorphoO"
-	test_routineSDmorpho3xFerm_opti();	// Dossier "testOptiSDMorphoF"
+    //test_routineSDmorpho3xOuv_opti();		// Dossier "testOptiSDMorphoO"
+    //test_routineSDmorpho3xFerm_opti();	// Dossier "testOptiSDMorphoF"
 	test_routineSDmorpho3xOuvFerm_opti();	// Dossier "testOptiSDMorphoOF"
-	test_routineSDmorpho3xFermOuv_opti();	// Dossier "testOptiSDMorphoFO"
+	//test_routineSDmorpho3xFermOuv_opti();	// Dossier "testOptiSDMorphoFO"
 	printf("\n");
 
-	test_routineSDmorpho3xOuv_pipe();	// Dossier "testSDmorphoOpipe"
-	test_routineSDmorpho3xFerm_pipe();	// Dossier "testSDmorphoFpipe"
+	//test_routineSDmorpho3xOuv_pipe();	// Dossier "testSDmorphoOpipe"
+	//test_routineSDmorpho3xFerm_pipe();	// Dossier "testSDmorphoFpipe"
 	test_routineSDmorpho3xOuvFerm_pipe();	// Dossier "testSDmorphoOFpipe"
-	test_routineSDmorpho3xFermOuv_pipe();	// Dossier "testSDmorphoFOpipe"
+	//test_routineSDmorpho3xFermOuv_pipe();	// Dossier "testSDmorphoFOpipe"
 	printf("\n");
-	test_routineSDmorpho3xOuv_bin();	// Dossier "testSDmorphoObin"
-	test_routineSDmorpho3xFerm_bin();	// Dossier "testSDmorphoFbin"
+	//test_routineSDmorpho3xOuv_bin();	// Dossier "testSDmorphoObin"
+	//test_routineSDmorpho3xFerm_bin();	// Dossier "testSDmorphoFbin"
 	test_routineSDmorpho3xOuvFerm_bin();	// Dossier "testSDmorphoOFbin"
-	test_routineSDmorpho3xFermOuv_bin();	// Dossier "testSDmorphoFObin"
+	//test_routineSDmorpho3xFermOuv_bin();	// Dossier "testSDmorphoFObin"
 	printf("\n");
 
-	test_routineSDmorpho3xOuv_pipe_bin();	// Dossier "testSDmorphoOpipebin"
-	test_routineSDmorpho3xFerm_pipe_bin();	// Dossier "testSDmorphoFpipebin"
+	//test_routineSDmorpho3xOuv_pipe_bin();	// Dossier "testSDmorphoOpipebin"
+	//test_routineSDmorpho3xFerm_pipe_bin();	// Dossier "testSDmorphoFpipebin"
 	test_routineSDmorpho3xOuvFerm_pipe_bin();	// Dossier "testSDmorphoOFpipebin"
-	test_routineSDmorpho3xFermOuv_pipe_bin();	// Dossier "testSDmorphoFOpipebin"
+	//test_routineSDmorpho3xFermOuv_pipe_bin();	// Dossier "testSDmorphoFOpipebin"
 	printf("\n");
 
-    test_routineSD_SSEmorpho3xOuv();        // Dossier "testSD_SSEmorphoO"
-    test_routineSD_SSEmorpho3xFerm();       // Dossier "testSD_SSEmorphoF"
+	//test_routineSD_SSEmorpho3xOuv();        // Dossier "testSD_SSEmorphoO"
+	//test_routineSD_SSEmorpho3xFerm();       // Dossier "testSD_SSEmorphoF"
     test_routineSD_SSEmorpho3xOuvFerm();    // Dossier "testSD_SSEmorphoOF"
-    test_routineSD_SSEmorpho3xFermOuv();    // Dossier "testSD_SSEmorphoFO"
+    //test_routineSD_SSEmorpho3xFermOuv();    // Dossier "testSD_SSEmorphoFO"
     printf("\n");
 
-	test_routineSD_SSEmorpho3xOuv_bin();		// Dossier "testSD_SSEmorphoO_bin"
-	test_routineSD_SSEmorpho3xFerm_bin();		// Dossier "testSD_SSEmorphoF_bin"
+    //test_routineSD_SSEmorpho3xOuv_bin();		// Dossier "testSD_SSEmorphoO_bin"
+	//test_routineSD_SSEmorpho3xFerm_bin();		// Dossier "testSD_SSEmorphoF_bin"
 	test_routineSD_SSEmorpho3xOuvFerm_bin();	// Dossier "testSD_SSEmorphoOF_bin"
-	test_routineSD_SSEmorpho3xFermOuv_bin();	// Dossier "testSD_SSEmorphoFO_bin"
+	//test_routineSD_SSEmorpho3xFermOuv_bin();	// Dossier "testSD_SSEmorphoFO_bin"
 	printf("\n");
-	test_routineSD_SSEmorpho3xOuv_pipebin(); 		// Dossier "testSD_SSEmorphoO_pipebin"
-	test_routineSD_SSEmorpho3xFerm_pipebin();		// Dossier "testSD_SSEmorphoF_pipebin"
+	//test_routineSD_SSEmorpho3xOuv_pipebin(); 		// Dossier "testSD_SSEmorphoO_pipebin"
+	//test_routineSD_SSEmorpho3xFerm_pipebin();		// Dossier "testSD_SSEmorphoF_pipebin"
 	test_routineSD_SSEmorpho3xOuvFerm_pipebin();	// Dossier "testSD_SSEmorphoOF_pipebin"
-	test_routineSD_SSEmorpho3xFermOuv_pipebin();	// Dossier "testSD_SSEmorphoFO_pipebin"
+	//test_routineSD_SSEmorpho3xFermOuv_pipebin();	// Dossier "testSD_SSEmorphoFO_pipebin"
     ///////////////////////////////////////////////////////////////////////////
 
     // Crée les images morpho et morpho SSE Ero, Dil, ouv et ferm dans des sous dossiers 
-    test_Etapemorpho();                     // Dossier "testmorpho"
-    test_EtapemorphoSSE();                  // Dossier "testmorphoSSE"
+	//test_Etapemorpho();                     // Dossier "testmorpho"
+	//test_EtapemorphoSSE();                  // Dossier "testmorphoSSE"
 
 
 

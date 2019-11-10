@@ -211,8 +211,8 @@ void test_routineFDmorpho3xOuv(int seuil){
 	int i;
 	for(i=1;i<=NBIMAGES;i++){
 	        sprintf(nameload2,"car3/car_3%03d.pgm",i);
-            It=LoadPGM_ui8matrix(nameload2,&nrl,&nrh,&ncl,&nch);
-            
+	        MLoadPGM_ui8matrix(nameload2,nrl,nrh,ncl,nch,It);
+
             routine_FrameDifference(Itm1,It,Et,nrl,nrh,ncl,nch,seuil);
             sprintf(namesave,"testFDmorphoO/car_3%03d.pgm",i);
             CHRONO(ouverture3(Et,Etout,nrl,nrh,ncl,nch),cycles);
@@ -258,7 +258,7 @@ void test_routineFDmorpho3xOuv_opti(int seuil){
 	int i;
 	for(i=1;i<=NBIMAGES;i++){
 	        sprintf(nameload2,"car3/car_3%03d.pgm",i);
-            It=LoadPGM_ui8matrix(nameload2,&nrl,&nrh,&ncl,&nch);
+	        MLoadPGM_ui8matrix(nameload2,nrl,nrh,ncl,nch,It);
 
             routine_FrameDifference(Itm1,It,Et,nrl,nrh,ncl,nch,seuil);
             sprintf(namesave,"testOptiFD/car_3%03d.pgm",i);
@@ -306,7 +306,7 @@ void test_routineFDmorpho3xOuv_pipe(int seuil){
 	int i;
 	for(i=1;i<=NBIMAGES;i++){
 	        sprintf(nameload2,"car3/car_3%03d.pgm",i);
-            It=LoadPGM_ui8matrix(nameload2,&nrl,&nrh,&ncl,&nch);
+	        MLoadPGM_ui8matrix(nameload2,nrl,nrh,ncl,nch,It);
 
             routine_FrameDifference(Itm1,It,Et,nrl,nrh,ncl,nch,seuil);
             sprintf(namesave,"testFDmorphoOpipe/car_3%03d.pgm",i);
@@ -326,6 +326,7 @@ void test_routineFDmorpho3xOuv_pipe(int seuil){
 	free_ui8matrix(It,nrl,nrh,ncl,nch);
 	free_ui8matrix(Et,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
 	free_ui8matrix(Etout,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+	free_ui8matrix(tmp,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
 
 }
 
@@ -357,7 +358,7 @@ void test_routineFDmorpho3xOuv_bin(int seuil){
 	int i;
 	for(i=1;i<=NBIMAGES;i++){
 	        sprintf(nameload2,"car3/car_3%03d.pgm",i);
-            It=LoadPGM_ui8matrix(nameload2,&nrl,&nrh,&ncl,&nch);
+	        MLoadPGM_ui8matrix(nameload2,nrl,nrh,ncl,nch,It);
 
             routine_FrameDifference(Itm1,It,Et,nrl,nrh,ncl,nch,seuil);
             sprintf(namesave,"testFDmorphoObin/car_3%03d.pgm",i);
@@ -411,7 +412,7 @@ void test_routineFDmorpho3xFerm(int seuil){
 	int i;
 	for(i=1;i<=NBIMAGES;i++){
 	        sprintf(nameload2,"car3/car_3%03d.pgm",i);
-            It=LoadPGM_ui8matrix(nameload2,&nrl,&nrh,&ncl,&nch);
+	        MLoadPGM_ui8matrix(nameload2,nrl,nrh,ncl,nch,It);
             
             routine_FrameDifference(Itm1,It,Et,nrl,nrh,ncl,nch,seuil);
             sprintf(namesave,"testFDmorphoF/car_3%03d.pgm",i);
@@ -458,7 +459,7 @@ void test_routineFDmorpho3xFerm_opti(int seuil){
 	int i;
 	for(i=1;i<=NBIMAGES;i++){
 	        sprintf(nameload2,"car3/car_3%03d.pgm",i);
-            It=LoadPGM_ui8matrix(nameload2,&nrl,&nrh,&ncl,&nch);
+	        MLoadPGM_ui8matrix(nameload2,nrl,nrh,ncl,nch,It);
 
             routine_FrameDifference(Itm1,It,Et,nrl,nrh,ncl,nch,seuil);
             sprintf(namesave,"testOptiFD/car_3%03d.pgm",i);
@@ -506,7 +507,7 @@ void test_routineFDmorpho3xFerm_pipe(int seuil){
 	int i;
 	for(i=1;i<=NBIMAGES;i++){
 	        sprintf(nameload2,"car3/car_3%03d.pgm",i);
-            It=LoadPGM_ui8matrix(nameload2,&nrl,&nrh,&ncl,&nch);
+	        MLoadPGM_ui8matrix(nameload2,nrl,nrh,ncl,nch,It);
 
             routine_FrameDifference(Itm1,It,Et,nrl,nrh,ncl,nch,seuil);
             sprintf(namesave,"testFDmorphoFpipe/car_3%03d.pgm",i);
@@ -526,6 +527,7 @@ void test_routineFDmorpho3xFerm_pipe(int seuil){
 	free_ui8matrix(It,nrl,nrh,ncl,nch);
 	free_ui8matrix(Et,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
 	free_ui8matrix(Etout,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+	free_ui8matrix(tmp,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
 
 }
 
@@ -557,7 +559,7 @@ void test_routineFDmorpho3xFerm_bin(int seuil){
 	int i;
 	for(i=1;i<=NBIMAGES;i++){
 	        sprintf(nameload2,"car3/car_3%03d.pgm",i);
-            It=LoadPGM_ui8matrix(nameload2,&nrl,&nrh,&ncl,&nch);
+	        MLoadPGM_ui8matrix(nameload2,nrl,nrh,ncl,nch,It);
 
             routine_FrameDifference(Itm1,It,Et,nrl,nrh,ncl,nch,seuil);
             sprintf(namesave,"testFDmorphoFbin/car_3%03d.pgm",i);
@@ -611,7 +613,7 @@ void test_routineFDmorpho3xOuvFerm(int seuil){
 	int i;
 	for(i=1;i<=NBIMAGES;i++){
 	        sprintf(nameload2,"car3/car_3%03d.pgm",i);
-            It=LoadPGM_ui8matrix(nameload2,&nrl,&nrh,&ncl,&nch);
+	        MLoadPGM_ui8matrix(nameload2,nrl,nrh,ncl,nch,It);
             
             routine_FrameDifference(Itm1,It,Et,nrl,nrh,ncl,nch,seuil);
             sprintf(namesave,"testFDmorphoOF/car_3%03d.pgm",i);
@@ -661,7 +663,7 @@ void test_routineFDmorpho3xOuvFerm_opti(int seuil){
 	int i;
 	for(i=1;i<=NBIMAGES;i++){
 	        sprintf(nameload2,"car3/car_3%03d.pgm",i);
-            It=LoadPGM_ui8matrix(nameload2,&nrl,&nrh,&ncl,&nch);
+	        MLoadPGM_ui8matrix(nameload2,nrl,nrh,ncl,nch,It);
 
             routine_FrameDifference(Itm1,It,Et,nrl,nrh,ncl,nch,seuil);
             sprintf(namesave,"testOptiFD/car_3%03d.pgm",i);
@@ -711,7 +713,7 @@ void test_routineFDmorpho3xFermOuv(int seuil){
 	int i;
 	for(i=1;i<=NBIMAGES;i++){
 	        sprintf(nameload2,"car3/car_3%03d.pgm",i);
-            It=LoadPGM_ui8matrix(nameload2,&nrl,&nrh,&ncl,&nch);
+	        MLoadPGM_ui8matrix(nameload2,nrl,nrh,ncl,nch,It);
             
             routine_FrameDifference(Itm1,It,Et,nrl,nrh,ncl,nch,seuil);
             sprintf(namesave,"testFDmorphoFO/car_3%03d.pgm",i);
@@ -760,7 +762,7 @@ void test_routineFDmorpho3xFermOuv_opti(int seuil){
 	int i;
 	for(i=1;i<=NBIMAGES;i++){
 	        sprintf(nameload2,"car3/car_3%03d.pgm",i);
-            It=LoadPGM_ui8matrix(nameload2,&nrl,&nrh,&ncl,&nch);
+	        MLoadPGM_ui8matrix(nameload2,nrl,nrh,ncl,nch,It);
 
             routine_FrameDifference(Itm1,It,Et,nrl,nrh,ncl,nch,seuil);
             sprintf(namesave,"testOptiFD/car_3%03d.pgm",i);
@@ -825,7 +827,7 @@ void test_routineSDmorpho3xOuv(){
 	
 	for(i=1;i<=NBIMAGES;i++){
 	        sprintf(nameload,"car3/car_3%03d.pgm",i);
-	        I= LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+	        MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,I);
 	        routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
 	        CHRONO(ouverture3(Et,Etout,nrl,nrh,ncl,nch),cycles);
 	        totalcy += cycles;
@@ -889,7 +891,7 @@ void test_routineSDmorpho3xOuv_opti(){
 
 	for(i=1;i<=NBIMAGES;i++){
 	        sprintf(nameload,"car3/car_3%03d.pgm",i);
-	        I= LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+	        MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,I);
 	        routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
 	        CHRONO(ouverture3_opti(Et,Etout,nrl,nrh,ncl,nch),cycles);
 	        totalcy += cycles;
@@ -954,7 +956,7 @@ void test_routineSDmorpho3xOuv_pipe(){
 
 	for(i=1;i<=NBIMAGES;i++){
 	        sprintf(nameload,"car3/car_3%03d.pgm",i);
-	        I= LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+	        MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,I);
 	        routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
 	        CHRONO(ouverture3_pipe(Et,tmp,Etout,nrl,nrh,ncl,nch),cycles);
 	        totalcy += cycles;
@@ -982,6 +984,7 @@ void test_routineSDmorpho3xOuv_pipe(){
 	free_ui8matrix(Mtm1,nrl,nrh,ncl,nch);
 	free_ui8matrix(Et,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
 	free_ui8matrix(Etout,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+	free_ui8matrix(tmp,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
 }
 
 void test_routineSDmorpho3xOuv_bin(){
@@ -1022,7 +1025,7 @@ void test_routineSDmorpho3xOuv_bin(){
 
 	for(i=1;i<=NBIMAGES;i++){
 	        sprintf(nameload,"car3/car_3%03d.pgm",i);
-	        I= LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+	        MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,I);
 	        routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
 	        convCharToBin(Et,Etbin,nrl,nrh,ncl,nch);
 			CHRONO(ouverture3_bin(Etbin,tmpbin,Etoutbin,nrl,nrh,(ncl/NBBITS),(nch/NBBITS)),cycles);
@@ -1092,7 +1095,7 @@ void test_routineSDmorpho3xFerm(){
 	
 	for(i=1;i<=NBIMAGES;i++){
 	        sprintf(nameload,"car3/car_3%03d.pgm",i);
-	        I= LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+	        MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,I);
 	        routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
 	        CHRONO(fermeture3(Et,Etout,nrl,nrh,ncl,nch),cycles);
 	        totalcy += cycles;
@@ -1156,7 +1159,7 @@ void test_routineSDmorpho3xFerm_opti(){
 
 	for(i=1;i<=NBIMAGES;i++){
 	        sprintf(nameload,"car3/car_3%03d.pgm",i);
-	        I= LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+	        MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,I);
 	        routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
 	        CHRONO(fermeture3_opti(Et,Etout,nrl,nrh,ncl,nch),cycles);
 	        totalcy += cycles;
@@ -1221,7 +1224,7 @@ void test_routineSDmorpho3xFerm_pipe(){
 
 	for(i=1;i<=NBIMAGES;i++){
 	        sprintf(nameload,"car3/car_3%03d.pgm",i);
-	        I= LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+	        MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,I);
 	        routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
 	        CHRONO(fermeture3_pipe(Et,tmp,Etout,nrl,nrh,ncl,nch),cycles);
 	        totalcy += cycles;
@@ -1249,6 +1252,7 @@ void test_routineSDmorpho3xFerm_pipe(){
 	free_ui8matrix(Mtm1,nrl,nrh,ncl,nch);
 	free_ui8matrix(Et,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
 	free_ui8matrix(Etout,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+	free_ui8matrix(tmp,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
 }
 
 void test_routineSDmorpho3xFerm_bin(){
@@ -1289,7 +1293,7 @@ void test_routineSDmorpho3xFerm_bin(){
 
 	for(i=1;i<=NBIMAGES;i++){
 	        sprintf(nameload,"car3/car_3%03d.pgm",i);
-	        I= LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+	        MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,I);;
 	        routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
 	        convCharToBin(Et,Etbin,nrl,nrh,ncl,nch);
 			CHRONO(fermeture3_bin(Etbin,tmpbin,Etoutbin,nrl,nrh,(ncl/NBBITS),(nch/NBBITS)),cycles);
@@ -1359,7 +1363,7 @@ void test_routineSDmorpho3xOuvFerm(){
 	
 	for(i=1;i<=NBIMAGES;i++){
 	        sprintf(nameload,"car3/car_3%03d.pgm",i);
-	        I= LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+	        MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,I);
 	        routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
 	        CHRONO(ouverture3(Et,Etout,nrl,nrh,ncl,nch),cycles);
 	        totalcy += cycles;
@@ -1426,7 +1430,7 @@ void test_routineSDmorpho3xOuvFerm_opti(){
 
 	for(i=1;i<=NBIMAGES;i++){
 	        sprintf(nameload,"car3/car_3%03d.pgm",i);
-	        I= LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+	        MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,I);
 	        routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
 	        CHRONO(ouverture3_opti(Et,Etout,nrl,nrh,ncl,nch),cycles);
 	        totalcy += cycles;
@@ -1493,7 +1497,7 @@ void test_routineSDmorpho3xFermOuv(){
 	
 	for(i=1;i<=NBIMAGES;i++){
 	        sprintf(nameload,"car3/car_3%03d.pgm",i);
-	        I= LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+	        MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,I);
 	        routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
 	        CHRONO(fermeture3(Et,Etout,nrl,nrh,ncl,nch),cycles);
 	        totalcy += cycles;
@@ -1560,7 +1564,7 @@ void test_routineSDmorpho3xFermOuv_opti(){
 
 	for(i=1;i<=NBIMAGES;i++){
 	        sprintf(nameload,"car3/car_3%03d.pgm",i);
-	        I= LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+	        MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,I);
 	        routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
 	        CHRONO(fermeture3_opti(Et,Etout,nrl,nrh,ncl,nch),cycles);
 	        totalcy += cycles;
@@ -1627,7 +1631,7 @@ void test_routineSDmorpho3xOuvFerm_pipe(){
 
 	for(i=1;i<=NBIMAGES;i++){
 			sprintf(nameload,"car3/car_3%03d.pgm",i);
-			I= LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+			MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,I);
 			routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
 			CHRONO(ouverture3_pipe(Et,tmp,Etout,nrl,nrh,ncl,nch),cycles);
 			totalcy += cycles;
@@ -1657,6 +1661,7 @@ void test_routineSDmorpho3xOuvFerm_pipe(){
 	free_ui8matrix(Mtm1,nrl,nrh,ncl,nch);
 	free_ui8matrix(Et,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
 	free_ui8matrix(Etout,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+	free_ui8matrix(tmp,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
 
 }
 
@@ -1694,7 +1699,7 @@ void test_routineSDmorpho3xFermOuv_pipe(){
 
 	for(i=1;i<=NBIMAGES;i++){
 			sprintf(nameload,"car3/car_3%03d.pgm",i);
-			I= LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+			MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,I);
 			routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
 			CHRONO(fermeture3_pipe(Et,tmp,Etout,nrl,nrh,ncl,nch),cycles);
 			totalcy += cycles;
@@ -1724,6 +1729,7 @@ void test_routineSDmorpho3xFermOuv_pipe(){
 	free_ui8matrix(Mtm1,nrl,nrh,ncl,nch);
 	free_ui8matrix(Et,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
 	free_ui8matrix(Etout,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
+	free_ui8matrix(tmp,nrl-BORD,nrh+BORD,ncl-BORD,nch+BORD);
 }
 
 void test_routineSDmorpho3xOuvFerm_bin(){
@@ -1763,7 +1769,7 @@ void test_routineSDmorpho3xOuvFerm_bin(){
 
 	for(i=1;i<=NBIMAGES;i++){
 	        sprintf(nameload,"car3/car_3%03d.pgm",i);
-	        I= LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+	        MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,I);
 	        routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
 	        convCharToBin(Et,Etbin,nrl,nrh,ncl,nch);
 			CHRONO(ouverture3_bin(Etbin,tmpbin,Etoutbin,nrl,nrh,(ncl/NBBITS),(nch/NBBITS)),cycles);
@@ -1838,7 +1844,7 @@ void test_routineSDmorpho3xFermOuv_bin(){
 
 	for(i=1;i<=NBIMAGES;i++){
 	        sprintf(nameload,"car3/car_3%03d.pgm",i);
-	        I= LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+	        MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,I);
 	        routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
 	        convCharToBin(Et,Etbin,nrl,nrh,ncl,nch);
 			CHRONO(fermeture3_bin(Etbin,tmpbin,Etoutbin,nrl,nrh,(ncl/NBBITS),(nch/NBBITS)),cycles);
@@ -1915,7 +1921,7 @@ void test_routineSDmorpho3xOuv_pipe_bin(){
 
 	for(i=1;i<=NBIMAGES;i++){
 			sprintf(nameload,"car3/car_3%03d.pgm",i);
-			I= LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+			MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,I);
 			routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
 			convCharToBin(Et,Etbin,nrl,nrh,ncl,nch);
 			CHRONO(ouverture3_pipe_bin(Etbin,tmpbin,Etoutbin,nrl,nrh,(ncl/NBBITS),(nch/NBBITS)),cycles);
@@ -1988,7 +1994,7 @@ void test_routineSDmorpho3xFerm_pipe_bin(){
 
 	for(i=1;i<=NBIMAGES;i++){
 			sprintf(nameload,"car3/car_3%03d.pgm",i);
-			I= LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+			MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,I);
 			routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
 			convCharToBin(Et,Etbin,nrl,nrh,ncl,nch);
 			CHRONO(fermeture3_pipe_bin(Etbin,tmpbin,Etoutbin,nrl,nrh,(ncl/NBBITS),(nch/NBBITS)),cycles);
@@ -2060,7 +2066,7 @@ void test_routineSDmorpho3xOuvFerm_pipe_bin(){
 
 	for(i=1;i<=NBIMAGES;i++){
 			sprintf(nameload,"car3/car_3%03d.pgm",i);
-			I= LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+			MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,I);
 			routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
 			convCharToBin(Et,Etbin,nrl,nrh,ncl,nch);
 			CHRONO(ouverture3_pipe_bin(Etbin,tmpbin,Etoutbin,nrl,nrh,(ncl/NBBITS),(nch/NBBITS)),cycles);
@@ -2134,7 +2140,7 @@ void test_routineSDmorpho3xFermOuv_pipe_bin(){
 
 	for(i=1;i<=NBIMAGES;i++){
 			sprintf(nameload,"car3/car_3%03d.pgm",i);
-			I= LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+			MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,I);
 			routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
 			convCharToBin(Et,Etbin,nrl,nrh,ncl,nch);
 			CHRONO(fermeture3_pipe_bin(Etbin,tmpbin,Etoutbin,nrl,nrh,(ncl/NBBITS),(nch/NBBITS)),cycles);

@@ -153,7 +153,7 @@ void test_routineFD_SSE(int seuil)
     for(i=1;i<=NBIMAGES;i++){
         sprintf(nameload2,"car3/car_3%03d.pgm",i);
         
-        a = LoadPGM_ui8matrix(nameload2,&nrl,&nrh,&ncl,&nch);
+        MLoadPGM_ui8matrix(nameload2,nrl,nrh,ncl,nch,a);
         //TODO convertir uint** en vuint** (m)
         
 
@@ -223,7 +223,7 @@ void test_routineFD_SSE_OMP(int seuil)
     for(i=1;i<=NBIMAGES;i++){
         sprintf(nameload2,"car3/car_3%03d.pgm",i);
         
-        a = LoadPGM_ui8matrix(nameload2,&nrl,&nrh,&ncl,&nch);
+        MLoadPGM_ui8matrix(nameload2,nrl,nrh,ncl,nch,a);
         //TODO convertir uint** en vuint** (m)
         
 
@@ -338,7 +338,7 @@ void test_routineSD_SSE()
     for(i=1;i<=NBIMAGES;i++){
         
         sprintf(nameload,"car3/car_3%03d.pgm",i);
-        a=LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+        MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,a);
         
         
         //Conversion
@@ -435,7 +435,7 @@ void test_routineSD_SSE_OMP()
     for(i=1;i<=NBIMAGES;i++){
         
         sprintf(nameload,"car3/car_3%03d.pgm",i);
-        a=LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+        MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,a);
         
         
         //Conversion

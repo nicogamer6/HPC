@@ -135,7 +135,7 @@ void test_routineFD_SSEmorpho3xOuv(int seuil){
     for(i=1;i<=NBIMAGES;i++){
         sprintf(nameload2,"car3/car_3%03d.pgm",i);
         
-        a = LoadPGM_ui8matrix(nameload2,&nrl,&nrh,&ncl,&nch);
+        MLoadPGM_ui8matrix(nameload2,nrl,nrh,ncl,nch,a);
         
         uint_to_vuint(a, It, n1, n2, n3, n4);
         routine_FrameDifference_SSE2(It0,It,m,n1, n2,n3,n4,seuil);
@@ -201,7 +201,7 @@ void test_routineFD_SSEmorpho3xFerm(int seuil){
     for(i=1;i<=NBIMAGES;i++){
         sprintf(nameload2,"car3/car_3%03d.pgm",i);
         
-        a = LoadPGM_ui8matrix(nameload2,&nrl,&nrh,&ncl,&nch);
+        MLoadPGM_ui8matrix(nameload2,nrl,nrh,ncl,nch,a);
         
         uint_to_vuint(a, It, n1, n2, n3, n4);
         routine_FrameDifference_SSE2(It0,It,m,n1, n2,n3,n4,seuil);
@@ -268,7 +268,7 @@ void test_routineFD_SSEmorpho3xOuvFerm(int seuil){
     for(i=1;i<=NBIMAGES;i++){
         sprintf(nameload2,"car3/car_3%03d.pgm",i);
         
-        a = LoadPGM_ui8matrix(nameload2,&nrl,&nrh,&ncl,&nch);
+        MLoadPGM_ui8matrix(nameload2,nrl,nrh,ncl,nch,a);
         
         uint_to_vuint(a, It, n1, n2, n3, n4);
         routine_FrameDifference_SSE2(It0,It,m,n1, n2,n3,n4,seuil);
@@ -339,7 +339,7 @@ void test_routineFD_SSEmorpho3xFermOuv(int seuil){
     for(i=1;i<=NBIMAGES;i++){
         sprintf(nameload2,"car3/car_3%03d.pgm",i);
         
-        a = LoadPGM_ui8matrix(nameload2,&nrl,&nrh,&ncl,&nch);
+        MLoadPGM_ui8matrix(nameload2,nrl,nrh,ncl,nch,a);
         
         uint_to_vuint(a, It, n1, n2, n3, n4);
         routine_FrameDifference_SSE2(It0,It,m,n1, n2,n3,n4,seuil);
@@ -428,7 +428,7 @@ void test_routineSD_SSEmorpho3xOuv(){
     
     for(i=1;i<=NBIMAGES;i++){
         sprintf(nameload,"car3/car_3%03d.pgm",i);
-        a=LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+        MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,a);
         //Conversion
         uint_to_vuint(a, Iv, n1, n2, n3, n4);
         
@@ -530,7 +530,7 @@ void test_routineSD_SSEmorpho3xFerm(){
     
     for(i=1;i<=NBIMAGES;i++){
         sprintf(nameload,"car3/car_3%03d.pgm",i);
-        a=LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+        MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,a);
         //Conversion
         uint_to_vuint(a, Iv, n1, n2, n3, n4);
         
@@ -632,7 +632,7 @@ void test_routineSD_SSEmorpho3xOuvFerm(){
     
     for(i=1;i<=NBIMAGES;i++){
         sprintf(nameload,"car3/car_3%03d.pgm",i);
-        a=LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+        MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,a);
         //Conversion
         uint_to_vuint(a, Iv, n1, n2, n3, n4);
         
@@ -735,7 +735,7 @@ void test_routineSD_SSEmorpho3xFermOuv(){
     
     for(i=1;i<=NBIMAGES;i++){
         sprintf(nameload,"car3/car_3%03d.pgm",i);
-        a=LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+        MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,a);
         //Conversion
         uint_to_vuint(a, Iv, n1, n2, n3, n4);
         
@@ -841,7 +841,7 @@ void test_routineSD_SSEmorpho3xOuv_bin(){
 
 	for(i=1;i<=NBIMAGES;i++){
 		sprintf(nameload,"car3/car_3%03d.pgm",i);
-		a=LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+		MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,a);
 		//Conversion
 		uint_to_vuint(a, Iv, n1, n2, n3, n4);
 
@@ -950,7 +950,7 @@ void test_routineSD_SSEmorpho3xFerm_bin(){
 
 	for(i=1;i<=NBIMAGES;i++){
 		sprintf(nameload,"car3/car_3%03d.pgm",i);
-		a=LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+		MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,a);
 		//Conversion
 		uint_to_vuint(a, Iv, n1, n2, n3, n4);
 
@@ -1059,7 +1059,7 @@ void test_routineSD_SSEmorpho3xOuvFerm_bin(){
 
 	for(i=1;i<=NBIMAGES;i++){
 		sprintf(nameload,"car3/car_3%03d.pgm",i);
-		a=LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+		MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,a);
 		//Conversion
 		uint_to_vuint(a, Iv, n1, n2, n3, n4);
 
@@ -1170,7 +1170,7 @@ void test_routineSD_SSEmorpho3xFermOuv_bin(){
 
 	for(i=1;i<=NBIMAGES;i++){
 		sprintf(nameload,"car3/car_3%03d.pgm",i);
-		a=LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+		MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,a);
 		//Conversion
 		uint_to_vuint(a, Iv, n1, n2, n3, n4);
 
@@ -1284,7 +1284,7 @@ void test_routineSD_SSEmorpho3xOuv_pipebin(){
 
 	for(i=1;i<=NBIMAGES;i++){
 		sprintf(nameload,"car3/car_3%03d.pgm",i);
-		a=LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+		MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,a);
 		//Conversion
 		uint_to_vuint(a, Iv, n1, n2, n3, n4);
 
@@ -1393,7 +1393,7 @@ void test_routineSD_SSEmorpho3xFerm_pipebin(){
 
 	for(i=1;i<=NBIMAGES;i++){
 		sprintf(nameload,"car3/car_3%03d.pgm",i);
-		a=LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+		MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,a);
 		//Conversion
 		uint_to_vuint(a, Iv, n1, n2, n3, n4);
 
@@ -1502,7 +1502,7 @@ void test_routineSD_SSEmorpho3xOuvFerm_pipebin(){
 
 	for(i=1;i<=NBIMAGES;i++){
 		sprintf(nameload,"car3/car_3%03d.pgm",i);
-		a=LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+		MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,a);
 		//Conversion
 		uint_to_vuint(a, Iv, n1, n2, n3, n4);
 
@@ -1613,7 +1613,7 @@ void test_routineSD_SSEmorpho3xFermOuv_pipebin(){
 
 	for(i=1;i<=NBIMAGES;i++){
 		sprintf(nameload,"car3/car_3%03d.pgm",i);
-		a=LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+		MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,a);
 		//Conversion
 		uint_to_vuint(a, Iv, n1, n2, n3, n4);
 

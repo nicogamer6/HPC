@@ -35,7 +35,7 @@ void test_routineFD(int seuil){
 	int i;
 	for(i=1;i<=NBIMAGES;i++){
 	        sprintf(nameload2,"car3/car_3%03d.pgm",i);
-            It=LoadPGM_ui8matrix(nameload2,&nrl,&nrh,&ncl,&nch);
+	        MLoadPGM_ui8matrix(nameload2,nrl,nrh,ncl,nch,It);
             CHRONO(routine_FrameDifference(Itm1,It,m,nrl,nrh,ncl,nch,seuil),cycles);
             totalcy += cycles;
             sprintf(namesave,"testFD/car_3%03d.pgm",i);
@@ -87,7 +87,7 @@ void test_routineSD(void){
 	
 	for(i=1;i<=NBIMAGES;i++){
 	        sprintf(nameload,"car3/car_3%03d.pgm",i);
-	        I=LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+	        MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,I);
 	        CHRONO(routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch),cycles);
 	        totalcy += cycles;
             sprintf(namesave,"testSD/car_3%03d.pgm",i);
@@ -151,7 +151,7 @@ void test_routineSD_opti(void){
     
     for(i=1;i<=NBIMAGES;i++){
             sprintf(nameload,"car3/car_3%03d.pgm",i);
-            I=LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+	        MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,I);
             CHRONO(routine_SigmaDelta_1step_opti(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch),cycles);
             totalcy += cycles;
             sprintf(namesave,"testOptiSD/car_3%03d.pgm",i);
@@ -200,10 +200,12 @@ void test_routineSD_Opti_SOA(void){
     int i;
     SoA3 Image;
     
+
     sprintf(nameload,"car3/car_3000.pgm");
     
     uint8 **Itm1 = LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
     uint8 **I = ui8matrix(nrl,nrh,ncl,nch);
+    Image.I = ui8matrix(nrl,nrh,ncl,nch);
     uint8 **Vtm1  = ui8matrix(nrl,nrh,ncl,nch);
     uint8 **V = ui8matrix(nrl,nrh,ncl,nch);
     uint8 **Mtm1  = ui8matrix(nrl,nrh,ncl,nch);
@@ -217,7 +219,7 @@ void test_routineSD_Opti_SOA(void){
     
     for(i=1;i<=NBIMAGES;i++){
         sprintf(nameload,"car3/car_3%03d.pgm",i);
-        Image.I = LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+        MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,Image.I);
         Image.Vt = Vtm1;
         Image.Mt = Mtm1;
     
@@ -241,6 +243,7 @@ void test_routineSD_Opti_SOA(void){
     
     free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
     free_ui8matrix(I,nrl,nrh,ncl,nch);
+    free_ui8matrix(Image.I,nrl,nrh,ncl,nch);
     free_ui8matrix(V,nrl,nrh,ncl,nch);
     free_ui8matrix(Vtm1,nrl,nrh,ncl,nch);
     free_ui8matrix(M,nrl,nrh,ncl,nch);
