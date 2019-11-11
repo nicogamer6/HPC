@@ -60,6 +60,8 @@ void diffImages(char dossier1[], char dossier2[]){
 
 int main()
 {
+	omp_set_num_threads(omp_get_max_threads());
+	printf("%d\n",omp_get_max_threads());
 
 	/*vulong64 un = init_vulong64(1);
 	vuint8 test = init_vuint8(255);
@@ -170,6 +172,8 @@ int main()
 	//test_routineSD_SSEmorpho3xFerm_pipebin();		// Dossier "testSD_SSEmorphoF_pipebin"
 	test_routineSD_SSEmorpho3xOuvFerm_pipebin();	// Dossier "testSD_SSEmorphoOF_pipebin"
 	//test_routineSD_SSEmorpho3xFermOuv_pipebin();	// Dossier "testSD_SSEmorphoFO_pipebin"
+
+	test_routineSD_SSEmorpho3xOuvFerm_pipebinOMP();	// Dossier "testSD_SSEmorphoOF_pipebinOMP"
     ///////////////////////////////////////////////////////////////////////////
 
     // Crée les images morpho et morpho SSE Ero, Dil, ouv et ferm dans des sous dossiers 
@@ -179,7 +183,7 @@ int main()
 
 
     //diffImages("testSD", "testSD_SSE");
-    //diffImages("testSD_SSEmorphoO_bin","testSD_SSEmorphoO_pipebin");
+    //diffImages("testSD_SSEmorphoOF_pipebinOMP","testSD_SSEmorphoOF_pipebin");
 
 
 

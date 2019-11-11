@@ -27,5 +27,10 @@ void dilatation3SSE_line_bin(ulong64 ** Et, ulong64 **EtD, int i, long nrl, long
 void ouverture3SSE_pipe_bin(ulong64 ** Et, ulong64 ** tmp, ulong64 **Etout, long nrl, long nrh, long ncl, long nch);
 void fermeture3SSE_pipe_bin(ulong64 ** Et, ulong64 ** tmp, ulong64 **Etout, long nrl, long nrh, long ncl, long nch);
 
+void erosion3SSE_line_binOMP(ulong64 ** Et, ulong64 **EtE, int i, long nrl, long nrh, long ncl, long nch);
+void dilatation3SSE_line_binOMP(ulong64 ** Et, ulong64 **EtD, int i, long nrl, long nrh, long ncl, long nch);
+void ouverture3SSE_pipe_binOMP(ulong64 ** Et, ulong64 ** tmp, ulong64 **Etout, long nrl, long nrh, long ncl, long nch);
+void fermeture3SSE_pipe_binOMP(ulong64 ** Et, ulong64 ** tmp, ulong64 **Etout, long nrl, long nrh, long ncl, long nch);
+
 #endif // __MORPHO_SSE_H__
 
