@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdint.h>
+#include <time.h>
 
 #include "vnrdef.h"
 #include "nrdef.h"
@@ -289,9 +290,11 @@ void test_unitaire_FD_SSE()
 
 void test_routineSD_SSE()
 {
+	clock_t time1,time2;
+	double tot=0;
 
     //Cycle par point//
-    double cycles, totalcy=0;
+    double cycles=0, totalcy=0;
     int iter, niter=2;
     int run, nrun = 5;
     double t0,t1,dt,tmin,t;
@@ -342,9 +345,12 @@ void test_routineSD_SSE()
         
         //Conversion
         uint_to_vuint(a, Iv, n1, n2, n3, n4);
-        
+        time1 = clock();
+
         //SigmaDelta_1step_SSE2(V, Vtm1, M, Iv, Mtm1 , Et, n1, n2, n3, n4);
-        CHRONO(SigmaDelta_1step_SSE2(V, Vtm1, M, Mtm1, Iv, Et, n1, n2, n3, n4),cycles);
+        SigmaDelta_1step_SSE2(V, Vtm1, M, Mtm1, Iv, Et, n1, n2, n3, n4);
+        time2 = clock();
+        tot+=(double)(time2-time1);
         totalcy += cycles;
         
         sprintf(namesave,"testSD_SSE/car_3%03d.pgm",i);
@@ -362,6 +368,8 @@ void test_routineSD_SSE()
         
         
     }
+    double time_taken = ((double)tot)/CLOCKS_PER_SEC; // in seconds
+    printf("SD SSE took %f seconds to execute \n", time_taken);
 
     totalcy = totalcy / NBIMAGES; //on doit rediviser par le nombre de points pour l'avoir par point
     totalcy = totalcy / ((nch+1)*(nrh+1));
@@ -386,9 +394,11 @@ void test_routineSD_SSE()
 
 void test_routineSD_SSE_OMP()
 {
+	clock_t time1,time2;
+	double tot=0;
 
     //Cycle par point//
-    double cycles, totalcy=0;
+    double cycles=0, totalcy=0;
     int iter, niter=2;
     int run, nrun = 5;
     double t0,t1,dt,tmin,t;
@@ -439,10 +449,12 @@ void test_routineSD_SSE_OMP()
         
         //Conversion
         uint_to_vuint(a, Iv, n1, n2, n3, n4);
-        
+        time1 = clock();
         //SigmaDelta_1step_SSE2(V, Vtm1, M, Iv, Mtm1 , Et, n1, n2, n3, n4);
-        CHRONO(SigmaDelta_1step_SSE2_OMP(V, Vtm1, M, Mtm1, Iv, Et, n1, n2, n3, n4),cycles);
-        totalcy += cycles;
+        SigmaDelta_1step_SSE2_OMP(V, Vtm1, M, Mtm1, Iv, Et, n1, n2, n3, n4);
+        time2 = clock();
+		tot+=(double)(time2-time1);
+		totalcy += cycles;
         
         sprintf(namesave,"testSD_SSE_OMP/car_3%03d.pgm",i);
         
@@ -459,7 +471,8 @@ void test_routineSD_SSE_OMP()
         
         
     }
-
+    double time_taken = ((double)tot)/CLOCKS_PER_SEC; // in seconds
+    printf("SD SSE OMP took %f seconds to execute \n", time_taken);
     totalcy = totalcy / NBIMAGES; //on doit rediviser par le nombre de points pour l'avoir par point
     totalcy = totalcy / ((nch+1)*(nrh+1));
     

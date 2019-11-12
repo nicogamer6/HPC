@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <time.h>
 #include "nrutil.h"
 #include "nrdef.h"
 #include "string.h"
@@ -56,8 +57,10 @@ void test_routineFD(int seuil){
 //Permet de remplir le dossier /testSD et de voir les nouvelles images avec algo SD sur l'ensemble du dossier /car3
 void test_routineSD(void){
 
+	clock_t time1,time2;
+	double tot=0;
 	//Cycle par point//
-	double cycles, totalcy=0;
+	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
 	double t0,t1,dt,tmin,t;
@@ -88,7 +91,10 @@ void test_routineSD(void){
 	for(i=1;i<=NBIMAGES;i++){
 	        sprintf(nameload,"car3/car_3%03d.pgm",i);
 	        MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,I);
-	        CHRONO(routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch),cycles);
+	        time1 = clock();
+	        routine_SigmaDelta_1step(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
+	        time2 = clock();
+	        tot+=(double)(time2-time1);
 	        totalcy += cycles;
             sprintf(namesave,"testSD/car_3%03d.pgm",i);
             SavePGM_ui8matrix(Et,nrl,nrh,ncl,nch,namesave);
@@ -99,7 +105,8 @@ void test_routineSD(void){
             copy_ui8matrix_ui8matrix(I, nrl, nrh, ncl, nch, Itm1);
            
 	} 
-
+	double time_taken = ((double)tot)/((double)CLOCKS_PER_SEC); // in seconds
+	printf("SD took %f seconds to execute \n", time_taken);
 	totalcy = totalcy / NBIMAGES; //on doit rediviser par le nombre de points pour l'avoir par point
 	totalcy = totalcy / ((nch+1)*(nrh+1));
 
@@ -121,7 +128,7 @@ void test_routineSD(void){
 void test_routineSD_opti(void){
 
     //Cycle par point//
-    double cycles, totalcy=0;
+    double cycles=0, totalcy=0;
     int iter, niter=2;
     int run, nrun = 5;
     double t0,t1,dt,tmin,t;
@@ -186,7 +193,7 @@ void test_routineSD_opti(void){
 void test_routineSD_Opti_SOA(void){
 
     //Cycle par point//
-    double cycles, totalcy=0;
+    double cycles=0, totalcy=0;
     int iter, niter=2;
     int run, nrun = 5;
     double t0,t1,dt,tmin,t;
@@ -255,8 +262,10 @@ void test_routineSD_Opti_SOA(void){
 
 void test_routineSD_OMP(void){
 
+	clock_t time1,time2;
+	double tot=0;
 	//Cycle par point//
-	double cycles, totalcy=0;
+	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
 	double t0,t1,dt,tmin,t;
@@ -287,7 +296,10 @@ void test_routineSD_OMP(void){
 	for(i=1;i<=NBIMAGES;i++){
 	        sprintf(nameload,"car3/car_3%03d.pgm",i);
 	        MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,I);
-	        CHRONO(routine_SigmaDelta_1stepOMP(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch),cycles);
+	        time1 = clock();
+	        routine_SigmaDelta_1stepOMP(V, Vtm1, M, Mtm1, I, Et, nrl, nrh, ncl, nch);
+	        time2 = clock();
+	        tot +=(double)(time2-time1);
 	        totalcy += cycles;
             sprintf(namesave,"testSD_OMP/car_3%03d.pgm",i);
             SavePGM_ui8matrix(Et,nrl,nrh,ncl,nch,namesave);
@@ -298,7 +310,8 @@ void test_routineSD_OMP(void){
             copy_ui8matrix_ui8matrix(I, nrl, nrh, ncl, nch, Itm1);
 
 	}
-
+	double time_taken = ((double)tot)/((double)CLOCKS_PER_SEC); // in seconds
+	printf("SD OMP took %f seconds to execute \n", time_taken);
 	totalcy = totalcy / NBIMAGES; //on doit rediviser par le nombre de points pour l'avoir par point
 	totalcy = totalcy / ((nch+1)*(nrh+1));
 
