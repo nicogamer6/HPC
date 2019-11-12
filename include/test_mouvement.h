@@ -16,4 +16,6 @@ void test_routineSD(void);
 void test_routineSD_opti(void);
 void test_routineSD_Opti_SOA(void);
 
+void test_routineSD_OMP(void);
+
 #endif // __TEST_MOUVEMENT_H__

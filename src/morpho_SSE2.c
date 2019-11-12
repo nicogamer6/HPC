@@ -463,6 +463,8 @@ void dilatation3SSE_line_binOMP(ulong64 ** Et, ulong64 **EtD, int i, long nrl, l
 	vulong64 bitfort = (_mm_slli_epi64(un,(NBBITS-1)));
 	bitfort = ~bitfort;
 
+	//omp_set_dynamic(7);
+
 	#pragma omp parallel for
 	// Parcours de l'image
 	for(j = ncl; j <= nch; j+=2) // pcqu'il y a 2 ulong64 par vulong64
