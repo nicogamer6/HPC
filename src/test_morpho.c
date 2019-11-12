@@ -190,7 +190,7 @@ void test_Etapemorpho(void){
 void test_routineFDmorpho3xOuv(int seuil){
 
 	//Cycle par point//
-	double cycles, totalcy=0;
+	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
 	double t0,t1,dt,tmin,t;
@@ -237,7 +237,7 @@ void test_routineFDmorpho3xOuv(int seuil){
 void test_routineFDmorpho3xOuv_opti(int seuil){
 
 	//Cycle par point//
-	double cycles, totalcy=0;
+	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
 	double t0,t1,dt,tmin,t;
@@ -284,7 +284,7 @@ void test_routineFDmorpho3xOuv_opti(int seuil){
 void test_routineFDmorpho3xOuv_pipe(int seuil){
 
 	//Cycle par point//
-	double cycles, totalcy=0;
+	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
 	double t0,t1,dt,tmin,t;
@@ -333,7 +333,7 @@ void test_routineFDmorpho3xOuv_pipe(int seuil){
 void test_routineFDmorpho3xOuv_bin(int seuil){
 
 	//Cycle par point//
-	double cycles, totalcy=0;
+	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
 	double t0,t1,dt,tmin,t;
@@ -391,7 +391,7 @@ void test_routineFDmorpho3xOuv_bin(int seuil){
 void test_routineFDmorpho3xFerm(int seuil){
 
 	//Cycle par point//
-	double cycles, totalcy=0;
+	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
 	double t0,t1,dt,tmin,t;
@@ -438,7 +438,7 @@ void test_routineFDmorpho3xFerm(int seuil){
 void test_routineFDmorpho3xFerm_opti(int seuil){
 
 	//Cycle par point//
-	double cycles, totalcy=0;
+	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
 	double t0,t1,dt,tmin,t;
@@ -485,7 +485,7 @@ void test_routineFDmorpho3xFerm_opti(int seuil){
 void test_routineFDmorpho3xFerm_pipe(int seuil){
 
 	//Cycle par point//
-	double cycles, totalcy=0;
+	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
 	double t0,t1,dt,tmin,t;
@@ -534,7 +534,7 @@ void test_routineFDmorpho3xFerm_pipe(int seuil){
 void test_routineFDmorpho3xFerm_bin(int seuil){
 
 	//Cycle par point//
-	double cycles, totalcy=0;
+	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
 	double t0,t1,dt,tmin,t;
@@ -592,7 +592,7 @@ void test_routineFDmorpho3xFerm_bin(int seuil){
 void test_routineFDmorpho3xOuvFerm(int seuil){
 
 	//Cycle par point//
-	double cycles, totalcy=0;
+	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
 	double t0,t1,dt,tmin,t;
@@ -642,7 +642,7 @@ void test_routineFDmorpho3xOuvFerm(int seuil){
 void test_routineFDmorpho3xOuvFerm_opti(int seuil){
 
 	//Cycle par point//
-	double cycles, totalcy=0;
+	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
 	double t0,t1,dt,tmin,t;
@@ -692,7 +692,7 @@ void test_routineFDmorpho3xOuvFerm_opti(int seuil){
 void test_routineFDmorpho3xFermOuv(int seuil){
 
 	//Cycle par point//
-	double cycles, totalcy=0;
+	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
 	double t0,t1,dt,tmin,t;
@@ -741,7 +741,7 @@ void test_routineFDmorpho3xFermOuv(int seuil){
 void test_routineFDmorpho3xFermOuv_opti(int seuil){
 
 	//Cycle par point//
-	double cycles, totalcy=0;
+	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
 	double t0,t1,dt,tmin,t;
@@ -796,7 +796,7 @@ void test_routineFDmorpho3xFermOuv_opti(int seuil){
 void test_routineSDmorpho3xOuv(){
 
 	//Cycle par point//
-	double cycles, totalcy=0;
+	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
 	double t0,t1,dt,tmin,t;
@@ -860,7 +860,7 @@ void test_routineSDmorpho3xOuv(){
 void test_routineSDmorpho3xOuv_opti(){
 
 	//Cycle par point//
-	double cycles, totalcy=0;
+	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
 	double t0,t1,dt,tmin,t;
@@ -924,7 +924,7 @@ void test_routineSDmorpho3xOuv_opti(){
 void test_routineSDmorpho3xOuv_pipe(){
 
 	//Cycle par point//
-	double cycles, totalcy=0;
+	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
 	double t0,t1,dt,tmin,t;
@@ -990,7 +990,7 @@ void test_routineSDmorpho3xOuv_pipe(){
 void test_routineSDmorpho3xOuv_bin(){
 
 	//Cycle par point//
-	double cycles, totalcy=0;
+	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
 	double t0,t1,dt,tmin,t;
@@ -1064,7 +1064,7 @@ void test_routineSDmorpho3xOuv_bin(){
 void test_routineSDmorpho3xFerm(){
 
 	//Cycle par point//
-	double cycles, totalcy=0;
+	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
 	double t0,t1,dt,tmin,t;
@@ -1128,7 +1128,7 @@ void test_routineSDmorpho3xFerm(){
 void test_routineSDmorpho3xFerm_opti(){
 
 	//Cycle par point//
-	double cycles, totalcy=0;
+	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
 	double t0,t1,dt,tmin,t;
@@ -1192,7 +1192,7 @@ void test_routineSDmorpho3xFerm_opti(){
 void test_routineSDmorpho3xFerm_pipe(){
 
 	//Cycle par point//
-	double cycles, totalcy=0;
+	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
 	double t0,t1,dt,tmin,t;
@@ -1258,7 +1258,7 @@ void test_routineSDmorpho3xFerm_pipe(){
 void test_routineSDmorpho3xFerm_bin(){
 
 	//Cycle par point//
-	double cycles, totalcy=0;
+	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
 	double t0,t1,dt,tmin,t;
@@ -1332,7 +1332,7 @@ void test_routineSDmorpho3xFerm_bin(){
 void test_routineSDmorpho3xOuvFerm(){
 
 	//Cycle par point//
-	double cycles, totalcy=0;
+	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
 	double t0,t1,dt,tmin,t;
@@ -1399,7 +1399,7 @@ void test_routineSDmorpho3xOuvFerm(){
 void test_routineSDmorpho3xOuvFerm_opti(){
 
 	//Cycle par point//
-	double cycles, totalcy=0;
+	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
 	double t0,t1,dt,tmin,t;
@@ -1466,7 +1466,7 @@ void test_routineSDmorpho3xOuvFerm_opti(){
 void test_routineSDmorpho3xFermOuv(){
 
 	//Cycle par point//
-	double cycles, totalcy=0;
+	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
 	double t0,t1,dt,tmin,t;
@@ -1533,7 +1533,7 @@ void test_routineSDmorpho3xFermOuv(){
 void test_routineSDmorpho3xFermOuv_opti(){
 
 	//Cycle par point//
-	double cycles, totalcy=0;
+	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
 	double t0,t1,dt,tmin,t;
@@ -1599,7 +1599,7 @@ void test_routineSDmorpho3xFermOuv_opti(){
 
 void test_routineSDmorpho3xOuvFerm_pipe(){
 	//Cycle par point//
-	double cycles, totalcy=0;
+	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
 	double t0,t1,dt,tmin,t;
@@ -1667,7 +1667,7 @@ void test_routineSDmorpho3xOuvFerm_pipe(){
 
 void test_routineSDmorpho3xFermOuv_pipe(){
 	//Cycle par point//
-	double cycles, totalcy=0;
+	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
 	double t0,t1,dt,tmin,t;
@@ -1734,7 +1734,7 @@ void test_routineSDmorpho3xFermOuv_pipe(){
 
 void test_routineSDmorpho3xOuvFerm_bin(){
 	//Cycle par point//
-	double cycles, totalcy=0;
+	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
 	double t0,t1,dt,tmin,t;
@@ -1809,7 +1809,7 @@ void test_routineSDmorpho3xOuvFerm_bin(){
 
 void test_routineSDmorpho3xFermOuv_bin(){
 	//Cycle par point//
-	double cycles, totalcy=0;
+	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
 	double t0,t1,dt,tmin,t;
@@ -1959,7 +1959,7 @@ void test_routineSDmorpho3xOuv_pipe_bin(){
 
 void test_routineSDmorpho3xFerm_pipe_bin(){
 	//Cycle par point//
-	double cycles, totalcy=0;
+	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
 	double t0,t1,dt,tmin,t;
@@ -2031,7 +2031,7 @@ void test_routineSDmorpho3xFerm_pipe_bin(){
 }
 void test_routineSDmorpho3xOuvFerm_pipe_bin(){
 	//Cycle par point//
-	double cycles, totalcy=0;
+	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
 	double t0,t1,dt,tmin,t;
@@ -2105,7 +2105,7 @@ void test_routineSDmorpho3xOuvFerm_pipe_bin(){
 }
 void test_routineSDmorpho3xFermOuv_pipe_bin(){
 	//Cycle par point//
-	double cycles, totalcy=0;
+	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
 	double t0,t1,dt,tmin,t;

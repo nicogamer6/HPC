@@ -60,7 +60,7 @@ void diffImages(char dossier1[], char dossier2[]){
 int main()
 {
 	//omp_set_num_threads(omp_get_max_threads());
-	omp_set_num_threads(2);
+	//omp_set_num_threads(2);
 	//printf("%d\n", omp_get_max_threads());
 
 	/*vulong64 un = init_vulong64(1);
@@ -94,7 +94,7 @@ int main()
     //test_routineFD_SSE_OMP(SEUILFD);        // Dossier "testFD_SSE_OMP"
     test_routineSD_SSE();                   // Dossier "testSD_SSE"
     test_routineSD_SSE_OMP();               // Dossier "testSD_SSE_OMP"
-    //printf("\n");
+    printf("\n");
     ///////////////////////////////////////////////////////////////////////////
     
     // Crée les images FD avec les morpho 3x3, O, F, OF et FO. 
