@@ -18,18 +18,18 @@
 
 #ifdef ENABLE_BENCHMARK
 
-#pragma message("ENABLE_BENCHMARK is ON")
+
 
 // check predef
 // https://sourceforge.net/p/predef/wiki/Architectures/
 
 #ifdef __INTEL_COMPILER
-#pragma message("icc compiler")
+
 #include <ia32intrin.h>
 #endif
 
 #ifdef __GNUC__
-#pragma message("gcc compiler ...")
+
 #include <x86intrin.h>
 #endif
 
@@ -52,7 +52,6 @@
 
 #else
 
-#pragma message("ENABLE_BENCHMARK is OFF")
 
 #define CHRONO(X,t)  X
 #define BENCH(X)
