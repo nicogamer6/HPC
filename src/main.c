@@ -1,16 +1,15 @@
 #include <stdio.h>
-#include "nrutil.h"
-#include "nrdef.h"
-#include "string.h"
 #include <omp.h>
+#include <string.h>
 
+#include "nrdef.h"
+#include "nrutil.h"
 #include "mouvement.h"
 #include "test_mouvement.h"
 #include "test_mouvement_SSE2.h"
 #include "morpho.h"
 #include "test_morpho.h"
 #include "matriceROC.h"
-
 #include "morpho_SSE2.h"
 #include "test_morpho_SSE2.h"
 
@@ -60,8 +59,9 @@ void diffImages(char dossier1[], char dossier2[]){
 
 int main()
 {
-	omp_set_num_threads(omp_get_max_threads());
-	printf("%d\n",omp_get_max_threads());
+	//omp_set_num_threads(omp_get_max_threads());
+	omp_set_num_threads(2);
+	//printf("%d\n", omp_get_max_threads());
 
 	/*vulong64 un = init_vulong64(1);
 	vuint8 test = init_vuint8(255);
@@ -79,9 +79,9 @@ int main()
     // AFFICHE le CPP juste pour la morpho
     //printf("SEUIL FD = %d\n",SEUILFD);
     //test_routineFD(SEUILFD);               	// Dossier "testFD"
-	test_routineSD();                    	 	// Dossier "testSD"
-    test_routineSD_opti();                  	// Dossier "testOptiSD"
-    test_routineSD_Opti_SOA();          		// Dossier "testSD_SoA"
+    //test_routineSD();                    	 	// Dossier "testSD"
+    //test_routineSD_opti();                  	// Dossier "testOptiSD"
+    //test_routineSD_Opti_SOA();          		// Dossier "testSD_SoA"
 
     //printf("\n");
     ///////////////////////////////////////////////////////////////////////////

@@ -163,7 +163,6 @@ void test_routineFD_SSE(int seuil)
         totalcy += cycles;
         vuint_to_uint(out, m, n1, n2, n3, n4);
 
-        
         sprintf(namesave,"testFD_SSE/car_3%03d.pgm",i);
         SavePGM_ui8matrix(out,nrl,nrh,ncl,nch,namesave);
         dup_vui8matrix(It, n1, n2, n3, n4, I0);
