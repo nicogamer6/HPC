@@ -60,22 +60,10 @@ void diffImages(char dossier1[], char dossier2[]){
 int main()
 {
 	//omp_set_num_threads(omp_get_max_threads());
-	//omp_set_num_threads(2);
+	omp_set_num_threads(2);
 	//printf("%d\n", omp_get_max_threads());
 
-	/*vulong64 un = init_vulong64(1);
-	vuint8 test = init_vuint8(255);
-	vulong64 zero = init_vulong64_all(60,1);
-	display_vulong64(zero," %llu ","\ntest\n");
-	//zero = ~zero;
-	//zero=__mm_andnot_si128(zero, zero);
-	zero=_mm_srli_epi64(zero,1); // pour décaler d'UN BIT un truc de 64 bits
-	//zero = _mm_and_si128(zero,un);
-
-	display_vulong64(zero," %llu ","\ntest\n");*/
-
-
-    // Crée les images FD et SD
+	// Crée les images FD et SD
     // AFFICHE le CPP juste pour la morpho
     //printf("SEUIL FD = %d\n",SEUILFD);
     //test_routineFD(SEUILFD);               	// Dossier "testFD"
