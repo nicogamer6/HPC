@@ -417,7 +417,7 @@ void erosion3SSE_line_binOMP(ulong64 ** Et, ulong64 **EtE, int i, long nrl, long
 	vulong64 bitfort = _mm_slli_epi64(un,(NBBITS-1));
 	bitfort = ~bitfort;
 
-	#pragma omp parallel for
+	#pragma omp parallel for schedule (guided)
 	for(j = ncl; j <= nch; j+=2) // pcqu'il y a 2 ulong64 par vulong64
 	{
 		res = ~zero; // tout à 1
@@ -465,7 +465,7 @@ void dilatation3SSE_line_binOMP(ulong64 ** Et, ulong64 **EtD, int i, long nrl, l
 
 	//omp_set_dynamic(7);
 
-	#pragma omp parallel for
+	#pragma omp parallel for schedule (guided)
 	// Parcours de l'image
 	for(j = ncl; j <= nch; j+=2) // pcqu'il y a 2 ulong64 par vulong64
 	{
@@ -504,7 +504,6 @@ void ouverture3SSE_pipe_binOMP(ulong64 ** Et, ulong64 ** tmp, ulong64 **Etout, l
 
 	erosion3SSE_line_binOMP(Et, tmp, i, nrl, nrh, ncl, nch); //1ère ligne
 
-	#pragma omp ordered
 	for(i=nrl;i<=nrh-1;i++){
 		erosion3SSE_line_binOMP(Et, tmp, i+1, nrl, nrh, ncl, nch);
 		dilatation3SSE_line_binOMP(tmp, Etout, i, nrl, nrh, ncl, nch);
@@ -517,7 +516,6 @@ void fermeture3SSE_pipe_binOMP(ulong64 ** Et, ulong64 ** tmp, ulong64 **Etout, l
 
 	dilatation3SSE_line_binOMP(Et, tmp, i, nrl, nrh, ncl, nch); //1ère ligne
 
-	#pragma omp ordered
 	for(i=nrl;i<=nrh-1;i++){
 		dilatation3SSE_line_binOMP(Et, tmp, i+1, nrl, nrh, ncl, nch);
 		erosion3SSE_line_binOMP(tmp, Etout, i, nrl, nrh, ncl, nch);

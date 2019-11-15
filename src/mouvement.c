@@ -80,7 +80,7 @@ void routine_SigmaDelta_step0OMP(uint8 **V, uint8 **M, uint8 **I, long nrl, long
 {
 	int i,j;
 	uint8 vmin = (uint8) VMIN;
-	#pragma omp parallel for
+	#pragma omp parallel for schedule (guided)
 	for(i = nrl; i<=nrh;i++)
 	{
 		for(j=ncl;j<=nch;j++)
@@ -309,7 +309,7 @@ void routine_SigmaDelta_1stepOMP(uint8 **V, uint8 **Vtm1, uint8 **M, uint8 **Mtm
     uint8 vmax = (uint8) VMAX;
     uint8 vmin = (uint8) VMIN;
 
-	#pragma omp parallel for
+	#pragma omp parallel for schedule (guided)
     for(i = nrl; i<=nrh;i++)
 	{
 		for(j=ncl;j<=nch;j++)

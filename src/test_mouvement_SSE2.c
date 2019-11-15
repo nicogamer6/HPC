@@ -436,7 +436,7 @@ void test_routineSD_SSE_AOSOA()
     SigmaDelta_step0_SSE2 (Mtm1, Vtm1, Itm1v, n1, n2, n3, n4);
     
     
-    for(i=1;i<NBIMAGES-1;i+=2){
+    for(i=1;i<=NBIMAGES;i+=2){
         
         sprintf(nameload,"car3/car_3%03d.pgm",i);
         MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,a);
