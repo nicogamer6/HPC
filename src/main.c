@@ -173,7 +173,7 @@ int main()
 
 
 
-    //diffImages("testSD", "testSD_SSE");
+    diffImages("testSD", "testSD_SSE");
     //diffImages("testSD_SSEmorphoOF_pipebinOMP","testSD_SSEmorphoOF_pipebin");
 
 
