@@ -384,6 +384,126 @@ void test_routineSD_SSE()
     
 }
 
+
+
+///TEST SD AOSOA///////////////////
+
+
+void test_routineSD_SSE_AOSOA()
+{
+
+    //Cycle par point//
+    double cycles=0, totalcy=0, cycles1=0;
+    int iter, niter=2;
+    int run, nrun = 5;
+    double t0,t1,dt,tmin,t;
+
+    char *format = "%6.2f\n";
+    ///////////////////
+
+    int n1, n2, n3, n4;
+    long nrl, nrh, ncl, nch;
+    char nameload[100];     //"car3/car_3..";
+    char namesave[100];     //"testSD/SD...";
+    int i;
+    s2v(nrl, nrh, ncl, nch, card_vuint8(), &n1, &n2, &n3, &n4);
+
+    sprintf(nameload,"car3/car_3000.pgm");
+    
+    uint8 **Itm1 = LoadPGM_ui8matrix(nameload,&nrl,&nrh,&ncl,&nch);
+    s2v(nrl, nrh, ncl, nch, card_vuint8(), &n1, &n2, &n3, &n4);
+   
+    uint8 ** a = ui8matrix(nrl, nrh, ncl, nch);
+    uint8 ** b = ui8matrix(nrl, nrh, ncl, nch);
+
+    vuint8 ** I = vui8matrix(n1,n2,n3,n4);
+    vuint8 ** V  = vui8matrix(n1,n2,n3,n4);
+    vuint8 ** Vtm1 = vui8matrix(n1,n2,n3,n4);
+    vuint8 ** M  = vui8matrix(n1,n2,n3,n4);
+    vuint8 ** Mtm1 = vui8matrix(n1,n2,n3,n4);
+    vuint8 ** Et = vui8matrix(n1,n2,n3,n4);
+    //uint8 **Ot = ui8matrix(nrl,nrh,ncl,nch);
+    
+   
+    vuint8 ** Iv = vui8matrix(n1,n2,n3,n4);
+    vuint8 ** Ivp1 = vui8matrix(n1,n2,n3,n4);
+
+    uint8 ** res = ui8matrix(nrl, nrh, ncl, nch);
+    
+    vuint8 ** Itm1v = vui8matrix(n1,n2,n3,n4);
+    uint_to_vuint(Itm1, Itm1v, n1, n2, n3, n4);
+    
+    SigmaDelta_step0_SSE2 (Mtm1, Vtm1, Itm1v, n1, n2, n3, n4);
+    
+    
+    for(i=1;i<=NBIMAGES-1;i+=2){
+        
+        sprintf(nameload,"car3/car_3%03d.pgm",i);
+        MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,a);
+        
+        sprintf(nameload,"car3/car_3%03d.pgm",i+1);
+        MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,b);
+        
+        //Conversion
+        uint_to_vuint(a, Iv, n1, n2, n3, n4);
+        uint_to_vuint(b, Ivp1, n1, n2, n3, n4);
+
+
+        //SigmaDelta_1step_SSE2(V, Vtm1, M, Iv, Mtm1 , Et, n1, n2, n3, n4);
+        CHRONO(SigmaDelta_1step_SSE2(V, Vtm1, M, Mtm1, Iv, Et, n1, n2, n3, n4),cycles);
+        
+        dup_vui8matrix(V, n1, n2, n3, n4, Vtm1);
+        dup_vui8matrix(M, n1, n2, n3, n4, Mtm1);
+        
+        CHRONO(SigmaDelta_1step_SSE2(V, Vtm1, M, Mtm1, Ivp1, Et, n1, n2, n3, n4),cycles1);
+
+        totalcy = totalcy + cycles + cycles1 ;
+        
+        sprintf(namesave,"testSD_SSE_AOSOA/car_3%03d.pgm",i);
+        
+        vuint_to_uint(res, Et, n1, n2, n3, n4);
+        
+        SavePGM_ui8matrix(res,nrl,nrh,ncl,nch,namesave);
+        //On doit copier M dans Mtm1, V dans Vtm1 et I dans Itm1
+     
+        
+        dup_vui8matrix(V, n1, n2, n3, n4, Vtm1);
+        dup_vui8matrix(M, n1, n2, n3, n4, Mtm1);
+        dup_vui8matrix(Iv, n1, n2, n3, n4, Itm1v);
+        dup_vui8matrix(Ivp1, n1, n2, n3, n4, Iv);
+
+        
+        
+        
+    }
+
+    totalcy = totalcy / NBIMAGES; //on doit rediviser par le nombre de points pour l'avoir par point
+    totalcy = totalcy / ((nch+1)*(nrh+1));
+    
+    BENCH(printf("Cycles SD_SSE_AOSOA = "));
+    BENCH(printf(format,totalcy));
+
+    free_ui8matrix(Itm1,nrl,nrh,ncl,nch);
+    free_ui8matrix(a,nrl,nrh,ncl,nch);
+    free_ui8matrix(b,nrl,nrh,ncl,nch);
+    free_ui8matrix(res,nrl,nrh,ncl,nch);
+    free_vui8matrix(I,n1,n2,n3,n4);
+    free_vui8matrix(V,n1,n2,n3,n4);
+    free_vui8matrix(Vtm1,n1,n2,n3,n4);
+    free_vui8matrix(M,n1,n2,n3,n4);
+    free_vui8matrix(Mtm1,n1,n2,n3,n4);
+    free_vui8matrix(Iv,n1,n2,n3,n4);
+    free_vui8matrix(Ivp1,n1,n2,n3,n4);
+    free_vui8matrix(Itm1v,n1,n2,n3,n4);
+    free_vui8matrix(Et,n1,n2,n3,n4);
+    
+    
+}
+
+
+
+
+
 void test_routineSD_SSE_OMP()
 {
 

@@ -23,6 +23,8 @@ void test_unitaire_FD_SSE();
 void test_routineSD_SSE();
 void test_routineSD_SSE_OMP();
 void test_unitaire_SD_SSE();
+void test_routineSD_SSE_AOSOA();
+
 
 
 #endif

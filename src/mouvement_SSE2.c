@@ -256,109 +256,104 @@ void SigmaDelta_1step_SSE2 (vuint8** V,vuint8** Vtm1, vuint8** M, vuint8** Mtm1,
 //       SIGMA DELTA STEP1 SSE AoSoA       //
 ////////////////////////////////////////
 
-/*
-void SigmaDelta_1step_SSE2_AoSoA (SoA *Vm, vuint8** V, vuint8** M, vuint8** Et,long nrl, long nrh, long ncl, long nch)
+#define MAX_SINT8 127
+#define MIN_SINT8 -128
+#define MAX_SINT16 32767
+#define MAX_UINT8 255
+#define NB_OCTET_M128 16
+
+
+//if a >= b return x, else return y
+vuint8 vuint8_if_else(vuint8 a, vuint8 b, vuint8 x, vuint8 y)
 {
-  //  vuint8 Mtmoins1, Mt, It, Vtmoins1, Vt, Et, res;
-    vuint8 v_M, v_It, v_Mtm1, v_V, v_Vtm1, sel;
-    vuint8 Ot;
+    vuint8 c, z;
+    /*
+    Description du problème : l'opération c = _mm_cmplt_epi8(a,b) est signée
+    ex : si a = {0,127} et b = {128, 255}, alors c considère a plus grand, car il prends b pour un négatif
+    Solution, avant la comparaison, on soustrait à a et b, 128
+    */
 
-    // Créer un tableau de vuint8 et stocker au fur et à mesure V I et M
-    
-    vuint8 v_min = init_vuint8(VMIN);
-    vuint8 v_max = init_vuint8(VMAX);
-    vuint8 un = init_vuint8(1);
-    vuint8 zero = init_vuint8(0);
-    vuint8 v_128 = init_vuint8(128);
-    vuint8 v_255 = init_vuint8(255);
-
-    
-    for (int i = nrl ; i <= nrh ; i++){
-        for (int j = ncl ; j <= nch ; j++){
-          
-            
-            v_Vtm1 = _mm_load_si128((vuint8*) &Vtm1[i][j]); Vm[0].p1[i][j]
-            v_It = _mm_load_si128((vuint8*) &It[i][j]) Vm[0].p2[i][j]
-            v_Mtm1 = _mm_load_si128((vuint8*) &Mtm1[i][j]);
-            
-            //display_vuint8(v_Vtm1," %d ","\ndebug\n");
-
-            
-            ////////////////////Step 1 Estimation/////////////////////////////
-
- 
-            //Si M < I. Stocke 1 dans a si M < I, sinon 0
-
-            sel = _mm_cmplt_epi8(_mm_sub_epi8(v_Mtm1,v_128), _mm_sub_epi8(v_It, v_128));
-            v_M = vec_sel( _mm_add_epi8(v_Mtm1, un), v_Mtm1, sel);
-            
-            // Cas le plus grand
-
-            sel = _mm_cmpgt_epi8(_mm_sub_epi8(v_Mtm1,v_128), _mm_sub_epi8(v_It, v_128));
-            v_M = vec_sel( _mm_sub_epi8(v_Mtm1, un), v_M, sel);
-            
-            // égalité
-
-            sel = _mm_cmpeq_epi8(_mm_sub_epi8(v_Mtm1,v_128), _mm_sub_epi8(v_It, v_128));
-            v_M = vec_sel(v_Mtm1,  v_M, sel);
-            
-            _mm_store_si128(&M[i][j],v_M);
-       
-            
-            //////////////////// //Step 2 Difference Computation//////////////////
-            
-            vuint8 max = init_vuint8(0);
-            max = _mm_max_epu8(v_M,v_It);
-            vuint8 min = init_vuint8(0);
-            min = _mm_min_epu8(v_M,v_It);
-            Ot = _mm_sub_epi8(max,min);
-           
-
-            ///////////////   //Step 3 Update and clamping//////////////////////////////
-
-
-            vuint8 v_Ot = init_vuint8(0);;
-            
-            //Ici ilfaut d'abord faire la multiplication de n et Ot
-
-            
-            for(int k = 0; k < N; k++)    {
-                v_Ot = _mm_adds_epu8(v_Ot, Ot);
-            }
-            
-
-            sel = _mm_cmplt_epi8(_mm_sub_epi8(v_Vtm1,v_128), _mm_sub_epi8(v_Ot,v_128));
-            v_V = vec_sel(_mm_add_epi8(v_Vtm1, un), v_Vtm1, sel);
-            
-            sel = _mm_cmpgt_epi8(_mm_sub_epi8(v_Vtm1,v_128), _mm_sub_epi8(v_Ot,v_128));
-            v_V = vec_sel(_mm_sub_epi8(v_Vtm1, un), v_V, sel);
-            
-            sel = _mm_cmpeq_epi8(_mm_sub_epi8(v_Vtm1,v_128), _mm_sub_epi8(v_Ot, v_128));
-            v_V = vec_sel(v_Vtm1, v_V, sel);
-            
-            
-            //MAX ET MIN
-            
-            v_V = _mm_min_epu8(v_V, v_max);
-            // a <- max(a, VMIN)
-            v_V = _mm_max_epu8(v_V, v_min);
-            
-            _mm_store_si128(&V[i][j],v_V);
-           
-    
-            
-       /////////////////// //Step 4 Estimation///////////////////////////
-            
-            vuint8 a  = _mm_cmplt_epi8(_mm_sub_epi8(Ot,v_128), _mm_sub_epi8(v_V,v_128));
-            
-            //Le retour de cmplt est de 1 si l'inégalité est vraie
-            a = _mm_andnot_si128(a , v_255);
-            _mm_store_si128(&Et[i][j],a);
-        }
-    }
+    c = _mm_cmplt_epi8(_mm_sub_epi8(a, init_vuint8(MAX_SINT8+1)), _mm_sub_epi8(b, init_vuint8(MAX_SINT8+1)));
+    z = _mm_or_si128(_mm_and_si128(c,y), _mm_andnot_si128(c,x));//select value
+    return z;
 }
 
-*/
+
+//if a > b return x, elif a < b return y, else return z
+vuint8 vuint8_if_elif_else(vuint8 a, vuint8 b, vuint8 x, vuint8 y, vuint8 z)
+{
+    vuint8 c, d;
+    /*
+    Description du problème : l'opération c = _mm_cmplt_epi8(a,b) est signée
+    ex : si a = {0,127} et b = {128, 255}, alors c considère a plus grand, car il prends b pour un négatif
+    Solution, avant la comparaison, on soustrait à a et b, 128
+    */
+    
+    c = _mm_cmpeq_epi8(_mm_sub_epi8(a, init_vuint8(MAX_SINT8+1)), _mm_sub_epi8(b, init_vuint8(MAX_SINT8+1)));
+    d = _mm_or_si128(_mm_and_si128(c,z), _mm_andnot_si128(c,vuint8_if_else(a,b,x,y)));//select value
+    return d;
+}
+
+//soustraction absolue
+vuint8 vuint8_sub_abs(vuint8 a, vuint b)
+{
+    vuint8 max, min;
+    max = _mm_max_epu8(a, b);
+    min = _mm_min_epu8(a, b); //Solution alternative, utiliser un if_else
+    return _mm_sub_epi8(max , min);
+}
+
+
+
+void SigmaDelta_SSE2_AoSoA(uint8 **It, uint8 **It_1, uint8 **Et, uint8 **Vt, uint8 **Vt_1, uint8 **Mt, uint8 **Mt_1, uint8 **Ot,long nrl, long nrh, long ncl, long nch)
+{
+    vuint8 a,b,x,y, one;
+    long i,j,k;
+    one = init_vuint8(1);
+
+    vuint8 vMt;
+    vuint8 vIt;
+    vuint8 vOt;
+    vuint8 vVt_1;
+    vuint8 vVt;
+
+    for(i=nrl; i<=nrh; i++) {
+        for(j=ncl; j<=nch; j+= NB_OCTET_M128) {
+
+            a = _mm_loadu_si128((__m128i *) &Mt_1[i][j]);
+            b = _mm_loadu_si128((__m128i *) &It[i][j]);
+            x = _mm_sub_epi8(a, one);//Mt plus grand
+            y = _mm_add_epi8(a, one);
+            _mm_storeu_si128( (__m128i *) &Mt[i][j], vuint8_if_elif_else(a, b, x, y ,a) );
+
+            vMt = _mm_loadu_si128((__m128i *) &Mt[i][j]);
+            vIt = _mm_loadu_si128((__m128i *) &It[i][j]);
+            vOt = vuint8_sub_abs( vMt, vIt);
+
+            b = vOt;
+            for (k = 0; k < N - 1; k++)
+                b = _mm_adds_epu8(b, vOt);
+            vVt_1 = _mm_loadu_si128((__m128i *) &Vt_1[i][j]);
+            x = _mm_sub_epi8(vVt_1, one);//Mt plus grand
+            y = _mm_add_epi8(vVt_1, one);//Mt plus petit
+            vVt= vuint8_if_elif_else(vVt_1, b, x, y ,vVt_1);
+            
+            b = init_vuint8(VMIN);
+            vVt=_mm_max_epu8(vVt, b);
+
+            b = init_vuint8(VMAX);
+            vVt=_mm_min_epu8(vVt, b);
+
+            _mm_storeu_si128( (__m128i *) &Vt[i][j],vVt);
+                
+            x = init_vuint8(MAX_UINT8);
+            y = _mm_setzero_si128();
+            _mm_storeu_si128( (__m128i *) &Et[i][j], vuint8_if_else(vOt,vVt,x,y));
+            
+        }
+    }
+
+}
 
 
 
