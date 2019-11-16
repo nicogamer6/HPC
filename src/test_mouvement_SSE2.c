@@ -400,7 +400,7 @@ void test_routineSD_SSE_AOSOA()
 
     char *format = "%6.2f\n";
     ///////////////////
-
+    int lig;
     int n1, n2, n3, n4;
     long nrl, nrh, ncl, nch;
     char nameload[100];     //"car3/car_3..";
@@ -436,7 +436,7 @@ void test_routineSD_SSE_AOSOA()
     SigmaDelta_step0_SSE2 (Mtm1, Vtm1, Itm1v, n1, n2, n3, n4);
     
     
-    for(i=1;i<=NBIMAGES;i+=2){
+    for(i=0;i<=NBIMAGES;i+=2){
         
         sprintf(nameload,"car3/car_3%03d.pgm",i);
         MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,a);
@@ -450,13 +450,18 @@ void test_routineSD_SSE_AOSOA()
 
 
         //SigmaDelta_1step_SSE2(V, Vtm1, M, Iv, Mtm1 , Et, n1, n2, n3, n4);
-        CHRONO(SigmaDelta_1step_SSE2(V, Vtm1, M, Mtm1, Iv, Et, n1, n2, n3, n4),cycles);
+        for(lig = 0;lig <= nrh; lig++){
+
+        CHRONO(SigmaDelta_1step_SSE2_row(V[lig], Vtm1[lig], M[lig], Mtm1[lig], Iv[lig], Et[lig], n1, n2, n3, n4),cycles);
+        }
         
         dup_vui8matrix(V, n1, n2, n3, n4, Vtm1);
         dup_vui8matrix(M, n1, n2, n3, n4, Mtm1);
         
-        CHRONO(SigmaDelta_1step_SSE2(V, Vtm1, M, Mtm1, Ivp1, Et, n1, n2, n3, n4),cycles1);
+        for(lig = 0;lig <= nrh; lig++){
 
+        CHRONO(SigmaDelta_1step_SSE2_row(V[lig], Vtm1[lig], M[lig], Mtm1[lig], Ivp1[lig], Et[lig], n1, n2, n3, n4),cycles1);
+        }
         totalcy = totalcy + cycles + cycles1 ;
         
         sprintf(namesave,"testSD_SSE_AOSOA/car_3%03d.pgm",i);

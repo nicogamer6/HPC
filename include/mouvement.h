@@ -20,6 +20,8 @@ void routine_SigmaDelta_1step_SOA(SoA3 Vm, uint8 **V, uint8 **M, uint8 **Et, lon
 void routine_SigmaDelta_1stepOMP(uint8 **V, uint8 **Vtm1, uint8 **M, uint8 **Mtm1, uint8 **I, uint8 **Et, long nrl, long nrh, long ncl, long nch);
 
 
+
+
 int min(int a, int b);
 int max(int a, int b);
 
