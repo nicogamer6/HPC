@@ -393,7 +393,7 @@ void test_routineSD_SSE_AOSOA()
 {
 
     //Cycle par point//
-    double cycles=0, totalcy=0, cycles1=0;
+    double cycles=0, totalcy=0;
     int iter, niter=2;
     int run, nrun = 5;
     double t0,t1,dt,tmin,t;
@@ -435,9 +435,9 @@ void test_routineSD_SSE_AOSOA()
     
     SigmaDelta_step0_SSE2 (Mtm1, Vtm1, Itm1v, n1, n2, n3, n4);
     
+    int r = NBIMAGES%2;
     
-    for(i=0;i<=NBIMAGES;i+=2){
-        
+    for(i=1;i<=(NBIMAGES-r);i+=2){
         sprintf(nameload,"car3/car_3%03d.pgm",i);
         MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,a);
         
@@ -450,21 +450,23 @@ void test_routineSD_SSE_AOSOA()
 
 
         //SigmaDelta_1step_SSE2(V, Vtm1, M, Iv, Mtm1 , Et, n1, n2, n3, n4);
-        for(lig = 0;lig <= nrh; lig++){
-
-        CHRONO(SigmaDelta_1step_SSE2_row(V[lig], Vtm1[lig], M[lig], Mtm1[lig], Iv[lig], Et[lig], n1, n2, n3, n4),cycles);
+        for(lig = nrl;lig <= nrh; lig++){
+        	CHRONO(SigmaDelta_1step_SSE2_row(V[lig], Vtm1[lig], M[lig], Mtm1[lig], Iv[lig], Et[lig], n1, n2, n3, n4),cycles);
+        	totalcy += cycles;
         }
-        
+        sprintf(namesave,"testSD_SSE_AOSOA/car_3%03d.pgm",i);
+		vuint_to_uint(res, Et, n1, n2, n3, n4);
+		SavePGM_ui8matrix(res,nrl,nrh,ncl,nch,namesave);
+
         dup_vui8matrix(V, n1, n2, n3, n4, Vtm1);
         dup_vui8matrix(M, n1, n2, n3, n4, Mtm1);
         
-        for(lig = 0;lig <= nrh; lig++){
-
-        CHRONO(SigmaDelta_1step_SSE2_row(V[lig], Vtm1[lig], M[lig], Mtm1[lig], Ivp1[lig], Et[lig], n1, n2, n3, n4),cycles1);
+        for(lig = nrl;lig <= nrh; lig++){
+        	CHRONO(SigmaDelta_1step_SSE2_row(V[lig], Vtm1[lig], M[lig], Mtm1[lig], Ivp1[lig], Et[lig], n1, n2, n3, n4),cycles);
+        	totalcy += cycles;
         }
-        totalcy = totalcy + cycles + cycles1 ;
         
-        sprintf(namesave,"testSD_SSE_AOSOA/car_3%03d.pgm",i);
+        sprintf(namesave,"testSD_SSE_AOSOA/car_3%03d.pgm",i+1);
         
         vuint_to_uint(res, Et, n1, n2, n3, n4);
         
@@ -480,6 +482,24 @@ void test_routineSD_SSE_AOSOA()
         
         
         
+    }
+
+    if (r==1){
+
+    	sprintf(nameload,"car3/car_3%03d.pgm",i);
+		MLoadPGM_ui8matrix(nameload,nrl,nrh,ncl,nch,a);
+
+		//Conversion
+		uint_to_vuint(a, Iv, n1, n2, n3, n4);
+
+		//SigmaDelta_1step_SSE2(V, Vtm1, M, Iv, Mtm1 , Et, n1, n2, n3, n4);
+		for(lig = nrl;lig <= nrh; lig++){
+			CHRONO(SigmaDelta_1step_SSE2_row(V[lig], Vtm1[lig], M[lig], Mtm1[lig], Iv[lig], Et[lig], n1, n2, n3, n4),cycles);
+			totalcy += cycles;
+		}
+		sprintf(namesave,"testSD_SSE_AOSOA/car_3%03d.pgm",i);
+		vuint_to_uint(res, Et, n1, n2, n3, n4);
+		SavePGM_ui8matrix(res,nrl,nrh,ncl,nch,namesave);
     }
 
     totalcy = totalcy / NBIMAGES; //on doit rediviser par le nombre de points pour l'avoir par point
