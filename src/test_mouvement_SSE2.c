@@ -484,6 +484,7 @@ void test_routineSD_SSE_AOSOA()
         
     }
 
+    //Dernier cas pour dernière image non traitée
     if (r==1){
 
     	sprintf(nameload,"car3/car_3%03d.pgm",i);
