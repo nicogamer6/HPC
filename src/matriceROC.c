@@ -25,7 +25,7 @@ void matriceROC(char dossier[]){
     
     int k; 
     int i,j;
-    int perdu;
+    int perdu = 0;
     
     VP = matROC[0][0];
     FN = matROC[0][1];

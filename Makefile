@@ -26,7 +26,7 @@ AR = ar -rc
 # -- Flags ----------
 C_DEBUG_FLAGS = -O0 -g
 C_OPTIMISATION_FLAGS = -O3 -fstrict-aliasing
-C_CC_FLAGS = -std=c99 -mssse3 -fopenmp
+C_CC_FLAGS = -std=c99 -mssse3 -fopenmp -Wall
 C_SSE_FLAGS = -mfpmath=sse -mmmx -msse -msse2 -msse3 -msse4.2
 
 C_INC_FLAGS = -I$(INC_PATH)

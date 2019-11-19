@@ -120,12 +120,12 @@ void test_routineFD_SSE(int seuil)
     double cycles=0, totalcy=0;
     int iter, niter=2;
     int run, nrun = 5;
-    double t0,t1,dt,tmin,t;
+    double t0,t1,dt,tmin;
 
     char *format = "%6.2f\n";
     ///////////////////
 
-    long nrl, nrh, ncl, nch;
+    long nrl=0, nrh=0, ncl=0, nch=0;
     int n1, n2, n3, n4;
     char nameload1[100], nameload2[100], namesave[100];
     //vuint8 vseuil=init_vuint8(seuil);
@@ -189,7 +189,7 @@ void test_routineFD_SSE_OMP(int seuil)
     double cycles=0, totalcy=0;
     int iter, niter=2;
     int run, nrun = 5;
-    double t0,t1,dt,tmin,t;
+    double t0,t1,dt,tmin;
 
     char *format = "%6.2f\n";
     ///////////////////
@@ -294,13 +294,13 @@ void test_routineSD_SSE()
     double cycles=0, totalcy=0;
     int iter, niter=2;
     int run, nrun = 5;
-    double t0,t1,dt,tmin,t;
+    double t0,t1,dt,tmin;
 
     char *format = "%6.2f\n";
     ///////////////////
 
     int n1, n2, n3, n4;
-    long nrl, nrh, ncl, nch;
+    long nrl=0, nrh=0, ncl=0, nch=0;
     char nameload[100];     //"car3/car_3..";
     char namesave[100];     //"testSD/SD...";
     int i;
@@ -396,13 +396,13 @@ void test_routineSD_SSE_AOSOA()
     double cycles=0, totalcy=0;
     int iter, niter=2;
     int run, nrun = 5;
-    double t0,t1,dt,tmin,t;
+    double t0,t1,dt,tmin;
 
     char *format = "%6.2f\n";
     ///////////////////
     int lig;
     int n1, n2, n3, n4;
-    long nrl, nrh, ncl, nch;
+    long nrl=0, nrh=0, ncl=0, nch=0;
     char nameload[100];     //"car3/car_3..";
     char namesave[100];     //"testSD/SD...";
     int i;
@@ -537,13 +537,13 @@ void test_routineSD_SSE_OMP()
     double cycles=0, totalcy=0;
     int iter, niter=2;
     int run, nrun = 5;
-    double t0,t1,dt,tmin,t;
+    double t0,t1,dt,tmin;
 
     char *format = "%6.2f\n";
     ///////////////////
 
     int n1, n2, n3, n4;
-    long nrl, nrh, ncl, nch;
+    long nrl=0, nrh=0, ncl=0, nch=0;
     char nameload[100];     //"car3/car_3..";
     char namesave[100];     //"testSD/SD...";
     int i;

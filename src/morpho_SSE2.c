@@ -16,15 +16,9 @@
 
 void erosion3SSE(uint8 ** Et, uint8 **EtE, long nrl, long nrh, long ncl, long nch){
 	int i, j;
-    int m;
     vuint8 l_1, l0, l1;
-    vuint8 tmp_1,tmp0,tmp1;
+    vuint8 tmp0,tmp1;
     vuint8 res;
-    vuint8 xl, xr;
-    vuint8 y;
-    vuint8 ero;
-
-    uint8 un = 255;
 
     // Parcours de l'image
     for(i = nrl; i <= nrh; i++)
@@ -71,15 +65,12 @@ void erosion3SSE(uint8 ** Et, uint8 **EtE, long nrl, long nrh, long ncl, long nc
 
 void dilatation3SSE(uint8 ** Et, uint8 **EtD, long nrl, long nrh, long ncl, long nch){
 	int i, j;
-    int m;
     vuint8 l_1, l0, l1;
-    vuint8 tmp_1,tmp0,tmp1;
+    vuint8 tmp0,tmp1;
     vuint8 res;
     //vuint8 xl, xr;
     //vuint8 y;
     //vuint8 ero;
-    uint8 zero = 0;
-
     // Parcours de l'image
     for(i = nrl; i <= nrh; i++)
     {
@@ -377,7 +368,7 @@ void dilatation3SSE_line_bin(ulong64 ** Et, ulong64 **EtD, int i, long nrl, long
 
 
 void ouverture3SSE_pipe_bin(ulong64 ** Et, ulong64 ** tmp, ulong64 **Etout, long nrl, long nrh, long ncl, long nch){
-	int i=nrl, j=ncl;
+	int i=nrl;
 
 	erosion3SSE_line_bin(Et, tmp, i, nrl, nrh, ncl, nch); //1ère ligne
 
@@ -389,7 +380,7 @@ void ouverture3SSE_pipe_bin(ulong64 ** Et, ulong64 ** tmp, ulong64 **Etout, long
 }
 
 void fermeture3SSE_pipe_bin(ulong64 ** Et, ulong64 ** tmp, ulong64 **Etout, long nrl, long nrh, long ncl, long nch){
-	int i=nrl, j=ncl;
+    int i=nrl;
 
 	dilatation3SSE_line_bin(Et, tmp, i, nrl, nrh, ncl, nch); //1ère ligne
 
@@ -500,7 +491,7 @@ void dilatation3SSE_line_binOMP(ulong64 ** Et, ulong64 **EtD, int i, long nrl, l
 
 
 void ouverture3SSE_pipe_binOMP(ulong64 ** Et, ulong64 ** tmp, ulong64 **Etout, long nrl, long nrh, long ncl, long nch){
-	int i=nrl, j=ncl;
+	int i=nrl;
 
 	erosion3SSE_line_binOMP(Et, tmp, i, nrl, nrh, ncl, nch); //1ère ligne
 
@@ -512,7 +503,7 @@ void ouverture3SSE_pipe_binOMP(ulong64 ** Et, ulong64 ** tmp, ulong64 **Etout, l
 }
 
 void fermeture3SSE_pipe_binOMP(ulong64 ** Et, ulong64 ** tmp, ulong64 **Etout, long nrl, long nrh, long ncl, long nch){
-	int i=nrl, j=ncl;
+	int i=nrl;
 
 	dilatation3SSE_line_binOMP(Et, tmp, i, nrl, nrh, ncl, nch); //1ère ligne
 

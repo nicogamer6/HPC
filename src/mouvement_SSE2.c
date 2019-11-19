@@ -31,9 +31,6 @@ void routine_FrameDifference_SSE2(vuint8** It, vuint8** It_1, vuint8** Et, long 
     int i, j;
 
     vuint8 v_SEUILFD = init_vuint8(seuil);
-    vuint8 v_255 = init_vuint8(255);
-    vuint8 v_128 = init_vuint8(128);
-
     vuint8 a,b;
     vuint8 v_it;
     vuint8 v_it_1;
@@ -64,8 +61,6 @@ void routine_FrameDifference_SSE2_OMP(vuint8** It, vuint8** It_1, vuint8** Et, l
     int i, j;
 
     vuint8 v_SEUILFD = init_vuint8(seuil);
-    vuint8 v_255 = init_vuint8(255);
-    vuint8 v_128 = init_vuint8(128);
 
     vuint8 a,b;
     vuint8 v_it;
@@ -157,7 +152,6 @@ void SigmaDelta_1step_SSE2 (vuint8** V,vuint8** Vtm1, vuint8** M, vuint8** Mtm1,
     vuint8 v_min = init_vuint8(VMIN);
     vuint8 v_max = init_vuint8(VMAX);
     vuint8 un = init_vuint8(1);
-    vuint8 zero = init_vuint8(0);
     vuint8 v_128 = init_vuint8(128);
     vuint8 v_255 = init_vuint8(255);
 
@@ -264,7 +258,6 @@ void SigmaDelta_1step_SSE2_row (vuint8* V,vuint8* Vtm1, vuint8* M, vuint8* Mtm1,
     vuint8 v_min = init_vuint8(VMIN);
     vuint8 v_max = init_vuint8(VMAX);
     vuint8 un = init_vuint8(1);
-    vuint8 zero = init_vuint8(0);
     vuint8 v_128 = init_vuint8(128);
     vuint8 v_255 = init_vuint8(255);
 
@@ -358,7 +351,6 @@ void SigmaDelta_1step_SSE2_OMP (vuint8** V,vuint8** Vtm1, vuint8** M, vuint8** M
     vuint8 v_min = init_vuint8(VMIN);
     vuint8 v_max = init_vuint8(VMAX);
     vuint8 un = init_vuint8(1);
-    vuint8 zero = init_vuint8(0);
     vuint8 v_128 = init_vuint8(128);
     vuint8 v_255 = init_vuint8(255);
 

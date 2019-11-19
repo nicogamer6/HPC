@@ -193,7 +193,7 @@ void test_routineFDmorpho3xOuv(int seuil){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
@@ -240,7 +240,7 @@ void test_routineFDmorpho3xOuv_opti(int seuil){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
@@ -287,7 +287,7 @@ void test_routineFDmorpho3xOuv_pipe(int seuil){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
@@ -336,7 +336,7 @@ void test_routineFDmorpho3xOuv_bin(int seuil){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
@@ -394,7 +394,7 @@ void test_routineFDmorpho3xFerm(int seuil){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
@@ -441,7 +441,7 @@ void test_routineFDmorpho3xFerm_opti(int seuil){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
@@ -488,7 +488,7 @@ void test_routineFDmorpho3xFerm_pipe(int seuil){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
@@ -537,7 +537,7 @@ void test_routineFDmorpho3xFerm_bin(int seuil){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
@@ -595,7 +595,7 @@ void test_routineFDmorpho3xOuvFerm(int seuil){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
@@ -645,7 +645,7 @@ void test_routineFDmorpho3xOuvFerm_opti(int seuil){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
@@ -695,7 +695,7 @@ void test_routineFDmorpho3xFermOuv(int seuil){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
@@ -744,7 +744,7 @@ void test_routineFDmorpho3xFermOuv_opti(int seuil){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
@@ -799,7 +799,7 @@ void test_routineSDmorpho3xOuv(){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
@@ -863,7 +863,7 @@ void test_routineSDmorpho3xOuv_opti(){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
@@ -927,7 +927,7 @@ void test_routineSDmorpho3xOuv_pipe(){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
@@ -993,7 +993,7 @@ void test_routineSDmorpho3xOuv_bin(){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
@@ -1067,7 +1067,7 @@ void test_routineSDmorpho3xFerm(){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
@@ -1131,7 +1131,7 @@ void test_routineSDmorpho3xFerm_opti(){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
@@ -1195,7 +1195,7 @@ void test_routineSDmorpho3xFerm_pipe(){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
@@ -1261,7 +1261,7 @@ void test_routineSDmorpho3xFerm_bin(){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
@@ -1335,7 +1335,7 @@ void test_routineSDmorpho3xOuvFerm(){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
@@ -1402,7 +1402,7 @@ void test_routineSDmorpho3xOuvFerm_opti(){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
@@ -1469,7 +1469,7 @@ void test_routineSDmorpho3xFermOuv(){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
@@ -1536,7 +1536,7 @@ void test_routineSDmorpho3xFermOuv_opti(){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
@@ -1602,7 +1602,7 @@ void test_routineSDmorpho3xOuvFerm_pipe(){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
@@ -1670,7 +1670,7 @@ void test_routineSDmorpho3xFermOuv_pipe(){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
@@ -1737,7 +1737,7 @@ void test_routineSDmorpho3xOuvFerm_bin(){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
@@ -1812,7 +1812,7 @@ void test_routineSDmorpho3xFermOuv_bin(){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
@@ -1889,7 +1889,7 @@ void test_routineSDmorpho3xOuv_pipe_bin(){
 	double cycles, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
@@ -1962,7 +1962,7 @@ void test_routineSDmorpho3xFerm_pipe_bin(){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
@@ -2034,7 +2034,7 @@ void test_routineSDmorpho3xOuvFerm_pipe_bin(){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
@@ -2108,7 +2108,7 @@ void test_routineSDmorpho3xFermOuv_pipe_bin(){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////

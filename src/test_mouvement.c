@@ -16,7 +16,7 @@ void test_routineFD(int seuil){
 	double cycles, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
@@ -60,7 +60,7 @@ void test_routineSD(void){
 	double cycles, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
@@ -124,7 +124,7 @@ void test_routineSD_opti(void){
     double cycles=0, totalcy=0;
     int iter, niter=2;
     int run, nrun = 5;
-    double t0,t1,dt,tmin,t;
+    double t0,t1,dt,tmin;
 
     char *format = "%6.2f\n";
     ///////////////////
@@ -189,7 +189,7 @@ void test_routineSD_Opti_SOA(void){
     double cycles=0, totalcy=0;
     int iter, niter=2;
     int run, nrun = 5;
-    double t0,t1,dt,tmin,t;
+    double t0,t1,dt,tmin;
 
     char *format = "%6.2f\n";
     ///////////////////
@@ -259,7 +259,7 @@ void test_routineSD_OMP(void){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////

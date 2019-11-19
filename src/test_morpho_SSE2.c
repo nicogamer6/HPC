@@ -20,9 +20,7 @@
 
 
 void test_EtapemorphoSSE(void){
-    long nrl, nrh, ncl, nch;
-    int n1, n2, n3, n4;
-
+    long nrl=0, nrh=0, ncl=0, nch=0;
     //vuint8 tmp;
     
     uint8 **Et=LoadPGM_ui8matrix("smile.pgm",&nrl,&nrh,&ncl,&nch);
@@ -105,12 +103,12 @@ void test_routineFD_SSEmorpho3xOuv(int seuil){
     double cycles=0, totalcy=0;
     int iter, niter=2;
     int run, nrun = 5;
-    double t0,t1,dt,tmin,t;
+    double t0,t1,dt,tmin;
 
     char *format = "%6.2f\n";
     ///////////////////
     
-    long nrl, nrh, ncl, nch;
+    long nrl=0, nrh=0, ncl=0, nch=0;
     int n1, n2, n3, n4;
     char nameload1[100], nameload2[100], namesave[100];
 
@@ -171,12 +169,12 @@ void test_routineFD_SSEmorpho3xFerm(int seuil){
     double cycles=0, totalcy=0;
     int iter, niter=2;
     int run, nrun = 5;
-    double t0,t1,dt,tmin,t;
+    double t0,t1,dt,tmin;
 
     char *format = "%6.2f\n";
     ///////////////////
 
-    long nrl, nrh, ncl, nch;
+    long nrl=0, nrh=0, ncl=0, nch=0;
     int n1, n2, n3, n4;
     char nameload1[100], nameload2[100], namesave[100];
 
@@ -237,12 +235,12 @@ void test_routineFD_SSEmorpho3xOuvFerm(int seuil){
     double cycles=0, totalcy=0;
     int iter, niter=2;
     int run, nrun = 5;
-    double t0,t1,dt,tmin,t;
+    double t0,t1,dt,tmin;
 
     char *format = "%6.2f\n";
     ///////////////////
 
-    long nrl, nrh, ncl, nch;
+    long nrl=0, nrh=0, ncl=0, nch=0;
     int n1, n2, n3, n4;
     char nameload1[100], nameload2[100], namesave[100];
 
@@ -308,12 +306,12 @@ void test_routineFD_SSEmorpho3xFermOuv(int seuil){
     double cycles, totalcy=0;
     int iter, niter=2;
     int run, nrun = 5;
-    double t0,t1,dt,tmin,t;
+    double t0,t1,dt,tmin;
 
     char *format = "%6.2f\n";
     ///////////////////
 
-    long nrl, nrh, ncl, nch;
+    long nrl=0, nrh=0, ncl=0, nch=0;
     int n1, n2, n3, n4;
     char nameload1[100], nameload2[100], namesave[100];
 
@@ -384,13 +382,13 @@ void test_routineSD_SSEmorpho3xOuv(){
     double cycles=0, totalcy=0;
     int iter, niter=2;
     int run, nrun = 5;
-    double t0,t1,dt,tmin,t;
+    double t0,t1,dt,tmin;
 
     char *format = "%6.2f\n";
     ///////////////////
 
     int n1, n2, n3, n4;
-    long nrl, nrh, ncl, nch;
+    long nrl=0, nrh=0, ncl=0, nch=0;
     char nameload[100];     //"car3/car_3..";
     char namesave[100];     //"testSD/SD...";
     int i;
@@ -486,13 +484,13 @@ void test_routineSD_SSEmorpho3xFerm(){
     double cycles=0, totalcy=0;
     int iter, niter=2;
     int run, nrun = 5;
-    double t0,t1,dt,tmin,t;
+    double t0,t1,dt,tmin;
 
     char *format = "%6.2f\n";
     ///////////////////
 
     int n1, n2, n3, n4;
-    long nrl, nrh, ncl, nch;
+    long nrl=0, nrh=0, ncl=0, nch=0;
     char nameload[100];     //"car3/car_3..";
     char namesave[100];     //"testSD/SD...";
     int i;
@@ -588,13 +586,13 @@ void test_routineSD_SSEmorpho3xOuvFerm(){
     double cycles=0, totalcy=0;
     int iter, niter=2;
     int run, nrun = 5;
-    double t0,t1,dt,tmin,t;
+    double t0,t1,dt,tmin;
 
     char *format = "%6.2f\n";
     ///////////////////
 
     int n1, n2, n3, n4;
-    long nrl, nrh, ncl, nch;
+    long nrl=0, nrh=0, ncl=0, nch=0;
     char nameload[100];     //"car3/car_3..";
     char namesave[100];     //"testSD/SD...";
     int i;
@@ -691,13 +689,13 @@ void test_routineSD_SSEmorpho3xFermOuv(){
     double cycles=0, totalcy=0;
     int iter, niter=2;
     int run, nrun = 5;
-    double t0,t1,dt,tmin,t;
+    double t0,t1,dt,tmin;
 
     char *format = "%6.2f\n";
     ///////////////////
 
     int n1, n2, n3, n4;
-    long nrl, nrh, ncl, nch;
+    long nrl=0, nrh=0, ncl=0, nch=0;
     char nameload[100];     //"car3/car_3..";
     char namesave[100];     //"testSD/SD...";
     int i;
@@ -793,13 +791,13 @@ void test_routineSD_SSEmorpho3xOuv_bin(){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
 
 	int n1, n2, n3, n4;
-	long nrl, nrh, ncl, nch;
+	long nrl=0, nrh=0, ncl=0, nch=0;
 	char nameload[100];     //"car3/car_3..";
 	char namesave[100];     //"testSD/SD...";
 	int i;
@@ -902,13 +900,13 @@ void test_routineSD_SSEmorpho3xFerm_bin(){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
 
 	int n1, n2, n3, n4;
-	long nrl, nrh, ncl, nch;
+	long nrl=0, nrh=0, ncl=0, nch=0;
 	char nameload[100];     //"car3/car_3..";
 	char namesave[100];     //"testSD/SD...";
 	int i;
@@ -1011,13 +1009,13 @@ void test_routineSD_SSEmorpho3xOuvFerm_bin(){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
 
 	int n1, n2, n3, n4;
-	long nrl, nrh, ncl, nch;
+	long nrl=0, nrh=0, ncl=0, nch=0;
 	char nameload[100];     //"car3/car_3..";
 	char namesave[100];     //"testSD/SD...";
 	int i;
@@ -1122,13 +1120,13 @@ void test_routineSD_SSEmorpho3xFermOuv_bin(){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
 
 	int n1, n2, n3, n4;
-	long nrl, nrh, ncl, nch;
+	long nrl=0, nrh=0, ncl=0, nch=0;
 	char nameload[100];     //"car3/car_3..";
 	char namesave[100];     //"testSD/SD...";
 	int i;
@@ -1236,13 +1234,13 @@ void test_routineSD_SSEmorpho3xOuv_pipebin(){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
 
 	int n1, n2, n3, n4;
-	long nrl, nrh, ncl, nch;
+	long nrl=0, nrh=0, ncl=0, nch=0;
 	char nameload[100];     //"car3/car_3..";
 	char namesave[100];     //"testSD/SD...";
 	int i;
@@ -1345,13 +1343,13 @@ void test_routineSD_SSEmorpho3xFerm_pipebin(){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
 
 	int n1, n2, n3, n4;
-	long nrl, nrh, ncl, nch;
+	long nrl=0, nrh=0, ncl=0, nch=0;
 	char nameload[100];     //"car3/car_3..";
 	char namesave[100];     //"testSD/SD...";
 	int i;
@@ -1454,13 +1452,13 @@ void test_routineSD_SSEmorpho3xOuvFerm_pipebin(){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
 
 	int n1, n2, n3, n4;
-	long nrl, nrh, ncl, nch;
+	long nrl=0, nrh=0, ncl=0, nch=0;
 	char nameload[100];     //"car3/car_3..";
 	char namesave[100];     //"testSD/SD...";
 	int i;
@@ -1565,13 +1563,13 @@ void test_routineSD_SSEmorpho3xFermOuv_pipebin(){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
 
 	int n1, n2, n3, n4;
-	long nrl, nrh, ncl, nch;
+	long nrl=0, nrh=0, ncl=0, nch=0;
 	char nameload[100];     //"car3/car_3..";
 	char namesave[100];     //"testSD/SD...";
 	int i;
@@ -1677,13 +1675,13 @@ void test_routineSD_SSEmorpho3xOuvFerm_pipebinOMP(){
 	double cycles=0, totalcy=0;
 	int iter, niter=2;
 	int run, nrun = 5;
-	double t0,t1,dt,tmin,t;
+	double t0,t1,dt,tmin;
 
 	char *format = "%6.2f\n";
 	///////////////////
 
 	int n1, n2, n3, n4;
-	long nrl, nrh, ncl, nch;
+	long nrl=0, nrh=0, ncl=0, nch=0;
 	char nameload[100];     //"car3/car_3..";
 	char namesave[100];     //"testSD/SD...";
 	int i;
@@ -1786,16 +1784,12 @@ void test_routineSD_SSEmorpho3xOuvFerm_pipebinOMP(){
 //////////TESTS UNITAIRES///////////////////////////////////
 void test_unitaire_erosion3SSE(){
 
-    int m;
     vuint8 l_1 = init_vuint8_all(255,0, 255, 0, 0, 255, 0, 255,255, 0, 0, 255, 0, 255,255, 0);
     vuint8 l0 = init_vuint8_all(0,255, 255, 255, 0, 0, 0, 255,255, 255, 0, 255, 0, 0,255, 0);
     vuint8 l1 = init_vuint8_all(255,255, 255, 0, 0, 0, 0, 255,0, 255, 255, 255, 0, 0,255, 0);
     
-    vuint8 tmp_1,tmp0,tmp1;
+    vuint8 tmp0,tmp1;
     vuint8 res;
-    vuint8 xl, xr;
-    vuint8 y;
-    vuint8 ero;
     printf("/////////////////test_unitaire_erosion3SSE////////////////\n");
     
     display_vuint8(l_1," %.3d ","l_1\n");
@@ -1820,16 +1814,12 @@ void test_unitaire_erosion3SSE(){
 
 void test_unitaire_dilatation3SSE(){
 
-    int m;
     vuint8 l_1 = init_vuint8_all(255,0, 255, 0, 0, 255, 0, 255,255, 0, 0, 255, 0, 255,255, 0);
     vuint8 l0 = init_vuint8_all(0,255, 255, 255, 0, 0, 0, 255,255, 255, 0, 255, 0, 0,255, 0);
     vuint8 l1 = init_vuint8_all(255,255, 255, 0, 0, 0, 0, 255,0, 255, 255, 255, 0, 0,255, 0);
     
-    vuint8 tmp_1,tmp0,tmp1;
+    vuint8 tmp0,tmp1;
     vuint8 res;
-    vuint8 xl, xr;
-    vuint8 y;
-    vuint8 ero;
     printf("\n\n/////////////////test_unitaire_dilatation3SSE////////////////\n");
 
     display_vuint8(l_1," %.3d ","l_1\n");
