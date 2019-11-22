@@ -64,7 +64,6 @@ int main()
 	//printf("%d\n", omp_get_max_threads());
 
 	// Crée les images FD et SD
-    // AFFICHE le CPP juste pour la morpho
     //printf("SEUIL FD = %d\n",SEUILFD);
     //test_routineFD(SEUILFD);               	// Dossier "testFD"
     test_routineSD();                    	 	// Dossier "testSD"
@@ -84,37 +83,7 @@ int main()
     test_routineSD_SSE_AOSOA();                   // Dossier "testSD_SSE_AOSOA"
     test_routineSD_SSE_OMP();               // Dossier "testSD_SSE_OMP"
 
-
     printf("\n");
-    ///////////////////////////////////////////////////////////////////////////
-    
-    // Crée les images FD avec les morpho 3x3, O, F, OF et FO. 
-    // AFFICHE le CPP juste pour la morpho et morphoSSE
-
-    //test_routineFDmorpho3xOuv(SEUILFD);     // Dossier "testFDmorphoO"
-    //test_routineFDmorpho3xFerm(SEUILFD);    // Dossier "testFDmorphoF"
-    //test_routineFDmorpho3xOuvFerm(SEUILFD); // Dossier "testFDmorphoOF"
-    //test_routineFDmorpho3xFermOuv(SEUILFD); // Dossier "testFDmorphoFO"
-    //printf("\n");
-
-	//test_routineFDmorpho3xOuv_opti(SEUILFD);		// Dossier "testOptiFD"
-	//test_routineFDmorpho3xFerm_opti(SEUILFD);		// Dossier "testOptiFD"
-	//test_routineFDmorpho3xOuvFerm_opti(SEUILFD);	// Dossier "testOptiFD"
-	//test_routineFDmorpho3xFermOuv_opti(SEUILFD);	// Dossier "testOptiFD"
-
-	//test_routineFDmorpho3xOuv_pipe(SEUILFD);	// Dossier "testFDmorphoOpipe"
-	//test_routineFDmorpho3xFerm_pipe(SEUILFD);	// Dossier "testFDmorphoFpipe"
-
-	//test_routineFDmorpho3xOuv_bin(SEUILFD);	// Dossier "testFDmorphoObin"
-	//test_routineFDmorpho3xFerm_bin(SEUILFD);	// Dossier "testFDmorphoFbin"
-
-    //test_routineFD_SSEmorpho3xOuv(SEUILFD);     // Dossier "testFD_SSEmorphoO"
-    //test_routineFD_SSEmorpho3xFerm(SEUILFD);    // Dossier "testFD_SSEmorphoF"
-    //test_routineFD_SSEmorpho3xOuvFerm(SEUILFD); // Dossier "testFD_SSEmorphoOF"
-    //test_routineFD_SSEmorpho3xFermOuv(SEUILFD); // Dossier "testFD_SSEmorphoFO"
-    //printf("\n");
-
-
 
     ///////////////////////////////////////////////////////////////////////////
     // Crée les images FD avec les morpho 3x3, O, F, OF et FO.
@@ -169,15 +138,58 @@ int main()
     ///////////////////////////////////////////////////////////////////////////
 
     // Crée les images morpho et morpho SSE Ero, Dil, ouv et ferm dans des sous dossiers 
-	//test_Etapemorpho();                     // Dossier "testmorpho"
-	//test_EtapemorphoSSE();                  // Dossier "testmorphoSSE"
+	test_Etapemorpho();                     // Dossier "testmorpho"
+	test_EtapemorphoSSE();                  // Dossier "testmorphoSSE"
 
 
-
+	//Comparer image par image deux dossiers et vérifier
     //diffImages("testSD_SSE", "testSD_SSE_AOSOA");
     //diffImages("testSD_SSEmorphoOF_pipebinOMP","testSD_SSEmorphoOF_pipebin");
 
 
+
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+
+	// Tests unitaires pour SD ET FD en SSE
+	//test_unitaire_SD_SSE();
+	//test_unitaire_FD_SSE();
+
+	//test_unitaire_erosion3SSE();
+	//test_unitaire_dilatation3SSE();
+	//test_unitaire_erosion3SSE_bin();
+	//test_unitaire_dilatation3SSE_bin();
+
+	///////////////////////////////////////////////////////////////////////////
+
+
+
+
+	// Crée les images FD avec les morpho 3x3, O, F, OF et FO.
+	// AFFICHE le CPP juste pour la morpho et morphoSSE
+
+	//test_routineFDmorpho3xOuv(SEUILFD);     // Dossier "testFDmorphoO"
+	//test_routineFDmorpho3xFerm(SEUILFD);    // Dossier "testFDmorphoF"
+	//test_routineFDmorpho3xOuvFerm(SEUILFD); // Dossier "testFDmorphoOF"
+	//test_routineFDmorpho3xFermOuv(SEUILFD); // Dossier "testFDmorphoFO"
+	//printf("\n");
+
+	//test_routineFDmorpho3xOuv_opti(SEUILFD);		// Dossier "testOptiFD"
+	//test_routineFDmorpho3xFerm_opti(SEUILFD);		// Dossier "testOptiFD"
+	//test_routineFDmorpho3xOuvFerm_opti(SEUILFD);	// Dossier "testOptiFD"
+	//test_routineFDmorpho3xFermOuv_opti(SEUILFD);	// Dossier "testOptiFD"
+
+	//test_routineFDmorpho3xOuv_pipe(SEUILFD);	// Dossier "testFDmorphoOpipe"
+	//test_routineFDmorpho3xFerm_pipe(SEUILFD);	// Dossier "testFDmorphoFpipe"
+
+	//test_routineFDmorpho3xOuv_bin(SEUILFD);	// Dossier "testFDmorphoObin"
+	//test_routineFDmorpho3xFerm_bin(SEUILFD);	// Dossier "testFDmorphoFbin"
+
+	//test_routineFD_SSEmorpho3xOuv(SEUILFD);     // Dossier "testFD_SSEmorphoO"
+	//test_routineFD_SSEmorpho3xFerm(SEUILFD);    // Dossier "testFD_SSEmorphoF"
+	//test_routineFD_SSEmorpho3xOuvFerm(SEUILFD); // Dossier "testFD_SSEmorphoOF"
+	//test_routineFD_SSEmorpho3xFermOuv(SEUILFD); // Dossier "testFD_SSEmorphoFO"
+	//printf("\n");
 
     ///////////////////////////////////////////////////////////////////////////
 
@@ -212,20 +224,7 @@ int main()
     //matriceROC("testSD_SSEmorphoFO");
     //printf("\n");
 
-    ///////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////
-    
-    // Tests unitaires pour SD ET FD en SSE
-    //test_unitaire_SD_SSE();
-    //test_unitaire_FD_SSE();
 
-    //test_unitaire_erosion3SSE();
-    //test_unitaire_dilatation3SSE();
-    //test_unitaire_erosion3SSE_bin();
-    //test_unitaire_dilatation3SSE_bin();
-
-
-    
 
     return 0;
 }
